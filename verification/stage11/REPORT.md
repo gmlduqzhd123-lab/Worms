@@ -11,3 +11,5 @@
 개별 검사 결과는 results.json, reference.json, release.json, themes.json, features.json, artwork.json, tactics.json에 기록합니다. 새 전투 검사는 3초 유지와 복귀, 3초를 넘는 체력 연출, 연속 피해, 일시정지, 조기 턴 넘김·승리 차단, 재시작, 머리 위 HP 위치, 사망 후 0 표시, 회복과 물 사망을 확인합니다. 모바일은 브라우저 에뮬레이션이며 실제 기기 검수는 포함하지 않습니다. 공개 검수는 verification/live-stage11/에 별도 기록합니다.
 
 Edge 155에서 전투 회귀 110, 설정·가이드 16, CPU·밸런스 20, 압축 배포본 13, 이미지 9, 테마 41, 표시·오프라인 14로 총 223개 검사 통과. 브라우저 JS 오류 0개. ZIP 실행 파일 60개 해시 일치 및 오프라인 실행을 확인했습니다. 단일 HTML은 57,554,937 bytes입니다.
+
+공개 배포 성공 후 26개 검사를 통과했습니다. 실행 파일 59개의 공개 해시 일치와 오류 0개를 verification/live-stage11/REPORT.md에 기록했습니다.
