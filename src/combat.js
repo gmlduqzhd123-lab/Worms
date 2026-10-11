@@ -5,7 +5,14 @@ function damage(w,amount,kx=0,ky=0){
   if(lost>0){if(!injuredWorms.includes(w))injuredWorms.push(w);w.hpAnim={from:shown,to:w.hp,at:gameNow,duration:clamp((shown-w.hp)*45,900,4000)+350};if(!shotFocus)rememberImpact(w.x,w.y)}
   if(lost>0)damageLabels.push({x:w.x+22,y:w.y-85,amount:lost,life:1.4,color:teams[w.team].color});
   w.vx+=kx;w.vy+=ky;if(kx||ky){w.knockTime=.65;w.onGround=false}w.hurt=1;
-  if(w.hp<=0){w.alive=false;burst(w.x,w.y,teams[w.team].color,25)}updateHUD()
+  if(w.hp<=0){w.alive=false;const at=w.hpAnim.at+w.hpAnim.duration;w.death={at,burstAt:at+900,end:at+1900,burst:false}}updateHUD()
+}
+function updateDeaths(){
+  for(const t of teams)for(const w of t.worms){const d=w.death;if(!d||d.burst||gameNow<d.burstAt)continue;d.burst=true;
+    if(gameNow>=d.end)continue;
+    // A cosmetic farewell burst: no damage, craters or chain reactions.
+    explosions.push({x:w.x,y:w.y-12,max:26,life:.55});burst(w.x,w.y-12,'#ffe2a1',16);playSFX('farewell');
+  }
 }
 function killWater(w){if(!w.alive)return;damage(w,w.hp);w.alive=false;rememberImpact(w.x,waterY);playSFX('splash');burst(w.x,waterY,'#a1edff',30);toast(`${w.name} 물에 빠짐!`);updateHUD()}
 function carve(x,y,r){

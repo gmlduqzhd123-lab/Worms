@@ -5,7 +5,7 @@ function battlePhase(){
   if(!started)return {id:'ready',text:'전투 준비',timer:String(turnSec)};
   if(paused)return {id:'paused',text:'일시정지',timer:'Ⅱ'};
   if(turnEnding)return {id:'handoff',text:'다음 팀으로 교대',timer:'↔'};
-  if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':'충돌 화면 확인',timer:'…'}};
+  if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':deathPending()?'사망 연출 중':'충돌 화면 확인',timer:'…'}};
   if(retreatUntil>gameNow)return {id:'retreat',text:'안전한 곳으로 후퇴',timer:((retreatUntil-gameNow)/1000).toFixed(1)};
   if(charging)return {id:'charge',text:'발사력 '+Math.round(clamp((gameNow-chargeAt)/1600,0,1)*100)+'%',timer:String(Math.max(0,Math.ceil(turnLeft)))};
   return {id:'aim',text:isCPU()?'CPU · '+(cpuStatus||'상황 판단 중'):'이동 · 무기 선택 · 조준',timer:String(Math.max(0,Math.ceil(turnLeft)))};
@@ -46,7 +46,7 @@ function toggleOverview(){overview=!overview;if(overview){setCameraZoom(Math.min
 function followWorm(){injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
 function panCamera(dx,dy){injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
 function injuryFrame(){
-  const victims=injuredWorms.filter(w=>w.alive||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration);
+  const victims=injuredWorms.filter(w=>w.alive||deathAnimating(w)||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration);
   if(!victims.length||!presentationPending())return null;
   // Reserve space for the HUD and keep labels readable at every zoom.
   const top=VH<500?92:150,bottom=VH<500?94:VW<=900?184:180;

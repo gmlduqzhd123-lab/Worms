@@ -1,0 +1,213 @@
+{
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "All 82 stage12 backup files match their recorded hashes",
+      "pass": true
+    },
+    {
+      "test": "Ten theme backgrounds and source references exist",
+      "pass": true
+    },
+    {
+      "test": "Initial load fetches only 21 common/default images instead of every theme",
+      "pass": true
+    },
+    {
+      "test": "햇살 해안: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "햇살 해안: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "햇살 해안: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "폐허 도시: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "폐허 도시: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "폐허 도시: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "사막 협곡: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "사막 협곡: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "사막 협곡: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "군사 해안: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "군사 해안: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "군사 해안: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "초록 언덕: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "초록 언덕: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "초록 언덕: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "오로라 설원: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "오로라 설원: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "오로라 설원: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "고철 야적장: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "고철 야적장: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "고철 야적장: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "용암 성채: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "용암 성채: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "용암 성채: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "달 기지: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "달 기지: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "달 기지: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "노을 섬: selection, preview and saved reload work at Pages subpath",
+      "pass": true
+    },
+    {
+      "test": "노을 섬: selected scenery and terrain start a valid battle",
+      "pass": true
+    },
+    {
+      "test": "노을 섬: terrain destruction updates collision",
+      "pass": true
+    },
+    {
+      "test": "All ten palettes preserve identical collision geometry for the same random seed",
+      "pass": true
+    },
+    {
+      "test": "Theme selection and battle fit 320x568 touch viewport",
+      "pass": true
+    },
+    {
+      "test": "Theme selection and battle fit 390x844 touch viewport",
+      "pass": true
+    },
+    {
+      "test": "Theme selection and battle fit 844x390 touch viewport",
+      "pass": true
+    },
+    {
+      "test": "Old settings and unknown theme values keep existing names and default to coast",
+      "pass": true
+    },
+    {
+      "test": "Failed selected background uses its palette fallback and remains playable",
+      "pass": true
+    },
+    {
+      "test": "Standalone offline HTML embeds all 30 images and previews all ten themes without network",
+      "pass": true
+    },
+    {
+      "test": "Theme browser JavaScript and missing-resource errors are zero",
+      "pass": true
+    }
+  ],
+  "geometry": [
+    {
+      "id": "coast",
+      "checksum": 882191160
+    },
+    {
+      "id": "ruins",
+      "checksum": 882191160
+    },
+    {
+      "id": "canyon",
+      "checksum": 882191160
+    },
+    {
+      "id": "fort",
+      "checksum": 882191160
+    },
+    {
+      "id": "meadow",
+      "checksum": 882191160
+    },
+    {
+      "id": "snow",
+      "checksum": 882191160
+    },
+    {
+      "id": "scrap",
+      "checksum": 882191160
+    },
+    {
+      "id": "castle",
+      "checksum": 882191160
+    },
+    {
+      "id": "moon",
+      "checksum": 882191160
+    },
+    {
+      "id": "sunset",
+      "checksum": 882191160
+    }
+  ],
+  "errors": [],
+  "badResponses": []
+}

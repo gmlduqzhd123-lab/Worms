@@ -51,7 +51,8 @@ function nextTurn(delay=900){
   if(combatUnsettled()||presentationPending()){commitAttack(0);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
-  scheduleCombat(()=>{activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()},delay)
+  const handoff=()=>{if(combatUnsettled()||presentationPending()){scheduleCombat(handoff,100);return}activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()};
+  scheduleCombat(handoff,delay)
 }
 function startRetreat(sec=2.6){commitAttack(sec)}
 function finishGame(){

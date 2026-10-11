@@ -15,7 +15,7 @@ function update(dt,ts){
   for(const t of teams)for(const wm of t.worms)wormStep(wm,dt);updateMines(dt);
   const processing=projectiles;projectiles=[];for(const p of processing){const ended=projectileStep(p,dt);rememberImpact(p.x,p.y);if(!ended)projectiles.push(p)}
   walkers=walkers.filter(o=>{const ended=walkerStep(o,dt);rememberImpact(o.x,o.y);return !ended});
-  resolveCombat();
+  updateDeaths();resolveCombat();
   if(charging)ui.power.style.width=clamp((gameNow-chargeAt)/1600,0,1)*100+'%';
   if((!living(0).length||!living(1).length)&&!attackCommitted&&!combatUnsettled()&&!presentationPending())finishGame();
   updateEffects(dt);updateCamera(dt)

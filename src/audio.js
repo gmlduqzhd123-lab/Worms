@@ -31,6 +31,7 @@ function beep(freq=300,dur=.06,type='square',gain=.03){if(!sfxEnabled)return;ens
 function playSFX(name){
   if(!sfxEnabled)return;ensureAudio();
   switch(name){
+    case 'farewell': noise(.14,.08,850,0,'lowpass');tone(90,.18,'sine',.05,0,'sfx',45);break;
     case 'explosion': noise(.32,.30,420,0,'lowpass');noise(.10,.11,2400,0,'highpass');tone(92,.34,'sawtooth',.12,0,'sfx',42);tone(58,.42,'sine',.14);break;
     case 'launch': noise(.14,.09,1500,0,'bandpass');tone(185,.16,'sawtooth',.075,0,'sfx',92);break;
     case 'shotgun': noise(.19,.30,1700,0,'bandpass');tone(76,.16,'square',.10,0,'sfx',48);break;

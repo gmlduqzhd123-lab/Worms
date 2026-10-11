@@ -1,6 +1,6 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage12'),site=path.join(evidence,'unpacked');
+const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage13'),site=path.join(evidence,'unpacked');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'release','manifest.json'),'utf8'));
 const tests=[],errors=[],badResponses=[],remoteRequests=[];let browser;
 const pass=test=>tests.push({test,pass:true});

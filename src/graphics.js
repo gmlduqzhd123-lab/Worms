@@ -45,15 +45,16 @@ function weaponIcon(id){const a=ART_MANIFEST.icons[id];if(a&&!artFailures.includ
 function initGraphics(){graphicsInitialized=true;loadArtwork();const labels=['병사','비행사','광부','해적','닌자','과학자','카우보이','겨울 병사','기사','우주인'];for(const id of ['appearanceA','appearanceB']){const el=document.getElementById(id);el.innerHTML=labels.map((name,i)=>'<option value="'+i+'">'+name+'</option>').join('');el.value=id==='appearanceA'?'0':'2'}for(const b of document.querySelectorAll('.weapon'))b.querySelector('.ico').innerHTML=weaponIcon(b.dataset.w)}
 function drawHealthLabel(w,x,y){
  const a=w.hpAnim,animating=!!(a&&gameNow<a.at+a.duration),hp=Math.ceil(displayedHP(w));
- if(!w.alive&&!animating)return;
+ if(!w.alive&&!animating&&!deathAnimating(w))return;
  ctx.save();ctx.translate(x,y);ctx.scale(1/cameraZoom,1/cameraZoom);x=0;y=-Math.max(0,(cameraZoom-1)*34);ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font='800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
  ctx.font='900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
  ctx.fillStyle='#102337';ctx.fillRect(x-18,y-43,36,5);if(animating){ctx.fillStyle='#ffd387';ctx.fillRect(x-17,y-42,34*a.from/100,3)}ctx.fillStyle=animating?'#ff7373':teams[w.team].color;ctx.fillRect(x-17,y-42,34*hp/100,3);ctx.restore();
 }
 function drawExplorer(w){
-  const x=screenX(w.x),y=screenY(w.y);if(!w.alive){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
-  const active=w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
+  const x=screenX(w.x),y=screenY(w.y),dying=!w.alive&&deathAnimating(w);if(!w.alive&&(!dying||gameNow>=w.death.burstAt)){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
+  const active=w.alive&&w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
   ctx.save();ctx.translate(x,y);ctx.scale(dir,1);ctx.rotate(w.hurt>0?Math.sin(worldTime*.09)*.1:clamp(w.vx*.025,-.1,.1));
+  if(dying){const t=clamp((gameNow-w.death.at)/900,0,1);ctx.translate(0,-Math.sin(t*Math.PI)*12);ctx.rotate(Math.sin(t*Math.PI*5)*.22);ctx.scale(1-t*.25,1-t*.3);ctx.globalAlpha=1-t*.25}
   ctx.fillStyle='rgba(20,30,20,.28)';ctx.beginPath();ctx.ellipse(0,10,15,4,0,0,Math.PI*2);ctx.fill();
   const art=characterArt(w),h=44,ww=h*art.bounds.w/art.bounds.h,bob=w.onGround?Math.sin(worldTime*.016)*Math.min(1.5,Math.abs(w.vx)):0;
   if(!drawArt(art.file,art.bounds,-ww/2,-34+bob,ww,h)){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(0,-8,11,19,0,0,Math.PI*2);ctx.fill()}
