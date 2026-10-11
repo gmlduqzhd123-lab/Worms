@@ -1,0 +1,70 @@
+{
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "19 custom vector weapon icons render without remote artwork",
+      "pass": true
+    },
+    {
+      "test": "Settings, team names, difficulty and audio restore after reload",
+      "pass": true
+    },
+    {
+      "test": "Six-step tutorial navigation and completion are saved",
+      "pass": true
+    },
+    {
+      "test": "Opening guide pauses battle and prevents battle keys; Escape resumes",
+      "pass": true
+    },
+    {
+      "test": "Guide preserves an already paused battle",
+      "pass": true
+    },
+    {
+      "test": "Completed result stores winner, health, turns and simulation duration once",
+      "pass": true
+    },
+    {
+      "test": "History renders winner and exports matching JSON",
+      "pass": true
+    },
+    {
+      "test": "Completed history survives page reload",
+      "pass": true
+    },
+    {
+      "test": "History is capped at 30 unique completed matches",
+      "pass": true
+    },
+    {
+      "test": "Two-step history deletion preserves settings and unrelated storage",
+      "pass": true
+    },
+    {
+      "test": "Malformed stored JSON does not crash or overwrite unreadable originals",
+      "pass": true
+    },
+    {
+      "test": "Storage disabled: battle and in-memory results still work",
+      "pass": true
+    },
+    {
+      "test": "Invalid preferences rejected, names limited, history content rendered as text",
+      "pass": true
+    },
+    {
+      "test": "Split local file works offline and restores preferences",
+      "pass": true
+    },
+    {
+      "test": "Standalone offline file preserves settings, guide and custom graphics",
+      "pass": true
+    },
+    {
+      "test": "Stage 5 feature browser errors: zero",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+html=html.replace('<link rel="stylesheet" href="./styles/game.css">','<style>\n'+fs.readFileSync(path.join(root,'styles','game.css'),'utf8')+'</style>');
+const scripts=[...html.matchAll(/<script defer src="\.\/([^\"]+)"><\/script>/g)];
+const combined=scripts.map(m=>fs.readFileSync(path.join(root,m[1]),'utf8')).join('\n');
+for(const m of scripts)html=html.replace(m[0],'');
+html=html.replace('</body>','<script>\n(() => {\n'+combined+'\n})();\n</script>\n</body>');
+const version=html.match(/name="wormfront-version" content="(\d+)"/)?.[1]||'4';
+fs.mkdirSync(path.join(root,'dist'),{recursive:true});fs.writeFileSync(path.join(root,'dist','wormfront-stage'+version+'-offline.html'),html,'utf8');
+console.log('Generated standalone offline HTML from current source files.');
