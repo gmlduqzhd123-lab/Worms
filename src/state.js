@@ -21,11 +21,13 @@ let projectiles=[],particles=[],explosions=[],damageLabels=[],mines=[],crates=[]
 let worldTime=0,last=performance.now(),cameraShake=0,crateRate=.58,initialMineCount=10;
 let aiBusy=false,aiTimer=null;
 let gameNow=performance.now(),turnWorm=null,turnEnding=false,attackCommitted=false;
-let shotFocus=null;
+let shotFocus=null,injuredWorms=[],injuryZoom=null;
+function injuryMoving(w){return w.alive&&(!w.onGround||w.knockTime>0||Math.abs(w.vx)>.2)}
+function injuryPending(){return injuredWorms.some(w=>injuryMoving(w)||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration)}
 function rememberImpact(x,y){shotFocus={x,y,at:gameNow}}
 function displayedHP(w){const a=w.hpAnim;if(!a||gameNow>=a.at+a.duration)return w.hp;const t=clamp((gameNow-a.at)/(a.duration-350),0,1);return lerp(a.from,a.to,t)}
 function healthAnimating(){return teams.some(t=>t.worms.some(w=>w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration))}
-function presentationPending(){return !!(shotFocus&&gameNow-shotFocus.at<3000)||healthAnimating()}
+function presentationPending(){return !!(shotFocus&&gameNow-shotFocus.at<3000)||healthAnimating()||injuryPending()}
 let combatTasks=[],taskSequence=0,retreatDuration=2.5,pendingEmissions=0,settledSince=null;
 function scheduleCombat(fn,delay){const id=++taskSequence;combatTasks.push({id,at:gameNow+delay,fn});return id}
 function cancelCombat(id){combatTasks=combatTasks.filter(t=>t.id!==id)}

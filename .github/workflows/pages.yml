@@ -25,7 +25,7 @@ jobs:
           mkdir -p _site/offline
           cp index.html .nojekyll manifest.webmanifest sw.js ys-install.js ys-qr.js qr.svg og-image.jpg _site/
           cp -R src styles assets icons _site/
-          cp dist/wormfront-stage11-offline.html _site/offline/wormfront.html
+          cp dist/wormfront-stage12-offline.html _site/offline/wormfront.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

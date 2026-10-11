@@ -38,14 +38,45 @@ function focusOn(x,y,instant=false){
   if(instant){camera.x=camera.targetX;camera.y=camera.targetY}
 }
 function setCameraZoom(value,sx=VW/2,sy=VH/2){
+  injuryZoom=null;
   const point=worldFromScreen(sx,sy);cameraZoom=clamp(value,Math.min(.35,VW/WW,VH/WH),1.8);
   camera.x=point.x-sx/cameraZoom;camera.y=point.y-sy/cameraZoom;clampCamera();camera.manualUntil=Infinity
 }
 function toggleOverview(){overview=!overview;if(overview){setCameraZoom(Math.min(VW/WW,VH/WH));focusOn(WW/2,WH/2,true)}else followWorm();document.getElementById('overviewBtn').textContent=overview?'전투 보기':'전체 맵'}
-function followWorm(){overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
-function panCamera(dx,dy){overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
+function followWorm(){injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
+function panCamera(dx,dy){injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
+function injuryFrame(){
+  const victims=injuredWorms.filter(w=>w.alive||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration);
+  if(!victims.length||!presentationPending())return null;
+  // Reserve space for the HUD and keep labels readable at every zoom.
+  const top=VH<500?92:150,bottom=VH<500?94:VW<=900?184:180;
+  const left=72,right=VW-72,upper=Math.min(top,VH*.3),lower=Math.max(upper+90,VH-bottom);
+  const minX=Math.min(...victims.map(w=>w.x)),maxX=Math.max(...victims.map(w=>w.x));
+  const minY=Math.min(...victims.map(w=>w.y)),maxY=Math.max(...victims.map(w=>w.y));
+  const zoom=Math.max(.02,Math.min(injuryZoom??cameraZoom,(right-left)/Math.max(1,maxX-minX),(lower-upper-120)/Math.max(1,maxY-minY)));
+  return {minX,maxX,minY,maxY,left,right,upper,lower,zoom};
+}
 function updateCamera(dt){
   if(gameNow<camera.manualUntil||overview)return;
+  const blend=1-Math.pow(.002,dt);
+  if(injuredWorms.length&&presentationPending()){
+    if(injuryZoom===null)injuryZoom=cameraZoom;
+    const frame=injuryFrame();
+    if(frame){
+      // Zoom out immediately to retain every victim; ease zooming back in.
+      cameraZoom=frame.zoom<cameraZoom?frame.zoom:lerp(cameraZoom,frame.zoom,blend);
+      const z=cameraZoom;
+      camera.targetX=(frame.minX+frame.maxX)/2-VW/2/z;
+      camera.targetY=(frame.minY+frame.maxY)/2-(frame.upper+frame.lower+64)/2/z;
+      camera.x=lerp(camera.x,camera.targetX,blend);camera.y=lerp(camera.y,camera.targetY,blend);
+      // Constrain smoothing so fast knockback never leaves a victim offscreen.
+      camera.x=clamp(camera.x,frame.maxX-frame.right/z,frame.minX-frame.left/z);
+      camera.y=clamp(camera.y,frame.maxY-(frame.lower-32)/z,frame.minY-(frame.upper+88)/z);
+      return;
+    }
+  }
+  if(!presentationPending())injuredWorms=[];
+  if(injuryZoom!==null){cameraZoom=lerp(cameraZoom,injuryZoom,blend);if(Math.abs(cameraZoom-injuryZoom)<.002){cameraZoom=injuryZoom;injuryZoom=null}}
   const f=projectiles[0]||walkers[0]||(presentationPending()?shotFocus:null)||current();if(f)focusOn(f.x,f.y,false);
-  camera.x=lerp(camera.x,camera.targetX,1-Math.pow(.002,dt));camera.y=lerp(camera.y,camera.targetY,1-Math.pow(.002,dt))
+  camera.x=lerp(camera.x,camera.targetX,blend);camera.y=lerp(camera.y,camera.targetY,blend)
 }

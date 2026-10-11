@@ -2,7 +2,7 @@
 
 function damage(w,amount,kx=0,ky=0){
   if(!w.alive)return;const shown=displayedHP(w),before=w.hp;w.hp=Math.max(0,w.hp-Math.max(0,Math.round(amount)));const lost=before-w.hp;
-  if(lost>0){w.hpAnim={from:shown,to:w.hp,at:gameNow,duration:clamp((shown-w.hp)*45,900,4000)+350};if(!shotFocus)rememberImpact(w.x,w.y)}
+  if(lost>0){if(!injuredWorms.includes(w))injuredWorms.push(w);w.hpAnim={from:shown,to:w.hp,at:gameNow,duration:clamp((shown-w.hp)*45,900,4000)+350};if(!shotFocus)rememberImpact(w.x,w.y)}
   if(lost>0)damageLabels.push({x:w.x+22,y:w.y-85,amount:lost,life:1.4,color:teams[w.team].color});
   w.vx+=kx;w.vy+=ky;if(kx||ky){w.knockTime=.65;w.onGround=false}w.hurt=1;
   if(w.hp<=0){w.alive=false;burst(w.x,w.y,teams[w.team].color,25)}updateHUD()

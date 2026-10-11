@@ -46,7 +46,7 @@ function initGraphics(){graphicsInitialized=true;loadArtwork();const labels=['ë³
 function drawHealthLabel(w,x,y){
  const a=w.hpAnim,animating=!!(a&&gameNow<a.at+a.duration),hp=Math.ceil(displayedHP(w));
  if(!w.alive&&!animating)return;
- ctx.save();ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font='800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
+ ctx.save();ctx.translate(x,y);ctx.scale(1/cameraZoom,1/cameraZoom);x=0;y=-Math.max(0,(cameraZoom-1)*34);ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font='800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
  ctx.font='900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
  ctx.fillStyle='#102337';ctx.fillRect(x-18,y-43,36,5);if(animating){ctx.fillStyle='#ffd387';ctx.fillRect(x-17,y-42,34*a.from/100,3)}ctx.fillStyle=animating?'#ff7373':teams[w.team].color;ctx.fillRect(x-17,y-42,34*hp/100,3);ctx.restore();
 }
