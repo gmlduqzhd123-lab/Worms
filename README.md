@@ -2,11 +2,17 @@
 
 GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
 
+## 공개 실행 주소
+
+[게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
+
+공개 사이트에서 추가 11개 검사를 통과했고 JavaScript·리소스 오류는 0개였습니다. 기록은 verification/live/REPORT.md와 results.json에 있습니다.
+
 ## 7단계 배포 준비
 
 release/wormfront-stage7-pages.zip에 실행 파일만 묶었습니다. release/manifest.json은 19개 파일의 해시를 담습니다. .github/workflows/pages.yml은 기본 브랜치에서 수동 실행하는 GitHub Pages 워크플로입니다. 자세한 방법은 [DEPLOYMENT.md](DEPLOYMENT.md)를 확인하세요.
 
-6단계 전체 파일은 versions/stage6/에 보존했습니다. 게임 규칙은 유지하고 버전 표기와 배포·검수 도구를 정리했습니다. 실제 GitHub Pages 배포는 하지 않았습니다.
+6단계 전체 파일은 versions/stage6/에 보존했습니다. 게임 규칙은 유지하고 버전 표기와 배포·검수 도구를 정리했습니다. 실제 GitHub Pages 배포를 완료했습니다.
 
 ## 실행
 
@@ -18,7 +24,7 @@ node scripts/serve.cjs
 
 주소: http://127.0.0.1:4187
 
-GitHub Pages에는 `index.html`, `src/`, `styles/`를 사이트 루트에 함께 올립니다. 모든 참조는 상대 경로여서 저장소 이름이 붙는 하위 경로에서도 실행할 수 있습니다. 이번 작업에서는 원격 저장소 생성, 커밋, 푸시 및 배포를 실행하지 않았습니다.
+GitHub Pages에는 `index.html`, `src/`, `styles/`를 사이트 루트에 함께 올립니다. 모든 참조는 상대 경로여서 저장소 이름이 붙는 하위 경로에서도 실행할 수 있습니다. gmlduqzhd123-lab/Worms 저장소에 업로드하고 GitHub Pages 배포를 완료했습니다.
 
 ## 유지된 CPU 개선
 

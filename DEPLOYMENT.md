@@ -1,6 +1,10 @@
 # GitHub Pages 배포 안내
 
-현재 상태는 배포 준비 완료입니다. 원격 저장소 생성·커밋·푸시·실제 배포는 수행하지 않았습니다.
+2026-10-11 배포 완료. 저장소: https://github.com/gmlduqzhd123-lab/Worms
+
+실행 주소: https://gmlduqzhd123-lab.github.io/Worms/
+
+기본 브랜치 main을 업로드하고 GitHub Actions 방식으로 Pages를 활성화했습니다. 수동 배포 워크플로가 성공했고 공개 사이트의 11개 실행 검사를 통과했습니다.
 
 ## ZIP으로 올리기
 
@@ -20,7 +24,7 @@ ZIP에는 게임 실행 파일 19개만 들어 있습니다. 원본·이전 버�
 
 워크플로는 수동 실행이며 기본 브랜치에서만 배포합니다. `_site/`에 실행 파일만 복사하여 업로드하고 `github-pages` 환경에 배포합니다. 저장소의 원본·보관본은 웹사이트에 업로드하지 않습니다. 서버·API 키 설정은 필요하지 않습니다.
 
-설정 방법과 배포 액션은 [GitHub 공식 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) 및 [게시 소스 설정 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 확인했습니다. GitHub Actions 실행은 실제 저장소에서 아직 검증하지 않았습니다.
+설정 방법과 배포 액션은 [GitHub 공식 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) 및 [게시 소스 설정 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 확인했습니다. GitHub Actions 실행은 실제 저장소에서 성공을 확인했습니다.
 
 ## 로컬·오프라인
 

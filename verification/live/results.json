@@ -1,0 +1,127 @@
+{
+  "url": "https://gmlduqzhd123-lab.github.io/Worms/",
+  "checkedAt": "2026-10-11T03:41:20.214Z",
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "All 18 public runtime files return HTTP 200 and match the commit; nojekyll control file is tracked",
+      "pass": true
+    },
+    {
+      "test": "Public desktop home loads stage 7 with 15 scripts",
+      "pass": true
+    },
+    {
+      "test": "Public game start and guide pause/resume work",
+      "pass": true
+    },
+    {
+      "test": "Public camera overview and worm follow work",
+      "pass": true
+    },
+    {
+      "test": "Public shotgun fires twice and advances turn",
+      "pass": true
+    },
+    {
+      "test": "Public settings restore and history dialog opens",
+      "pass": true
+    },
+    {
+      "test": "Public CPU turn returns control to the player",
+      "pass": true
+    },
+    {
+      "test": "Public mobile touch start/pause and portrait control layout work",
+      "pass": true
+    },
+    {
+      "test": "Public mobile guide opens and closes",
+      "pass": true
+    },
+    {
+      "test": "Public standalone HTML starts without external scripts or CSS",
+      "pass": true
+    },
+    {
+      "test": "Public browser JS and missing-resource errors are zero",
+      "pass": true
+    }
+  ],
+  "hashes": [
+    {
+      "file": "index.html",
+      "sha256": "549de06f72de135956fbacb0f32cee2da33ee871cfb931153462a8ba07fae542"
+    },
+    {
+      "file": "styles/game.css",
+      "sha256": "f83046071275c50667f7930b3a91dd071d6ec409768919c9f8a06d3f6cae6a73"
+    },
+    {
+      "file": "src/state.js",
+      "sha256": "c8eb1f32a2f16183420eb9622ae49b2929b8185d0dcec1c19aa717db798858b7"
+    },
+    {
+      "file": "src/audio.js",
+      "sha256": "2b6b5672a544b6c6ae374fc1fe9426d277417403c7c65b2c3b5cad81ba5c18fe"
+    },
+    {
+      "file": "src/terrain.js",
+      "sha256": "db1d9c1f6345043cb97b30fae05266fb5deb16e99e049d64d8d3eb2c19a53765"
+    },
+    {
+      "file": "src/turns.js",
+      "sha256": "6338bf509b220aac3171bd79136d9822bd7657f24d0025dbfa7034aa1f9d9f8c"
+    },
+    {
+      "file": "src/ui.js",
+      "sha256": "8835006c5ac03d47716ce450d85038f699a8384f66eebb3541e28df66dc39cbe"
+    },
+    {
+      "file": "src/combat.js",
+      "sha256": "af34d69073a82f394813fdd35cb86898d45fb6166e914a7fcc029bb72f0fd216"
+    },
+    {
+      "file": "src/weapons.js",
+      "sha256": "9f62c8b2488b588525dcff6ca276b1e5dbfc6438cd053c7b0a5fba2d57d7b52f"
+    },
+    {
+      "file": "src/physics.js",
+      "sha256": "709154adc83cbbc3f580b5be0d63acef868c44ae71fdde53d33a43f642d728a5"
+    },
+    {
+      "file": "src/ai.js",
+      "sha256": "62e13cfd461418443823adea7cd734c87769c7759753ccbde9fee7d4c4b7f1fd"
+    },
+    {
+      "file": "src/render.js",
+      "sha256": "d08d082185fc969b6bdf3b0ba7951d2b2bfe9746a1ebf0184714e8e7a1afd169"
+    },
+    {
+      "file": "src/loop.js",
+      "sha256": "0b705e9c448088299fec32f650b4b291e26a9bc298e1f8f0a74e4a9a737bec6a"
+    },
+    {
+      "file": "src/input.js",
+      "sha256": "fb42149462fb686a380d24264ef8bf095d2ad89de18b3785cbbbd6b3b1a7db3c"
+    },
+    {
+      "file": "src/graphics.js",
+      "sha256": "549917dde643091b7c4038be710e973c688adde4ffea730992dafb5f836c29f3"
+    },
+    {
+      "file": "src/persistence.js",
+      "sha256": "115f2348e0aff536bf3f7e1e5c1f91e7129ef80b5fd28f9edfc67242087a8682"
+    },
+    {
+      "file": "src/boot.js",
+      "sha256": "a6b4ee5aa006161eb234376dfc74fd84177a0262bfa344db38c6f981a27f7555"
+    },
+    {
+      "file": "offline/wormfront.html",
+      "sha256": "f3924f88844a1b51cdd66383c613617913fcd587903588a07b6d9d59fd5a9a81"
+    }
+  ],
+  "errors": [],
+  "failedResources": []
+}
