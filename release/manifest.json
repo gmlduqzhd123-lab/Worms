@@ -3,8 +3,8 @@
   "files": [
     {
       "file": "index.html",
-      "bytes": 11205,
-      "sha256": "d1ac901bc711fda31a63c0e68029fa026f57384c68a1c0acd35b506c64081870"
+      "bytes": 13649,
+      "sha256": "5db832e35a865846bbe82ded44357c98bba0067263ae1f67eb27bb14eea96ce1"
     },
     {
       "file": ".nojekyll",
@@ -13,8 +13,8 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 13648,
-      "sha256": "f3232d3aa5b880e3f98d4b7bc9cad3655c00f5fdabfd8851b2efe03ad3571464"
+      "bytes": 14617,
+      "sha256": "9766f67bf78350f3e148ebf464d975481eeee6f16af94e8261afb272442d1c37"
     },
     {
       "file": "src/state.js",
@@ -242,9 +242,64 @@
       "sha256": "3557b594b41ccb6dd8928a1787f76ec01bc8f40b4a4f454ea2055c842435dbfd"
     },
     {
+      "file": "manifest.webmanifest",
+      "bytes": 727,
+      "sha256": "48c904ad62c132a8c9105991a719a38cb937b97ced2a65876e2158c4bab1b662"
+    },
+    {
+      "file": "sw.js",
+      "bytes": 1753,
+      "sha256": "18eaeba66368cf26ccd15aaf378f091520cf7fa63f5c058cd9a3364b14a2c289"
+    },
+    {
+      "file": "ys-install.js",
+      "bytes": 11520,
+      "sha256": "a70169efee22552c8505767c88a3a333b92671fcf9b6ffecfa2f286ad7cddbaa"
+    },
+    {
+      "file": "ys-qr.js",
+      "bytes": 4233,
+      "sha256": "9942da1c4fd0582bd82e750846bad93c2723236e7649c580c7972c711b2b78bf"
+    },
+    {
+      "file": "qr.svg",
+      "bytes": 1726,
+      "sha256": "3b4027b74cd21cee8fd5b726e1805bcb036e5d4e75e54ba253cc7981d88fd009"
+    },
+    {
+      "file": "og-image.jpg",
+      "bytes": 54587,
+      "sha256": "54f5410fdb7dca02083edbea191e091ee96c31744be725e4757b715ad350f587"
+    },
+    {
+      "file": "icons/apple-touch-icon.png",
+      "bytes": 36881,
+      "sha256": "7e1888a792e1facd34f78643aa8205bae14db7d9e0deb6be7ac71d97a7224021"
+    },
+    {
+      "file": "icons/favicon-32.png",
+      "bytes": 2073,
+      "sha256": "bcbe737e48d18f3e6c6cd3dafb74fcf76c203761530c9dd29d0f4d511224c340"
+    },
+    {
+      "file": "icons/icon-192.png",
+      "bytes": 41501,
+      "sha256": "8006037ae1d6e9ed5713bf135ffff76add24dea8bd208fe833302c09ac6ad62a"
+    },
+    {
+      "file": "icons/icon-512.png",
+      "bytes": 224828,
+      "sha256": "455c14e5848343b79b6df9e681e4b1d8868c141ee1d594d372141b703309f397"
+    },
+    {
+      "file": "icons/icon-maskable-512.png",
+      "bytes": 187828,
+      "sha256": "f49898a780d33e619b10570d6d812129e196d7b2a32ca67fc950ec2fed18ee02"
+    },
+    {
       "file": "offline/wormfront.html",
-      "bytes": 57480324,
-      "sha256": "5b96c10aef3b1c76fd79d6b6c137aae15dd74c59737f1b12f1aa7feaa3a06339"
+      "bytes": 57553389,
+      "sha256": "3b45eedd4cc91521fbafbd8dbf6f0968e3382aa02ce46cb618a095e027ec81ad"
     }
   ]
 }

@@ -9,20 +9,21 @@
 ## ZIP으로 올리기
 
 1. `release/wormfront-stage10-pages.zip`을 풉니다.
-2. 압축을 푼 `index.html`, `.nojekyll`, `src/`, `styles/`, `assets/`, `offline/`을 GitHub 저장소 루트에 올립니다. ZIP 파일 자체를 올리는 방식이 아닙니다.
+2. 압축을 푼 `index.html`, `.nojekyll`, `src/`, `styles/`, `assets/`, `icons/`, `offline/`과 루트의 앱 설치·QR·공유 파일을 GitHub 저장소 루트에 올립니다. ZIP 파일 자체를 올리는 방식이 아닙니다.
 3. 저장소 Settings → Pages에서 Source를 **Deploy from a branch**로 선택합니다. 파일을 올린 브랜치와 **/(root)**를 선택하고 저장합니다.
 4. 배포 완료 후 Pages에 표시된 주소를 엽니다. 홈 → 시작 → 발사 → 다음 턴, 가이드, 설정 복원과 모바일 조작을 확인합니다.
 
-ZIP에는 게임 실행 파일 49개만 들어 있습니다. 원본·이전 버전·검사 코드·검수 자료는 들어 있지 않습니다. 폴더 이름을 유지합니다.
+ZIP에는 게임 실행 파일 60개만 들어 있습니다. 원본·이전 버전·검사 코드·검수 자료는 들어 있지 않습니다. 폴더 이름을 유지합니다.
 
 ## 소스 저장소에서 수동 배포하기
 
 1. `index.html`, `.nojekyll`, `src/`, `styles/`, `assets/`, `dist/wormfront-stage10-offline.html`, `.github/workflows/pages.yml`을 저장소의 기본 브랜치에 넣습니다.
+   앱 설치·QR·공유 미리보기용 `manifest.webmanifest`, `sw.js`, `ys-install.js`, `ys-qr.js`, `qr.svg`, `og-image.jpg`, `icons/`도 함께 넣습니다.
 2. Settings → Pages → Source를 **GitHub Actions**로 선택합니다.
 3. Actions에서 **Publish Wormfront to GitHub Pages** → **Run workflow**를 기본 브랜치에서 실행합니다.
 4. 작업이 완료되면 표시된 배포 URL에서 위의 게임 흐름을 확인합니다.
 
-워크플로는 수동 실행이며 기본 브랜치에서만 배포합니다. `_site/`에 실행 파일만 복사하여 업로드하고 `github-pages` 환경에 배포합니다. 저장소의 원본·보관본은 웹사이트에 업로드하지 않습니다. 서버·API 키 설정은 필요하지 않습니다.
+워크플로는 main 브랜치에 푸시(PR 병합 포함)하면 자동으로 실행되고, Actions에서 수동으로도 실행할 수 있습니다. 기본 브랜치에서만 배포합니다. `_site/`에 실행 파일만 복사하여 업로드하고 `github-pages` 환경에 배포합니다. 저장소의 원본·보관본은 웹사이트에 업로드하지 않습니다. 서버·API 키 설정은 필요하지 않습니다.
 
 설정 방법과 배포 액션은 [GitHub 공식 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) 및 [게시 소스 설정 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 확인했습니다. GitHub Actions 실행은 실제 저장소에서 성공을 확인했습니다.
 

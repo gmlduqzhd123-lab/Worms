@@ -1,6 +1,10 @@
 {
   "tests": [
     {
+      "test": "Merged install helper and QR dialog retain a working QR image",
+      "pass": true
+    },
+    {
       "test": "Player turn begins in movement/aim phase",
       "pass": true
     },
@@ -42,6 +46,10 @@
     },
     {
       "test": "Compact HUD and visible phase fit 844x390",
+      "pass": true
+    },
+    {
+      "test": "Standalone file embeds QR, installation guide and helper scripts without external dependencies",
       "pass": true
     },
     {

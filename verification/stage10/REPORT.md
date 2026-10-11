@@ -10,14 +10,16 @@
 
 ## 검증 기록
 
-전투 회귀 97, 설정·가이드 16, CPU·밸런스 20, 압축 배포본 13, 이미지 9, 테마 41, 새 전투 표시 12로 총 208개 검사가 통과했습니다. 브라우저 JavaScript 오류와 배포본의 외부 서비스 요청은 0개입니다.
+전투 회귀 97, 설정·가이드 16, CPU·밸런스 20, 압축 배포본 13, 이미지 9, 테마 41, 새 전투 표시·병합 기능 14로 총 210개 검사가 통과했습니다. 브라우저 JavaScript 오류와 배포본의 외부 서비스 요청은 0개입니다.
 
 Microsoft Edge 155 / Playwright. results.json(전투 회귀), features.json(설정·가이드), tactics.json(CPU·밸런스), release.json(압축 배포본), artwork.json(이미지), themes.json(맵 테마), reference.json(새 전투 표시)에 개별 결과를 기록합니다.
 
 새 검사는 실제 HP 감소량·과잉 피해·사망 후 중복 피해, 피해 표시 수명·재시작 초기화·일시정지, 턴 단계·충전력·후퇴 시간, 기폭 초 경계, 초기 resize 보호, 모바일 HUD 가시성을 확인합니다. 전투 화면 reference-battle.png, reference-feedback.png와 모바일 320×568 / 390×844 / 844×390 스크린샷을 확인했습니다.
 
-ZIP 49개 실행 파일 해시와 압축 해제 후 시작·발사·교대·모바일·오프라인 실행을 확인합니다. 전체 이미지 30장을 포함한 오프라인 HTML은 57,480,324 bytes입니다. 원본 PNG 20장은 바이트가 동일합니다. 원본 HTML SHA256은 0499d59e72d030ce0dff4a03f27e8cca0c56521762696db3e44bd3ebad8f2fe5, 원본 이미지 ZIP SHA256은 1c1fffd89314735ebac1c9e6aa5dc83bcf40f8daaea548dfbb70d12a37e5023d로 유지됐습니다. 이전 9단계 파일 68개는 versions/stage9/에 보존했으며 stage9-preservation.json의 해시와 일치합니다.
+ZIP 60개 실행 파일 해시와 압축 해제 후 시작·발사·교대·모바일·오프라인 실행을 확인합니다. 전체 이미지 30장을 포함한 오프라인 HTML은 57,553,389 bytes입니다. 원본 PNG 20장은 바이트가 동일합니다. 원본 HTML SHA256은 0499d59e72d030ce0dff4a03f27e8cca0c56521762696db3e44bd3ebad8f2fe5, 원본 이미지 ZIP SHA256은 1c1fffd89314735ebac1c9e6aa5dc83bcf40f8daaea548dfbb70d12a37e5023d로 유지됐습니다. 이전 9단계 파일 68개는 versions/stage9/에 보존했으며 stage9-preservation.json의 해시와 일치합니다.
 
 ## 범위
 
 모바일 검수는 브라우저 에뮬레이션이며 실제 단말 검사는 포함하지 않습니다. 원작의 다중 팀·지형 구조 다양성·동작별 애니메이션·전체 무기 감각은 후속 작업입니다. 공개 배포 검수는 verification/live-stage10/에 별도로 기록합니다.
+
+원격 저장소의 2ed8a55 / 323b084 변경(앱 설치·QR·공유 미리보기·main 자동 배포)을 병합해 보존했습니다. 배포 ZIP과 로컬 서버에 추가 실행 파일 11개와 올바른 MIME을 포함하고, 단일 HTML에는 도우미·아이콘·QR을 임베딩합니다. 서비스 워커 캐시는 worms-v10으로 새 버전을 구분합니다. 앱 설치 자체와 실기기 QR 촬영은 검수하지 않았습니다.

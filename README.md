@@ -14,7 +14,7 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 제공한 나머지 화면 예시 9장을 참고해 UI와 캐릭터 없는 배경을 built-in imagegen으로 제작했습니다. 저장 경로와 프롬프트 전체는 assets/THEME_PROMPTS.json에 있습니다. 새 테마 배경은 선택할 때만 로딩하며 실패 시 해당 테마의 절차적 색상 표시를 사용합니다. 원본 PNG와 8단계 전체 56개 파일은 versions/stage8/에 보존하고 해시를 확인했습니다.
 
-release/wormfront-stage10-pages.zip에는 49개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
+release/wormfront-stage10-pages.zip에는 60개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
 
 ## 유지된 8단계 시각 개선
 
@@ -151,7 +151,7 @@ CPU의 로프·제트팩·점프 경로 탐색 및 무기 추가는 포함하지
 
 ## 검수
 
-현재 보고서는 `verification/stage10/REPORT.md`입니다. 회귀·저장·CPU·배포본·이미지·테마 및 새 전투 표시 검사를 수행합니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
+현재 보고서는 `verification/stage10/REPORT.md`입니다. 회귀·저장·CPU·배포본·이미지·테마 및 새 전투 표시·병합 기능 검사 총 210개를 통과했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
 
 이전 단계 검수 결과와 스크린샷은 `verification/stage1/`, `verification/stage2/`, `verification/stage3/`에 보관했습니다.
 

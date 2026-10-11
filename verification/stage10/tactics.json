@@ -85,21 +85,21 @@
   "timings": [
     {
       "level": "easy",
-      "ms": 8.599999994039536,
+      "ms": 9,
       "score": 43.41268423941687,
       "simulations": 120,
       "type": "grenade"
     },
     {
       "level": "normal",
-      "ms": 11.599999994039536,
+      "ms": 12.099999994039536,
       "score": 43.375722462075316,
       "simulations": 252,
       "type": "grenade"
     },
     {
       "level": "hard",
-      "ms": 15,
+      "ms": 17,
       "score": 43.48775114629578,
       "simulations": 360,
       "type": "grenade"

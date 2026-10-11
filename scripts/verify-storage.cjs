@@ -1,8 +1,8 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage10');fs.mkdirSync(evidence,{recursive:true});
-const files=['index.html','styles/game.css',...JSON.parse(fs.readFileSync(path.join(root,'scripts','source-order.json'),'utf8')),...fs.readdirSync(path.join(root,'assets','images')).map(f=>'assets/images/'+f)];
-const server=http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname.slice(1)||'index.html';if(!files.includes(name)){res.writeHead(404);res.end();return}res.writeHead(200,{'Content-Type':name.endsWith('.png')?'image/png':name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'text/html; charset=utf-8'});res.end(fs.readFileSync(path.join(root,name)))});
+const files=['index.html','styles/game.css',...JSON.parse(fs.readFileSync(path.join(root,'scripts','source-order.json'),'utf8')),...fs.readdirSync(path.join(root,'assets','images')).map(f=>'assets/images/'+f),...JSON.parse(fs.readFileSync(path.join(root,'scripts/site-extras.json')))];
+const server=http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname.slice(1)||'index.html';if(!files.includes(name)){res.writeHead(404);res.end();return}res.writeHead(200,{'Content-Type':require('./mime.cjs')(name)});res.end(fs.readFileSync(path.join(root,name)))});
 const results=[],errors=[];let browser;
 function passed(test){results.push({test,pass:true})}
 async function winFixture(page){await page.evaluate(()=>{teams[0].worms.forEach((w,i)=>{w.alive=i<2;w.hp=i<2?75:0});teams[1].worms.forEach(w=>{w.alive=false;w.hp=0});turnNo=12;gameNow=matchStartedAt+120000;finishGame();finishGame()})}

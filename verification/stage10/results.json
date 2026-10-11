@@ -374,7 +374,7 @@
       "pass": true
     },
     {
-      "test": "Pages-style repository subpath loads 15 scripts and CSS, game and audio controls work",
+      "test": "Pages-style repository subpath loads 17 scripts and CSS, game and audio controls work",
       "pass": true
     },
     {

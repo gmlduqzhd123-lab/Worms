@@ -94,3 +94,13 @@ body{touch-action:auto}#game{touch-action:none}#panel,.gameDialog{touch-action:p
 #timer[data-phase="resolve"],#timer[data-phase="handoff"]{color:#a8cadd}#timer[data-phase="retreat"]{color:#ffb183;font-size:21px}
 #toast{top:74px}#audioControls{top:74px}#cameraControls,#helpAccess{top:113px}
 @media(max-width:480px){#top{width:calc(100% - 12px);gap:4px;grid-template-columns:minmax(0,1fr) 152px minmax(0,1fr)}#top .team{padding:6px 5px}.teamName{font-size:10px}#center{padding:5px 4px;gap:2px 3px;grid-template-columns:1fr 29px}#turnLabel,#wind,#subhud{font-size:9px}#subhud{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#timer{font-size:22px}#audioControls{top:75px}#cameraControls,#helpAccess{top:113px}#toast{top:156px}}
+/* 📲 앱 설치 · 📱 QR: 시작 화면 맨 윗줄 오른쪽 */
+.homeTop{display:flex;justify-content:flex-end;gap:7px;margin:-6px 0 2px}
+.homeChip{border:1px solid #7fa3b4;border-radius:999px;padding:6px 13px;background:#0b2033cc;color:#e8f3f8;font:inherit;font-size:13px;font-weight:900;cursor:pointer;white-space:nowrap}
+.homeChip:hover{background:#1c4058}
+.homeChip.install{background:#ffe08a;border-color:#ffe08a;color:#1a2a36}
+.homeChip.install:hover{background:#ffd35a}
+.ysFoot{text-align:center;font-size:11px!important;color:#8fa9b8!important;margin:12px 0 2px!important}
+.ysFoot a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media(min-width:601px){#panel{position:relative}.homeTop{position:absolute;top:16px;right:18px;margin:0}}
+@media(max-width:480px){.homeWide{display:none}.homeChip{padding:5px 11px;font-size:12.5px}}

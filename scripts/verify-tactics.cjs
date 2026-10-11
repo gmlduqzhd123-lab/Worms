@@ -21,8 +21,8 @@ const server=http.createServer((req,res)=>{
  if(pathname==='/test'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(instrumented);return}
  const relative=pathname.startsWith('/wormfront/')?pathname.slice('/wormfront/'.length):pathname.slice(1);
  const file=relative===''?'index.html':relative;
- if(!['index.html','styles/game.css',...sourceFiles,...fs.readdirSync(path.join(root,'assets','images')).map(f=>'assets/images/'+f)].includes(file)){res.writeHead(404);res.end();return}
- const type=file.endsWith('.png')?'image/png':file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html';res.writeHead(200,{'Content-Type':type+'; charset=utf-8'});res.end(fs.readFileSync(path.join(root,file)))
+ if(!['index.html','styles/game.css',...sourceFiles,...fs.readdirSync(path.join(root,'assets','images')).map(f=>'assets/images/'+f),...JSON.parse(fs.readFileSync(path.join(root,'scripts/site-extras.json')))].includes(file)){res.writeHead(404);res.end();return}
+ const type=require('./mime.cjs')(file);res.writeHead(200,{'Content-Type':type+'; charset=utf-8'});res.end(fs.readFileSync(path.join(root,file)))
 });
 const results=[],errors=[];let browser;const timings=[];
 (async()=>{
