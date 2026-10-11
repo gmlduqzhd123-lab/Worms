@@ -90,6 +90,10 @@
       "pass": true
     },
     {
+      "test": "Damage view includes labels from a magnified starting view and restores that zoom",
+      "pass": true
+    },
+    {
       "test": "Damage group stays inside mobile HUD 320x568",
       "pass": true
     },

@@ -845,7 +845,7 @@ function injuryFrame(){
   const left=72,right=VW-72,upper=Math.min(top,VH*.3),lower=Math.max(upper+90,VH-bottom);
   const minX=Math.min(...victims.map(w=>w.x)),maxX=Math.max(...victims.map(w=>w.x));
   const minY=Math.min(...victims.map(w=>w.y)),maxY=Math.max(...victims.map(w=>w.y));
-  const zoom=Math.max(.02,Math.min(injuryZoom??cameraZoom,(right-left)/Math.max(1,maxX-minX),(lower-upper-120)/Math.max(1,maxY-minY)));
+  const zoom=Math.max(.02,Math.min(1,injuryZoom??cameraZoom,(right-left)/Math.max(1,maxX-minX),(lower-upper-120)/Math.max(1,maxY-minY)));
   return {minX,maxX,minY,maxY,left,right,upper,lower,zoom};
 }
 function updateCamera(dt){

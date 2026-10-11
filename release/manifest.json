@@ -38,8 +38,8 @@
     },
     {
       "file": "src/ui.js",
-      "bytes": 5989,
-      "sha256": "cefcf58f40a9bc4dc6b7a2f75f985ac2177177b243243e6d11e9edf4d3d336ff"
+      "bytes": 5991,
+      "sha256": "1ef8161a0c95e50a01bca4601c6b4ada376f8b969c73d9d2662c21fc88e420fe"
     },
     {
       "file": "src/combat.js",
@@ -298,8 +298,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 57557388,
-      "sha256": "fee773571419938f9f847a3e3c1e781fb011ae99eb7723463729b3e8b0551db8"
+      "bytes": 57557390,
+      "sha256": "b84e48042ab40ecc92e0fdcc0b1d5465c8eb9483a83e1de39fcaea641bc03a84"
     }
   ]
 }
