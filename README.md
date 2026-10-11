@@ -6,7 +6,7 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
 
-8단계 공개 검수 기록은 verification/live-stage8/에 보존했습니다. 9단계 공개 검수는 verification/live-stage9/에 기록합니다.
+9단계 GitHub Pages 배포를 완료했고 공개 사이트 22개 검사를 통과했습니다. 실행 파일 48개가 배포 커밋과 일치하며 JavaScript·리소스 오류는 0개입니다. 기록은 verification/live-stage9/에 있습니다. 이전 공개 검수 기록은 verification/live-stage8/에 보존했습니다.
 
 ## 9단계 맵 테마
 

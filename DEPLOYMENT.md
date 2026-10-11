@@ -4,7 +4,7 @@
 
 실행 주소: https://gmlduqzhd123-lab.github.io/Worms/
 
-기본 브랜치 main을 업로드하고 GitHub Actions 방식으로 Pages를 활성화했습니다. 수동 배포 워크플로가 성공했고 8단계 배포 기록은 verification/live-stage8/에 보존했습니다. 9단계 공개 검수는 verification/live-stage9/에 기록합니다.
+기본 브랜치 main을 업로드하고 GitHub Actions 방식으로 Pages를 활성화했습니다. 수동 배포 워크플로가 성공했고 9단계 공개 검사 22개와 실행 파일 48개 해시 일치를 확인했습니다. 기록은 verification/live-stage9/에 있습니다. 이전 배포 기록은 verification/live-stage8/에 보존했습니다.
 
 ## ZIP으로 올리기
 
