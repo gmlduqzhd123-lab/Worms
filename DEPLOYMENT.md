@@ -23,7 +23,7 @@ ZIP에는 게임 실행 파일 49개만 들어 있습니다. 원본·이전 버�
 3. Actions에서 **Publish Wormfront to GitHub Pages** → **Run workflow**를 기본 브랜치에서 실행합니다.
 4. 작업이 완료되면 표시된 배포 URL에서 위의 게임 흐름을 확인합니다.
 
-워크플로는 수동 실행이며 기본 브랜치에서만 배포합니다. `_site/`에 실행 파일만 복사하여 업로드하고 `github-pages` 환경에 배포합니다. 저장소의 원본·보관본은 웹사이트에 업로드하지 않습니다. 서버·API 키 설정은 필요하지 않습니다.
+워크플로는 main 브랜치에 푸시(PR 병합 포함)하면 자동으로 실행되고, Actions에서 수동으로도 실행할 수 있습니다. 기본 브랜치에서만 배포합니다. `_site/`에 실행 파일만 복사하여 업로드하고 `github-pages` 환경에 배포합니다. 저장소의 원본·보관본은 웹사이트에 업로드하지 않습니다. 서버·API 키 설정은 필요하지 않습니다.
 
 설정 방법과 배포 액션은 [GitHub 공식 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) 및 [게시 소스 설정 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 확인했습니다. GitHub Actions 실행은 실제 저장소에서 성공을 확인했습니다.
 
