@@ -21,13 +21,18 @@ let projectiles=[],particles=[],explosions=[],damageLabels=[],mines=[],crates=[]
 let worldTime=0,last=performance.now(),cameraShake=0,crateRate=.58,initialMineCount=10;
 let aiBusy=false,aiTimer=null;
 let gameNow=performance.now(),turnWorm=null,turnEnding=false,attackCommitted=false;
+let shotFocus=null;
+function rememberImpact(x,y){shotFocus={x,y,at:gameNow}}
+function displayedHP(w){const a=w.hpAnim;if(!a||gameNow>=a.at+a.duration)return w.hp;const t=clamp((gameNow-a.at)/(a.duration-350),0,1);return lerp(a.from,a.to,t)}
+function healthAnimating(){return teams.some(t=>t.worms.some(w=>w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration))}
+function presentationPending(){return !!(shotFocus&&gameNow-shotFocus.at<3000)||healthAnimating()}
 let combatTasks=[],taskSequence=0,retreatDuration=2.5,pendingEmissions=0,settledSince=null;
 function scheduleCombat(fn,delay){const id=++taskSequence;combatTasks.push({id,at:gameNow+delay,fn});return id}
 function cancelCombat(id){combatTasks=combatTasks.filter(t=>t.id!==id)}
 function runCombatTasks(){const due=combatTasks.filter(t=>t.at<=gameNow);combatTasks=combatTasks.filter(t=>t.at>gameNow);for(const t of due){if(!gameOver)t.fn()}}
 function combatUnsettled(){return projectiles.length>0||walkers.length>0||pendingEmissions>0||mines.some(m=>m.armed&&m.timer>0)||teams.some(t=>t.worms.some(w=>w.alive&&!w.onGround&&Math.abs(w.vy)>.75))}
 function commitAttack(sec=2.5){attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
-function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
+function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()||presentationPending()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
 function clearInput(){heldControls.clear();cameraPointers.clear();dragCamera=null;for(const k of Object.keys(keys))keys[k]=false;charging=false;ui.powerBox.classList.remove('show')}
 function setPaused(on){if(!started||gameOver)return;paused=on;physicsAccumulator=0;document.getElementById('pauseBtn').textContent=paused?'▶ 계속하기':'⏸ 일시정지';clearInput();if(paused)stopMusic();else if(musicEnabled)startMusic();updateHUD()}
 const keys={};

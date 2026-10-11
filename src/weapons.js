@@ -84,7 +84,7 @@ function shootShotgun(w,pwr){
   for(let i=0;i<range/step;i++){x+=Math.cos(rad)*facing*step;y+=Math.sin(rad)*step;
     for(const t of teams)for(const o of t.worms)if(o.alive&&o!==w&&dist(x,y,o.x,o.y)<o.r+3){hit=o;break}
     if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH)break}
-  carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
+  rememberImpact(x,y);carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
   if(shotgunRemain>0)toast('산탄총 1발 남음',800);else{startRetreat(2.6)}
 }
 function placeMine(){

@@ -39,7 +39,7 @@ function startGame(){
 
 function beginTurn(){
   if(gameOver)return;if(!living(0).length||!living(1).length){finishGame();return}
-  cpuWalk=null;cpuStatus='';turnNo++;if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate();
+  shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate();
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
   const w=current();turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
@@ -47,7 +47,7 @@ function beginTurn(){
 }
 function nextTurn(delay=900){
   if(turnEnding||gameOver)return;
-  if(combatUnsettled()){commitAttack(0);return}
+  if(combatUnsettled()||presentationPending()){commitAttack(0);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
   scheduleCombat(()=>{activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()},delay)

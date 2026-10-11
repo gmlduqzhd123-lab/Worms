@@ -1,0 +1,446 @@
+{
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "Production UI pause/resume",
+      "pass": true
+    },
+    {
+      "test": "Production UI shotgun two shots and next turn",
+      "pass": true
+    },
+    {
+      "test": "Last projectile view stays for at least 3 seconds after a miss",
+      "pass": true
+    },
+    {
+      "test": "Camera returns only after the shot hold completes",
+      "pass": true
+    },
+    {
+      "test": "HP animates above a killed worm and blocks camera beyond 3 seconds",
+      "pass": true
+    },
+    {
+      "test": "Camera resumes after every HP number reaches its target",
+      "pass": true
+    },
+    {
+      "test": "Repeated damage animates continuously from the currently shown HP",
+      "pass": true
+    },
+    {
+      "test": "Pause freezes impact hold and HP countdown together",
+      "pass": true
+    },
+    {
+      "test": "Early turn-skip waits for damage presentation",
+      "pass": true
+    },
+    {
+      "test": "Final victory waits until lethal HP countdown reaches zero",
+      "pass": true
+    },
+    {
+      "test": "Restart clears camera hold and HP animation",
+      "pass": true
+    },
+    {
+      "test": "HP number renders on its own line above the character head",
+      "pass": true
+    },
+    {
+      "test": "Dead worm keeps its HP label until zero is readable",
+      "pass": true
+    },
+    {
+      "test": "Health pickup cancels a stale damage counter",
+      "pass": true
+    },
+    {
+      "test": "Water death continues the HP countdown all the way to zero",
+      "pass": true
+    },
+    {
+      "test": "Banana preserves all 4 balanced child projectiles",
+      "pass": true
+    },
+    {
+      "test": "Cluster preserves 6 child projectiles",
+      "pass": true
+    },
+    {
+      "test": "Mortar preserves 4 child projectiles",
+      "pass": true
+    },
+    {
+      "test": "Shotgun second shot enters retreat",
+      "pass": true
+    },
+    {
+      "test": "Girder landing permits jump",
+      "pass": true
+    },
+    {
+      "test": "Pause freezes combat clock and queued airstrike",
+      "pass": true
+    },
+    {
+      "test": "Dynamite keeps original team until explosion",
+      "pass": true
+    },
+    {
+      "test": "Death keeps original active worm during attack",
+      "pass": true
+    },
+    {
+      "test": "Restart cancels delayed airstrike emissions",
+      "pass": true
+    },
+    {
+      "test": "Victory waits for attack resolution",
+      "pass": true
+    },
+    {
+      "test": "Collision cache matches alpha over all pixels after terrain generation",
+      "pass": true
+    },
+    {
+      "test": "Collision cache matches alpha after boundary and overlapping craters",
+      "pass": true
+    },
+    {
+      "test": "100000 collision lookups cause zero Canvas readbacks",
+      "pass": true
+    },
+    {
+      "test": "Crater refresh reads only its affected rectangle",
+      "pass": true
+    },
+    {
+      "test": "Drill updates the collision cache",
+      "pass": true
+    },
+    {
+      "test": "30/60/120/144 FPS produce identical movement, timer and step counts",
+      "pass": true
+    },
+    {
+      "test": "30/60/144 FPS produce identical projectile positions",
+      "pass": true
+    },
+    {
+      "test": "Long frame limits catch-up to 15 steps",
+      "pass": true
+    },
+    {
+      "test": "Pause clears fractional accumulator and freezes effects",
+      "pass": true
+    },
+    {
+      "test": "Swept projectile catches a one-pixel wall",
+      "pass": true
+    },
+    {
+      "test": "CPU prediction includes grenade bounces",
+      "pass": true
+    },
+    {
+      "test": "CPU prediction includes girder collision",
+      "pass": true
+    },
+    {
+      "test": "CPU prediction includes worm collision",
+      "pass": true
+    },
+    {
+      "test": "CPU prediction terminates at water",
+      "pass": true
+    },
+    {
+      "test": "CPU prediction terminates at map boundary",
+      "pass": true
+    },
+    {
+      "test": "Prediction causes no terrain, health, ammo or projectile mutation",
+      "pass": true
+    },
+    {
+      "test": "Zoom keeps its screen anchor fixed",
+      "pass": true
+    },
+    {
+      "test": "Overview fits entire world and follow returns to worm",
+      "pass": true
+    },
+    {
+      "test": "Manual camera remains still during tracking",
+      "pass": true
+    },
+    {
+      "test": "Jump followed by second press performs backflip in air",
+      "pass": true
+    },
+    {
+      "test": "Third jump press cannot repeat aerial backflip",
+      "pass": true
+    },
+    {
+      "test": "Knockback preserves horizontal speed above walk limit",
+      "pass": true
+    },
+    {
+      "test": "High speed body cannot pass thin wall",
+      "pass": true
+    },
+    {
+      "test": "Jetpack collides with terrain ceiling",
+      "pass": true
+    },
+    {
+      "test": "Rope constraint removes outward radial velocity",
+      "pass": true
+    },
+    {
+      "test": "Rope shortening and release retain momentum",
+      "pass": true
+    },
+    {
+      "test": "Destroyed rope anchor detaches safely",
+      "pass": true
+    },
+    {
+      "test": "Rope cannot move worm through wall",
+      "pass": true
+    },
+    {
+      "test": "bazooka prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "bazooka prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "bazooka prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "grenade prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "grenade prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "grenade prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "banana prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "banana prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "banana prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "sacred prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "sacred prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "sacred prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "cluster prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "cluster prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "cluster prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "mortar prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "mortar prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "mortar prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "homing prediction equals live landing (wind -0.06)",
+      "pass": true
+    },
+    {
+      "test": "homing prediction equals live landing (wind 0)",
+      "pass": true
+    },
+    {
+      "test": "homing prediction equals live landing (wind 0.06)",
+      "pass": true
+    },
+    {
+      "test": "bazooka completes turn",
+      "pass": true
+    },
+    {
+      "test": "grenade completes turn",
+      "pass": true
+    },
+    {
+      "test": "shotgun completes turn",
+      "pass": true
+    },
+    {
+      "test": "banana completes turn",
+      "pass": true
+    },
+    {
+      "test": "sacred completes turn",
+      "pass": true
+    },
+    {
+      "test": "cluster completes turn",
+      "pass": true
+    },
+    {
+      "test": "homing completes turn",
+      "pass": true
+    },
+    {
+      "test": "mortar completes turn",
+      "pass": true
+    },
+    {
+      "test": "airstrike completes turn",
+      "pass": true
+    },
+    {
+      "test": "dynamite completes turn",
+      "pass": true
+    },
+    {
+      "test": "mine completes turn",
+      "pass": true
+    },
+    {
+      "test": "bat completes turn",
+      "pass": true
+    },
+    {
+      "test": "punch completes turn",
+      "pass": true
+    },
+    {
+      "test": "sheep completes turn",
+      "pass": true
+    },
+    {
+      "test": "drill completes turn",
+      "pass": true
+    },
+    {
+      "test": "rope completes turn",
+      "pass": true
+    },
+    {
+      "test": "jetpack completes turn",
+      "pass": true
+    },
+    {
+      "test": "teleport completes turn",
+      "pass": true
+    },
+    {
+      "test": "girder completes turn",
+      "pass": true
+    },
+    {
+      "test": "Trusted desktop clicks zoom, overview and follow",
+      "pass": true
+    },
+    {
+      "test": "Trusted desktop drag pans without firing target weapon",
+      "pass": true
+    },
+    {
+      "test": "Trusted desktop wheel zoom",
+      "pass": true
+    },
+    {
+      "test": "Production CPU attacks and returns control",
+      "pass": true
+    },
+    {
+      "test": "Mobile production start and touch pause/resume",
+      "pass": true
+    },
+    {
+      "test": "Mobile 390x844 controls within viewport and separated",
+      "pass": true
+    },
+    {
+      "test": "Mobile 320x568 controls within viewport and separated",
+      "pass": true
+    },
+    {
+      "test": "Trusted simultaneous mobile movement and charged fire, release clears input",
+      "pass": true
+    },
+    {
+      "test": "Trusted touch cancellation cancels charge without firing",
+      "pass": true
+    },
+    {
+      "test": "Trusted touch drag pans without teleport",
+      "pass": true
+    },
+    {
+      "test": "Trusted pinch zoom does not select target",
+      "pass": true
+    },
+    {
+      "test": "Trusted mobile jetpack rise hold and release",
+      "pass": true
+    },
+    {
+      "test": "Trusted mobile turn-end button",
+      "pass": true
+    },
+    {
+      "test": "Pages-style repository subpath loads 17 scripts and CSS, game and audio controls work",
+      "pass": true
+    },
+    {
+      "test": "Local file index.html loads split code and shotgun completes turn",
+      "pass": true
+    },
+    {
+      "test": "Standalone HTML starts offline with working camera and pause, no external script or CSS",
+      "pass": true
+    },
+    {
+      "test": "Browser JavaScript errors",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

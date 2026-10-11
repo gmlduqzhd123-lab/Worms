@@ -43,8 +43,15 @@ const ICON_PATHS={
 };
 function weaponIcon(id){const a=ART_MANIFEST.icons[id];if(a&&!artFailures.includes(a.file)){const b=a.bounds;return '<svg viewBox="'+b.x+' '+b.y+' '+b.w+' '+b.h+'" aria-hidden="true"><image href="'+artUrl(a.file)+'" width="1254" height="1254"/></svg>'}return '<svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="'+(ICON_PATHS[id]||ICON_PATHS.target)+'"/></svg>'}
 function initGraphics(){graphicsInitialized=true;loadArtwork();const labels=['병사','비행사','광부','해적','닌자','과학자','카우보이','겨울 병사','기사','우주인'];for(const id of ['appearanceA','appearanceB']){const el=document.getElementById(id);el.innerHTML=labels.map((name,i)=>'<option value="'+i+'">'+name+'</option>').join('');el.value=id==='appearanceA'?'0':'2'}for(const b of document.querySelectorAll('.weapon'))b.querySelector('.ico').innerHTML=weaponIcon(b.dataset.w)}
+function drawHealthLabel(w,x,y){
+ const a=w.hpAnim,animating=!!(a&&gameNow<a.at+a.duration),hp=Math.ceil(displayedHP(w));
+ if(!w.alive&&!animating)return;
+ ctx.save();ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font='800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
+ ctx.font='900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
+ ctx.fillStyle='#102337';ctx.fillRect(x-18,y-43,36,5);if(animating){ctx.fillStyle='#ffd387';ctx.fillRect(x-17,y-42,34*a.from/100,3)}ctx.fillStyle=animating?'#ff7373':teams[w.team].color;ctx.fillRect(x-17,y-42,34*hp/100,3);ctx.restore();
+}
 function drawExplorer(w){
-  if(!w.alive)return;const x=screenX(w.x),y=screenY(w.y);if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
+  const x=screenX(w.x),y=screenY(w.y);if(!w.alive){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
   const active=w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
   ctx.save();ctx.translate(x,y);ctx.scale(dir,1);ctx.rotate(w.hurt>0?Math.sin(worldTime*.09)*.1:clamp(w.vx*.025,-.1,.1));
   ctx.fillStyle='rgba(20,30,20,.28)';ctx.beginPath();ctx.ellipse(0,10,15,4,0,0,Math.PI*2);ctx.fill();
@@ -54,7 +61,7 @@ function drawExplorer(w){
   if(active&&!turnLocked&&ART_MANIFEST.icons[selected]&&['bazooka','rope','teleport','punch'].includes(selected)){const tool=ART_MANIFEST.icons[selected];ctx.save();ctx.translate(7,-11);ctx.rotate(aim*Math.PI/180);drawArt(tool.file,tool.bounds,-2,-5,24,24*tool.bounds.h/tool.bounds.w);ctx.restore()}
   ctx.restore();
   if(active){ctx.strokeStyle='#ffe49b';ctx.lineWidth=1.6;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
-    const ay=y-65+Math.sin(worldTime*.008)*2;ctx.fillStyle='#ffe49b';ctx.strokeStyle='#153044';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-6,ay-7);ctx.lineTo(x+6,ay-7);ctx.lineTo(x,ay);ctx.closePath();ctx.fill();ctx.stroke()}
-  ctx.font='800 11px system-ui';ctx.textAlign='center';ctx.strokeStyle='#102337';ctx.lineWidth=4;ctx.strokeText(w.name+' · '+w.hp,x,y-43);ctx.fillStyle=color;ctx.fillText(w.name+' · '+w.hp,x,y-43);
+    const ay=y-78+Math.sin(worldTime*.008)*2;ctx.fillStyle='#ffe49b';ctx.strokeStyle='#153044';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-6,ay-7);ctx.lineTo(x+6,ay-7);ctx.lineTo(x,ay);ctx.closePath();ctx.fill();ctx.stroke()}
+  drawHealthLabel(w,x,y);
   if(active&&!turnLocked&&!isCPU()&&!projectiles.length&&!targetMode&&!['mine','dynamite','bat','punch','sheep','drill','jetpack'].includes(selected)){const a=aim*Math.PI/180,tx=x+Math.cos(a)*facing*48,ty=y+Math.sin(a)*48;ctx.strokeStyle='#fff1c7';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(tx,ty);ctx.stroke();ctx.strokeStyle='#ffe49b';ctx.beginPath();ctx.arc(tx,ty,4,0,Math.PI*2);ctx.moveTo(tx-7,ty);ctx.lineTo(tx+7,ty);ctx.stroke()}
 }

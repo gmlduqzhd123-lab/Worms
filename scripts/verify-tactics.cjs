@@ -2,9 +2,10 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const evidence=path.join(root,'verification','stage10');fs.mkdirSync(evidence,{recursive:true});
+const evidence=path.join(root,'verification','stage11');fs.mkdirSync(evidence,{recursive:true});
 const injection=`
 function resetCheck(){
+ shotFocus=null;
  cameraZoom=1;overview=false;camera.manualUntil=0;heldControls.clear();cameraPointers.clear();dragCamera=null;physicsAccumulator=0;physicsSteps=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;
  projectiles=[];walkers=[];mines=[];crates=[];girders=[];rope=null;jetpack=false;particles=[];explosions=[];keys.a=keys.d=keys.w=keys.s=false;
  WW=2600;WH=900;waterY=780;wind=0;terrain.width=WW;terrain.height=WH;tctx.clearRect(0,0,WW,WH);tctx.fillStyle='#527d3b';tctx.fillRect(0,500,WW,400);refreshTerrainCollision();
@@ -46,7 +47,7 @@ const results=[],errors=[];let browser;const timings=[];
  }
  await check('CPU executes an attack with a valid owner',setup+"cpuShoot();stepCheck(.4);attackCommitted&&projectiles.length>0&&projectiles[0].owner===turnWorm");
  await check('CPU does not shoot after turn changes',setup+"cpuShoot();nextTurn(0);stepCheck(.6);activeTeam===0&&projectiles.length===0");
- await check('No safe shot yields a pass without spending ammo',setup+"teams[0].worms[0].x=turnWorm.x;teams[0].worms[0].y=turnWorm.y-100;teams[1].worms[1].alive=true;teams[1].worms[1].x=turnWorm.x;teams[1].worms[1].y=turnWorm.y-100;const before=JSON.stringify(teams[1].ammo);cpuShoot();stepCheck(3);activeTeam===0&&before===JSON.stringify(teams[1].ammo)&&projectiles.length===0");
+ await check('No safe shot yields a pass without spending ammo',setup+"teams[0].worms[0].x=turnWorm.x;teams[0].worms[0].y=turnWorm.y-100;teams[1].worms[1].alive=true;teams[1].worms[1].x=turnWorm.x;teams[1].worms[1].y=turnWorm.y-100;const before=JSON.stringify(teams[1].ammo);cpuShoot();stepCheck(6);activeTeam===0&&before===JSON.stringify(teams[1].ammo)&&projectiles.length===0");
  await check('Explosions apply configured center damage',"resetCheck();turnWorm.x=500;projectileStep({type:'bazooka',x:500,y:491,vx:0,vy:0,life:0},FIXED_DT);turnWorm.hp===50");
  await check('Banana child count and damage differ from cluster',"resetCheck();splitBomb({type:'banana',x:500,y:100},weaponBalance.banana.children);const banana=projectiles.length===4&&projectiles.every(p=>p.damage===24);projectiles=[];splitBomb({type:'cluster',x:500,y:100},weaponBalance.cluster.children);banana&&projectiles.length===6&&projectiles.every(p=>p.damage===18)");
  await check('Rare wide-area weapons have one initial round',"defaultAmmo.banana===1&&defaultAmmo.airstrike===1&&weaponBalance.sacred.damage===75");
