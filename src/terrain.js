@@ -4,6 +4,7 @@ function resize(){
   DPR=Math.max(1,Math.min(2,devicePixelRatio||1));VW=innerWidth;VH=innerHeight;
   canvas.width=Math.round(VW*DPR);canvas.height=Math.round(VH*DPR);canvas.style.width=VW+'px';canvas.style.height=VH+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
   mini.width=500;mini.height=130;
+  if(!graphicsInitialized)return;
   if(!started) buildWorld(+document.getElementById('mapSize').value);else clampCamera();
 }
 addEventListener('resize',resize);

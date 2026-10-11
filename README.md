@@ -1,4 +1,4 @@
-# Wormfront Armageddon — 9단계 맵 테마 확장
+# Wormfront Armageddon — 10단계 실제 플레이 참고 개선
 
 GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`, `assets/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
 
@@ -6,15 +6,15 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
 
-9단계 GitHub Pages 배포를 완료했고 공개 사이트 22개 검사를 통과했습니다. 실행 파일 48개가 배포 커밋과 일치하며 JavaScript·리소스 오류는 0개입니다. 기록은 verification/live-stage9/에 있습니다. 이전 공개 검수 기록은 verification/live-stage8/에 보존했습니다.
+10단계는 실제 플레이 영상의 대표 구간을 참고해 HUD, 턴 단계, 활성 캐릭터 표시, 피해 숫자와 기폭 카운트다운을 개선했습니다. 관찰 범위와 원작과의 차이는 verification/stage10/REFERENCE.md, 검수 결과는 verification/stage10/REPORT.md에 기록합니다.
 
-## 9단계 맵 테마
+## 유지된 9단계 맵 테마
 
 햇살 해안, 폐허 도시, 사막 협곡, 군사 해안, 초록 언덕, 오로라 설원, 고철 야적장, 용암 성채, 달 기지, 노을 섬의 10개 테마를 시작 화면에서 선택합니다. 선택한 맵의 배경을 미리 보여 주고 브라우저 설정에 저장합니다. 배경·지형·수면 색은 테마에 맞춰 바뀌며 중력·수위 상승·지형 파괴 규칙은 같습니다. 달은 저중력 모드가 아니며 용암도 기존 물과 같은 접촉 사망 규칙을 사용합니다.
 
 제공한 나머지 화면 예시 9장을 참고해 UI와 캐릭터 없는 배경을 built-in imagegen으로 제작했습니다. 저장 경로와 프롬프트 전체는 assets/THEME_PROMPTS.json에 있습니다. 새 테마 배경은 선택할 때만 로딩하며 실패 시 해당 테마의 절차적 색상 표시를 사용합니다. 원본 PNG와 8단계 전체 56개 파일은 versions/stage8/에 보존하고 해시를 확인했습니다.
 
-release/wormfront-stage9-pages.zip에는 49개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
+release/wormfront-stage10-pages.zip에는 49개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
 
 ## 유지된 8단계 시각 개선
 
@@ -26,7 +26,7 @@ release/wormfront-stage9-pages.zip에는 49개 실행 파일이 있습니다. �
 
 ## 실행
 
-폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage9-offline.html`을 열면 됩니다.
+폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage10-offline.html`을 열면 됩니다.
 
 ```powershell
 node scripts/serve.cjs
@@ -151,7 +151,7 @@ CPU의 로프·제트팩·점프 경로 탐색 및 무기 추가는 포함하지
 
 ## 검수
 
-현재 보고서는 `verification/stage9/REPORT.md`입니다. 실제 Edge에서 회귀 97개, 저장·가이드 16개, CPU·밸런스 20개, 압축 해제한 배포본 13개, 이미지 적용 9개, 테마 41개로 총 196개 검사를 통과했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
+현재 보고서는 `verification/stage10/REPORT.md`입니다. 회귀·저장·CPU·배포본·이미지·테마 및 새 전투 표시 검사를 수행합니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
 
 이전 단계 검수 결과와 스크린샷은 `verification/stage1/`, `verification/stage2/`, `verification/stage3/`에 보관했습니다.
 

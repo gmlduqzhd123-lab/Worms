@@ -1,0 +1,109 @@
+{
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "Safe ground movement improves distance",
+      "pass": true
+    },
+    {
+      "test": "CPU walks through real fixed-step physics",
+      "pass": true
+    },
+    {
+      "test": "CPU stops at a cliff without falling",
+      "pass": true
+    },
+    {
+      "test": "CPU avoids armed mines",
+      "pass": true
+    },
+    {
+      "test": "CPU avoids walls and bodies",
+      "pass": true
+    },
+    {
+      "test": "Low health prefers reachable health crate",
+      "pass": true
+    },
+    {
+      "test": "Pause freezes CPU walking and pending shot",
+      "pass": true
+    },
+    {
+      "test": "Turn transition cancels movement",
+      "pass": true
+    },
+    {
+      "test": "CPU shot score penalizes friendly damage",
+      "pass": true
+    },
+    {
+      "test": "Water and out-of-bounds shots are rejected",
+      "pass": true
+    },
+    {
+      "test": "CPU obeys ammo and planner does not mutate game",
+      "pass": true
+    },
+    {
+      "test": "easy planner completes within 2-second QA ceiling",
+      "pass": true
+    },
+    {
+      "test": "normal planner completes within 2-second QA ceiling",
+      "pass": true
+    },
+    {
+      "test": "hard planner completes within 2-second QA ceiling",
+      "pass": true
+    },
+    {
+      "test": "CPU executes an attack with a valid owner",
+      "pass": true
+    },
+    {
+      "test": "CPU does not shoot after turn changes",
+      "pass": true
+    },
+    {
+      "test": "No safe shot yields a pass without spending ammo",
+      "pass": true
+    },
+    {
+      "test": "Explosions apply configured center damage",
+      "pass": true
+    },
+    {
+      "test": "Banana child count and damage differ from cluster",
+      "pass": true
+    },
+    {
+      "test": "Rare wide-area weapons have one initial round",
+      "pass": true
+    }
+  ],
+  "timings": [
+    {
+      "level": "easy",
+      "ms": 8.599999994039536,
+      "score": 43.41268423941687,
+      "simulations": 120,
+      "type": "grenade"
+    },
+    {
+      "level": "normal",
+      "ms": 11.599999994039536,
+      "score": 43.375722462075316,
+      "simulations": 252,
+      "type": "grenade"
+    },
+    {
+      "level": "hard",
+      "ms": 15,
+      "score": 43.48775114629578,
+      "simulations": 360,
+      "type": "grenade"
+    }
+  ],
+  "errors": []
+}

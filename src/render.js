@@ -21,14 +21,16 @@ function drawObjects(){
   if(rope){const w=current();if(w){ctx.strokeStyle='#eee7cb';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(screenX(rope.ax),screenY(rope.ay));ctx.lineTo(screenX(w.x),screenY(w.y));ctx.stroke()}}
   for(const o of walkers){const x=screenX(o.x),y=screenY(o.y),a=ART_MANIFEST.icons.sheep;ctx.save();ctx.translate(x,y);ctx.scale(Math.sign(o.vx)||1,1);if(!drawArt(a.file,a.bounds,-16,-23,32,29)){ctx.font='22px serif';ctx.fillText('🐑',-10,0)}ctx.restore()}
 }
+function projectileFuse(p){return ['grenade','banana','sacred','cluster','dynamite'].includes(p.type)&&p.life>0?String(Math.max(1,Math.ceil(p.life))):null}
 function drawProjectile(p){
   const x=screenX(p.x),y=screenY(p.y);ctx.save();ctx.translate(x,y);let col='#4c5668';
   if(p.type==='grenade')col='#35633d';if(p.type==='banana')col='#f4d13e';if(p.type==='sacred')col='#f7f7f2';if(p.type==='cluster')col='#cf6f4e';if(p.type==='homing')col='#b8c8db';if(p.type==='mortar')col='#d89c4c';if(p.type==='mini')col='#ff8353';if(p.type==='air')col='#2b3039';if(p.type==='dynamite')col='#d33f3f';if(p.type==='drill')col='#abb2bb';
-  const art=['grenade','sacred','dynamite'].includes(p.type)?ART_MANIFEST.icons[p.type]:null;if(art&&artImages[art.file]){const h=Math.max(14,p.r*3),ww=h*art.bounds.w/art.bounds.h;drawArt(art.file,art.bounds,-ww/2,-h/2,ww,h)}else{ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}if(['bazooka','air','homing'].includes(p.type)){ctx.fillStyle='#ffae44';ctx.beginPath();ctx.moveTo(-p.r,0);ctx.lineTo(-p.r-10,rand(-3,3));ctx.lineTo(-p.r-2,4);ctx.fill()}if(p.type==='sacred'){ctx.strokeStyle='#ffd84e';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-7,5,0,Math.PI*2);ctx.stroke()}ctx.restore()
+  const art=['grenade','sacred','dynamite'].includes(p.type)?ART_MANIFEST.icons[p.type]:null;if(art&&artImages[art.file]){const h=Math.max(14,p.r*3),ww=h*art.bounds.w/art.bounds.h;drawArt(art.file,art.bounds,-ww/2,-h/2,ww,h)}else{ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}if(['bazooka','air','homing'].includes(p.type)){ctx.fillStyle='#ffae44';ctx.beginPath();ctx.moveTo(-p.r,0);ctx.lineTo(-p.r-10,rand(-3,3));ctx.lineTo(-p.r-2,4);ctx.fill()}if(p.type==='sacred'){ctx.strokeStyle='#ffd84e';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-7,5,0,Math.PI*2);ctx.stroke()}const fuse=projectileFuse(p);if(fuse){ctx.font='900 12px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.strokeText(fuse,0,-16);ctx.fillStyle='#ffec9e';ctx.fillText(fuse,0,-16)}ctx.restore()
 }
 function drawEffects(){
   for(const e of explosions){const r=lerp(2,e.max,1-e.life);ctx.fillStyle=`rgba(255,${Math.floor(145+90*e.life)},55,${Math.max(0,e.life)*.63})`;ctx.beginPath();ctx.arc(screenX(e.x),screenY(e.y),r,0,Math.PI*2);ctx.fill()}
   for(const p of particles){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.fillRect(screenX(p.x),screenY(p.y),p.size,p.size);ctx.globalAlpha=1}
+  for(const label of damageLabels){ctx.save();ctx.globalAlpha=Math.min(1,label.life*2);ctx.font='900 19px system-ui';ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#122333';ctx.fillStyle='#fff0a6';const x=screenX(label.x),y=screenY(label.y);ctx.strokeText('−'+label.amount,x,y);ctx.fillText('−'+label.amount,x,y);ctx.restore()}
 }
 function drawMini(){
   const mw=mini.width,mh=mini.height;mctx.clearRect(0,0,mw,mh);mctx.fillStyle='#79c9f6';mctx.fillRect(0,0,mw,mh);

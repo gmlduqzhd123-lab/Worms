@@ -12,11 +12,12 @@ const FIXED_DT=1/60,MAX_FRAME_DELTA=.25;
 let physicsAccumulator=0,physicsSteps=0;
 let cameraZoom=1,overview=false;
 let camera={x:0,y:0,targetX:0,targetY:0,manualUntil:0};
+let graphicsInitialized=false;
 let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
 let activeTeam=0,activeIdx=[0,0],turnSec=45,turnLeft=45,turnStart=0,turnLocked=false,turnNo=0,sdAt=20,sudden=false;
 let selected='bazooka',aim=-45,facing=1,wind=0,retreatUntil=0,chargeAt=0,charging=false,lastJumpTap=0;
 let targetMode=null,targetPoint=null,shotgunRemain=0,rope=null,jetpack=false,jetFuel=0;
-let projectiles=[],particles=[],explosions=[],mines=[],crates=[],girders=[],clouds=[],walkers=[];
+let projectiles=[],particles=[],explosions=[],damageLabels=[],mines=[],crates=[],girders=[],clouds=[],walkers=[];
 let worldTime=0,last=performance.now(),cameraShake=0,crateRate=.58,initialMineCount=10;
 let aiBusy=false,aiTimer=null;
 let gameNow=performance.now(),turnWorm=null,turnEnding=false,attackCommitted=false;
@@ -28,7 +29,7 @@ function combatUnsettled(){return projectiles.length>0||walkers.length>0||pendin
 function commitAttack(sec=2.5){attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
 function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
 function clearInput(){heldControls.clear();cameraPointers.clear();dragCamera=null;for(const k of Object.keys(keys))keys[k]=false;charging=false;ui.powerBox.classList.remove('show')}
-function setPaused(on){if(!started||gameOver)return;paused=on;physicsAccumulator=0;document.getElementById('pauseBtn').textContent=paused?'▶ 계속하기':'⏸ 일시정지';clearInput();if(paused)stopMusic();else if(musicEnabled)startMusic()}
+function setPaused(on){if(!started||gameOver)return;paused=on;physicsAccumulator=0;document.getElementById('pauseBtn').textContent=paused?'▶ 계속하기':'⏸ 일시정지';clearInput();if(paused)stopMusic();else if(musicEnabled)startMusic();updateHUD()}
 const keys={};
 const G=.225,MOVE=1.42,JUMP=-5.15,FALLMAX=9.5;
 

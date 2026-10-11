@@ -2,7 +2,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const evidence=path.join(root,'verification','stage9');fs.mkdirSync(evidence,{recursive:true});
+const evidence=path.join(root,'verification','stage10');fs.mkdirSync(evidence,{recursive:true});
 const injection=`
 function resetCheck(){
  cameraZoom=1;overview=false;camera.manualUntil=0;heldControls.clear();cameraPointers.clear();dragCamera=null;physicsAccumulator=0;physicsSteps=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;

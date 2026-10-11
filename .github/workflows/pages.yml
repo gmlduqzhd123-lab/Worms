@@ -23,7 +23,7 @@ jobs:
           mkdir -p _site/offline
           cp index.html .nojekyll _site/
           cp -R src styles assets _site/
-          cp dist/wormfront-stage9-offline.html _site/offline/wormfront.html
+          cp dist/wormfront-stage10-offline.html _site/offline/wormfront.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

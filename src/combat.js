@@ -1,7 +1,9 @@
 'use strict';
 
 function damage(w,amount,kx=0,ky=0){
-  if(!w.alive)return;w.hp=Math.max(0,w.hp-Math.max(0,Math.round(amount)));w.vx+=kx;w.vy+=ky;if(kx||ky){w.knockTime=.65;w.onGround=false}w.hurt=1;
+  if(!w.alive)return;const before=w.hp;w.hp=Math.max(0,w.hp-Math.max(0,Math.round(amount)));const lost=before-w.hp;
+  if(lost>0)damageLabels.push({x:w.x,y:w.y-52,amount:lost,life:1.4,color:teams[w.team].color});
+  w.vx+=kx;w.vy+=ky;if(kx||ky){w.knockTime=.65;w.onGround=false}w.hurt=1;
   if(w.hp<=0){w.alive=false;burst(w.x,w.y,teams[w.team].color,25)}updateHUD()
 }
 function killWater(w){if(!w.alive)return;w.alive=false;w.hp=0;playSFX('splash');burst(w.x,waterY,'#a1edff',30);toast(`${w.name} 물에 빠짐!`);updateHUD()}
