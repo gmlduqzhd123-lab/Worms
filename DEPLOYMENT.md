@@ -18,6 +18,7 @@ ZIP에는 게임 실행 파일 49개만 들어 있습니다. 원본·이전 버�
 ## 소스 저장소에서 수동 배포하기
 
 1. `index.html`, `.nojekyll`, `src/`, `styles/`, `assets/`, `dist/wormfront-stage9-offline.html`, `.github/workflows/pages.yml`을 저장소의 기본 브랜치에 넣습니다.
+   앱 설치·QR·공유 미리보기용 `manifest.webmanifest`, `sw.js`, `ys-install.js`, `ys-qr.js`, `qr.svg`, `og-image.jpg`, `icons/`도 함께 넣습니다.
 2. Settings → Pages → Source를 **GitHub Actions**로 선택합니다.
 3. Actions에서 **Publish Wormfront to GitHub Pages** → **Run workflow**를 기본 브랜치에서 실행합니다.
 4. 작업이 완료되면 표시된 배포 URL에서 위의 게임 흐름을 확인합니다.
