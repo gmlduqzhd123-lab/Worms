@@ -1,7 +1,7 @@
 'use strict';
 
 const STORAGE_KEYS={settings:'wormfront.settings.v1',results:'wormfront.results.v1',guide:'wormfront.guide.v1'};
-const OPTION_IDS=['mode','difficulty','inputA','inputB','count','turnTime','mapSize','crateRate','sdTurn','mineCount','appearanceA','appearanceB'];
+const OPTION_IDS=['mode','difficulty','inputA','inputB','count','turnTime','mapSize','crateRate','sdTurn','mineCount','appearanceA','appearanceB','mapTheme'];
 const blockedStorageKeys=new Set();
 let matchId='',matchStartedAt=0,matchRecorded=false,matchHistory=[],guideStep=0,modalPauseOwned=false,modalReturnFocus=null,deleteArmed=false;
 function storageStatus(message){document.getElementById('storageStatus').textContent=message}

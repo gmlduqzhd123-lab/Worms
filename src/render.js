@@ -2,14 +2,14 @@
 
 /* ---------------- Render ---------------- */
 function drawSky(){
-  const scenic=artImages['coast.png'];if(scenic){const scale=Math.max(VW/scenic.width,VH/scenic.height),dw=scenic.width*scale,dh=scenic.height*scale;ctx.drawImage(scenic,(VW-dw)/2,(VH-dh)/2,dw,dh);if(sudden){ctx.fillStyle='rgba(57,39,74,.4)';ctx.fillRect(0,0,VW,VH)}}
+  const theme=getMapTheme(),scenic=artImages[theme.file];if(scenic){const scale=Math.max(VW/scenic.width,VH/scenic.height),dw=scenic.width*scale,dh=scenic.height*scale;ctx.drawImage(scenic,(VW-dw)/2,(VH-dh)/2,dw,dh);if(sudden){ctx.fillStyle='rgba(57,39,74,.4)';ctx.fillRect(0,0,VW,VH)}}
   if(!scenic){
-  const g=ctx.createLinearGradient(0,0,0,VH);g.addColorStop(0,sudden?'#4c5979':'#18394e');g.addColorStop(.62,sudden?'#81879e':'#578b99');g.addColorStop(1,'#e4dcc0');ctx.fillStyle=g;ctx.fillRect(0,0,VW,VH);
+  const g=ctx.createLinearGradient(0,0,0,VH);g.addColorStop(0,sudden?'#4c5979':theme.sky[0]);g.addColorStop(.62,sudden?'#81879e':theme.sky[1]);g.addColorStop(1,theme.sky[1]);ctx.fillStyle=g;ctx.fillRect(0,0,VW,VH);
   const sunWorld=WW*.78;const sx=sunWorld-camera.x*.12;ctx.fillStyle=sudden?'rgba(242,226,178,.66)':'rgba(255,232,182,.92)';ctx.beginPath();ctx.arc(sx,VH*.16,33,0,Math.PI*2);ctx.fill();
   ctx.fillStyle=sudden?'rgba(220,224,232,.56)':'rgba(220,236,225,.30)';
   for(const c of clouds){const x=c.x-camera.x*.55,y=c.y-camera.y*.2,s=c.s;if(x<-120||x>VW+120)continue;ctx.beginPath();ctx.ellipse(x,y,42*s,16*s,0,0,Math.PI*2);ctx.ellipse(x+28*s,y-8*s,27*s,18*s,0,0,Math.PI*2);ctx.ellipse(x-27*s,y-5*s,25*s,14*s,0,0,Math.PI*2);ctx.fill()}
   }
-  const sy=(waterY-camera.y)*cameraZoom;const sea=ctx.createLinearGradient(0,sy,0,VH);sea.addColorStop(0,sudden?'#3b536f':'#38abd8');sea.addColorStop(1,'#0b4d80');ctx.fillStyle=sea;ctx.fillRect(0,sy,VW,VH-sy);
+  const sy=(waterY-camera.y)*cameraZoom;const sea=ctx.createLinearGradient(0,sy,0,VH);sea.addColorStop(0,theme.water[0]);sea.addColorStop(1,theme.water[1]);ctx.fillStyle=sea;ctx.fillRect(0,sy,VW,VH-sy);
   ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=2;ctx.beginPath();for(let x=0;x<VW;x+=12){const y=sy+Math.sin((x+camera.x+worldTime*.05)*.04)*2;x?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.stroke()
 }
 function drawTerrain(){ctx.drawImage(terrain,camera.x,camera.y,VW/cameraZoom,VH/cameraZoom,0,0,VW/cameraZoom,VH/cameraZoom)}

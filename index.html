@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="8">
+<meta name="wormfront-version" content="9">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>웜프런트 — 작은 전장의 탐사대</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -65,12 +65,13 @@
 
   <div id="overlay">
     <div id="panel">
-      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/worm-soldier.png"><img src="./assets/images/worm-pirate.png"><img src="./assets/images/worm-astronaut.png"></div><div class="brandLine">WORMFRONT · ISLAND SKIRMISH 08</div>
+      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/worm-soldier.png"><img src="./assets/images/worm-pirate.png"><img src="./assets/images/worm-astronaut.png"></div><div class="brandLine">WORMFRONT · WORLD EXPLORER 09</div>
       <h1>작은 전장의 탐사대</h1>
-      <p>햇살 가득한 섬에서 펼치는 한 턴의 모험. 나만의 캐릭터를 고르고, 바람을 읽고, 마지막 한 수를 완성하세요.</p>
+      <p>열 개의 전장에서 펼치는 한 턴의 모험. 맵과 캐릭터를 고르고, 바람을 읽고, 마지막 한 수를 완성하세요.</p>
       <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button></div>
       <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
       <p id="matchSummary" hidden></p>
+      <section class="themePicker" aria-label="맵 테마 선택"><label for="mapTheme">맵 테마</label><select id="mapTheme"><option value="coast">햇살 해안</option><option value="ruins">폐허 도시</option><option value="canyon">사막 협곡</option><option value="fort">군사 해안</option><option value="meadow">초록 언덕</option><option value="snow">오로라 설원</option><option value="scrap">고철 야적장</option><option value="castle">용암 성채</option><option value="moon">달 기지</option><option value="sunset">노을 섬</option></select><div id="themePreview"><img id="themePreviewImage" alt="선택한 맵의 배경 미리보기" hidden><div class="themeCaption"><strong id="themeName"></strong><span id="themeDescription"></span></div></div><p class="themeRules">모든 테마에 동일한 중력·지형 파괴·수위 규칙이 적용됩니다.</p></section>
       <div class="grid">
         <div><label>게임 모드<select id="mode"><option value="cpu" selected>플레이어 vs PC</option><option value="pvp">2인 로컬 대전</option></select></label></div>
         <div><label>CPU 난이도<select id="difficulty"><option value="easy">쉬움</option><option value="normal" selected>보통</option><option value="hard">어려움</option></select></label></div>

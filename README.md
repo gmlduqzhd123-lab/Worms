@@ -1,4 +1,4 @@
-# Wormfront Armageddon — 8단계 제공 이미지 적용
+# Wormfront Armageddon — 9단계 맵 테마 확장
 
 GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`, `assets/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
 
@@ -6,19 +6,27 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
 
-8단계 GitHub Pages 배포를 완료했고 공개 사이트 12개 검사를 통과했습니다. 공개 실행 파일 39개가 배포 커밋과 일치하며 JavaScript·리소스 오류는 0개입니다. 기록은 verification/live-stage8/에 있습니다. 7단계 공개 검수 기록은 verification/live/에 보존했습니다.
+8단계 공개 검수 기록은 verification/live-stage8/에 보존했습니다. 9단계 공개 검수는 verification/live-stage9/에 기록합니다.
 
-## 8단계 시각 개선
+## 9단계 맵 테마
+
+햇살 해안, 폐허 도시, 사막 협곡, 군사 해안, 초록 언덕, 오로라 설원, 고철 야적장, 용암 성채, 달 기지, 노을 섬의 10개 테마를 시작 화면에서 선택합니다. 선택한 맵의 배경을 미리 보여 주고 브라우저 설정에 저장합니다. 배경·지형·수면 색은 테마에 맞춰 바뀌며 중력·수위 상승·지형 파괴 규칙은 같습니다. 달은 저중력 모드가 아니며 용암도 기존 물과 같은 접촉 사망 규칙을 사용합니다.
+
+제공한 나머지 화면 예시 9장을 참고해 UI와 캐릭터 없는 배경을 built-in imagegen으로 제작했습니다. 저장 경로와 프롬프트 전체는 assets/THEME_PROMPTS.json에 있습니다. 새 테마 배경은 선택할 때만 로딩하며 실패 시 해당 테마의 절차적 색상 표시를 사용합니다. 원본 PNG와 8단계 전체 56개 파일은 versions/stage8/에 보존하고 해시를 확인했습니다.
+
+release/wormfront-stage9-pages.zip에는 49개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
+
+## 유지된 8단계 시각 개선
 
 제공한 ZIP의 캐릭터 10종과 아이템 10종을 원본 PNG 그대로 적용했습니다. 팀별 외형 선택과 저장, 무기 아이콘, 수류탄·다이너마이트·지뢰·양 폭탄 표시를 연결했습니다. 배경 예시 10장은 참고 자료로 보존했으며, 해안 예시를 참고하여 UI 없는 배경 한 장을 imagegen으로 제작했습니다. 제작 프롬프트와 도구 모드는 assets/BACKGROUND_PROMPT.txt에 있습니다.
 
 흙·잔디 지형, 금속 느낌의 패널과 선택 표시를 적용했습니다. 단일 캐릭터 이미지에 이동·점프·피격 변환을 적용하며 별도의 프레임 애니메이션은 포함하지 않습니다. 나머지 무기 9종은 기존 벡터 아이콘을 사용합니다. 이미지가 로딩되지 않으면 기존 벡터·절차적 화면으로 대체합니다.
 
-원본과 이전 수정본은 original/ 및 versions/에 보존했습니다. 7단계 전체 파일은 versions/stage7/에 있습니다. release/wormfront-stage8-pages.zip과 release/manifest.json은 40개 실행 파일을 담습니다. 이미지 원본을 유지하여 PNG 합계 약 22.3 MB, 단일 오프라인 HTML은 약 34 MB입니다.
+원본과 이전 수정본은 original/ 및 versions/에 보존했습니다. 7단계 전체 파일은 versions/stage7/에 있습니다. 8단계 배포 ZIP은 release/wormfront-stage8-pages.zip에 유지했습니다. 당시 40개 파일의 명세는 versions/stage8/release/manifest.json에 보존했습니다. 당시 PNG 합계는 약 22.3 MB, 단일 HTML은 약 34 MB입니다.
 
 ## 실행
 
-폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage8-offline.html`을 열면 됩니다.
+폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage9-offline.html`을 열면 됩니다.
 
 ```powershell
 node scripts/serve.cjs
@@ -47,7 +55,7 @@ CPU는 지형·거더·낙차·지뢰·다른 캐릭터를 확인하고 최대 7
 
 저장 키는 wormfront.settings.v1, wormfront.results.v1, wormfront.guide.v1입니다. 현재 브라우저의 localStorage에만 저장하며 기기 간 동기화하지 않습니다. 저장이 차단되면 현재 화면에서만 유지합니다. 손상된 JSON은 자동으로 덮어쓰지 않습니다. file:// 저장 범위는 브라우저와 파일 위치에 따라 달라질 수 있습니다.
 
-4단계 전체 분리본은 versions/stage4/에, 단일 HTML은 dist/wormfront-stage4-offline.html에 보존했습니다. build-offline.cjs는 HTML 버전 표시를 읽어 현재 8단계 파일을 생성합니다.
+4단계 전체 분리본은 versions/stage4/에, 단일 HTML은 dist/wormfront-stage4-offline.html에 보존했습니다. build-offline.cjs는 HTML 버전 표시를 읽어 현재 9단계 파일을 생성합니다.
 
 ## 파일 구조
 
@@ -143,7 +151,7 @@ CPU의 로프·제트팩·점프 경로 탐색 및 무기 추가는 포함하지
 
 ## 검수
 
-현재 보고서는 `verification/stage8/REPORT.md`입니다. 실제 Edge에서 회귀 97개, 저장·가이드 16개, CPU·밸런스 20개, 압축 해제한 배포본 13개, 이미지 적용 9개로 총 155개 검사를 통과했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
+현재 보고서는 `verification/stage9/REPORT.md`입니다. 실제 Edge에서 회귀 97개, 저장·가이드 16개, CPU·밸런스 20개, 압축 해제한 배포본 13개, 이미지 적용 9개, 테마 41개로 총 196개 검사를 통과했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
 
 이전 단계 검수 결과와 스크린샷은 `verification/stage1/`, `verification/stage2/`, `verification/stage3/`에 보관했습니다.
 
