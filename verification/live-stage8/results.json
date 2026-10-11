@@ -1,0 +1,215 @@
+{
+  "url": "https://gmlduqzhd123-lab.github.io/Worms/",
+  "checkedAt": "2026-10-11T04:00:36.480Z",
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "All 39 public runtime files return HTTP 200 and match the commit; nojekyll control file is tracked",
+      "pass": true
+    },
+    {
+      "test": "Public desktop home loads stage 8 with 15 scripts",
+      "pass": true
+    },
+    {
+      "test": "Public site loads 21 artwork files, 10 character choices and 10 item icons",
+      "pass": true
+    },
+    {
+      "test": "Public game start and guide pause/resume work",
+      "pass": true
+    },
+    {
+      "test": "Public camera overview and worm follow work",
+      "pass": true
+    },
+    {
+      "test": "Public shotgun fires twice and advances turn",
+      "pass": true
+    },
+    {
+      "test": "Public settings restore and history dialog opens",
+      "pass": true
+    },
+    {
+      "test": "Public CPU turn returns control to the player",
+      "pass": true
+    },
+    {
+      "test": "Public mobile touch start/pause and portrait control layout work",
+      "pass": true
+    },
+    {
+      "test": "Public mobile guide opens and closes",
+      "pass": true
+    },
+    {
+      "test": "Public standalone HTML starts without external scripts or CSS",
+      "pass": true
+    },
+    {
+      "test": "Public browser JS and missing-resource errors are zero",
+      "pass": true
+    }
+  ],
+  "hashes": [
+    {
+      "file": "index.html",
+      "sha256": "656d5105f1d913bce438455a1c130aa6fcafb3748d3f1290f6256fd3cca2cca9"
+    },
+    {
+      "file": "styles/game.css",
+      "sha256": "f99b9da54c076bba9745c173c7c74dab4c152c25de193ce048f8da16969c57db"
+    },
+    {
+      "file": "src/state.js",
+      "sha256": "c8eb1f32a2f16183420eb9622ae49b2929b8185d0dcec1c19aa717db798858b7"
+    },
+    {
+      "file": "src/audio.js",
+      "sha256": "2b6b5672a544b6c6ae374fc1fe9426d277417403c7c65b2c3b5cad81ba5c18fe"
+    },
+    {
+      "file": "src/terrain.js",
+      "sha256": "422950a9862bb76a72b7e7603f5da4a947c17017c26017ff39b281693bd43bd7"
+    },
+    {
+      "file": "src/turns.js",
+      "sha256": "6338bf509b220aac3171bd79136d9822bd7657f24d0025dbfa7034aa1f9d9f8c"
+    },
+    {
+      "file": "src/ui.js",
+      "sha256": "8835006c5ac03d47716ce450d85038f699a8384f66eebb3541e28df66dc39cbe"
+    },
+    {
+      "file": "src/combat.js",
+      "sha256": "af34d69073a82f394813fdd35cb86898d45fb6166e914a7fcc029bb72f0fd216"
+    },
+    {
+      "file": "src/weapons.js",
+      "sha256": "9f62c8b2488b588525dcff6ca276b1e5dbfc6438cd053c7b0a5fba2d57d7b52f"
+    },
+    {
+      "file": "src/physics.js",
+      "sha256": "709154adc83cbbc3f580b5be0d63acef868c44ae71fdde53d33a43f642d728a5"
+    },
+    {
+      "file": "src/ai.js",
+      "sha256": "62e13cfd461418443823adea7cd734c87769c7759753ccbde9fee7d4c4b7f1fd"
+    },
+    {
+      "file": "src/render.js",
+      "sha256": "11df997ae0af3695a3cd75dc02cc09ef8d9d81594f23440bd9f7d090df35700a"
+    },
+    {
+      "file": "src/loop.js",
+      "sha256": "0b705e9c448088299fec32f650b4b291e26a9bc298e1f8f0a74e4a9a737bec6a"
+    },
+    {
+      "file": "src/input.js",
+      "sha256": "fb42149462fb686a380d24264ef8bf095d2ad89de18b3785cbbbd6b3b1a7db3c"
+    },
+    {
+      "file": "src/graphics.js",
+      "sha256": "31cc291e9c82f125faa87241f2d1d93645efc3b7ae244834e01952cf1d0bd95b"
+    },
+    {
+      "file": "src/persistence.js",
+      "sha256": "813968e7802f4cbc719e5f3b87926d9fe96f5d09629e8d1173555ac91993dbd2"
+    },
+    {
+      "file": "src/boot.js",
+      "sha256": "a6b4ee5aa006161eb234376dfc74fd84177a0262bfa344db38c6f981a27f7555"
+    },
+    {
+      "file": "assets/images/coast.png",
+      "sha256": "a5354848c2a30405b3cfec400c12053967441d1f23ee45a9b2393f0b99c8ece6"
+    },
+    {
+      "file": "assets/images/item-bazooka.png",
+      "sha256": "bc53e131121c31fc713a92c74aeadbdb63f46c14e6139f9d708dbef0da504dc3"
+    },
+    {
+      "file": "assets/images/item-dynamite.png",
+      "sha256": "65d413b2c7ce420f6e5e0d50a03659c3102ca0dc91868c519801628b306adc01"
+    },
+    {
+      "file": "assets/images/item-grenade.png",
+      "sha256": "eb01c31734af554bc5108a227d4643470878bd58015766f7da30623de1c17e7b"
+    },
+    {
+      "file": "assets/images/item-jetpack.png",
+      "sha256": "6f4dc0059743c95e86c5d2d20477f602e3300c42a037a5e4d07395125dd573d4"
+    },
+    {
+      "file": "assets/images/item-mine.png",
+      "sha256": "fda8749bef5a465cae7085fda4d7bbaf0ee3c086fb93993fef3c69a59ea378f1"
+    },
+    {
+      "file": "assets/images/item-punch.png",
+      "sha256": "b03f2bd25da58fd1cce6c80ee6402a042bf8117d3bab3f41a25539079f108168"
+    },
+    {
+      "file": "assets/images/item-rope.png",
+      "sha256": "d96c30e56ac81b05794447157570d7cca3bede1c956415eb260acfe1d20dabdd"
+    },
+    {
+      "file": "assets/images/item-sacred.png",
+      "sha256": "5b2de7d28e0010c1b025c82b425c33b44cd7f0784e5cfc719596d819aff4f208"
+    },
+    {
+      "file": "assets/images/item-sheep.png",
+      "sha256": "b8b89e0464a043c0079263a60b35bda3928ad3126a84feb80fc4460f35fbcd58"
+    },
+    {
+      "file": "assets/images/item-teleport.png",
+      "sha256": "aede33187da67fa8decf3578e2ffe73ccb6f756e5bc0a9c23715425993dadd7c"
+    },
+    {
+      "file": "assets/images/worm-astronaut.png",
+      "sha256": "9c09d860543c99d29e08919602b175c17ef87616226bbc12256b171792c2d50b"
+    },
+    {
+      "file": "assets/images/worm-cowboy.png",
+      "sha256": "7abb7af57a56e6976ffe2056ac08ed9d0d6769dfda1d5eae8810ae8d8aac9cd4"
+    },
+    {
+      "file": "assets/images/worm-knight.png",
+      "sha256": "7f6e5d234be56708cbf4972efdef06db202c80c4a88288266a3cfbb0f15ace14"
+    },
+    {
+      "file": "assets/images/worm-miner.png",
+      "sha256": "3b32ec8c3b8d80d5901a94a257a8ee3a999ece7a2a12c9301b94c8084fe0510b"
+    },
+    {
+      "file": "assets/images/worm-ninja.png",
+      "sha256": "39d1c0c3d56dbc224dfcb862f9e7b44f8f3880e24b112036b1d4af7d5fee0d0b"
+    },
+    {
+      "file": "assets/images/worm-pilot.png",
+      "sha256": "12b67f5021bd5a47d2b9f6c096b26c029e3817ec761789b4c921a3087412c4e2"
+    },
+    {
+      "file": "assets/images/worm-pirate.png",
+      "sha256": "919b67ff030ee1da8ec2b96d5e184cb7bf6444a15c268793d8fe5da944e7a548"
+    },
+    {
+      "file": "assets/images/worm-scientist.png",
+      "sha256": "2d0f4d1caf88bb59486d9b9bee53eefe1447536bf1c9e1bae651f5a9f7c5d0ab"
+    },
+    {
+      "file": "assets/images/worm-soldier.png",
+      "sha256": "b2d24668533a25e2763003ef4a5b1547cc5fffdcc8f50971bd7eb2db8314feed"
+    },
+    {
+      "file": "assets/images/worm-winter.png",
+      "sha256": "3557b594b41ccb6dd8928a1787f76ec01bc8f40b4a4f454ea2055c842435dbfd"
+    },
+    {
+      "file": "offline/wormfront.html",
+      "sha256": "da36032377f458bfd529eddcb985f4501c37fa92da4147981e00016dd005123a"
+    }
+  ],
+  "errors": [],
+  "failedResources": []
+}
