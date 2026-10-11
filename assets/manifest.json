@@ -1,0 +1,231 @@
+{
+  "background": {
+    "file": "coast.png",
+    "source": "source-01.png",
+    "method": "imagegen scenic layer, no HUD"
+  },
+  "icons": {
+    "bazooka": {
+      "id": "bazooka",
+      "file": "item-bazooka.png",
+      "bounds": {
+        "x": 16,
+        "y": 335,
+        "w": 1229,
+        "h": 600
+      },
+      "source": "source-11.png"
+    },
+    "grenade": {
+      "id": "grenade",
+      "file": "item-grenade.png",
+      "bounds": {
+        "x": 251,
+        "y": 82,
+        "w": 766,
+        "h": 1106
+      },
+      "source": "source-12.png"
+    },
+    "sacred": {
+      "id": "sacred",
+      "file": "item-sacred.png",
+      "bounds": {
+        "x": 48,
+        "y": 31,
+        "w": 1158,
+        "h": 1165
+      },
+      "source": "source-13.png"
+    },
+    "rope": {
+      "id": "rope",
+      "file": "item-rope.png",
+      "bounds": {
+        "x": 9,
+        "y": 338,
+        "w": 1236,
+        "h": 670
+      },
+      "source": "source-14.png"
+    },
+    "sheep": {
+      "id": "sheep",
+      "file": "item-sheep.png",
+      "bounds": {
+        "x": 72,
+        "y": 97,
+        "w": 1135,
+        "h": 1030
+      },
+      "source": "source-15.png"
+    },
+    "dynamite": {
+      "id": "dynamite",
+      "file": "item-dynamite.png",
+      "bounds": {
+        "x": 244,
+        "y": 39,
+        "w": 883,
+        "h": 1172
+      },
+      "source": "source-16.png"
+    },
+    "mine": {
+      "id": "mine",
+      "file": "item-mine.png",
+      "bounds": {
+        "x": 57,
+        "y": 327,
+        "w": 1139,
+        "h": 654
+      },
+      "source": "source-17.png"
+    },
+    "punch": {
+      "id": "punch",
+      "file": "item-punch.png",
+      "bounds": {
+        "x": 245,
+        "y": 41,
+        "w": 985,
+        "h": 1123
+      },
+      "source": "source-18.png"
+    },
+    "teleport": {
+      "id": "teleport",
+      "file": "item-teleport.png",
+      "bounds": {
+        "x": 81,
+        "y": 279,
+        "w": 1096,
+        "h": 748
+      },
+      "source": "source-19.png"
+    },
+    "jetpack": {
+      "id": "jetpack",
+      "file": "item-jetpack.png",
+      "bounds": {
+        "x": 19,
+        "y": 148,
+        "w": 1212,
+        "h": 944
+      },
+      "source": "source-20.png"
+    }
+  },
+  "characters": [
+    {
+      "id": "soldier",
+      "file": "worm-soldier.png",
+      "bounds": {
+        "x": 188,
+        "y": 100,
+        "w": 881,
+        "h": 1055
+      },
+      "source": "source-21.png"
+    },
+    {
+      "id": "pilot",
+      "file": "worm-pilot.png",
+      "bounds": {
+        "x": 166,
+        "y": 83,
+        "w": 923,
+        "h": 1088
+      },
+      "source": "source-22.png"
+    },
+    {
+      "id": "miner",
+      "file": "worm-miner.png",
+      "bounds": {
+        "x": 208,
+        "y": 80,
+        "w": 856,
+        "h": 1103
+      },
+      "source": "source-23.png"
+    },
+    {
+      "id": "pirate",
+      "file": "worm-pirate.png",
+      "bounds": {
+        "x": 162,
+        "y": 28,
+        "w": 1009,
+        "h": 1167
+      },
+      "source": "source-24.png"
+    },
+    {
+      "id": "ninja",
+      "file": "worm-ninja.png",
+      "bounds": {
+        "x": 98,
+        "y": 94,
+        "w": 1131,
+        "h": 1061
+      },
+      "source": "source-25.png"
+    },
+    {
+      "id": "scientist",
+      "file": "worm-scientist.png",
+      "bounds": {
+        "x": 184,
+        "y": 29,
+        "w": 972,
+        "h": 1130
+      },
+      "source": "source-26.png"
+    },
+    {
+      "id": "cowboy",
+      "file": "worm-cowboy.png",
+      "bounds": {
+        "x": 165,
+        "y": 58,
+        "w": 1012,
+        "h": 1103
+      },
+      "source": "source-27.png"
+    },
+    {
+      "id": "winter",
+      "file": "worm-winter.png",
+      "bounds": {
+        "x": 155,
+        "y": 70,
+        "w": 996,
+        "h": 1088
+      },
+      "source": "source-28.png"
+    },
+    {
+      "id": "knight",
+      "file": "worm-knight.png",
+      "bounds": {
+        "x": 148,
+        "y": 42,
+        "w": 1027,
+        "h": 1130
+      },
+      "source": "source-29.png"
+    },
+    {
+      "id": "astronaut",
+      "file": "worm-astronaut.png",
+      "bounds": {
+        "x": 181,
+        "y": 100,
+        "w": 936,
+        "h": 1070
+      },
+      "source": "source-30.png"
+    }
+  ]
+}

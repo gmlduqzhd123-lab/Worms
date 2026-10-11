@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="7">
+<meta name="wormfront-version" content="8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>웜프런트 — 작은 전장의 탐사대</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -65,9 +65,9 @@
 
   <div id="overlay">
     <div id="panel">
-      <div class="brandLine">WORMFRONT · FIELD NOTES 07</div>
+      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/worm-soldier.png"><img src="./assets/images/worm-pirate.png"><img src="./assets/images/worm-astronaut.png"></div><div class="brandLine">WORMFRONT · ISLAND SKIRMISH 08</div>
       <h1>작은 전장의 탐사대</h1>
-      <p>달빛 협곡에서 펼치는 한 턴의 모험. 바람을 읽고, 지형을 바꾸고, 코랄과 민트 탐사대의 마지막 한 수를 완성하세요.</p>
+      <p>햇살 가득한 섬에서 펼치는 한 턴의 모험. 나만의 캐릭터를 고르고, 바람을 읽고, 마지막 한 수를 완성하세요.</p>
       <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button></div>
       <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
       <p id="matchSummary" hidden></p>
@@ -83,7 +83,7 @@
         <div><label>갑작스러운 죽음<select id="sdTurn"><option value="14">14턴</option><option value="20" selected>20턴</option><option value="28">28턴</option></select></label></div>
         <div><label>초기 중립 지뢰<select id="mineCount"><option value="5">5개</option><option value="10" selected>10개</option><option value="18">18개</option></select></label></div>
       </div>
-      <div class="actions"><button class="btn ghost" id="regen">새 맵 미리 만들기</button><button class="btn primary" id="start">전투 시작</button></div>
+      <div class="row"><label>코랄 캐릭터<select id="appearanceA"></select></label><label>민트 캐릭터<select id="appearanceB"></select></label></div><div class="actions"><button class="btn ghost" id="regen">새 맵 미리 만들기</button><button class="btn primary" id="start">전투 시작</button></div>
     </div>
   </div>
 </div>

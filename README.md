@@ -1,22 +1,24 @@
-# Wormfront Armageddon — 7단계 통합 검수·배포 준비
+# Wormfront Armageddon — 8단계 제공 이미지 적용
 
-GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
+GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`, `assets/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
 
 ## 공개 실행 주소
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
 
-공개 사이트에서 추가 11개 검사를 통과했고 JavaScript·리소스 오류는 0개였습니다. 기록은 verification/live/REPORT.md와 results.json에 있습니다.
+7단계 공개 검수 기록은 verification/live/에 보존했습니다. 8단계 공개 검수 기록은 verification/live-stage8/에 저장합니다.
 
-## 7단계 배포 준비
+## 8단계 시각 개선
 
-release/wormfront-stage7-pages.zip에 실행 파일만 묶었습니다. release/manifest.json은 19개 파일의 해시를 담습니다. .github/workflows/pages.yml은 기본 브랜치에서 수동 실행하는 GitHub Pages 워크플로입니다. 자세한 방법은 [DEPLOYMENT.md](DEPLOYMENT.md)를 확인하세요.
+제공한 ZIP의 캐릭터 10종과 아이템 10종을 원본 PNG 그대로 적용했습니다. 팀별 외형 선택과 저장, 무기 아이콘, 수류탄·다이너마이트·지뢰·양 폭탄 표시를 연결했습니다. 배경 예시 10장은 참고 자료로 보존했으며, 해안 예시를 참고하여 UI 없는 배경 한 장을 imagegen으로 제작했습니다. 제작 프롬프트와 도구 모드는 assets/BACKGROUND_PROMPT.txt에 있습니다.
 
-6단계 전체 파일은 versions/stage6/에 보존했습니다. 게임 규칙은 유지하고 버전 표기와 배포·검수 도구를 정리했습니다. 실제 GitHub Pages 배포를 완료했습니다.
+흙·잔디 지형, 금속 느낌의 패널과 선택 표시를 적용했습니다. 단일 캐릭터 이미지에 이동·점프·피격 변환을 적용하며 별도의 프레임 애니메이션은 포함하지 않습니다. 나머지 무기 9종은 기존 벡터 아이콘을 사용합니다. 이미지가 로딩되지 않으면 기존 벡터·절차적 화면으로 대체합니다.
+
+원본과 이전 수정본은 original/ 및 versions/에 보존했습니다. 7단계 전체 파일은 versions/stage7/에 있습니다. release/wormfront-stage8-pages.zip과 release/manifest.json은 40개 실행 파일을 담습니다. 이미지 원본을 유지하여 PNG 합계 약 22.3 MB, 단일 오프라인 HTML은 약 34 MB입니다.
 
 ## 실행
 
-폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage7-offline.html`을 열면 됩니다.
+폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage8-offline.html`을 열면 됩니다.
 
 ```powershell
 node scripts/serve.cjs
@@ -38,14 +40,14 @@ CPU는 지형·거더·낙차·지뢰·다른 캐릭터를 확인하고 최대 7
 
 ## 유지된 5단계 변경
 
-- 달빛 협곡 배경, 코랄·민트 탐사대 캐릭터와 19개 SVG 무기 아이콘을 코드로 제작했습니다. 외부 이미지·폰트는 사용하지 않습니다.
+- 5단계의 벡터 캐릭터·무기와 절차적 배경은 8단계 이미지 로딩 실패 시 대체 표시로 유지합니다.
 - 6단계 가이드에서 이동·발사·카메라·로프·제트팩·턴 규칙을 안내합니다. 열면 전투를 정지하고 닫으면 이전 정지 상태를 복원합니다. 실습 미션은 포함하지 않습니다.
 - 팀 이름·대전 옵션·음악·효과음과 가이드 완료 상태를 저장합니다.
 - 최근 30경기의 승자·체력·생존자·턴·전투 시간을 저장합니다. JSON 내보내기와 두 번 확인하는 기록 삭제를 지원합니다.
 
 저장 키는 wormfront.settings.v1, wormfront.results.v1, wormfront.guide.v1입니다. 현재 브라우저의 localStorage에만 저장하며 기기 간 동기화하지 않습니다. 저장이 차단되면 현재 화면에서만 유지합니다. 손상된 JSON은 자동으로 덮어쓰지 않습니다. file:// 저장 범위는 브라우저와 파일 위치에 따라 달라질 수 있습니다.
 
-4단계 전체 분리본은 versions/stage4/에, 단일 HTML은 dist/wormfront-stage4-offline.html에 보존했습니다. build-offline.cjs는 HTML 버전 표시를 읽어 현재 7단계 파일을 생성합니다.
+4단계 전체 분리본은 versions/stage4/에, 단일 HTML은 dist/wormfront-stage4-offline.html에 보존했습니다. build-offline.cjs는 HTML 버전 표시를 읽어 현재 8단계 파일을 생성합니다.
 
 ## 파일 구조
 
@@ -65,11 +67,12 @@ CPU는 지형·거더·낙차·지뢰·다른 캐릭터를 확인하고 최대 7
 | `src/render.js` | Canvas 화면 그리기 |
 | `src/loop.js` | 전투 갱신, 고정 간격 물리, 렌더링 루프 |
 | `src/input.js` | 키보드·마우스·멀티 터치 이벤트 |
-| `src/graphics.js` | 독자적인 캐릭터·벡터 아이콘 |
+| `src/graphics.js` | 이미지 로딩·외형 선택·캐릭터·아이콘 렌더링 |
+| `assets/` | 제공 PNG, 생성 배경과 이미지 메타데이터 |
 | `src/persistence.js` | 가이드·설정·결과 저장 |
 | `src/boot.js` | 초기 실행 |
 
-15개 일반 스크립트를 `defer`로 순서대로 로딩하고 공통 상태를 공유합니다. ES 모듈이나 런타임 파일 요청을 사용하지 않아 `file://`로 직접 열 수 있습니다. 스크립트 순서는 `index.html`과 `scripts/source-order.json`에 기록했습니다. 역할별 파일 분리이며 각 파일의 상태를 완전히 독립된 모듈로 바꾸는 단계는 아닙니다.
+15개 일반 스크립트를 `defer`로 순서대로 로딩하고 공통 상태를 공유합니다. ES 모듈이나 API 요청을 사용하지 않아 `file://`로 직접 열 수 있습니다. 스크립트 순서는 `index.html`과 `scripts/source-order.json`에 기록했습니다. 역할별 파일 분리이며 각 파일의 상태를 완전히 독립된 모듈로 바꾸는 단계는 아닙니다.
 
 분리된 코드를 수정한 뒤 다음 명령으로 현재 소스가 포함된 단일 HTML을 다시 생성할 수 있습니다.
 
@@ -140,7 +143,7 @@ CPU의 로프·제트팩·점프 경로 탐색 및 무기 추가는 포함하지
 
 ## 검수
 
-현재 보고서는 `verification/stage7/REPORT.md`입니다. 실제 Edge에서 회귀 97개, 저장·가이드 16개, CPU·밸런스 20개, 압축 해제한 배포본 13개로 총 146개 검사를 통과했습니다.
+현재 보고서는 `verification/stage8/REPORT.md`입니다. 실제 Edge에서 회귀 97개, 저장·가이드 16개, CPU·밸런스 20개, 압축 해제한 배포본 13개, 이미지 적용 9개로 총 155개 검사를 통과했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
 
 이전 단계 검수 결과와 스크린샷은 `verification/stage1/`, `verification/stage2/`, `verification/stage3/`에 보관했습니다.
 

@@ -1,17 +1,17 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage7'),site=path.join(evidence,'unpacked');
+const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage8'),site=path.join(evidence,'unpacked');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'release','manifest.json'),'utf8'));
 const tests=[],errors=[],badResponses=[],remoteRequests=[];let browser;
 const pass=test=>tests.push({test,pass:true});
 const server=http.createServer((req,res)=>{
  let name=new URL(req.url,'http://localhost').pathname;if(name.startsWith('/wormfront/'))name=name.slice(11);else name=name.slice(1);if(!name)name='index.html';
  if(!manifest.files.some(f=>f.file===name)){res.writeHead(404);res.end();return}
- res.writeHead(200,{'Content-Type':name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'text/html; charset=utf-8'});res.end(fs.readFileSync(path.join(site,name)));
+ res.writeHead(200,{'Content-Type':name.endsWith('.png')?'image/png':name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'text/html; charset=utf-8'});res.end(fs.readFileSync(path.join(site,name)));
 });
 (async()=>{
- for(const item of manifest.files){const data=fs.readFileSync(path.join(site,item.file));assert.equal(crypto.createHash('sha256').update(data).digest('hex'),item.sha256)}pass('All 19 extracted ZIP files match the release manifest');
- assert.equal(manifest.files.length,19);assert.ok(fs.existsSync(path.join(site,'.nojekyll')));assert.ok(!fs.existsSync(path.join(site,'original')));assert.ok(!fs.existsSync(path.join(site,'versions')));pass('ZIP has nojekyll and runtime files, with originals and history excluded');
+ for(const item of manifest.files){const data=fs.readFileSync(path.join(site,item.file));assert.equal(crypto.createHash('sha256').update(data).digest('hex'),item.sha256)}pass('All extracted ZIP files match the release manifest');
+ assert.equal(manifest.files.length,40);assert.ok(fs.existsSync(path.join(site,'.nojekyll')));assert.ok(!fs.existsSync(path.join(site,'original')));assert.ok(!fs.existsSync(path.join(site,'versions')));pass('ZIP has nojekyll and runtime files, with originals and history excluded');
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
  browser=await chromium.launch({headless:true,channel:'msedge'});
  async function track(page){page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('favicon.ico'))badResponses.push(r.url())});page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith(url))remoteRequests.push(r.url())})}

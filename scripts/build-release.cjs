@@ -5,7 +5,8 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const refs=[...html.matchAll(/<script defer src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
 if(JSON.stringify(refs)!==JSON.stringify(order))throw Error('Script order differs from source-order.json');
 const version=html.match(/name="wormfront-version" content="(\d+)"/)[1];
-const files=['index.html','.nojekyll','styles/game.css',...order];
+const images=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')).map(f=>'assets/images/'+f):[];
+const files=['index.html','.nojekyll','styles/game.css',...order,...images];
 const rows=[];
 for(const file of files){const data=fs.readFileSync(path.join(root,file));const dest=path.join(site,file);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,data);rows.push({file,bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex')})}
 const offline=fs.readFileSync(path.join(root,'dist',`wormfront-stage${version}-offline.html`));
