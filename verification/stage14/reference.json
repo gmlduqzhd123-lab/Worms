@@ -1,0 +1,62 @@
+{
+  "tests": [
+    {
+      "test": "Merged install helper and QR dialog retain a working QR image",
+      "pass": true
+    },
+    {
+      "test": "Player turn begins in movement/aim phase",
+      "pass": true
+    },
+    {
+      "test": "Resize before graphics initialization updates viewport without building terrain too early",
+      "pass": true
+    },
+    {
+      "test": "Damage labels use rounded HP loss, clamp overkill and ignore negative/repeated death damage",
+      "pass": true
+    },
+    {
+      "test": "Damage feedback expires without changing turn or collision rules",
+      "pass": true
+    },
+    {
+      "test": "New match clears previous damage feedback",
+      "pass": true
+    },
+    {
+      "test": "Charge, impact resolution, retreat, handoff and pause display their own phases",
+      "pass": true
+    },
+    {
+      "test": "Timed explosive countdown follows live fuse boundaries; rockets have no fuse badge",
+      "pass": true
+    },
+    {
+      "test": "Pause freezes floating damage positions and fuse simulation",
+      "pass": true
+    },
+    {
+      "test": "Compact HUD and visible phase fit 320x568",
+      "pass": true
+    },
+    {
+      "test": "Compact HUD and visible phase fit 390x844",
+      "pass": true
+    },
+    {
+      "test": "Compact HUD and visible phase fit 844x390",
+      "pass": true
+    },
+    {
+      "test": "Standalone file embeds QR, installation guide and helper scripts without external dependencies",
+      "pass": true
+    },
+    {
+      "test": "Reference feedback produces zero browser JS errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "browser": "155.0.4283.45"
+}

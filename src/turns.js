@@ -1,15 +1,25 @@
 'use strict';
 
 function createWorm(team,idx,x){
-  return{team,idx,name:`${team===0?'R':'B'}-${idx+1}`,x,y:groundY(x)-10,vx:0,vy:0,r:9,hp:100,alive:true,onGround:false,hurt:0}
+  return{team,idx,name:`${team===0?'내캐릭':'NPC'}${idx+1}`,x,y:groundY(x)-10,vx:0,vy:0,r:9,hp:100,alive:true,onGround:true,hurt:0}
+}
+function safeSpawn(team,idx,desired,left,right){
+  const candidates=[desired];for(let offset=8;offset<=right-left;offset+=8)candidates.push(desired-offset,desired+offset);
+  for(const x of candidates){if(x<left||x>right)continue;const w=createWorm(team,idx,x);let top=Math.max(0,groundY(x)-4);while(top<waterY-60&&!solid(x,top))top++;
+    if(top>=waterY-60)continue;w.y=top-w.r+.2;
+    if(!bodyBlocked(w,x,w.y)&&pointBlocked(x,w.y+w.r+.2)&&teams.every(t=>t.worms.every(other=>dist(x,w.y,other.x,other.y)>40)))return w;
+  }
+  return null;
 }
 function placeWorms(){
   const n=+document.getElementById('count').value;teams.forEach(t=>t.worms=[]);
   const leftA=WW*.05,rightA=WW*.42,leftB=WW*.58,rightB=WW*.95;
   for(let i=0;i<n;i++){
     const jitter=rand(-70,70);
-    teams[0].worms.push(createWorm(0,i,clamp(lerp(leftA,rightA,n===1?.5:i/(n-1))+jitter,50,WW-50)));
-    teams[1].worms.push(createWorm(1,i,clamp(lerp(leftB,rightB,n===1?.5:i/(n-1))+jitter,50,WW-50)))
+    const a=safeSpawn(0,i,clamp(lerp(leftA,rightA,n===1?.5:i/(n-1))+jitter,leftA,rightA),leftA,rightA);
+    const b=safeSpawn(1,i,clamp(lerp(leftB,rightB,n===1?.5:i/(n-1))+jitter,leftB,rightB),leftB,rightB);
+    if(!a||!b)throw Error('안전한 시작 지점을 찾을 수 없습니다.');
+    teams[0].worms.push(a);teams[1].worms.push(b)
   }
 }
 function living(t){return teams[t].worms.filter(w=>w.alive)}
@@ -32,7 +42,7 @@ function startGame(){
   teams.forEach(t=>t.ammo={...defaultAmmo});turnSec=+document.getElementById('turnTime').value;sdAt=+document.getElementById('sdTurn').value;
   crateRate=+document.getElementById('crateRate').value;initialMineCount=+document.getElementById('mineCount').value;
   ui.nameA.textContent=teams[0].name;ui.nameB.textContent=teams[1].name;
-  buildWorld(+document.getElementById('mapSize').value);placeWorms();
+  buildWorld(+document.getElementById('mapSize').value);placeWorms();seedMines(initialMineCount);
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
   activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
   selected='bazooka';ui.overlay.style.display='none';beginTurn()

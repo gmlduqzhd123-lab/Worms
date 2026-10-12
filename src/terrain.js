@@ -69,8 +69,7 @@ function generateTerrain(){
 
   clouds=Array.from({length:Math.max(12,Math.floor(WW/340))},()=>({x:rand(-200,WW),y:rand(55,WH*.30),s:rand(.55,1.35),v:rand(.012,.045)}));
   mines=[];crates=[];girders=[];walkers=[];
-  seedMines(initialMineCount)
 }
 function seedMines(n){
-  for(let i=0;i<n;i++){const x=rand(100,WW-100),y=groundY(x)-6;if(y<waterY-10)mines.push({x,y,armed:true,timer:0,owner:-1})}
+  for(let attempt=0;attempt<n*80&&mines.length<n;attempt++){const x=rand(100,WW-100),y=groundY(x)-6;if(y<waterY-30&&teams.every(t=>t.worms.every(w=>dist(x,y,w.x,w.y)>=110)))mines.push({x,y,armed:true,timer:0,owner:-1})}
 }

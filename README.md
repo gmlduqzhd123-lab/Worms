@@ -1,4 +1,4 @@
-# Wormfront Armageddon — 13단계 사망 애니메이션·작은 폭발
+# Wormfront Armageddon — 14단계 안전한 시작·캐릭터 기본 이름
 
 GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는 `index.html`, `src/`, `styles/`, `assets/`를 함께 유지합니다. 외부 서버, API 키, 설치형 라이브러리가 필요하지 않습니다.
 
@@ -6,7 +6,7 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [단일 HTML](https://gmlduqzhd123-lab.github.io/Worms/offline/wormfront.html)
 
-13단계는 HP가 0까지 감소한 뒤 사망 동작·작은 폭발을 보여주고, 모든 사망 연출이 끝나야 카메라·턴·승리를 전환합니다. 피해 캐릭터의 밀려남·낙하를 추적하고, 여러 피해 캐릭터와 머리 위 HP가 함께 보이도록 자동 줌을 조절합니다. 마지막 충돌 화면 3초 유지와 체력 감소 연출이 끝날 때까지의 전환 대기도 유지합니다. 검수 기록은 verification/stage13/REPORT.md입니다.
+14단계는 지뢰와 떨어진 안전한 지형에서 시작하며 기본 이름은 내캐릭1~4·NPC1~4입니다. 새 맵 미리 만들기 버튼은 제거했습니다. HP가 0까지 감소한 뒤 사망 동작·작은 폭발을 보여주고, 모든 사망 연출이 끝나야 카메라·턴·승리를 전환합니다. 피해 캐릭터의 밀려남·낙하를 추적하고, 여러 피해 캐릭터와 머리 위 HP가 함께 보이도록 자동 줌을 조절합니다. 마지막 충돌 화면 3초 유지와 체력 감소 연출이 끝날 때까지의 전환 대기도 유지합니다. 검수 기록은 verification/stage14/REPORT.md입니다.
 
 ## 유지된 9단계 맵 테마
 
@@ -14,7 +14,7 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 제공한 나머지 화면 예시 9장을 참고해 UI와 캐릭터 없는 배경을 built-in imagegen으로 제작했습니다. 저장 경로와 프롬프트 전체는 assets/THEME_PROMPTS.json에 있습니다. 새 테마 배경은 선택할 때만 로딩하며 실패 시 해당 테마의 절차적 색상 표시를 사용합니다. 원본 PNG와 8단계 전체 56개 파일은 versions/stage8/에 보존하고 해시를 확인했습니다.
 
-release/wormfront-stage13-pages.zip에는 60개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
+release/wormfront-stage14-pages.zip에는 60개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
 
 ## 유지된 8단계 시각 개선
 
@@ -26,7 +26,7 @@ release/wormfront-stage13-pages.zip에는 60개 실행 파일이 있습니다. �
 
 ## 실행
 
-폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage13-offline.html`을 열면 됩니다.
+폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage14-offline.html`을 열면 됩니다.
 
 ```powershell
 node scripts/serve.cjs
@@ -151,7 +151,7 @@ CPU의 로프·제트팩·점프 경로 탐색 및 무기 추가는 포함하지
 
 ## 검수
 
-현재 보고서는 `verification/stage13/REPORT.md`입니다. 회귀·저장·CPU·배포본·이미지·테마 및 새 전투 표시·병합 기능 검사 결과는 개별 JSON과 보고서에 기록했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
+현재 보고서는 `verification/stage14/REPORT.md`입니다. 회귀·저장·CPU·배포본·이미지·테마 및 새 전투 표시·병합 기능 검사 결과는 개별 JSON과 보고서에 기록했습니다. 모바일은 브라우저 에뮬레이션으로 확인했으며 실제 기기 검사는 포함하지 않습니다.
 
 이전 단계 검수 결과와 스크린샷은 `verification/stage1/`, `verification/stage2/`, `verification/stage3/`에 보관했습니다.
 
