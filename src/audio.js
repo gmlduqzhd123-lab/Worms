@@ -109,7 +109,7 @@ function setAudioVolume(kind,value){
   updateVolumeControls();saveSettings();
 }
 function updateVolumeControls(){
-  for(const [id,value] of [['musicVolume',musicVolume],['sfxVolume',sfxVolume]]){
+  for(const [id,value] of [['musicVolume',musicVolume],['sfxVolume',sfxVolume],['homeMusicVolume',musicVolume],['homeSfxVolume',sfxVolume]]){
     const input=document.getElementById(id),output=document.getElementById(id+'Value');
     if(input)input.value=Math.round(value*100);if(output)output.textContent=Math.round(value*100)+'%';
   }

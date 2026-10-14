@@ -2,7 +2,7 @@
 
 /* ---------------- Input ---------------- */
 addEventListener('keydown',e=>{
-  if(e.target.closest?.('#audioControls'))return;
+  if(e.target.closest?.('#audioControls,#homeAudioControls'))return;
   if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open)return;
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
@@ -12,7 +12,7 @@ addEventListener('keydown',e=>{
 });
 addEventListener('blur',()=>{if(started&&!gameOver)setPaused(true);else clearInput()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&started&&!gameOver)setPaused(true)});
-addEventListener('keyup',e=>{if(e.target.closest?.('#audioControls')){clearInput();return}const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false;if(e.key===' ')fireEnd()});
+addEventListener('keyup',e=>{if(e.target.closest?.('#audioControls,#homeAudioControls')){clearInput();return}const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false;if(e.key===' ')fireEnd()});
 
 const cameraPointers=new Map();let dragCamera=null,pinchDistance=0;
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -58,6 +58,8 @@ document.querySelectorAll('.ctrl').forEach(btn=>{
   btn.addEventListener('pointerup',e=>release(e,false));btn.addEventListener('pointercancel',e=>release(e,true));btn.addEventListener('lostpointercapture',e=>release(e,true));
 });
 
-for(const [id,kind] of [['musicVolume','music'],['sfxVolume','sfx']])document.getElementById(id).addEventListener('input',e=>setAudioVolume(kind,e.target.value));
+for(const [id,kind] of [['musicVolume','music'],['sfxVolume','sfx'],['homeMusicVolume','music'],['homeSfxVolume','sfx']])document.getElementById(id).addEventListener('input',e=>setAudioVolume(kind,e.target.value));
 document.getElementById('audioControls').addEventListener('focusin',clearInput);
 document.getElementById('volumeControls').addEventListener('keydown',e=>{if(e.key==='Escape'){e.currentTarget.open=false;e.currentTarget.querySelector('summary').focus();e.stopPropagation()}});
+
+document.getElementById('homeAudioControls').addEventListener('focusin',clearInput);

@@ -1,0 +1,81 @@
+{
+  "tests": [
+    {
+      "name": "Fresh default levels preserve the previous quiet music balance",
+      "pass": true
+    },
+    {
+      "name": "Keyboard Home sets music to true zero",
+      "pass": true
+    },
+    {
+      "name": "Slider arrow keys adjust only volume, never gameplay",
+      "pass": true
+    },
+    {
+      "name": "Keyboard End reaches 100 percent",
+      "pass": true
+    },
+    {
+      "name": "Independent sliders update both audio buses and percent labels",
+      "pass": true
+    },
+    {
+      "name": "Effect ducking returns to the selected music level",
+      "pass": true
+    },
+    {
+      "name": "Changing muted SFX volume keeps the channel muted",
+      "pass": true
+    },
+    {
+      "name": "SFX ON restores the selected value",
+      "pass": true
+    },
+    {
+      "name": "Both levels restore after a new page load",
+      "pass": true
+    },
+    {
+      "name": "Restored levels initialize actual audio gains",
+      "pass": true
+    },
+    {
+      "name": "Zero-volume effects do not duck the music",
+      "pass": true
+    },
+    {
+      "name": "Zero persists rather than falling back to defaults",
+      "pass": true
+    },
+    {
+      "name": "Real touch input adjusts the mobile slider",
+      "pass": true
+    },
+    {
+      "name": "Volume panel fits 320x568",
+      "pass": true
+    },
+    {
+      "name": "Volume panel fits 390x844",
+      "pass": true
+    },
+    {
+      "name": "Volume panel fits 844x390",
+      "pass": true
+    },
+    {
+      "name": "Out-of-range saved numbers clamp safely",
+      "pass": true
+    },
+    {
+      "name": "Invalid and legacy settings retain defaults",
+      "pass": true
+    },
+    {
+      "name": "Standalone file includes sliders and retains its own saved volume",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

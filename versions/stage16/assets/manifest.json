@@ -1,0 +1,533 @@
+{
+  "background": {
+    "file": "coast.png",
+    "source": "source-01.png",
+    "method": "imagegen scenic layer, no HUD"
+  },
+  "icons": {
+    "bazooka": {
+      "id": "bazooka",
+      "file": "item-bazooka.png",
+      "bounds": {
+        "x": 16,
+        "y": 335,
+        "w": 1229,
+        "h": 600
+      },
+      "source": "source-11.png"
+    },
+    "grenade": {
+      "id": "grenade",
+      "file": "item-grenade.png",
+      "bounds": {
+        "x": 251,
+        "y": 82,
+        "w": 766,
+        "h": 1106
+      },
+      "source": "source-12.png"
+    },
+    "sacred": {
+      "id": "sacred",
+      "file": "item-sacred.png",
+      "bounds": {
+        "x": 48,
+        "y": 31,
+        "w": 1158,
+        "h": 1165
+      },
+      "source": "source-13.png"
+    },
+    "rope": {
+      "id": "rope",
+      "file": "item-rope.png",
+      "bounds": {
+        "x": 9,
+        "y": 338,
+        "w": 1236,
+        "h": 670
+      },
+      "source": "source-14.png"
+    },
+    "sheep": {
+      "id": "sheep",
+      "file": "item-sheep.png",
+      "bounds": {
+        "x": 72,
+        "y": 97,
+        "w": 1135,
+        "h": 1030
+      },
+      "source": "source-15.png"
+    },
+    "dynamite": {
+      "id": "dynamite",
+      "file": "item-dynamite.png",
+      "bounds": {
+        "x": 244,
+        "y": 39,
+        "w": 883,
+        "h": 1172
+      },
+      "source": "source-16.png"
+    },
+    "mine": {
+      "id": "mine",
+      "file": "item-mine.png",
+      "bounds": {
+        "x": 57,
+        "y": 327,
+        "w": 1139,
+        "h": 654
+      },
+      "source": "source-17.png"
+    },
+    "punch": {
+      "id": "punch",
+      "file": "item-punch.png",
+      "bounds": {
+        "x": 245,
+        "y": 41,
+        "w": 985,
+        "h": 1123
+      },
+      "source": "source-18.png"
+    },
+    "teleport": {
+      "id": "teleport",
+      "file": "item-teleport.png",
+      "bounds": {
+        "x": 81,
+        "y": 279,
+        "w": 1096,
+        "h": 748
+      },
+      "source": "source-19.png"
+    },
+    "jetpack": {
+      "id": "jetpack",
+      "file": "item-jetpack.png",
+      "bounds": {
+        "x": 19,
+        "y": 148,
+        "w": 1212,
+        "h": 944
+      },
+      "source": "source-20.png"
+    }
+  },
+  "characters": [
+    {
+      "id": "soldier",
+      "file": "worm-soldier.png",
+      "bounds": {
+        "x": 188,
+        "y": 100,
+        "w": 881,
+        "h": 1055
+      },
+      "source": "source-21.png"
+    },
+    {
+      "id": "pilot",
+      "file": "worm-pilot.png",
+      "bounds": {
+        "x": 166,
+        "y": 83,
+        "w": 923,
+        "h": 1088
+      },
+      "source": "source-22.png"
+    },
+    {
+      "id": "miner",
+      "file": "worm-miner.png",
+      "bounds": {
+        "x": 208,
+        "y": 80,
+        "w": 856,
+        "h": 1103
+      },
+      "source": "source-23.png"
+    },
+    {
+      "id": "pirate",
+      "file": "worm-pirate.png",
+      "bounds": {
+        "x": 162,
+        "y": 28,
+        "w": 1009,
+        "h": 1167
+      },
+      "source": "source-24.png"
+    },
+    {
+      "id": "ninja",
+      "file": "worm-ninja.png",
+      "bounds": {
+        "x": 98,
+        "y": 94,
+        "w": 1131,
+        "h": 1061
+      },
+      "source": "source-25.png"
+    },
+    {
+      "id": "scientist",
+      "file": "worm-scientist.png",
+      "bounds": {
+        "x": 184,
+        "y": 29,
+        "w": 972,
+        "h": 1130
+      },
+      "source": "source-26.png"
+    },
+    {
+      "id": "cowboy",
+      "file": "worm-cowboy.png",
+      "bounds": {
+        "x": 165,
+        "y": 58,
+        "w": 1012,
+        "h": 1103
+      },
+      "source": "source-27.png"
+    },
+    {
+      "id": "winter",
+      "file": "worm-winter.png",
+      "bounds": {
+        "x": 155,
+        "y": 70,
+        "w": 996,
+        "h": 1088
+      },
+      "source": "source-28.png"
+    },
+    {
+      "id": "knight",
+      "file": "worm-knight.png",
+      "bounds": {
+        "x": 148,
+        "y": 42,
+        "w": 1027,
+        "h": 1130
+      },
+      "source": "source-29.png"
+    },
+    {
+      "id": "astronaut",
+      "file": "worm-astronaut.png",
+      "bounds": {
+        "x": 181,
+        "y": 100,
+        "w": 936,
+        "h": 1070
+      },
+      "source": "source-30.png"
+    }
+  ],
+  "themes": [
+    {
+      "id": "coast",
+      "name": "햇살 해안",
+      "file": "coast.png",
+      "source": "source-01.png",
+      "description": "푸른 바다와 등대가 보이는 밝은 섬",
+      "top": "#ba8644",
+      "bottom": "#573c25",
+      "rim": "#8fcf38",
+      "edge": [
+        "#5e9c21",
+        "#b5df43"
+      ],
+      "rock": [
+        "#735536",
+        "#c29961"
+      ],
+      "speck": [
+        "#483221",
+        "#ecc48b"
+      ],
+      "water": [
+        "#38abd8",
+        "#0b4d80"
+      ],
+      "sky": [
+        "#4aa5ed",
+        "#bddffa"
+      ]
+    },
+    {
+      "id": "ruins",
+      "name": "폐허 도시",
+      "description": "노을 아래 벽돌 건물과 무너진 다리",
+      "top": "#8f7c72",
+      "bottom": "#3c3b47",
+      "rim": "#bcb0a0",
+      "edge": [
+        "#928d86",
+        "#d5c7b6"
+      ],
+      "rock": [
+        "#655d5b",
+        "#b19885"
+      ],
+      "speck": [
+        "#413e45",
+        "#c4b3a2"
+      ],
+      "water": [
+        "#947183",
+        "#302b49"
+      ],
+      "sky": [
+        "#686390",
+        "#eaae82"
+      ],
+      "file": "theme-ruins.png",
+      "source": "source-02.png"
+    },
+    {
+      "id": "canyon",
+      "name": "사막 협곡",
+      "description": "주황빛 사암과 겹겹이 이어지는 메사",
+      "top": "#cc8144",
+      "bottom": "#743b2e",
+      "rim": "#edbd73",
+      "edge": [
+        "#c58e55",
+        "#f0c986"
+      ],
+      "rock": [
+        "#a34f37",
+        "#e09d59"
+      ],
+      "speck": [
+        "#74392e",
+        "#f4bc78"
+      ],
+      "water": [
+        "#b47c66",
+        "#674657"
+      ],
+      "sky": [
+        "#9483bc",
+        "#ffc17d"
+      ],
+      "file": "theme-canyon.png",
+      "source": "source-03.png"
+    },
+    {
+      "id": "fort",
+      "name": "군사 해안",
+      "description": "레이더 기지와 바다 건너 정박한 함선",
+      "top": "#918260",
+      "bottom": "#494a38",
+      "rim": "#9fa866",
+      "edge": [
+        "#77834e",
+        "#b7bf7e"
+      ],
+      "rock": [
+        "#6a705a",
+        "#b2ad88"
+      ],
+      "speck": [
+        "#4a4b38",
+        "#c1b490"
+      ],
+      "water": [
+        "#3d98b2",
+        "#183f60"
+      ],
+      "sky": [
+        "#459bde",
+        "#d3ecfa"
+      ],
+      "file": "theme-fort.png",
+      "source": "source-04.png"
+    },
+    {
+      "id": "meadow",
+      "name": "초록 언덕",
+      "description": "작은 성과 마을, 강이 흐르는 초원",
+      "top": "#94754a",
+      "bottom": "#4a3928",
+      "rim": "#95cb49",
+      "edge": [
+        "#60982e",
+        "#c4e079"
+      ],
+      "rock": [
+        "#6d573e",
+        "#c6ae80"
+      ],
+      "speck": [
+        "#4a3928",
+        "#d9bd82"
+      ],
+      "water": [
+        "#6cafb0",
+        "#284e68"
+      ],
+      "sky": [
+        "#64b2ec",
+        "#d9edee"
+      ],
+      "file": "theme-meadow.png",
+      "source": "source-05.png"
+    },
+    {
+      "id": "snow",
+      "name": "오로라 설원",
+      "description": "달빛과 오로라가 비치는 얼어붙은 해안",
+      "top": "#899ead",
+      "bottom": "#3b4c67",
+      "rim": "#edf5ff",
+      "edge": [
+        "#bbd4ee",
+        "#ffffff"
+      ],
+      "rock": [
+        "#647b99",
+        "#bfcedc"
+      ],
+      "speck": [
+        "#344864",
+        "#d0e0ee"
+      ],
+      "water": [
+        "#6595b7",
+        "#173656"
+      ],
+      "sky": [
+        "#183a65",
+        "#5c869d"
+      ],
+      "file": "theme-snow.png",
+      "source": "source-06.png"
+    },
+    {
+      "id": "scrap",
+      "name": "고철 야적장",
+      "description": "크레인 실루엣과 초록빛 오염수",
+      "top": "#756850",
+      "bottom": "#30332e",
+      "rim": "#7e9b3b",
+      "edge": [
+        "#547a30",
+        "#b3c35d"
+      ],
+      "rock": [
+        "#4e4c43",
+        "#9b8870"
+      ],
+      "speck": [
+        "#2b322b",
+        "#a69d6c"
+      ],
+      "water": [
+        "#70c630",
+        "#1e5427"
+      ],
+      "sky": [
+        "#14294a",
+        "#53677f"
+      ],
+      "file": "theme-scrap.png",
+      "source": "source-07.png"
+    },
+    {
+      "id": "castle",
+      "name": "용암 성채",
+      "description": "보랏빛 밤하늘과 용암 계곡의 고성",
+      "top": "#746569",
+      "bottom": "#342a38",
+      "rim": "#ad8272",
+      "edge": [
+        "#88676b",
+        "#ccb19b"
+      ],
+      "rock": [
+        "#56464e",
+        "#a68a82"
+      ],
+      "speck": [
+        "#342a38",
+        "#bea293"
+      ],
+      "water": [
+        "#ffad32",
+        "#a42622"
+      ],
+      "sky": [
+        "#352441",
+        "#965264"
+      ],
+      "file": "theme-castle.png",
+      "source": "source-08.png"
+    },
+    {
+      "id": "moon",
+      "name": "달 기지",
+      "description": "별빛과 지구를 바라보는 회색 달 표면",
+      "top": "#9997a8",
+      "bottom": "#474654",
+      "rim": "#cdceda",
+      "edge": [
+        "#9596a8",
+        "#e0e2ee"
+      ],
+      "rock": [
+        "#6c6c80",
+        "#b8b8ca"
+      ],
+      "speck": [
+        "#444453",
+        "#d0cfdb"
+      ],
+      "water": [
+        "#626681",
+        "#252638"
+      ],
+      "sky": [
+        "#090d24",
+        "#35425a"
+      ],
+      "file": "theme-moon.png",
+      "source": "source-09.png"
+    },
+    {
+      "id": "sunset",
+      "name": "노을 섬",
+      "description": "황금빛 수평선과 먼 화산섬",
+      "top": "#9b764b",
+      "bottom": "#4b392c",
+      "rim": "#afa052",
+      "edge": [
+        "#7f813c",
+        "#d4bd69"
+      ],
+      "rock": [
+        "#6e583d",
+        "#bfa076"
+      ],
+      "speck": [
+        "#493627",
+        "#d8b78a"
+      ],
+      "water": [
+        "#b67b62",
+        "#183c59"
+      ],
+      "sky": [
+        "#83435b",
+        "#f4a063"
+      ],
+      "file": "theme-sunset.png",
+      "source": "source-10.png"
+    }
+  ]
+}

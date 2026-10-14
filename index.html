@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="웜즈 아마겟돈(Remake)">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="16">
+<meta name="wormfront-version" content="17">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>웜프런트 — 작은 전장의 탐사대</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -97,6 +97,10 @@
       <p>열 개의 전장에서 펼치는 한 턴의 모험. 맵과 캐릭터를 고르고, 바람을 읽고, 마지막 한 수를 완성하세요.</p>
       <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button></div>
       <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
+      <section id="homeAudioControls" aria-labelledby="homeAudioTitle"><h2 id="homeAudioTitle">음량 설정</h2><div class="homeAudioGrid">
+        <div><label for="homeMusicVolume">배경음악 <output id="homeMusicVolumeValue" for="homeMusicVolume">18%</output></label><input id="homeMusicVolume" type="range" min="0" max="100" step="1" value="18"></div>
+        <div><label for="homeSfxVolume">효과음 <output id="homeSfxVolumeValue" for="homeSfxVolume">72%</output></label><input id="homeSfxVolume" type="range" min="0" max="100" step="1" value="72"></div>
+      </div><p>게임 중 음량 설정과 함께 저장됩니다. 0%는 무음입니다.</p></section>
       <p id="matchSummary" hidden></p>
       <section class="themePicker" aria-label="맵 테마 선택"><label for="mapTheme">맵 테마</label><select id="mapTheme"><option value="coast">햇살 해안</option><option value="ruins">폐허 도시</option><option value="canyon">사막 협곡</option><option value="fort">군사 해안</option><option value="meadow">초록 언덕</option><option value="snow">오로라 설원</option><option value="scrap">고철 야적장</option><option value="castle">용암 성채</option><option value="moon">달 기지</option><option value="sunset">노을 섬</option></select><div id="themePreview"><img id="themePreviewImage" alt="선택한 맵의 배경 미리보기" hidden><div class="themeCaption"><strong id="themeName"></strong><span id="themeDescription"></span></div></div><p class="themeRules">모든 테마에 동일한 중력·지형 파괴·수위 규칙이 적용됩니다.</p></section>
       <div class="grid">

@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),crypto=require('node:crypto'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage16');const tests=[],errors=[];let browser;
+const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage17');const tests=[],errors=[];let browser;
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'assets','manifest.json'),'utf8'));const files=['index.html','styles/game.css',...JSON.parse(fs.readFileSync(path.join(root,'scripts','source-order.json'),'utf8')),...fs.readdirSync(path.join(root,'assets','images')).map(f=>'assets/images/'+f),...JSON.parse(fs.readFileSync(path.join(root,'scripts/site-extras.json')))];
 const server=http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname.slice(1)||'index.html';if(!files.includes(name)){res.writeHead(404);res.end();return}res.writeHead(200,{'Content-Type':require('./mime.cjs')(name)});res.end(fs.readFileSync(path.join(root,name)))});const pass=test=>tests.push({test,pass:true});
 (async()=>{
