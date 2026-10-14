@@ -104,3 +104,10 @@ body{touch-action:auto}#game{touch-action:none}#panel,.gameDialog{touch-action:p
 .ysFoot a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 @media(min-width:601px){#panel{position:relative}.homeTop{position:absolute;top:16px;right:18px;margin:0}}
 @media(max-width:480px){.homeWide{display:none}.homeChip{padding:5px 11px;font-size:12.5px}}
+
+/* Independent saved audio levels; panel stays compact on small screens. */
+#audioControls{z-index:15}
+#volumeControls summary{list-style:none;user-select:none}#volumeControls summary::-webkit-details-marker{display:none}
+.volumePanel{position:absolute;right:0;top:calc(100% + 6px);width:244px;max-width:calc(100vw - 24px);padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 8px 24px #0008;display:grid;grid-template-columns:82px 1fr;align-items:center;gap:10px;color:#fff;font-size:12px}
+.volumePanel label{display:flex;flex-direction:column;gap:4px}.volumePanel output{font-size:11px;color:#c8eacb}.volumePanel input{width:100%;min-width:0;height:32px;accent-color:#a3e668;cursor:pointer;touch-action:pan-y}
+.volumePanel input:focus-visible,#volumeControls summary:focus-visible{outline:2px solid #eaff88;outline-offset:3px}

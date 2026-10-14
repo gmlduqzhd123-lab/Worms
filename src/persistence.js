@@ -16,7 +16,7 @@ function writeSaved(key,value){
 }
 function settingsSnapshot(){
   const options={};for(const id of OPTION_IDS){const el=document.getElementById(id);options[id]=el.tagName==='INPUT'?el.value.trim().slice(0,40):el.value}
-  return{version:1,options,audio:{music:musicEnabled,sfx:sfxEnabled}}
+  return{version:1,options,audio:{music:musicEnabled,sfx:sfxEnabled,musicVolume,sfxVolume}}
 }
 function saveSettings(){if(writeSaved(STORAGE_KEYS.settings,settingsSnapshot()))storageStatus('설정이 이 브라우저에 저장됐습니다.')}
 function loadSettings(){
@@ -26,6 +26,7 @@ function loadSettings(){
   }
   if(typeof saved.audio?.music==='boolean')musicEnabled=saved.audio.music;
   if(typeof saved.audio?.sfx==='boolean')sfxEnabled=saved.audio.sfx;
+  for(const kind of ['musicVolume','sfxVolume']){const value=saved.audio?.[kind];if(typeof value==='number'&&Number.isFinite(value)){const safe=Math.max(0,Math.min(1,value));if(kind==='musicVolume')musicVolume=safe;else sfxVolume=safe;}}
 }
 function validResult(r){return r&&typeof r.id==='string'&&typeof r.savedAt==='string'&&Number.isFinite(Date.parse(r.savedAt))&&['cpu','pvp'].includes(r.mode)&&Number.isInteger(r.turns)&&r.turns>=0&&Number.isFinite(r.seconds)&&r.seconds>=0&&(r.winner===null||r.winner===0||r.winner===1)&&Array.isArray(r.teams)&&r.teams.length===2&&r.teams.every(t=>typeof t.name==='string'&&Number.isFinite(t.hp)&&t.hp>=0&&Number.isInteger(t.survivors)&&t.survivors>=0)}
 function loadResults(){const saved=readSaved(STORAGE_KEYS.results);matchHistory=saved?.version===1&&Array.isArray(saved.matches)?saved.matches.filter(validResult).slice(0,30):[]}

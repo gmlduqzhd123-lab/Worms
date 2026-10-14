@@ -3,13 +3,14 @@
 let audio=null,masterGain=null,musicGain=null,sfxGain=null,noiseBuf=null;
 let musicEnabled=true,sfxEnabled=true;
 const MUSIC_VOLUME=.18;
+let musicVolume=MUSIC_VOLUME,sfxVolume=.72;
 let musicBuffer=null,musicSource=null,musicLoading=null,musicOffset=0,musicStartedAt=0,musicError=null;
 function ensureAudio(){
   try{
     if(!audio){
       audio=new (window.AudioContext||window.webkitAudioContext)();
       masterGain=audio.createGain();musicGain=audio.createGain();sfxGain=audio.createGain();
-      masterGain.gain.value=.78;musicGain.gain.value=MUSIC_VOLUME;sfxGain.gain.value=.72;
+      masterGain.gain.value=.78;musicGain.gain.value=musicVolume;sfxGain.gain.value=sfxEnabled?sfxVolume:0;
       musicGain.connect(masterGain);sfxGain.connect(masterGain);masterGain.connect(audio.destination);
       noiseBuf=audio.createBuffer(1,audio.sampleRate*.7,audio.sampleRate);
       const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
@@ -29,9 +30,9 @@ function noise(dur=.15,gain=.08,filter=1000,when=0,mode='lowpass'){
   n.buffer=noiseBuf;f.type=mode;f.frequency.value=filter;g.gain.setValueAtTime(Math.max(.0002,gain),t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
   n.connect(f);f.connect(g);g.connect(sfxGain);n.start(t);n.stop(t+dur+.02)
 }
-function beep(freq=300,dur=.06,type='square',gain=.03){if(!sfxEnabled)return;ensureAudio();tone(freq,dur,type,gain)}
+function beep(freq=300,dur=.06,type='square',gain=.03){if(!sfxEnabled||sfxVolume===0)return;ensureAudio();tone(freq,dur,type,gain)}
 function playSFX(name){
-  if(!sfxEnabled)return;ensureAudio();duckMusic();
+  if(!sfxEnabled||sfxVolume===0)return;ensureAudio();duckMusic();
   switch(name){
     case 'farewell': noise(.14,.08,850,0,'lowpass');tone(90,.18,'sine',.05,0,'sfx',45);break;
     case 'explosion': noise(.32,.30,420,0,'lowpass');noise(.10,.11,2400,0,'highpass');tone(92,.34,'sawtooth',.12,0,'sfx',42);tone(58,.42,'sine',.14);break;
@@ -80,7 +81,7 @@ function startMusic(){
   }
   musicSource=audio.createBufferSource();musicSource.buffer=musicBuffer;musicSource.loop=true;musicSource.connect(musicGain);
   musicStartedAt=audio.currentTime;musicSource.start(0,musicOffset%musicBuffer.duration);
-  musicGain.gain.setTargetAtTime(MUSIC_VOLUME,audio.currentTime,.15);
+  musicGain.gain.setTargetAtTime(musicVolume,audio.currentTime,.15);
 }
 function stopMusic(){
   if(!musicSource)return;musicOffset=(musicOffset+audio.currentTime-musicStartedAt)%musicBuffer.duration;
@@ -88,13 +89,28 @@ function stopMusic(){
 }
 function duckMusic(){
   if(!musicSource||!musicEnabled)return;const now=audio.currentTime;
-  musicGain.gain.cancelScheduledValues(now);musicGain.gain.setTargetAtTime(MUSIC_VOLUME*.45,now,.025);
-  musicGain.gain.setTargetAtTime(MUSIC_VOLUME,now+.45,.22);
+  musicGain.gain.cancelScheduledValues(now);musicGain.gain.setTargetAtTime(musicVolume*.45,now,.025);
+  musicGain.gain.setTargetAtTime(musicVolume,now+.45,.22);
 }
 function setMusic(on){musicEnabled=on;if(on)ensureAudio();else stopMusic();updateAudioButtons();saveSettings()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopMusic();else if(musicEnabled&&audio)startMusic()});
-function setSfx(on){sfxEnabled=on;if(sfxGain&&audio)sfxGain.gain.setTargetAtTime(on?.72:.0001,audio.currentTime,.03);updateAudioButtons();saveSettings()}
+function setSfx(on){sfxEnabled=on;if(sfxGain&&audio)sfxGain.gain.setTargetAtTime(on?sfxVolume:0,audio.currentTime,.03);updateAudioButtons();saveSettings()}
 function updateAudioButtons(){
   const mb=document.getElementById('musicBtn'),sb=document.getElementById('sfxBtn');if(!mb||!sb)return;
-  mb.textContent=musicEnabled?'🎵 음악 ON':'🎵 음악 OFF';sb.textContent=sfxEnabled?'🔊 효과음 ON':'🔇 효과음 OFF';mb.classList.toggle('off',!musicEnabled);sb.classList.toggle('off',!sfxEnabled)
+  mb.textContent=musicEnabled?'🎵 음악 ON':'🎵 음악 OFF';sb.textContent=sfxEnabled?'🔊 효과음 ON':'🔇 효과음 OFF';updateVolumeControls();mb.classList.toggle('off',!musicEnabled);sb.classList.toggle('off',!sfxEnabled)
+}
+
+function setAudioVolume(kind,value){
+  const number=Number(value);if(!Number.isFinite(number))return;
+  const volume=Math.max(0,Math.min(100,number))/100;
+  if(kind==='music')musicVolume=volume;else if(kind==='sfx')sfxVolume=volume;else return;
+  ensureAudio();
+  if(audio){const gain=kind==='music'?musicGain:sfxGain;gain.gain.cancelScheduledValues(audio.currentTime);gain.gain.setTargetAtTime(kind==='music'?musicVolume:(sfxEnabled?sfxVolume:0),audio.currentTime,.03);}
+  updateVolumeControls();saveSettings();
+}
+function updateVolumeControls(){
+  for(const [id,value] of [['musicVolume',musicVolume],['sfxVolume',sfxVolume]]){
+    const input=document.getElementById(id),output=document.getElementById(id+'Value');
+    if(input)input.value=Math.round(value*100);if(output)output.textContent=Math.round(value*100)+'%';
+  }
 }

@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="웜즈 아마겟돈(Remake)">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="15">
+<meta name="wormfront-version" content="16">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>웜프런트 — 작은 전장의 탐사대</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -45,6 +45,10 @@
     <button class="audioBtn" id="pauseBtn">⏸ 일시정지</button>
     <button class="audioBtn" id="musicBtn">🎵 음악 ON</button>
     <button class="audioBtn" id="sfxBtn">🔊 효과음 ON</button>
+    <details id="volumeControls"><summary class="audioBtn">음량</summary><div class="volumePanel">
+      <label for="musicVolume">배경음악 <output id="musicVolumeValue" for="musicVolume">18%</output></label><input id="musicVolume" type="range" min="0" max="100" step="1" value="18">
+      <label for="sfxVolume">효과음 <output id="sfxVolumeValue" for="sfxVolume">72%</output></label><input id="sfxVolume" type="range" min="0" max="100" step="1" value="72">
+    </div></details>
   </div>
   <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">웜 추적</button></div>
   <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="제트팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="제트팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>

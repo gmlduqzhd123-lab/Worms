@@ -1,7 +1,7 @@
 // 📲 웜즈 아마겟돈 오프라인 지원: 한 번 접속하면 인터넷이 끊겨도 게임이 열려요.
 // 게임 파일은 새 버전을 먼저 받아 오고(네트워크 우선), 실패할 때만 저장해 둔 사본을 써요.
 // 같은 주소(gmlduqzhd123-lab.github.io)의 다른 앱들과 저장소를 함께 쓰므로, 이 앱의 이전 캐시만 지운다.
-const CACHE = 'worms-v15';
+const CACHE = 'worms-v16';
 const CACHE_PREFIX = 'worms-v';
 const CORE = [
     './assets/audio/bouncy-tactical-groove.mp3', './', './index.html', './manifest.webmanifest', './ys-install.js', './ys-qr.js', './qr.svg',
