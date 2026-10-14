@@ -1,0 +1,1 @@
+const path=require('path');module.exports=file=>({'.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.js':'text/javascript','.css':'text/css'}[path.extname(file)]||'text/html; charset=utf-8');

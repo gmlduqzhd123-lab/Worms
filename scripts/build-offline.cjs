@@ -10,7 +10,7 @@ html=html.replace(/<script>\s*\/\/[^\n]*\nif \('serviceWorker'[\s\S]*?<\/script>
 const scripts=[...html.matchAll(/<script defer src="\.\/([^\"]+)"><\/script>/g)];
 const assetFiles=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')):[];const assetData=Object.fromEntries(assetFiles.map(f=>[f,'data:image/png;base64,'+fs.readFileSync(path.join(root,'assets','images',f)).toString('base64')]));
 html=html.replace(/src="\.\/assets\/images\/([^"]+)"/g,(_,file)=>'src="'+assetData[file]+'"');
-const combined='window.WORMFRONT_ASSET_DATA='+JSON.stringify(assetData)+';\n'+scripts.map(m=>fs.readFileSync(path.join(root,m[1]),'utf8')).join('\n');
+const combined='window.WORMFRONT_AUDIO_DATA='+JSON.stringify('data:audio/mpeg;base64,'+fs.readFileSync(path.join(root,'assets/audio/bouncy-tactical-groove.mp3')).toString('base64'))+';\n'+'window.WORMFRONT_ASSET_DATA='+JSON.stringify(assetData)+';\n'+scripts.map(m=>fs.readFileSync(path.join(root,m[1]),'utf8')).join('\n');
 for(const m of scripts)html=html.replace(m[0],'');
 html=html.replace('</body>','<script>\n(() => {\n'+combined+'\n})();\n</script>\n</body>');
 const version=html.match(/name="wormfront-version" content="(\d+)"/)?.[1]||'4';

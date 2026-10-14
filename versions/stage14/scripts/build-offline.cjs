@@ -1,0 +1,18 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+html=html.replace('<link rel="stylesheet" href="./styles/game.css">','<style>\n'+fs.readFileSync(path.join(root,'styles','game.css'),'utf8')+'</style>');
+for(const helper of ['ys-install.js','ys-qr.js'])html=html.replace('<script src="./'+helper+'"></script>','<script>\n'+fs.readFileSync(path.join(root,helper),'utf8')+'\n</script>');
+html=html.replace('<link rel="manifest" href="./manifest.webmanifest">','');
+html=html.replace(/href="\.\/icons\/([^"]+)"/g,(_,file)=>'href="data:image/png;base64,'+fs.readFileSync(path.join(root,'icons',file)).toString('base64')+'"');
+html=html.replace('<html lang="ko"','<html data-qr-src="data:image/svg+xml;base64,'+fs.readFileSync(path.join(root,'qr.svg')).toString('base64')+'" lang="ko"');
+html=html.replace(/<script>\s*\/\/[^\n]*\nif \('serviceWorker'[\s\S]*?<\/script>/,'');
+const scripts=[...html.matchAll(/<script defer src="\.\/([^\"]+)"><\/script>/g)];
+const assetFiles=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')):[];const assetData=Object.fromEntries(assetFiles.map(f=>[f,'data:image/png;base64,'+fs.readFileSync(path.join(root,'assets','images',f)).toString('base64')]));
+html=html.replace(/src="\.\/assets\/images\/([^"]+)"/g,(_,file)=>'src="'+assetData[file]+'"');
+const combined='window.WORMFRONT_ASSET_DATA='+JSON.stringify(assetData)+';\n'+scripts.map(m=>fs.readFileSync(path.join(root,m[1]),'utf8')).join('\n');
+for(const m of scripts)html=html.replace(m[0],'');
+html=html.replace('</body>','<script>\n(() => {\n'+combined+'\n})();\n</script>\n</body>');
+const version=html.match(/name="wormfront-version" content="(\d+)"/)?.[1]||'4';
+fs.mkdirSync(path.join(root,'dist'),{recursive:true});fs.writeFileSync(path.join(root,'dist','wormfront-stage'+version+'-offline.html'),html,'utf8');
+console.log('Generated standalone offline HTML from current source files.');

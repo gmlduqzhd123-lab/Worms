@@ -1,19 +1,21 @@
 'use strict';
 
-let audio=null,masterGain=null,musicGain=null,sfxGain=null,noiseBuf=null,musicTimer=null;
-let musicEnabled=true,sfxEnabled=true,musicStep=0;
+let audio=null,masterGain=null,musicGain=null,sfxGain=null,noiseBuf=null;
+let musicEnabled=true,sfxEnabled=true;
+const MUSIC_VOLUME=.18;
+let musicBuffer=null,musicSource=null,musicLoading=null,musicOffset=0,musicStartedAt=0,musicError=null;
 function ensureAudio(){
   try{
     if(!audio){
       audio=new (window.AudioContext||window.webkitAudioContext)();
       masterGain=audio.createGain();musicGain=audio.createGain();sfxGain=audio.createGain();
-      masterGain.gain.value=.78;musicGain.gain.value=.105;sfxGain.gain.value=.72;
+      masterGain.gain.value=.78;musicGain.gain.value=MUSIC_VOLUME;sfxGain.gain.value=.72;
       musicGain.connect(masterGain);sfxGain.connect(masterGain);masterGain.connect(audio.destination);
       noiseBuf=audio.createBuffer(1,audio.sampleRate*.7,audio.sampleRate);
       const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
     }
     if(audio.state==='suspended')audio.resume();
-    if(musicEnabled&&!musicTimer)startMusic();
+    if(musicEnabled)startMusic();
   }catch{}
 }
 function tone(freq,dur=.08,type='square',gain=.05,when=0,dest='sfx',endFreq=null){
@@ -29,7 +31,7 @@ function noise(dur=.15,gain=.08,filter=1000,when=0,mode='lowpass'){
 }
 function beep(freq=300,dur=.06,type='square',gain=.03){if(!sfxEnabled)return;ensureAudio();tone(freq,dur,type,gain)}
 function playSFX(name){
-  if(!sfxEnabled)return;ensureAudio();
+  if(!sfxEnabled)return;ensureAudio();duckMusic();
   switch(name){
     case 'farewell': noise(.14,.08,850,0,'lowpass');tone(90,.18,'sine',.05,0,'sfx',45);break;
     case 'explosion': noise(.32,.30,420,0,'lowpass');noise(.10,.11,2400,0,'highpass');tone(92,.34,'sawtooth',.12,0,'sfx',42);tone(58,.42,'sine',.14);break;
@@ -55,23 +57,42 @@ function playSFX(name){
   }
 }
 function boomSound(){playSFX('explosion')}
-function midi(n){return 440*Math.pow(2,(n-69)/12)}
-function musicVoice(note,dur,gain,type='triangle',when=0){tone(midi(note),dur,type,gain,when,'music')}
-function scheduleMusicStep(){
-  if(!audio||!musicEnabled)return;
-  const step=musicStep++%64,beat=step%16,bar=Math.floor(step/16);
-  const roots=[48,43,45,41],root=roots[bar];
-  if(beat%4===0){musicVoice(root,.20,.042,'triangle');musicVoice(root+12,.12,.018,'square',.02)}
-  if(beat===2||beat===6||beat===10||beat===14)noise(.035,.010,4800,0,'highpass');
-  const melody=[60,64,67,72,67,64,62,67,71,74,71,67,60,65,69,72];
-  if(beat%2===0){const n=melody[(bar*4+beat/2)%melody.length];musicVoice(n,.13,.026,'square');musicVoice(n+12,.08,.010,'triangle',.025)}
-  if(beat===7||beat===15)musicVoice(root+7,.16,.018,'triangle');
+function makeMusicLoop(buffer){
+  // Overlap the last and first half-second to soften the repeat seam.
+  const overlap=Math.min(Math.floor(buffer.sampleRate*.5),Math.floor(buffer.length/8));
+  const loop=audio.createBuffer(buffer.numberOfChannels,buffer.length-overlap,buffer.sampleRate);
+  for(let channel=0;channel<buffer.numberOfChannels;channel++){
+    const input=buffer.getChannelData(channel),output=loop.getChannelData(channel);
+    output.set(input.subarray(0,output.length));
+    for(let i=0;i<overlap;i++){const mix=i/overlap;output[i]=input[i]*mix+input[output.length+i]*(1-mix);}
+  }
+  return loop;
 }
 function startMusic(){
-  if(!musicEnabled||!audio||musicTimer)return;musicStep=0;scheduleMusicStep();musicTimer=setInterval(scheduleMusicStep,132)
+  if(!musicEnabled||!audio||paused||document.hidden||musicSource)return;
+  if(!musicBuffer){
+    if(!musicLoading)musicLoading=(async()=>{
+      const response=await fetch(window.WORMFRONT_AUDIO_DATA||'./assets/audio/bouncy-tactical-groove.mp3');
+      if(!response.ok)throw Error('Music HTTP '+response.status);
+      musicBuffer=makeMusicLoop(await audio.decodeAudioData(await response.arrayBuffer()));musicError=null;startMusic();
+    })().catch(e=>{musicError=e.message;console.warn('Background music unavailable:',e.message)}).finally(()=>{musicLoading=null});
+    return;
+  }
+  musicSource=audio.createBufferSource();musicSource.buffer=musicBuffer;musicSource.loop=true;musicSource.connect(musicGain);
+  musicStartedAt=audio.currentTime;musicSource.start(0,musicOffset%musicBuffer.duration);
+  musicGain.gain.setTargetAtTime(MUSIC_VOLUME,audio.currentTime,.15);
 }
-function stopMusic(){if(musicTimer){clearInterval(musicTimer);musicTimer=null}}
-function setMusic(on){musicEnabled=on;if(musicGain)musicGain.gain.setTargetAtTime(on?.105:.0001,audio.currentTime,.05);if(on){ensureAudio();startMusic()}else stopMusic();updateAudioButtons();saveSettings()}
+function stopMusic(){
+  if(!musicSource)return;musicOffset=(musicOffset+audio.currentTime-musicStartedAt)%musicBuffer.duration;
+  musicSource.stop();musicSource.disconnect();musicSource=null;
+}
+function duckMusic(){
+  if(!musicSource||!musicEnabled)return;const now=audio.currentTime;
+  musicGain.gain.cancelScheduledValues(now);musicGain.gain.setTargetAtTime(MUSIC_VOLUME*.45,now,.025);
+  musicGain.gain.setTargetAtTime(MUSIC_VOLUME,now+.45,.22);
+}
+function setMusic(on){musicEnabled=on;if(on)ensureAudio();else stopMusic();updateAudioButtons();saveSettings()}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopMusic();else if(musicEnabled&&audio)startMusic()});
 function setSfx(on){sfxEnabled=on;if(sfxGain&&audio)sfxGain.gain.setTargetAtTime(on?.72:.0001,audio.currentTime,.03);updateAudioButtons();saveSettings()}
 function updateAudioButtons(){
   const mb=document.getElementById('musicBtn'),sb=document.getElementById('sfxBtn');if(!mb||!sb)return;

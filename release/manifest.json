@@ -1,10 +1,10 @@
 {
-  "version": "14",
+  "version": "15",
   "files": [
     {
       "file": "index.html",
       "bytes": 13579,
-      "sha256": "5a1a2c15e9c231f0a1365166783514a596bc9889a94110bd0f1ac3125fbe79f3"
+      "sha256": "b5e9ff68c42e0fd4e4c0b0394c11c31cb6e3345be71abd01eaf36363f77ec29e"
     },
     {
       "file": ".nojekyll",
@@ -23,8 +23,8 @@
     },
     {
       "file": "src/audio.js",
-      "bytes": 5818,
-      "sha256": "a3f0ba6b203914a561ce7cf785ae2d898f82e317a65cf8a79d4b0f0afea83947"
+      "bytes": 6904,
+      "sha256": "1a4abe6a14f7ddc75b4323aeb223c6901e64a4f9dece73e5352ebd108c574410"
     },
     {
       "file": "src/terrain.js",
@@ -33,8 +33,8 @@
     },
     {
       "file": "src/turns.js",
-      "bytes": 5563,
-      "sha256": "5fa7cb000ee0fbee5df16fe75af10262f27ca7548a4e5fcced56856775a1b193"
+      "bytes": 5577,
+      "sha256": "eaf7b7b8fc3518984ed7f8e5c3b89adc418e196a31890f0cce85ae7b669a9095"
     },
     {
       "file": "src/ui.js",
@@ -248,8 +248,8 @@
     },
     {
       "file": "sw.js",
-      "bytes": 1753,
-      "sha256": "a1b63bfc3600084ac23c9ded0620754307a88cd6bdea6fecf301ba4f4e507aa6"
+      "bytes": 1798,
+      "sha256": "d9383de1fa8e5333c9e1faff1cc1d989e088a631736bd5025343da47f1f16241"
     },
     {
       "file": "ys-install.js",
@@ -297,9 +297,14 @@
       "sha256": "f49898a780d33e619b10570d6d812129e196d7b2a32ca67fc950ec2fed18ee02"
     },
     {
+      "file": "assets/audio/bouncy-tactical-groove.mp3",
+      "bytes": 1692441,
+      "sha256": "f13482d68e76573722f0a44e80ad229c1c011b416331fc14e60e8c61ff0b6ea5"
+    },
+    {
       "file": "offline/wormfront.html",
-      "bytes": 57559009,
-      "sha256": "c88264681f0cb9e5ed9208a16e348b0a5e11b78f2805b4b99ba9b8ab0823f8d0"
+      "bytes": 59816752,
+      "sha256": "6abfb4ecde0c0ac0f7591b5de41dc5a24662baeff80a455f66bfee2fac7ef323"
     }
   ]
 }

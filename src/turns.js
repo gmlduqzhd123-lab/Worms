@@ -45,7 +45,7 @@ function startGame(){
   buildWorld(+document.getElementById('mapSize').value);placeWorms();seedMines(initialMineCount);
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
   activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
-  selected='bazooka';ui.overlay.style.display='none';beginTurn()
+  selected='bazooka';ui.overlay.style.display='none';ensureAudio();beginTurn()
 }
 
 function beginTurn(){

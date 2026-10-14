@@ -1,6 +1,6 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage14'),site=path.join(evidence,'unpacked');
+const root=path.resolve(__dirname,'..'),evidence=path.join(root,'verification','stage15'),site=path.join(evidence,'unpacked');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'release','manifest.json'),'utf8'));
 const tests=[],errors=[],badResponses=[],remoteRequests=[];let browser;
 const pass=test=>tests.push({test,pass:true});
@@ -11,7 +11,7 @@ const server=http.createServer((req,res)=>{
 });
 (async()=>{
  for(const item of manifest.files){const data=fs.readFileSync(path.join(site,item.file));assert.equal(crypto.createHash('sha256').update(data).digest('hex'),item.sha256)}pass('All extracted ZIP files match the release manifest');
- assert.equal(manifest.files.length,60);assert.ok(fs.existsSync(path.join(site,'.nojekyll')));assert.ok(!fs.existsSync(path.join(site,'original')));assert.ok(!fs.existsSync(path.join(site,'versions')));pass('ZIP has nojekyll and runtime files, with originals and history excluded');
+ assert.equal(manifest.files.length,61);assert.ok(fs.existsSync(path.join(site,'.nojekyll')));assert.ok(!fs.existsSync(path.join(site,'original')));assert.ok(!fs.existsSync(path.join(site,'versions')));pass('ZIP has nojekyll and runtime files, with originals and history excluded');
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
  browser=await chromium.launch({headless:true,channel:'msedge'});
  async function track(page){page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('favicon.ico'))badResponses.push(r.url())});page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith(url))remoteRequests.push(r.url())})}

@@ -1,0 +1,6 @@
+Tool: built-in imagegen.imagegen
+Mode: reference-guided background generation; transparent_background=false
+Reference: original/artwork/extracted/source-01.png
+Output: assets/images/coast.png
+Prompt:
+Use the supplied gameplay concept as a STYLE REFERENCE to create ONE clean scenic background layer for a 2D side-view cartoon artillery game. Landscape 16:9. Bright hand-painted tropical island coast, vivid blue sky with soft white clouds, blue ocean in lower half, distant green rocky islands and one small lighthouse on the far right. Match the supplied illustration's crisp outlines, warm playful colors and slightly textured painterly shading. Scene must be distant scenery only: NO foreground terrain or platforms, NO characters, NO weapons or explosions, NO palm trees in foreground, NO HUD, NO text, NO buttons, NO borders, NO minimap, NO signs, NO flags. Open clear central area so procedural gameplay terrain and small characters will be rendered over it. Ocean horizon near 50 percent height. Preserve the supplied game's bright coastal mood.

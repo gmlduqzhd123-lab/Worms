@@ -1,0 +1,34 @@
+name: Publish Wormfront to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Prepare static site
+        run: |
+          mkdir -p _site/offline
+          cp index.html .nojekyll manifest.webmanifest sw.js ys-install.js ys-qr.js qr.svg og-image.jpg _site/
+          cp -R src styles assets icons _site/
+          cp dist/wormfront-stage14-offline.html _site/offline/wormfront.html
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
