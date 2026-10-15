@@ -1,0 +1,57 @@
+[
+  {
+    "suite": "browser",
+    "exit": 0,
+    "seconds": 52.4
+  },
+  {
+    "suite": "storage",
+    "exit": 0,
+    "seconds": 26.616
+  },
+  {
+    "suite": "tactics",
+    "exit": 0,
+    "seconds": 4.514
+  },
+  {
+    "suite": "release",
+    "exit": 0,
+    "seconds": 27.035
+  },
+  {
+    "suite": "artwork",
+    "exit": 0,
+    "seconds": 13.265
+  },
+  {
+    "suite": "themes",
+    "exit": 0,
+    "seconds": 26.338
+  },
+  {
+    "suite": "reference",
+    "exit": 0,
+    "seconds": 6.884
+  },
+  {
+    "suite": "audio",
+    "exit": 0,
+    "seconds": 10.714
+  },
+  {
+    "suite": "volume",
+    "exit": 0,
+    "seconds": 20.928
+  },
+  {
+    "suite": "home-volume",
+    "exit": 0,
+    "seconds": 14.416
+  },
+  {
+    "suite": "fixes",
+    "exit": 0,
+    "seconds": 3.477
+  }
+]

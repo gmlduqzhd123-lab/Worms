@@ -30,15 +30,17 @@ function healthAnimating(){return teams.some(t=>t.worms.some(w=>w.hpAnim&&gameNo
 function deathAnimating(w){return !!(w.death&&gameNow<w.death.end)}
 function deathPending(){return teams.some(t=>t.worms.some(deathAnimating))}
 function presentationPending(){return !!(shotFocus&&gameNow-shotFocus.at<3000)||healthAnimating()||injuryPending()||deathPending()}
-let combatTasks=[],taskSequence=0,retreatDuration=2.5,pendingEmissions=0,settledSince=null;
+let combatTasks=[],taskSequence=0,retreatDuration=2.5,pendingEmissions=0,settledSince=null,deploymentRetreatUntil=0;
 function scheduleCombat(fn,delay){const id=++taskSequence;combatTasks.push({id,at:gameNow+delay,fn});return id}
 function cancelCombat(id){combatTasks=combatTasks.filter(t=>t.id!==id)}
 function runCombatTasks(){const due=combatTasks.filter(t=>t.at<=gameNow);combatTasks=combatTasks.filter(t=>t.at>gameNow);for(const t of due){if(!gameOver)t.fn()}}
-function combatUnsettled(){return projectiles.length>0||walkers.length>0||pendingEmissions>0||mines.some(m=>m.armed&&m.timer>0)||teams.some(t=>t.worms.some(w=>w.alive&&!w.onGround&&Math.abs(w.vy)>.75))}
-function commitAttack(sec=2.5){attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
+function deploymentRetreatActive(){return attackCommitted&&gameNow<deploymentRetreatUntil}
+function combatUnsettled(){return deploymentRetreatActive()||projectiles.length>0||walkers.length>0||pendingEmissions>0||mines.some(m=>m.armed&&m.timer>0)||teams.some(t=>t.worms.some(w=>w.alive&&!w.onGround&&Math.abs(w.vy)>.75))}
+function commitAttack(sec=2.5){deploymentRetreatUntil=0;attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
+function beginDeploymentRetreat(sec){commitAttack(0);deploymentRetreatUntil=gameNow+sec*1000}
 function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()||presentationPending()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
 function clearInput(){heldControls.clear();cameraPointers.clear();dragCamera=null;for(const k of Object.keys(keys))keys[k]=false;charging=false;ui.powerBox.classList.remove('show')}
-function setPaused(on){if(!started||gameOver)return;paused=on;physicsAccumulator=0;document.getElementById('pauseBtn').textContent=paused?'▶ 계속하기':'⏸ 일시정지';clearInput();if(paused)stopMusic();else if(musicEnabled)startMusic();updateHUD()}
+function setPaused(on){if(!started||gameOver)return;paused=on;physicsAccumulator=0;document.getElementById('pauseBtn').textContent=paused?'▶ 계속하기':'⏸ 일시정지';clearInput();if(paused){stopMusic();stopSFX()}else if(musicEnabled)startMusic();updateHUD()}
 const keys={};
 const G=.225,MOVE=1.42,JUMP=-5.15,FALLMAX=9.5;
 

@@ -1,8 +1,10 @@
 'use strict';
 
 /* ---------------- Input ---------------- */
+function nativeKeyboardTarget(e){return e.target.closest?.('input,select,textarea,[contenteditable="true"]')||([' ','Enter'].includes(e.key)&&e.target.closest?.('button,summary,a[href]'))}
 addEventListener('keydown',e=>{
   if(e.target.closest?.('#audioControls,#homeAudioControls'))return;
+  if(nativeKeyboardTarget(e))return;
   if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open)return;
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
@@ -12,7 +14,10 @@ addEventListener('keydown',e=>{
 });
 addEventListener('blur',()=>{if(started&&!gameOver)setPaused(true);else clearInput()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&started&&!gameOver)setPaused(true)});
-addEventListener('keyup',e=>{if(e.target.closest?.('#audioControls,#homeAudioControls')){clearInput();return}const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false;if(e.key===' ')fireEnd()});
+addEventListener('keyup',e=>{if(e.target.closest?.('#audioControls,#homeAudioControls')||nativeKeyboardTarget(e)){clearInput();return}const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false;if(e.key===' ')fireEnd()});
+document.addEventListener('focusin',e=>{if(e.target.closest?.('input,select,textarea,button,summary,a[href],[contenteditable="true"]'))clearInput()});
+// Pointer selection returns Space/Enter to the battlefield; Tab focus keeps native activation.
+document.addEventListener('click',e=>{const button=e.target.closest?.('button');if(button&&e.detail>0&&document.activeElement===button)button.blur()});
 
 const cameraPointers=new Map();let dragCamera=null,pinchDistance=0;
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -33,7 +38,7 @@ canvas.addEventListener('pointermove',e=>{
 function endCameraPointer(e,cancelled=false){
   const drag=dragCamera;cameraPointers.delete(e.pointerId);if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);
   if(!cancelled&&drag&&!drag.moved&&targetMode&&!isCPU()){const p=worldFromScreen(e.clientX,e.clientY);useTarget(p.x,p.y)}
-  if(cameraPointers.size===0){dragCamera=null;pinchDistance=0}else if(dragCamera){dragCamera.moved=true}
+  if(cameraPointers.size===0){dragCamera=null;pinchDistance=0}else if(cameraPointers.size===1){const point=[...cameraPointers.values()][0];dragCamera={x:point.x,y:point.y,startX:point.x,startY:point.y,moved:true};pinchDistance=0}else if(dragCamera){dragCamera.moved=true}
 }
 canvas.addEventListener('pointerup',e=>endCameraPointer(e));canvas.addEventListener('pointercancel',e=>endCameraPointer(e,true));
 mini.addEventListener('pointerdown',e=>{const r=mini.getBoundingClientRect();focusOn((e.clientX-r.left)/r.width*WW,(e.clientY-r.top)/r.height*WH,true);camera.manualUntil=Infinity});

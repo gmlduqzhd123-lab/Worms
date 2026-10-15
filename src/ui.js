@@ -5,6 +5,7 @@ function battlePhase(){
   if(!started)return {id:'ready',text:'전투 준비',timer:String(turnSec)};
   if(paused)return {id:'paused',text:'일시정지',timer:'Ⅱ'};
   if(turnEnding)return {id:'handoff',text:'다음 팀으로 교대',timer:'↔'};
+  if(deploymentRetreatActive())return {id:'retreat',text:'설치한 폭탄에서 벗어나세요',timer:((deploymentRetreatUntil-gameNow)/1000).toFixed(1)};
   if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':deathPending()?'사망 연출 중':'충돌 화면 확인',timer:'…'}};
   if(retreatUntil>gameNow)return {id:'retreat',text:'안전한 곳으로 후퇴',timer:((retreatUntil-gameNow)/1000).toFixed(1)};
   if(charging)return {id:'charge',text:'발사력 '+Math.round(clamp((gameNow-chargeAt)/1600,0,1)*100)+'%',timer:String(Math.max(0,Math.ceil(turnLeft)))};

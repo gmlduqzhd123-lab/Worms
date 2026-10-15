@@ -1,0 +1,51 @@
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const {chromium}=require('playwright');
+const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),baseline=process.argv.includes('--baseline');
+const out=path.join(root,'verification',live?'live-stage18':'stage18');fs.mkdirSync(out,{recursive:true});
+const fixture=`
+shotFocus=null;injuredWorms=[];injuryZoom=null;cameraZoom=1;overview=false;camera.manualUntil=0;clearInput();physicsAccumulator=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;
+if(typeof deploymentRetreatUntil!=='undefined')deploymentRetreatUntil=0;
+projectiles=[];walkers=[];mines=[];crates=[];girders=[];rope=null;jetpack=false;particles=[];explosions=[];damageLabels=[];
+WW=2600;WH=900;waterY=780;wind=0;terrain.width=WW;terrain.height=WH;tctx.clearRect(0,0,WW,WH);tctx.fillStyle='#527d3b';tctx.fillRect(0,500,WW,400);refreshTerrainCollision();
+teams.forEach((t,i)=>{t.ammo={...defaultAmmo};t.worms=[0,1].map(j=>({team:i,idx:j,name:'test-'+i+'-'+j,x:i?1400+j*700:300+j*600,y:491,vx:0,vy:0,r:9,hp:100,alive:true,onGround:true,hurt:0}));});turnWorm=current();ui.overlay.style.display='none';updateHUD();`;
+let server,browser;const results=[],errors=[];
+const step=`function step(seconds){for(let i=0;i<Math.ceil(seconds*60);i++)advanceFrame(FIXED_DT)}`;
+(async()=>{
+ let url='https://gmlduqzhd123-lab.github.io/Worms/';
+ if(!live){const sourceRoot=baseline?path.join(root,'versions','stage17'):root;server=http.createServer((req,res)=>{const relative=new URL(req.url,'http://local').pathname.slice(1)||'index.html',file=path.resolve(sourceRoot,relative);if(!file.startsWith(sourceRoot+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return}res.setHeader('Content-Type',require('./mime.cjs')(file));res.end(fs.readFileSync(file))});await new Promise(r=>server.listen(0,'127.0.0.1',r));url='http://127.0.0.1:'+server.address().port+'/'}
+ browser=await chromium.launch({headless:true,channel:'msedge'});const context=await browser.newContext({viewport:{width:1280,height:720}});await context.addInitScript(()=>{window.requestAnimationFrame=()=>0});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(url);
+ const run=code=>page.evaluate(`(()=>{${step}\n${code}})()`),check=async(name,code)=>{assert.equal(await run(code),true,name);results.push({test:name,pass:true})};
+ await page.locator('#inputA').fill('Team');await page.locator('#inputA').press('End');await page.keyboard.press('Space');await page.keyboard.type('A');const typed=await page.locator('#inputA').inputValue();assert.equal(typed,baseline?'TeamA':'Team A');results.push({test:baseline?'Reproduced: home team name Space is blocked':'Home team name accepts spaces with native keyboard input',pass:true,observed:typed});
+ if(baseline){
+  for(const type of ['mine','dynamite']){const result=await run(`${fixture}selected='${type}';fireStart();keys.a=true;step(3.2);return{x:turnWorm.x,hp:turnWorm.hp,turnLocked,activeTeam}`);assert.ok(result.hp<100);results.push({test:'Reproduced: '+type+' placement prevents escape and damages owner',pass:true,observed:result})}
+  const stuck=await run(`${fixture}selected='teleport';fireStart();useTarget(600,740);return{blocked:bodyBlocked(turnWorm,turnWorm.x,turnWorm.y),y:turnWorm.y,ammo:teams[0].ammo.teleport}`);assert.equal(stuck.blocked,true);results.push({test:'Reproduced: deep terrain teleport embeds the worm',pass:true,observed:stuck});
+ }else{
+  await check('Placed mine allows retreat, arms after grace, does not auto-damage moving owner',`${fixture}selected='mine';fireStart();const start=turnWorm.x;keys.a=true;step(2.8);return turnWorm.x<start-90&&turnWorm.hp===100&&mines[0].armed&&mines[0].timer===0`);
+  await check('Dynamite allows escape but blocks a second attack until explosion resolves',`${fixture}selected='dynamite';fireStart();const start=turnWorm.x;keys.a=true;selected='bazooka';fireStart();step(2.7);const safe=turnWorm.x<start-90&&turnWorm.hp===100&&projectiles.length===1&&projectiles[0].type==='dynamite'&&activeTeam===0&&turnLocked&&!charging;step(.6);return safe&&turnWorm.hp===100&&activeTeam===0`);
+  await check('Idle mine owner is vulnerable after the arming grace',`${fixture}selected='mine';fireStart();step(1);const grace=turnWorm.hp===100&&mines[0].timer===0;step(2);return grace&&turnWorm.hp<100`);
+  await check('Placement timers freeze while paused and resume on the game clock',`${fixture}selected='dynamite';fireStart();step(.4);const before=projectiles[0].life,until=deploymentRetreatUntil,now=gameNow;setPaused(true);step(5);const frozen=gameNow===now&&projectiles[0].life===before&&deploymentRetreatUntil===until;setPaused(false);keys.a=true;step(1);return frozen&&projectiles[0].life<before&&turnWorm.hp===100`);
+  await check('Placement retreat supports jumping and the ordinary attack remains locked',`${fixture}selected='dynamite';fireStart();jump();const jumps=turnWorm.vy<0&&!turnWorm.onGround;${fixture}spawnBallistic('bazooka',turnWorm,.3,-45,1);const x=turnWorm.x;keys.a=true;step(.2);return jumps&&turnWorm.x===x`);
+  await check('Deep terrain teleport finds a supported clear position',`${fixture}selected='teleport';fireStart();useTarget(600,740);return teams[0].ammo.teleport===1&&!bodyBlocked(turnWorm,turnWorm.x,turnWorm.y)&&pointBlocked(turnWorm.x,turnWorm.y+turnWorm.r+.2)&&turnWorm.y<500`);
+  await check('Out-of-world teleport is rejected without ammo loss or relocation',`${fixture}selected='teleport';fireStart();useTarget(-120,500);const left=turnWorm.x===300&&teams[0].ammo.teleport===2;useTarget(WW+120,500);return left&&turnWorm.x===300&&teams[0].ammo.teleport===2&&targetMode==='teleport'`);
+  await check('Teleport refuses occupied destinations and keeps targeting active',`${fixture}selected='teleport';fireStart();useTarget(teams[1].worms[0].x,500);return turnWorm.x===300&&teams[0].ammo.teleport===2&&targetMode==='teleport'`);
+  await check('A restarted match clears the temporary placement retreat',`${fixture}selected='dynamite';fireStart();document.getElementById('mode').value='pvp';startGame();return !attackCommitted&&!turnLocked&&deploymentRetreatUntil<=gameNow&&turnNo===1`);
+  await run(fixture);await page.locator('[data-w="grenade"]').focus();await page.keyboard.press('Space');assert.deepEqual(await run('return {selected,charging,projectiles:projectiles.length,turnNo}'),{selected:'grenade',charging:false,projectiles:0,turnNo:1});results.push({test:'Space on a keyboard-focused weapon selects it without firing',pass:true});
+  await page.locator('[data-w="bazooka"]').focus();await page.keyboard.press('Enter');assert.equal(await run('return selected===\'bazooka\'&&!turnEnding&&turnNo===1'),true);results.push({test:'Enter on a keyboard-focused weapon selects it without ending the turn',pass:true});
+  await page.locator('#pauseBtn').focus();await page.keyboard.press('Space');assert.equal(await run('return paused&&!charging&&projectiles.length===0'),true);await page.keyboard.press('Space');assert.equal(await run('return !paused&&!charging'),true);results.push({test:'Keyboard pause button toggles pause without firing',pass:true});
+  await page.click('[data-w="grenade"]');await page.keyboard.down('Space');assert.equal(await run('return charging'),true);await page.keyboard.up('Space');assert.equal(await run('return projectiles.length===1&&projectiles[0].type===\'grenade\''),true);results.push({test:'Pointer weapon selection still allows subsequent keyboard firing',pass:true});
+ }
+ const touchContext=await browser.newContext({viewport:{width:844,height:390},isMobile:true,hasTouch:true});await touchContext.addInitScript(()=>{window.requestAnimationFrame=()=>0});const mobile=await touchContext.newPage();mobile.on('pageerror',e=>errors.push(e.message));await mobile.goto(url);await mobile.evaluate(`(()=>{${fixture}camera.x=600;camera.y=0;selected='teleport';fireStart()})()`);
+ const cdp=await touchContext.newCDPSession(mobile);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:200,y:180,id:1},{x:400,y:180,id:2}]});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:180,y:180,id:1},{x:420,y:180,id:2}]});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[{x:420,y:180,id:2}]});
+ const pinch=await mobile.evaluate(()=>({x:camera.x,zoom:cameraZoom,pointers:[...cameraPointers],dragCamera}));
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:170,y:180,id:1}]});
+ await mobile.waitForTimeout(80);
+ const drag=await mobile.evaluate(()=>({delta:camera.x,zoom:cameraZoom,ammo:teams[0].ammo.teleport,target:targetMode,pointers:[...cameraPointers],dragCamera}));drag.delta-=pinch.x;
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ if(baseline)assert.ok(drag.delta>100,JSON.stringify({pinch,drag}));else{assert.ok(Math.abs(drag.delta-10/pinch.zoom)<1,JSON.stringify({pinch,drag}));assert.equal(drag.ammo,2);assert.equal(drag.target,'teleport')}
+ results.push({test:baseline?'Reproduced: releasing one pinch finger makes the next drag jump':'Trusted pinch-to-one-finger drag stays continuous and does not teleport',pass:true,observed:drag});await touchContext.close();
+ assert.deepEqual(errors,[]);results.push({test:'No browser JavaScript errors',pass:true});
+ fs.writeFileSync(path.join(out,baseline?'fixes-before.json':'fixes.json'),JSON.stringify({url,baseline,checks:results.length,results},null,2));console.log(JSON.stringify({checks:results.length,results},null,2));
+})().catch(error=>{console.error(error);process.exitCode=1}).finally(async()=>{if(browser)await browser.close();if(server){server.closeAllConnections();await new Promise(r=>server.close(r))}});

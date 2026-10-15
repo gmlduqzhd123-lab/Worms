@@ -18,7 +18,7 @@ function update(dt,ts){
   updateDeaths();resolveCombat();
   if(charging)ui.power.style.width=clamp((gameNow-chargeAt)/1600,0,1)*100+'%';
   if((!living(0).length||!living(1).length)&&!attackCommitted&&!combatUnsettled()&&!presentationPending())finishGame();
-  updateEffects(dt);updateCamera(dt)
+  updateEffects(dt);updateCamera(dt);updateSFX(dt)
 }
 
 function advanceFrame(elapsed){

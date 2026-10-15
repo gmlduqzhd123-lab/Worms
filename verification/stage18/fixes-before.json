@@ -1,0 +1,71 @@
+{
+  "url": "http://127.0.0.1:54645/",
+  "baseline": true,
+  "checks": 6,
+  "results": [
+    {
+      "test": "Reproduced: home team name Space is blocked",
+      "pass": true,
+      "observed": "TeamA"
+    },
+    {
+      "test": "Reproduced: mine placement prevents escape and damages owner",
+      "pass": true,
+      "observed": {
+        "x": 203.69493486797364,
+        "hp": 63,
+        "turnLocked": true,
+        "activeTeam": 0
+      }
+    },
+    {
+      "test": "Reproduced: dynamite placement prevents escape and damages owner",
+      "pass": true,
+      "observed": {
+        "x": 260.9588686025617,
+        "hp": 38,
+        "turnLocked": true,
+        "activeTeam": 0
+      }
+    },
+    {
+      "test": "Reproduced: deep terrain teleport embeds the worm",
+      "pass": true,
+      "observed": {
+        "blocked": true,
+        "y": 610,
+        "ammo": 1
+      }
+    },
+    {
+      "test": "Reproduced: releasing one pinch finger makes the next drag jump",
+      "pass": true,
+      "observed": {
+        "delta": 191.66666666666674,
+        "zoom": 1.2,
+        "ammo": 2,
+        "target": "teleport",
+        "pointers": [
+          [
+            2,
+            {
+              "x": 170,
+              "y": 180
+            }
+          ]
+        ],
+        "dragCamera": {
+          "x": 170,
+          "y": 180,
+          "startX": 400,
+          "startY": 180,
+          "moved": true
+        }
+      }
+    },
+    {
+      "test": "No browser JavaScript errors",
+      "pass": true
+    }
+  ]
+}

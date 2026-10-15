@@ -3,7 +3,7 @@
 function damage(w,amount,kx=0,ky=0){
   if(!w.alive)return;const shown=displayedHP(w),before=w.hp;w.hp=Math.max(0,w.hp-Math.max(0,Math.round(amount)));const lost=before-w.hp;
   if(lost>0){if(!injuredWorms.includes(w))injuredWorms.push(w);w.hpAnim={from:shown,to:w.hp,at:gameNow,duration:clamp((shown-w.hp)*45,900,4000)+350};if(!shotFocus)rememberImpact(w.x,w.y)}
-  if(lost>0)damageLabels.push({x:w.x+22,y:w.y-85,amount:lost,life:1.4,color:teams[w.team].color});
+  if(lost>0){damageLabels.push({x:w.x+22,y:w.y-85,amount:lost,life:1.4,color:teams[w.team].color});playSFX('hurt')}
   w.vx+=kx;w.vy+=ky;if(kx||ky){w.knockTime=.65;w.onGround=false}w.hurt=1;
   if(w.hp<=0){w.alive=false;const at=w.hpAnim.at+w.hpAnim.duration;w.death={at,burstAt:at+900,end:at+1900,burst:false}}updateHUD()
 }
@@ -20,9 +20,9 @@ function carve(x,y,r){
   tctx.fillStyle=g;tctx.beginPath();tctx.arc(x,y,r,0,Math.PI*2);tctx.fill();tctx.restore();refreshTerrainCollision(x-r-2,y-r-2,r*2+4,r*2+4)
 }
 function burst(x,y,color,n=18){for(let i=0;i<n;i++){const a=rand(0,Math.PI*2),s=rand(1,5);particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-rand(0,2),life:rand(.35,1),color,size:rand(2,5)})}}
-function explode(x,y,r=58,maxD=55){
+function explode(x,y,r=58,maxD=55,soundType=null){
   rememberImpact(x,y);
-  boomSound();carve(x,y,r*.77);cameraShake=Math.max(cameraShake,Math.min(18,r*.18));explosions.push({x,y,max:r,life:1});burst(x,y,'#ffc84f',30);
+  boomSound(r,soundType);carve(x,y,r*.77);cameraShake=Math.max(cameraShake,Math.min(18,r*.18));explosions.push({x,y,max:r,life:1});burst(x,y,'#ffc84f',30);
   for(const t of teams)for(const w of t.worms){if(!w.alive)continue;const d=dist(x,y,w.x,w.y);if(d<r){const f=1-d/r,n=Math.max(.001,d);damage(w,maxD*f,(w.x-x)/n*f*4.4,(w.y-y)/n*f*4.4-1.4*f)}}
   for(const m of mines)if(m.armed&&dist(x,y,m.x,m.y)<r*.72)m.timer=.12
 }

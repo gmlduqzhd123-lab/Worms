@@ -2,10 +2,10 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const evidence=path.join(root,'verification','stage17');fs.mkdirSync(evidence,{recursive:true});
+const evidence=path.join(root,'verification','stage18');fs.mkdirSync(evidence,{recursive:true});
 const injection=`
 function resetCheck(){
- shotFocus=null;injuredWorms=[];injuryZoom=null;
+ shotFocus=null;injuredWorms=[];injuryZoom=null;deploymentRetreatUntil=0;
  cameraZoom=1;overview=false;camera.manualUntil=0;heldControls.clear();cameraPointers.clear();dragCamera=null;physicsAccumulator=0;physicsSteps=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;
  projectiles=[];walkers=[];mines=[];crates=[];girders=[];rope=null;jetpack=false;particles=[];explosions=[];keys.a=keys.d=keys.w=keys.s=false;
  WW=2600;WH=900;waterY=780;wind=0;terrain.width=WW;terrain.height=WH;tctx.clearRect(0,0,WW,WH);tctx.fillStyle='#527d3b';tctx.fillRect(0,500,WW,400);refreshTerrainCollision();

@@ -33,9 +33,9 @@ function current(){
 function isCPU(){return mode==='cpu'&&activeTeam===1}
 
 function startGame(){
-  injuredWorms=[];injuryZoom=null;
+  injuredWorms=[];injuryZoom=null;deploymentRetreatUntil=0;
   cpuWalk=null;cpuStatus='';saveSettings();beginMatchRecord();
-  ensureAudio();playSFX('turn');
+  stopSFX();ensureAudio();
   cameraZoom=1;overview=false;physicsAccumulator=0;combatTasks=[];pendingEmissions=0;turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();aiBusy=false;
   mode=document.getElementById('mode').value;difficulty=document.getElementById('difficulty').value;
   teams[0].name=document.getElementById('inputA').value.trim()||'플레이어';teams[1].name=document.getElementById('inputB').value.trim()||(mode==='cpu'?'CPU':'블루 팀');
@@ -50,6 +50,7 @@ function startGame(){
 
 function beginTurn(){
   if(gameOver)return;if(!living(0).length||!living(1).length){finishGame();return}
+  deploymentRetreatUntil=0;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate();
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
@@ -68,7 +69,7 @@ function startRetreat(sec=2.6){commitAttack(sec)}
 function finishGame(){
   if(gameOver)return;
   cpuWalk=null;cpuStatus='';gameOver=true;turnLocked=true;clearInput();combatTasks=[];pendingEmissions=0;cancelCombat(aiTimer);const a=living(0).length,b=living(1).length;
-  const msg=a===b?'무승부!':a>b?`${teams[0].name} 승리!`:`${teams[1].name} 승리!`;recordMatchResult();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
+  const msg=a===b?'무승부!':a>b?`${teams[0].name} 승리!`:`${teams[1].name} 승리!`;recordMatchResult();stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
   const finishedMatch=matchId;
   setTimeout(()=>{if(!gameOver||matchId!==finishedMatch)return;document.querySelector('#panel h1').textContent=msg;document.querySelector('#panel p').textContent='전투 종료. 다시 시작하면 새로운 초대형 전장이 만들어집니다.';ui.overlay.style.display='flex'},2100)
 }
