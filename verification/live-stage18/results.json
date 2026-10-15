@@ -1,0 +1,399 @@
+{
+  "url": "https://gmlduqzhd123-lab.github.io/Worms/",
+  "checkedAt": "2026-10-15T06:22:03.423Z",
+  "browser": "155.0.4283.45",
+  "tests": [
+    {
+      "test": "All 60 public runtime files return HTTP 200 and match the commit; nojekyll control file is tracked",
+      "pass": true
+    },
+    {
+      "test": "Public desktop home loads stage 18 with 17 scripts",
+      "pass": true
+    },
+    {
+      "test": "Public site loads 21 artwork files, 10 character choices and 10 item icons",
+      "pass": true
+    },
+    {
+      "test": "Public merged QR, installation helper and active service worker remain available",
+      "pass": true
+    },
+    {
+      "test": "Public default roster has four characters and map-making control is absent",
+      "pass": true
+    },
+    {
+      "test": "Public new game uses player/NPC names and places mines away from all spawn points",
+      "pass": true
+    },
+    {
+      "test": "Public real-time first-turn idle stays at full HP for five seconds with 18 initial mines",
+      "pass": true
+    },
+    {
+      "test": "Public 햇살 해안 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 폐허 도시 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 사막 협곡 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 군사 해안 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 초록 언덕 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 오로라 설원 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 고철 야적장 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 용암 성채 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 달 기지 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public 노을 섬 preview, battle and saved selection work",
+      "pass": true
+    },
+    {
+      "test": "Public game start and guide pause/resume work",
+      "pass": true
+    },
+    {
+      "test": "Public camera overview and worm follow work",
+      "pass": true
+    },
+    {
+      "test": "Public automatic camera retains the last impact view after the projectile disappears",
+      "pass": true
+    },
+    {
+      "test": "Public grenade shows attack-resolution phase and live fuse countdown, then advances turn",
+      "pass": true
+    },
+    {
+      "test": "Public shotgun fires twice and advances turn",
+      "pass": true
+    },
+    {
+      "test": "Public settings restore and history dialog opens",
+      "pass": true
+    },
+    {
+      "test": "Public CPU turn returns control to the player",
+      "pass": true
+    },
+    {
+      "test": "Public deterministic lethal-damage fixture shows gradual HP countdown and completes at zero",
+      "pass": true
+    },
+    {
+      "test": "Public controlled knockback and falling physics retain both victims and readable HP for 100 frames at 1280x720",
+      "pass": true
+    },
+    {
+      "test": "Public controlled knockback and falling physics retain both victims and readable HP for 100 frames at 320x568",
+      "pass": true
+    },
+    {
+      "test": "Public controlled knockback and falling physics retain both victims and readable HP for 100 frames at 390x844",
+      "pass": true
+    },
+    {
+      "test": "Public controlled knockback and falling physics retain both victims and readable HP for 100 frames at 844x390",
+      "pass": true
+    },
+    {
+      "test": "Public lethal victims remain visible through the last HP zero hold",
+      "pass": true
+    },
+    {
+      "test": "Public death motion follows HP countdown before any farewell explosion",
+      "pass": true
+    },
+    {
+      "test": "Public small farewell bursts fire once without changing terrain or other HP",
+      "pass": true
+    },
+    {
+      "test": "Public camera and turn wait through the farewell tail, then hand off normally",
+      "pass": true
+    },
+    {
+      "test": "Public mobile touch start/pause and portrait control layout work",
+      "pass": true
+    },
+    {
+      "test": "Public mobile guide opens and closes",
+      "pass": true
+    },
+    {
+      "test": "Public standalone HTML starts without external scripts or CSS",
+      "pass": true
+    },
+    {
+      "test": "Public browser JS and missing-resource errors are zero",
+      "pass": true
+    }
+  ],
+  "hashes": [
+    {
+      "file": "index.html",
+      "sha256": "55645a4b80787d593fc7349efd37fdf2b2aba8dbae930f65b0d09febb980781f"
+    },
+    {
+      "file": "styles/game.css",
+      "sha256": "51a611f56fb2091e229eda0d721d59c84d0dabd2cd7438d13b91ca7649fa055f"
+    },
+    {
+      "file": "src/state.js",
+      "sha256": "ca2512dfecb873388f3fa4abaf2f163c8b606398509dede6eaa6323eb8144ad4"
+    },
+    {
+      "file": "src/audio.js",
+      "sha256": "ff81727691d972ea453a76d942299c15da35f1104a9c455b33762f75b7ebc432"
+    },
+    {
+      "file": "src/terrain.js",
+      "sha256": "eafa67f13a8f6dfbda70de18274e844547c59336d6f3d6adecdaa4662057ca49"
+    },
+    {
+      "file": "src/turns.js",
+      "sha256": "2fabebf8d7aeb58fc3c944f2da7ba2dc06263bda61ecde727c88c7cb81a9c9ee"
+    },
+    {
+      "file": "src/ui.js",
+      "sha256": "55cd1f552a78a88387b8c3c2fcd5308b1784510778d58fd4fe8c0794cc7d646e"
+    },
+    {
+      "file": "src/combat.js",
+      "sha256": "54f0bbff49e03c51114305af4ea5cb6564a349de4beedaf6cc3a2eb1dbf6bbaa"
+    },
+    {
+      "file": "src/weapons.js",
+      "sha256": "69a0f7f3ebcdfafef50cae07691e2248deeb93e019874b464cfaf64e9ca3e380"
+    },
+    {
+      "file": "src/physics.js",
+      "sha256": "8a4c183a0cc54cd6f5b473435e440e8941a010fa63f4200425767be59ecbf002"
+    },
+    {
+      "file": "src/ai.js",
+      "sha256": "62e13cfd461418443823adea7cd734c87769c7759753ccbde9fee7d4c4b7f1fd"
+    },
+    {
+      "file": "src/render.js",
+      "sha256": "503431588987277304b8b99338e8cbf46faefb9fb12271472046120b98769777"
+    },
+    {
+      "file": "src/loop.js",
+      "sha256": "0837fcca1854c0b13f7cab7c33023213c9e176900cd02bf0d912be33af1b4201"
+    },
+    {
+      "file": "src/input.js",
+      "sha256": "c01e8afe132e8d1ef39a46df3f6874e19f22e494ddd7f3a06437d54b58d76f5d"
+    },
+    {
+      "file": "src/graphics.js",
+      "sha256": "71686f7c4ea96715410c78b9e4c5595ce1d96bfcdcb00cadd5306d9054f95a5d"
+    },
+    {
+      "file": "src/persistence.js",
+      "sha256": "f6549749e7ae656fe8e370f748cb3abf6ac9e3e48b2764268dce4a5c89a5b5ac"
+    },
+    {
+      "file": "src/boot.js",
+      "sha256": "0926c5f58970709b94155857c495110dd7e47c6318c9279238201dbbdecc03d6"
+    },
+    {
+      "file": "assets/images/coast.png",
+      "sha256": "a5354848c2a30405b3cfec400c12053967441d1f23ee45a9b2393f0b99c8ece6"
+    },
+    {
+      "file": "assets/images/item-bazooka.png",
+      "sha256": "bc53e131121c31fc713a92c74aeadbdb63f46c14e6139f9d708dbef0da504dc3"
+    },
+    {
+      "file": "assets/images/item-dynamite.png",
+      "sha256": "65d413b2c7ce420f6e5e0d50a03659c3102ca0dc91868c519801628b306adc01"
+    },
+    {
+      "file": "assets/images/item-grenade.png",
+      "sha256": "eb01c31734af554bc5108a227d4643470878bd58015766f7da30623de1c17e7b"
+    },
+    {
+      "file": "assets/images/item-jetpack.png",
+      "sha256": "6f4dc0059743c95e86c5d2d20477f602e3300c42a037a5e4d07395125dd573d4"
+    },
+    {
+      "file": "assets/images/item-mine.png",
+      "sha256": "fda8749bef5a465cae7085fda4d7bbaf0ee3c086fb93993fef3c69a59ea378f1"
+    },
+    {
+      "file": "assets/images/item-punch.png",
+      "sha256": "b03f2bd25da58fd1cce6c80ee6402a042bf8117d3bab3f41a25539079f108168"
+    },
+    {
+      "file": "assets/images/item-rope.png",
+      "sha256": "d96c30e56ac81b05794447157570d7cca3bede1c956415eb260acfe1d20dabdd"
+    },
+    {
+      "file": "assets/images/item-sacred.png",
+      "sha256": "5b2de7d28e0010c1b025c82b425c33b44cd7f0784e5cfc719596d819aff4f208"
+    },
+    {
+      "file": "assets/images/item-sheep.png",
+      "sha256": "b8b89e0464a043c0079263a60b35bda3928ad3126a84feb80fc4460f35fbcd58"
+    },
+    {
+      "file": "assets/images/item-teleport.png",
+      "sha256": "aede33187da67fa8decf3578e2ffe73ccb6f756e5bc0a9c23715425993dadd7c"
+    },
+    {
+      "file": "assets/images/theme-canyon.png",
+      "sha256": "744e7c52afd5d371b3a720c21fb6ffac379b91032bf3d7c15deb7dca0525df77"
+    },
+    {
+      "file": "assets/images/theme-castle.png",
+      "sha256": "f571d5c18e0d11cc9b81d36e2de358601a32e76a18d3be83dda8fcc72181eaad"
+    },
+    {
+      "file": "assets/images/theme-fort.png",
+      "sha256": "f461c76cc8516417b37f09e6a744c167639bb24336d8caeed0578c4addce0b30"
+    },
+    {
+      "file": "assets/images/theme-meadow.png",
+      "sha256": "f8ebe4ec79b1e645059b321c66ccbc81ab9177a5450da99bbf2b0839d4fc072a"
+    },
+    {
+      "file": "assets/images/theme-moon.png",
+      "sha256": "a3df04e8d176ae9a5da8ea328b8c9ff7007e05312f7274ecc246dc5a5d21d684"
+    },
+    {
+      "file": "assets/images/theme-ruins.png",
+      "sha256": "c893a7022d33785088f7d3cf5d070e88913bfcd9a2705bad7e084256009d064a"
+    },
+    {
+      "file": "assets/images/theme-scrap.png",
+      "sha256": "23df6e68914cb4bc63a2ddae983e8a8d4297385dba86db88f4326135c43ec419"
+    },
+    {
+      "file": "assets/images/theme-snow.png",
+      "sha256": "12c39ae7746b2b6ce405765470d87b5e11d89d4ff0ea169e017b34e91c591cac"
+    },
+    {
+      "file": "assets/images/theme-sunset.png",
+      "sha256": "4fd1042d6fb3a8d58867ac9dd36584183c8fe1f4b37d4e5f606821e423da4d75"
+    },
+    {
+      "file": "assets/images/worm-astronaut.png",
+      "sha256": "9c09d860543c99d29e08919602b175c17ef87616226bbc12256b171792c2d50b"
+    },
+    {
+      "file": "assets/images/worm-cowboy.png",
+      "sha256": "7abb7af57a56e6976ffe2056ac08ed9d0d6769dfda1d5eae8810ae8d8aac9cd4"
+    },
+    {
+      "file": "assets/images/worm-knight.png",
+      "sha256": "7f6e5d234be56708cbf4972efdef06db202c80c4a88288266a3cfbb0f15ace14"
+    },
+    {
+      "file": "assets/images/worm-miner.png",
+      "sha256": "3b32ec8c3b8d80d5901a94a257a8ee3a999ece7a2a12c9301b94c8084fe0510b"
+    },
+    {
+      "file": "assets/images/worm-ninja.png",
+      "sha256": "39d1c0c3d56dbc224dfcb862f9e7b44f8f3880e24b112036b1d4af7d5fee0d0b"
+    },
+    {
+      "file": "assets/images/worm-pilot.png",
+      "sha256": "12b67f5021bd5a47d2b9f6c096b26c029e3817ec761789b4c921a3087412c4e2"
+    },
+    {
+      "file": "assets/images/worm-pirate.png",
+      "sha256": "919b67ff030ee1da8ec2b96d5e184cb7bf6444a15c268793d8fe5da944e7a548"
+    },
+    {
+      "file": "assets/images/worm-scientist.png",
+      "sha256": "2d0f4d1caf88bb59486d9b9bee53eefe1447536bf1c9e1bae651f5a9f7c5d0ab"
+    },
+    {
+      "file": "assets/images/worm-soldier.png",
+      "sha256": "b2d24668533a25e2763003ef4a5b1547cc5fffdcc8f50971bd7eb2db8314feed"
+    },
+    {
+      "file": "assets/images/worm-winter.png",
+      "sha256": "3557b594b41ccb6dd8928a1787f76ec01bc8f40b4a4f454ea2055c842435dbfd"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "sha256": "42898f3b88aaa6dc5a0db009a55458c0de217c9294d09d16368748c96b78dc68"
+    },
+    {
+      "file": "sw.js",
+      "sha256": "37f37848234be0cceae3860491e948fbae830f03e3bcc9b6578c1ae78c038c2f"
+    },
+    {
+      "file": "ys-install.js",
+      "sha256": "8e0e68543106bb710a847c96c0ac099da703caafbec21ea74f4376d9a6ff450e"
+    },
+    {
+      "file": "ys-qr.js",
+      "sha256": "363c4852c125bb7925bd737ba3b38e568d733ca61a67e90d753471cdcd449aaa"
+    },
+    {
+      "file": "qr.svg",
+      "sha256": "3af031a7f2d7aae2fcb4beaf1b9e5f4e64bcb8759d47a604862cf953eb714a4c"
+    },
+    {
+      "file": "og-image.jpg",
+      "sha256": "54f5410fdb7dca02083edbea191e091ee96c31744be725e4757b715ad350f587"
+    },
+    {
+      "file": "icons/apple-touch-icon.png",
+      "sha256": "7e1888a792e1facd34f78643aa8205bae14db7d9e0deb6be7ac71d97a7224021"
+    },
+    {
+      "file": "icons/favicon-32.png",
+      "sha256": "bcbe737e48d18f3e6c6cd3dafb74fcf76c203761530c9dd29d0f4d511224c340"
+    },
+    {
+      "file": "icons/icon-192.png",
+      "sha256": "8006037ae1d6e9ed5713bf135ffff76add24dea8bd208fe833302c09ac6ad62a"
+    },
+    {
+      "file": "icons/icon-512.png",
+      "sha256": "455c14e5848343b79b6df9e681e4b1d8868c141ee1d594d372141b703309f397"
+    },
+    {
+      "file": "icons/icon-maskable-512.png",
+      "sha256": "f49898a780d33e619b10570d6d812129e196d7b2a32ca67fc950ec2fed18ee02"
+    },
+    {
+      "file": "assets/audio/bouncy-tactical-groove.mp3",
+      "sha256": "f13482d68e76573722f0a44e80ad229c1c011b416331fc14e60e8c61ff0b6ea5"
+    },
+    {
+      "file": "offline/wormfront.html",
+      "sha256": "4c5e46cc425e4005662e9af01694682468941075644078d61f0dd1964f9286e4"
+    }
+  ],
+  "errors": [],
+  "failedResources": []
+}
