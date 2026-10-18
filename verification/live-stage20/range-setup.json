@@ -1,0 +1,420 @@
+{
+  "tests": [
+    {
+      "name": "bazooka charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "bazooka charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "bazooka charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "grenade charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "grenade charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "grenade charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "banana charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "banana charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "banana charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "sacred charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "sacred charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "sacred charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "cluster charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "cluster charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "cluster charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "mortar charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "mortar charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "mortar charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "homing charge 0.12 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "homing charge 0.5 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "homing charge 1 has about twice the previous horizontal range and the same fuse",
+      "pass": true
+    },
+    {
+      "name": "bazooka retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "grenade retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "banana retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "sacred retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "cluster retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "mortar retains progressively longer distance with higher charge",
+      "pass": true
+    },
+    {
+      "name": "Shotgun charge 0.12 reaches about twice as far",
+      "pass": true
+    },
+    {
+      "name": "Shotgun charge 0.5 reaches about twice as far",
+      "pass": true
+    },
+    {
+      "name": "Shotgun charge 1 reaches about twice as far",
+      "pass": true
+    },
+    {
+      "name": "Fresh home shows essentials and hides all advanced options",
+      "pass": true
+    },
+    {
+      "name": "Advanced settings retain existing persistence and reopen with saved values",
+      "pass": true
+    },
+    {
+      "name": "Collapsed advanced settings still apply to the next battle",
+      "pass": true
+    },
+    {
+      "name": "Trusted keyboard hold fills the gauge and releases the extended full-power rocket",
+      "pass": true
+    },
+    {
+      "name": "CPU aims at a distant enemy and its prediction matches actual fixed-step projectile travel",
+      "pass": true
+    },
+    {
+      "name": "Start button is visible immediately at 1280x900",
+      "pass": true
+    },
+    {
+      "name": "Touch opens/closes advanced settings and starts a battle at 1280x900",
+      "pass": true
+    },
+    {
+      "name": "Start button is visible immediately at 320x568",
+      "pass": true
+    },
+    {
+      "name": "Touch opens/closes advanced settings and starts a battle at 320x568",
+      "pass": true
+    },
+    {
+      "name": "Start button is visible immediately at 390x844",
+      "pass": true
+    },
+    {
+      "name": "Touch opens/closes advanced settings and starts a battle at 390x844",
+      "pass": true
+    },
+    {
+      "name": "Start button is visible immediately at 844x390",
+      "pass": true
+    },
+    {
+      "name": "Touch opens/closes advanced settings and starts a battle at 844x390",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "pass": true
+    }
+  ],
+  "measurements": [
+    {
+      "type": "bazooka",
+      "power": 0.12,
+      "range": 5243.010106307287,
+      "y": 11000.031238346925,
+      "life": 8,
+      "before": 2621.6433133271803,
+      "ratio": 1.9998945240393047
+    },
+    {
+      "type": "bazooka",
+      "power": 0.5,
+      "range": 7111.058628713699,
+      "y": 11000.856977144702,
+      "life": 8,
+      "before": 3555.46421563653,
+      "ratio": 2.0000366189708974
+    },
+    {
+      "type": "bazooka",
+      "power": 1,
+      "range": 9763.271770764752,
+      "y": 11000.676081793885,
+      "life": 8,
+      "before": 4881.521765447087,
+      "ratio": 2.0000467558850588
+    },
+    {
+      "type": "grenade",
+      "power": 0.12,
+      "range": 2303.6124717496223,
+      "y": 3461.630055626233,
+      "life": 3,
+      "before": 1151.8062358746847,
+      "ratio": 2.0000000000002194
+    },
+    {
+      "type": "grenade",
+      "power": 0.5,
+      "range": 3025.0735205942365,
+      "y": 3100.8995312039474,
+      "life": 3,
+      "before": 1512.5367602973638,
+      "ratio": 1.9999999999996754
+    },
+    {
+      "type": "grenade",
+      "power": 1,
+      "range": 3974.3643743374632,
+      "y": 2626.2541043324786,
+      "life": 3,
+      "before": 1987.1821871688808,
+      "ratio": 1.99999999999985
+    },
+    {
+      "type": "banana",
+      "power": 0.12,
+      "range": 2510.9870916815926,
+      "y": 3858.7927456602006,
+      "life": 3.2,
+      "before": 1255.4935458408636,
+      "ratio": 1.9999999999998928
+    },
+    {
+      "type": "banana",
+      "power": 0.5,
+      "range": 3362.929140644872,
+      "y": 3432.821721178469,
+      "life": 3.2,
+      "before": 1681.4645703224942,
+      "ratio": 1.9999999999999307
+    },
+    {
+      "type": "banana",
+      "power": 1,
+      "range": 4483.905520860993,
+      "y": 2872.333531070974,
+      "life": 3.2,
+      "before": 2241.9527604306204,
+      "ratio": 1.9999999999998896
+    },
+    {
+      "type": "sacred",
+      "power": 0.12,
+      "range": 2512.3503935553963,
+      "y": 4670.136094723163,
+      "life": 3.5,
+      "before": 1256.1751967780074,
+      "ratio": 1.9999999999995077
+    },
+    {
+      "type": "sacred",
+      "power": 0.5,
+      "range": 3354.7267019830197,
+      "y": 4248.947940509348,
+      "life": 3.5,
+      "before": 1677.3633509915035,
+      "ratio": 2.0000000000000075
+    },
+    {
+      "type": "sacred",
+      "power": 1,
+      "range": 4463.116581492632,
+      "y": 3694.7530007544055,
+      "life": 3.5,
+      "before": 2231.5582907459902,
+      "ratio": 2.0000000000002918
+    },
+    {
+      "type": "cluster",
+      "power": 0.12,
+      "range": 2338.040086711315,
+      "y": 3444.416248145033,
+      "life": 3,
+      "before": 1169.0200433561295,
+      "ratio": 1.9999999999991924
+    },
+    {
+      "type": "cluster",
+      "power": 0.5,
+      "range": 3088.359577510939,
+      "y": 3069.2565027458504,
+      "life": 3,
+      "before": 1544.179788755704,
+      "ratio": 1.999999999999696
+    },
+    {
+      "type": "cluster",
+      "power": 1,
+      "range": 4075.6220654033987,
+      "y": 2575.625258799498,
+      "life": 3,
+      "before": 2037.8110327017785,
+      "ratio": 1.9999999999999223
+    },
+    {
+      "type": "mortar",
+      "power": 0.12,
+      "range": 5712.097471847901,
+      "y": 11001.383984148204,
+      "life": 6,
+      "before": 2856.0487359249382,
+      "ratio": 1.9999999999993083
+    },
+    {
+      "type": "mortar",
+      "power": 0.5,
+      "range": 7394.569164258084,
+      "y": 11000.557959371818,
+      "life": 6,
+      "before": 3697.4613588240827,
+      "ratio": 1.9999043794225901
+    },
+    {
+      "type": "mortar",
+      "power": 1,
+      "range": 9646.350708946133,
+      "y": 10705.010937027693,
+      "life": 6,
+      "before": 4823.175354473726,
+      "ratio": 1.9999999999997267
+    },
+    {
+      "type": "homing",
+      "power": 0.12,
+      "range": 10175.136670019581,
+      "y": 1004.7833014643704,
+      "life": 8,
+      "before": 5080.3372850342985,
+      "ratio": 2.0028466810645793
+    },
+    {
+      "type": "homing",
+      "power": 0.5,
+      "range": 10168.552645806425,
+      "y": 1006.0692449147808,
+      "life": 8,
+      "before": 5084.251098011628,
+      "ratio": 2.000009922756016
+    },
+    {
+      "type": "homing",
+      "power": 1,
+      "range": 10144.41962568047,
+      "y": 1006.9754611037312,
+      "life": 8,
+      "before": 5057.778445774569,
+      "ratio": 2.0057066030947728
+    },
+    {
+      "shotgun": {
+        "power": 0.12,
+        "range": 1036
+      },
+      "before": 518,
+      "ratio": 2
+    },
+    {
+      "shotgun": {
+        "power": 0.5,
+        "range": 1463
+      },
+      "before": 735,
+      "ratio": 1.9904761904761905
+    },
+    {
+      "shotgun": {
+        "power": 1,
+        "range": 2023
+      },
+      "before": 1015,
+      "ratio": 1.993103448275862
+    },
+    {
+      "cpu": {
+        "plan": {
+          "type": "grenade",
+          "score": 43.49710912659174
+        },
+        "predicted": {
+          "x": 2588.718534527368,
+          "y": 495.6846540475152,
+          "hit": true,
+          "event": "worm",
+          "steps": 140,
+          "bounces": 2
+        },
+        "actual": {
+          "x": 2588.718534527368,
+          "y": 495.6846540475152,
+          "event": "worm"
+        },
+        "error": 0,
+        "distance": 12.215459334592852
+      }
+    }
+  ],
+  "errors": [],
+  "browser": "155.0.4283.62"
+}

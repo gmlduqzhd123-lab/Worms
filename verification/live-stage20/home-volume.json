@@ -1,0 +1,57 @@
+{
+  "tests": [
+    {
+      "name": "Home sliders show existing defaults without autoplay",
+      "pass": true
+    },
+    {
+      "name": "Home overlay covers in-game audio controls without overlap",
+      "pass": true
+    },
+    {
+      "name": "Home keyboard adjustment works without game inputs",
+      "pass": true
+    },
+    {
+      "name": "Home edits synchronize the in-game controls and labels",
+      "pass": true
+    },
+    {
+      "name": "Starting the game uses the levels chosen on the home screen",
+      "pass": true
+    },
+    {
+      "name": "In-game changes synchronize the home controls",
+      "pass": true
+    },
+    {
+      "name": "Returning to the home screen and restarting retain shared settings",
+      "pass": true
+    },
+    {
+      "name": "Both screens restore the same saved values after reload",
+      "pass": true
+    },
+    {
+      "name": "Home zero volume persists to both screens",
+      "pass": true
+    },
+    {
+      "name": "Home volume section fits and scrolls at 320x568",
+      "pass": true
+    },
+    {
+      "name": "Home volume section fits and scrolls at 390x844",
+      "pass": true
+    },
+    {
+      "name": "Home volume section fits and scrolls at 844x390",
+      "pass": true
+    },
+    {
+      "name": "Real mobile touch adjusts and synchronizes the home slider",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

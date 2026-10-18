@@ -28,4 +28,6 @@ viewport-fit=cover, 동적 뷰포트 높이, 노치·홈 표시 영역의 safe-a
 
 19단계 105개 파일은 versions/stage19에 보존했으며 stage19-preservation.json의 SHA-256과 일치합니다. original/와 기존 보관본, 제공 이미지·MP3를 유지합니다. 배포 ZIP은 release/wormfront-stage20-pages.zip(실행 파일 61개), 단일 HTML은 dist/wormfront-stage20-offline.html입니다. 공개 배포 결과는 ../live-stage20/REPORT.md에 기록합니다.
 
+GitHub Pages 작업 39087511312가 성공했고 실행 커밋 726a40905e458a53c59528888fba903d684b3162의 공개 검사 284개가 통과했습니다. 공개 실행 파일 60개의 HTTP 200과 커밋 해시 일치도 확인했습니다.
+
 모바일 검수는 실제 Edge의 터치·화면 에뮬레이션입니다. 실제 스마트폰·iOS Safari의 주소창·노치·OS 회전 동작은 검수하지 않았습니다. 브라우저가 전체 화면을 허용하지 않는 경우에는 브라우저의 콘텐츠 영역을 채우는 방식으로 실행하며 주소창 제거를 보장하지 않습니다.
