@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),baseline=process.argv.includes('--baseline');
-const out=path.join(root,'verification',live?'live-stage18':'stage18');fs.mkdirSync(out,{recursive:true});
+const out=path.join(root,'verification',live?'live-stage19':'stage19');fs.mkdirSync(out,{recursive:true});
 const fixture=`
 shotFocus=null;injuredWorms=[];injuryZoom=null;cameraZoom=1;overview=false;camera.manualUntil=0;clearInput();physicsAccumulator=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;
 if(typeof deploymentRetreatUntil!=='undefined')deploymentRetreatUntil=0;
@@ -13,7 +13,7 @@ const step=`function step(seconds){for(let i=0;i<Math.ceil(seconds*60);i++)advan
 (async()=>{
  let url='https://gmlduqzhd123-lab.github.io/Worms/';
  if(!live){const sourceRoot=baseline?path.join(root,'versions','stage17'):root;server=http.createServer((req,res)=>{const relative=new URL(req.url,'http://local').pathname.slice(1)||'index.html',file=path.resolve(sourceRoot,relative);if(!file.startsWith(sourceRoot+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return}res.setHeader('Content-Type',require('./mime.cjs')(file));res.end(fs.readFileSync(file))});await new Promise(r=>server.listen(0,'127.0.0.1',r));url='http://127.0.0.1:'+server.address().port+'/'}
- browser=await chromium.launch({headless:true,channel:'msedge'});const context=await browser.newContext({viewport:{width:1280,height:720}});await context.addInitScript(()=>{window.requestAnimationFrame=()=>0});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(url);
+ browser=await chromium.launch({headless:true,channel:'msedge'});const context=await browser.newContext({viewport:{width:1280,height:720}});await context.addInitScript(()=>{window.requestAnimationFrame=()=>0});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(url);await page.locator('#advancedSettings').evaluate(el=>el.open=true);
  const run=code=>page.evaluate(`(()=>{${step}\n${code}})()`),check=async(name,code)=>{assert.equal(await run(code),true,name);results.push({test:name,pass:true})};
  await page.locator('#inputA').fill('Team');await page.locator('#inputA').press('End');await page.keyboard.press('Space');await page.keyboard.type('A');const typed=await page.locator('#inputA').inputValue();assert.equal(typed,baseline?'TeamA':'Team A');results.push({test:baseline?'Reproduced: home team name Space is blocked':'Home team name accepts spaces with native keyboard input',pass:true,observed:typed});
  if(baseline){
@@ -34,7 +34,7 @@ const step=`function step(seconds){for(let i=0;i<Math.ceil(seconds*60);i++)advan
   await page.locator('#pauseBtn').focus();await page.keyboard.press('Space');assert.equal(await run('return paused&&!charging&&projectiles.length===0'),true);await page.keyboard.press('Space');assert.equal(await run('return !paused&&!charging'),true);results.push({test:'Keyboard pause button toggles pause without firing',pass:true});
   await page.click('[data-w="grenade"]');await page.keyboard.down('Space');assert.equal(await run('return charging'),true);await page.keyboard.up('Space');assert.equal(await run('return projectiles.length===1&&projectiles[0].type===\'grenade\''),true);results.push({test:'Pointer weapon selection still allows subsequent keyboard firing',pass:true});
  }
- const touchContext=await browser.newContext({viewport:{width:844,height:390},isMobile:true,hasTouch:true});await touchContext.addInitScript(()=>{window.requestAnimationFrame=()=>0});const mobile=await touchContext.newPage();mobile.on('pageerror',e=>errors.push(e.message));await mobile.goto(url);await mobile.evaluate(`(()=>{${fixture}camera.x=600;camera.y=0;selected='teleport';fireStart()})()`);
+ const touchContext=await browser.newContext({viewport:{width:844,height:390},isMobile:true,hasTouch:true});await touchContext.addInitScript(()=>{window.requestAnimationFrame=()=>0});const mobile=await touchContext.newPage();mobile.on('pageerror',e=>errors.push(e.message));await mobile.goto(url);await mobile.locator('#advancedSettings').evaluate(el=>el.open=true);await mobile.evaluate(`(()=>{${fixture}camera.x=600;camera.y=0;selected='teleport';fireStart()})()`);
  const cdp=await touchContext.newCDPSession(mobile);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:200,y:180,id:1},{x:400,y:180,id:2}]});
  await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:180,y:180,id:1},{x:420,y:180,id:2}]});

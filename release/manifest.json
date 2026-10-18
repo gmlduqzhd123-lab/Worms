@@ -1,10 +1,10 @@
 {
-  "version": "18",
+  "version": "19",
   "files": [
     {
       "file": "index.html",
-      "bytes": 14734,
-      "sha256": "0a2e41b77baec6fac5442b55aecc44e86eae3f53f7b8c576f5b1302e404bb622"
+      "bytes": 14931,
+      "sha256": "e6bda0b4e7c7aedb5a4e6c9b46fcf46cea632bdbcb6f9168206fb10f08dad824"
     },
     {
       "file": ".nojekyll",
@@ -13,8 +13,8 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 16262,
-      "sha256": "7a0fe402f7c82d41404ee9b557cf0bb476acf1f29309945fce12c524ba0ede01"
+      "bytes": 17744,
+      "sha256": "264e35fc21c18b1d9c849cf7568ff7873c9ffbc51a9a6f883608743310df3d10"
     },
     {
       "file": "src/state.js",
@@ -48,8 +48,8 @@
     },
     {
       "file": "src/weapons.js",
-      "bytes": 12152,
-      "sha256": "69a0f7f3ebcdfafef50cae07691e2248deeb93e019874b464cfaf64e9ca3e380"
+      "bytes": 12463,
+      "sha256": "9b3bd7c3ed2b0dff9b6856886c7c24aae247194ec9a5fa21926e2132604cacb0"
     },
     {
       "file": "src/physics.js",
@@ -249,7 +249,7 @@
     {
       "file": "sw.js",
       "bytes": 1798,
-      "sha256": "290310743fa73c6bcff492782453fbc1f3cfdd4ff4a6c04c22da895150c22d7f"
+      "sha256": "adafebb3e6233bf18ca9ed2bb37843e8f711dc9268ca04419157d228a8eed3ee"
     },
     {
       "file": "ys-install.js",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59836651,
-      "sha256": "d31bb5ad9aa43c7380eadf16845ef5418d7dd8a08682d35fe436573fad16d161"
+      "bytes": 59838641,
+      "sha256": "e725aee383a37406376843d619be3baee3c1bb8f727f0e1178f9c8691d808ba7"
     }
   ]
 }

@@ -1,0 +1,75 @@
+{
+  "total": 512,
+  "suites": [
+    {
+      "suite": "range-setup",
+      "checks": 44,
+      "pass": true
+    },
+    {
+      "suite": "results",
+      "checks": 170,
+      "pass": true
+    },
+    {
+      "suite": "features",
+      "checks": 16,
+      "pass": true
+    },
+    {
+      "suite": "tactics",
+      "checks": 20,
+      "pass": true
+    },
+    {
+      "suite": "release",
+      "checks": 13,
+      "pass": true
+    },
+    {
+      "suite": "artwork",
+      "checks": 9,
+      "pass": true
+    },
+    {
+      "suite": "themes",
+      "checks": 41,
+      "pass": true
+    },
+    {
+      "suite": "reference",
+      "checks": 14,
+      "pass": true
+    },
+    {
+      "suite": "audio",
+      "checks": 15,
+      "pass": true
+    },
+    {
+      "suite": "volume",
+      "checks": 19,
+      "pass": true
+    },
+    {
+      "suite": "home-volume",
+      "checks": 14,
+      "pass": true
+    },
+    {
+      "suite": "fixes",
+      "checks": 16,
+      "pass": true
+    },
+    {
+      "suite": "sfx",
+      "checks": 118,
+      "pass": true
+    },
+    {
+      "suite": "sfx-offline",
+      "checks": 3,
+      "pass": true
+    }
+  ]
+}

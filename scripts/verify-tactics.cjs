@@ -2,7 +2,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const evidence=path.join(root,'verification','stage18');fs.mkdirSync(evidence,{recursive:true});
+const evidence=path.join(root,'verification','stage19');fs.mkdirSync(evidence,{recursive:true});
 const injection=`
 function resetCheck(){
  shotFocus=null;injuredWorms=[];injuryZoom=null;deploymentRetreatUntil=0;
@@ -28,7 +28,7 @@ const server=http.createServer((req,res)=>{
 const results=[],errors=[];let browser;const timings=[];
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
- browser=await chromium.launch({headless:true,channel:'msedge'});const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(url+'/test');
+ browser=await chromium.launch({headless:true,channel:'msedge'});const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(url+'/test');await page.locator('#advancedSettings').evaluate(el=>el.open=true);
  async function check(name,code){assert.equal(await page.evaluate(s=>window.stage1Check.run(s),code),true,name);results.push({test:name,pass:true})}
  const setup="resetCheck();cpuWalk=null;cpuStatus='';mode='cpu';activeTeam=1;turnWorm=teams[1].worms[0];teams[0].worms[0].x=1000;teams[0].worms[1].alive=false;teams[1].worms[1].alive=false;difficulty='hard';";
  await check('Safe ground movement improves distance',setup+"const x=chooseCpuMove(turnWorm,nearestEnemy(turnWorm));x<turnWorm.x&&x>=turnWorm.x-180");

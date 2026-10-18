@@ -1,0 +1,71 @@
+{
+  "tests": [
+    {
+      "name": "No autoplay before user interaction",
+      "pass": true
+    },
+    {
+      "name": "Supplied MP3 decoded and plays through the quieter music bus",
+      "pass": true
+    },
+    {
+      "name": "Decoded samples contain music",
+      "pass": true
+    },
+    {
+      "name": "Audio graph outputs nonzero music samples",
+      "pass": true
+    },
+    {
+      "name": "Explosion ducks music",
+      "pass": true
+    },
+    {
+      "name": "Music volume recovers after effect",
+      "pass": true
+    },
+    {
+      "name": "Pause stops music and effects cannot restart it",
+      "pass": true
+    },
+    {
+      "name": "Resume starts one looping source",
+      "pass": true
+    },
+    {
+      "name": "Music OFF stops source while effects stay enabled",
+      "pass": true
+    },
+    {
+      "name": "Music ON resumes source",
+      "pass": true
+    },
+    {
+      "name": "Playback remains active across loop boundary",
+      "pass": true
+    },
+    {
+      "name": "Paused restart resumes music even with sound effects OFF",
+      "pass": true
+    },
+    {
+      "name": "Music OFF setting persists after reload",
+      "pass": true
+    },
+    {
+      "name": "Starting with saved music OFF stays silent",
+      "pass": true
+    },
+    {
+      "name": "Standalone file decodes embedded MP3 without a server",
+      "pass": true
+    }
+  ],
+  "metadata": {
+    "duration": 71.5,
+    "sampleRate": 48000,
+    "channels": 2
+  },
+  "errors": [],
+  "sourceSHA256": "f13482d68e76573722f0a44e80ad229c1c011b416331fc14e60e8c61ff0b6ea5"
+}

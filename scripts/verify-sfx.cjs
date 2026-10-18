@@ -1,7 +1,7 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live');
-const folder=path.join(root,'verification',live?'live-stage18':'stage18');fs.mkdirSync(folder,{recursive:true});
+const folder=path.join(root,'verification',live?'live-stage19':'stage19');fs.mkdirSync(folder,{recursive:true});
 const tests=[],errors=[],measurements={};let browser;
 const server=http.createServer((req,res)=>{
  const relative=decodeURIComponent(new URL(req.url,'http://localhost').pathname).slice(1)||'index.html';
@@ -45,7 +45,7 @@ async function offlineRender(page,source,names,options={}){return page.evaluate(
  // Trusted clicks still create the real browser AudioContext; continuous-sound
  // lifecycle fixtures call updateSFX explicitly, without advancing combat.
  await page.addInitScript(()=>{window.requestAnimationFrame=()=>0;});
- await page.goto(base);record('Initial page does not autoplay audio',await page.evaluate(()=>audio===null));
+ await page.goto(base);await page.locator('#advancedSettings').evaluate(el=>el.open=true);record('Initial page does not autoplay audio',await page.evaluate(()=>audio===null));
  const cueNames=await page.evaluate(()=>Object.keys(SFX_CUES));
  record('Sound catalogue contains every existing and newly connected gameplay cue',requiredCues.every(name=>cueNames.includes(name)),cueNames);
  oneShots=cueNames;

@@ -1,0 +1,60 @@
+{
+  "browser": "155.0.4283.62",
+  "tests": [
+    {
+      "test": "All extracted ZIP files match the release manifest",
+      "pass": true
+    },
+    {
+      "test": "ZIP has nojekyll and runtime files, with originals and history excluded",
+      "pass": true
+    },
+    {
+      "test": "Extracted ZIP works at Pages subpath: game, camera and guide pause/resume",
+      "pass": true
+    },
+    {
+      "test": "Packaged settings persist on reload",
+      "pass": true
+    },
+    {
+      "test": "320x568 packaged settings scroll with browser touch input",
+      "pass": true
+    },
+    {
+      "test": "Packaged six-step guide fits small mobile viewport and completes",
+      "pass": true
+    },
+    {
+      "test": "Packaged mobile controls and touch pause at 320x568",
+      "pass": true
+    },
+    {
+      "test": "Packaged mobile controls and touch pause at 390x844",
+      "pass": true
+    },
+    {
+      "test": "Packaged mobile controls and touch pause at 844x390",
+      "pass": true
+    },
+    {
+      "test": "Packaged battle survives orientation resize and touch camera controls",
+      "pass": true
+    },
+    {
+      "test": "Extracted split HTML works offline and completes shotgun turn",
+      "pass": true
+    },
+    {
+      "test": "Extracted standalone HTML works offline with guide, start and pause",
+      "pass": true
+    },
+    {
+      "test": "Release has zero JS errors, missing resources or external network dependencies",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "remoteRequests": []
+}

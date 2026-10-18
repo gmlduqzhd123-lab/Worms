@@ -34,6 +34,9 @@ function fireEnd(){
 }
 // Single source for direct explosions and the CPU damage estimate.
 const weaponBalance={bazooka:{radius:58,damage:50},grenade:{radius:60,damage:55},homing:{radius:55,damage:45},sacred:{radius:78,damage:75},air:{radius:40,damage:30},mini:{radius:30,damage:18},banana:{radius:38,damage:30,children:4,childDamage:24},cluster:{radius:32,damage:24,children:6,childDamage:18},mortar:{radius:32,damage:24,children:4,childDamage:18}};
+// Double horizontal reach while retaining each weapon's fuse, gravity and vertical arc.
+// Live shots and CPU simulations both use these shared rules.
+const SHOT_RANGE_SCALE=2;
 const ballisticRules={
   bazooka:{base:10,mul:9,life:8,r:5,wind:true},
   grenade:{base:8.2,mul:7.5,life:3,r:5,bounce:3},
@@ -47,7 +50,7 @@ function createBallistic(type,w,pwr,ang,face,target=null){
   const rule=ballisticRules[type];if(!rule||rule.base===undefined)throw Error('Unknown ballistic weapon: '+type);
   const rad=ang*Math.PI/180,speed=rule.base+pwr*rule.mul;
   return{type,x:w.x+Math.cos(rad)*face*16,y:w.y+Math.sin(rad)*16,
-    vx:Math.cos(rad)*face*speed,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
+    vx:Math.cos(rad)*face*speed*SHOT_RANGE_SCALE,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
 }
 function spawnBallistic(type,w,pwr,ang,face,target=null){
   projectiles.push(createBallistic(type,w,pwr,ang,face,target));commitAttack();
@@ -58,9 +61,9 @@ function advanceBallistic(p,dt){
   p.life-=dt;
   if(p.life<=1e-9)return 'fuse';
   if(p.type==='homing'&&p.target){
-    const dx=p.target.x-p.x,dy=p.target.y-p.y,n=Math.max(1,Math.hypot(dx,dy));
-    p.vx=lerp(p.vx,dx/n*11,.035*dt*60);p.vy=lerp(p.vy,dy/n*11,.035*dt*60)
-  }else{if(ballisticRules[p.type]?.wind)p.vx+=wind*dt*60;p.vy+=G*dt*60}
+    const dx=(p.target.x-p.x)/SHOT_RANGE_SCALE,dy=p.target.y-p.y,n=Math.max(1,Math.hypot(dx,dy));
+    p.vx=lerp(p.vx,dx/n*11*SHOT_RANGE_SCALE,.035*dt*60);p.vy=lerp(p.vy,dy/n*11,.035*dt*60)
+  }else{if(ballisticRules[p.type]?.wind)p.vx+=wind*dt*60*(ballisticRules[p.type].base===undefined?1:SHOT_RANGE_SCALE);p.vy+=G*dt*60}
   const dx=p.vx*dt*60,dy=p.vy*dt*60,slices=Math.max(1,Math.ceil(Math.hypot(dx,dy)/2));
   for(let i=0;i<slices;i++){
     const ox=p.x,oy=p.y;p.x+=dx/slices;p.y+=dy/slices;
@@ -81,7 +84,7 @@ function advanceBallistic(p,dt){
   return null
 }
 function shootShotgun(w,pwr){
-  const rad=aim*Math.PI/180,range=450+pwr*560,step=7;let x=w.x+Math.cos(rad)*facing*14,y=w.y+Math.sin(rad)*14,hit=null;
+  const rad=aim*Math.PI/180,range=(450+pwr*560)*SHOT_RANGE_SCALE,step=7;let x=w.x+Math.cos(rad)*facing*14,y=w.y+Math.sin(rad)*14,hit=null;
   for(let i=0;i<range/step;i++){x+=Math.cos(rad)*facing*step;y+=Math.sin(rad)*step;
     for(const t of teams)for(const o of t.worms)if(o.alive&&o!==w&&dist(x,y,o.x,o.y)<o.r+3){hit=o;break}
     if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH)break}

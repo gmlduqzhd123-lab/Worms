@@ -1,0 +1,61 @@
+{
+  "tool": "built-in imagegen.imagegen",
+  "mode": "reference-guided generation",
+  "transparent_background": false,
+  "themes": [
+    {
+      "id": "ruins",
+      "source": "source-02.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Ruined city at sunset: distant damaged brick skyline, old water tower silhouettes, broken bridge and reflective river. Warm orange sunset beneath a muted purple sky.",
+      "output": "assets/images/theme-ruins.png"
+    },
+    {
+      "id": "canyon",
+      "source": "source-03.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Desert canyon: distant orange sandstone mesas and layered cliffs, a low warm sun, purple and peach sky, sparse tiny cactus silhouettes in the far distance. Match the reference's slightly pixel-textured cartoon illustration mood.",
+      "output": "assets/images/theme-canyon.png"
+    },
+    {
+      "id": "fort",
+      "source": "source-04.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Military coastal island: distant olive green hills, small concrete hangars and radar dishes on far islands, a very small anchored ship offshore, bright blue sky and sea. Quiet scenery without combat.",
+      "output": "assets/images/theme-fort.png"
+    },
+    {
+      "id": "meadow",
+      "source": "source-05.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Green countryside: distant rolling meadows, a tiny medieval castle and village on far hilltops, a winding blue river and distant stone viaduct, soft sunny sky. Lush peaceful pastoral atmosphere.",
+      "output": "assets/images/theme-meadow.png"
+    },
+    {
+      "id": "snow",
+      "source": "source-06.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Frozen northern coast at night: distant snow capped mountains, dark pine forests, tiny warm-lit lighthouse, green aurora and moon above cold blue water, floating small distant ice floes.",
+      "output": "assets/images/theme-snow.png"
+    },
+    {
+      "id": "scrap",
+      "source": "source-07.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Moonlit industrial scrapyard: distant silhouettes of cranes, rusty factory roofs, chimneys and tiny yellow windows, a full moon in dark blue sky, green polluted water along lower half. Atmospheric cartoon industrial scenery without foreground debris.",
+      "output": "assets/images/theme-scrap.png"
+    },
+    {
+      "id": "castle",
+      "source": "source-08.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Gothic volcanic kingdom: distant dark castle spires and old arched stone bridge silhouettes, a pale full moon, purple crimson night sky, orange lava glow in the far valley along lower half. No foreground towers or platforms.",
+      "output": "assets/images/theme-castle.png"
+    },
+    {
+      "id": "moon",
+      "source": "source-09.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Lunar base: deep black-blue star field, planet Earth in upper left, distant grey cratered lunar hills and tiny glass dome station with radio dishes and yellow lights near the horizon. Open central sky, only distant scenery.",
+      "output": "assets/images/theme-moon.png"
+    },
+    {
+      "id": "sunset",
+      "source": "source-10.png",
+      "prompt": "Use case: stylized-concept. Create ONE clean landscape 16:9 background layer for a 2D side-view cartoon artillery game. The supplied image is a reference for scenery, color and illustration style only. Adapt its theme into crisp playful hand-painted distant scenery, lightly textured shading, consistent cartoon outlines. Leave the central play area uncluttered, horizon near halfway down the canvas. All landmarks are distant and visually secondary; procedural destructible terrain and characters will be drawn separately over this image. NO HUD, UI, text, letters, signs, labels, numbers, borders, minimap, characters, creatures, weapons, projectiles, explosions, flags, foreground platforms, foreground walls, foreground terrain or close-up trees. Tropical island at dramatic sunset: low golden sun, orange red and purple cloud sky, distant palm covered volcanic island with a thin plume of smoke, tiny old shipwreck silhouette far offshore, shimmering dark blue ocean below.",
+      "output": "assets/images/theme-sunset.png"
+    }
+  ]
+}

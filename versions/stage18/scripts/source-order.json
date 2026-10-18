@@ -1,0 +1,17 @@
+[
+  "src/state.js",
+  "src/audio.js",
+  "src/terrain.js",
+  "src/turns.js",
+  "src/ui.js",
+  "src/combat.js",
+  "src/weapons.js",
+  "src/physics.js",
+  "src/ai.js",
+  "src/render.js",
+  "src/loop.js",
+  "src/input.js",
+  "src/graphics.js",
+  "src/persistence.js",
+  "src/boot.js"
+]

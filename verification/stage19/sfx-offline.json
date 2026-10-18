@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "name": "Standalone offline UI shotgun produces an audible finite output",
+      "pass": true,
+      "peak": 0.45927467942237854
+    },
+    {
+      "name": "Standalone offline SFX OFF suppresses the second shotgun output",
+      "pass": true,
+      "peak": 0
+    },
+    {
+      "name": "Offline sound test has no network dependency or browser JavaScript error",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "requests": []
+}
