@@ -23,6 +23,7 @@ function update(dt,ts){
 
 function advanceFrame(elapsed){
   if(!started||paused||gameOver){physicsAccumulator=0;return 0}
+  if(wormIntro){physicsAccumulator=0;advanceWormIntro(Math.max(0,Math.min(MAX_FRAME_DELTA,elapsed)));return 0}
   physicsAccumulator+=Math.max(0,Math.min(MAX_FRAME_DELTA,elapsed));
   let steps=0;
   while(physicsAccumulator+1e-9>=FIXED_DT){
@@ -32,4 +33,4 @@ function advanceFrame(elapsed){
   }
   return steps
 }
-function loop(ts){const elapsed=Math.max(0,(ts-last)/1000);last=ts;advanceFrame(elapsed);if(started)updateHUD();render(Math.min(MAX_FRAME_DELTA,elapsed));requestAnimationFrame(loop)}
+function loop(ts){const now=Math.max(ts,last),elapsed=(now-last)/1000;last=now;advanceFrame(elapsed);if(started)updateHUD();render(Math.min(MAX_FRAME_DELTA,elapsed));requestAnimationFrame(loop)}

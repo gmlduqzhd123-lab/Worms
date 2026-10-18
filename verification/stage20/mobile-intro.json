@@ -1,0 +1,227 @@
+{
+  "tests": [
+    {
+      "name": "Default battle starts with an eight-worm introduction before turn one",
+      "pass": true
+    },
+    {
+      "name": "Intro blocks movement, attacks, camera input, CPU tasks and the battle clock",
+      "pass": true
+    },
+    {
+      "name": "Real-time camera visits every worm in order for about two seconds with visible HP and surroundings",
+      "pass": true
+    },
+    {
+      "name": "Natural intro completion returns to the first player with a fresh turn timer",
+      "pass": true
+    },
+    {
+      "name": "2 worms per team obey exact two-second boundaries without consuming battle time",
+      "pass": true
+    },
+    {
+      "name": "6 worms per team obey exact two-second boundaries without consuming battle time",
+      "pass": true
+    },
+    {
+      "name": "Pause freezes introduction time and the skip button starts turn one",
+      "pass": true
+    },
+    {
+      "name": "Restart resets the intro and repeated skip cannot create an extra turn",
+      "pass": true
+    },
+    {
+      "name": "Mobile portrait shows the requested rotation notice and makes game controls inert",
+      "pass": true
+    },
+    {
+      "name": "Trusted mobile start requests browser fullscreen during its user gesture",
+      "pass": true
+    },
+    {
+      "name": "Native Edge fullscreen entered successfully",
+      "pass": true
+    },
+    {
+      "name": "Portrait rotation freezes the current intro and the gameplay clock",
+      "pass": true
+    },
+    {
+      "name": "Returning to landscape automatically resumes a rotation-only pause",
+      "pass": true
+    },
+    {
+      "name": "An explicit user pause survives portrait-to-landscape rotation",
+      "pass": true
+    },
+    {
+      "name": "Portrait during combat stops the timer and clears held movement and charged fire",
+      "pass": true
+    },
+    {
+      "name": "Rotation notice remains visible above a temporarily hidden guide and restores it in landscape",
+      "pass": true
+    },
+    {
+      "name": "Landscape controls respect simulated notch and home-indicator safe areas",
+      "pass": true
+    },
+    {
+      "name": "Canvas pixel backing and displayed viewport resize together",
+      "pass": true
+    },
+    {
+      "name": "Touch controls and HUD fit 568x320 landscape",
+      "pass": true
+    },
+    {
+      "name": "Touch controls and HUD fit 932x430 landscape",
+      "pass": true
+    },
+    {
+      "name": "Fullscreen toolbar supports exit and a new trusted fullscreen request",
+      "pass": true
+    },
+    {
+      "name": "Fullscreen unsupported still permits landscape play and intro skipping",
+      "pass": true
+    },
+    {
+      "name": "Fullscreen rejected still permits landscape play and intro skipping",
+      "pass": true
+    },
+    {
+      "name": "Standalone offline file shows rotation guidance and begins the introduction in landscape",
+      "pass": true
+    },
+    {
+      "name": "Standalone intro skip starts turn one without network requests",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "pass": true
+    }
+  ],
+  "observations": {
+    "visits": [
+      {
+        "name": "내캐릭1",
+        "team": 0,
+        "at": 1002.0999999940395,
+        "x": 256,
+        "y": 427.20000000000005,
+        "health": 100
+      },
+      {
+        "name": "내캐릭2",
+        "team": 0,
+        "at": 3004.699999988079,
+        "x": 640,
+        "y": 431.20000000000005,
+        "health": 100
+      },
+      {
+        "name": "내캐릭3",
+        "team": 0,
+        "at": 5005.399999976158,
+        "x": 640,
+        "y": 331.2,
+        "health": 100
+      },
+      {
+        "name": "내캐릭4",
+        "team": 0,
+        "at": 7007.0999999940395,
+        "x": 640,
+        "y": 331.2,
+        "health": 100
+      },
+      {
+        "name": "NPC1",
+        "team": 1,
+        "at": 9009.699999988079,
+        "x": 640,
+        "y": 420.20000000000005,
+        "health": 100
+      },
+      {
+        "name": "NPC2",
+        "team": 1,
+        "at": 11010.799999982119,
+        "x": 640,
+        "y": 337.2,
+        "health": 100
+      },
+      {
+        "name": "NPC3",
+        "team": 1,
+        "at": 13012.09999999404,
+        "x": 640,
+        "y": 372.2,
+        "health": 100
+      },
+      {
+        "name": "NPC4",
+        "team": 1,
+        "at": 15014.5,
+        "x": 958.9722049349803,
+        "y": 331.2,
+        "health": 100
+      }
+    ],
+    "fullscreen": {
+      "requests": 1,
+      "active": true,
+      "supported": true
+    },
+    "safeArea": [
+      {
+        "id": "top",
+        "x": 44,
+        "y": 18,
+        "right": 810,
+        "bottom": 77
+      },
+      {
+        "id": "audioControls",
+        "x": 410.09375,
+        "y": 79,
+        "right": 810,
+        "bottom": 110
+      },
+      {
+        "id": "cameraControls",
+        "x": 594.125,
+        "y": 120,
+        "right": 810,
+        "bottom": 156
+      },
+      {
+        "id": "utilityControls",
+        "x": 44,
+        "y": 193,
+        "right": 810,
+        "bottom": 229
+      },
+      {
+        "id": "mobile",
+        "x": 44,
+        "y": 235,
+        "right": 810,
+        "bottom": 288
+      },
+      {
+        "id": "weaponDock",
+        "x": 47,
+        "y": 288,
+        "right": 797,
+        "bottom": 364
+      }
+    ]
+  },
+  "errors": [],
+  "browser": "155.0.4283.62"
+}

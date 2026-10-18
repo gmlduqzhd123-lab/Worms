@@ -1,5 +1,6 @@
+require('./test-presentation.cjs')();
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),out=path.join(root,'verification',live?'live-stage19':'stage19');fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),out=path.join(root,'verification',live?'live-stage20':'stage20');fs.mkdirSync(out,{recursive:true});
 let browser;const tests=[],errors=[],measurements=[];const pass=name=>tests.push({name,pass:true});
 const server=http.createServer((req,res)=>{const file=path.join(root,new URL(req.url,'http://local').pathname.slice(1)||'index.html');if(!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return}res.setHeader('Content-Type',require('./mime.cjs')(file));res.end(fs.readFileSync(file))});
 async function measure(page){return page.evaluate(()=>{

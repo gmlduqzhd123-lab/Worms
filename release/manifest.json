@@ -1,10 +1,10 @@
 {
-  "version": "19",
+  "version": "20",
   "files": [
     {
       "file": "index.html",
-      "bytes": 14931,
-      "sha256": "e6bda0b4e7c7aedb5a4e6c9b46fcf46cea632bdbcb6f9168206fb10f08dad824"
+      "bytes": 15588,
+      "sha256": "4554ccba9e5ff9dbd95c07e58f2e553dc5ed678401aafb82ebc9126878e8e432"
     },
     {
       "file": ".nojekyll",
@@ -13,13 +13,13 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 17744,
-      "sha256": "264e35fc21c18b1d9c849cf7568ff7873c9ffbc51a9a6f883608743310df3d10"
+      "bytes": 20754,
+      "sha256": "783badc207b128c1ac8b1b7bf4f52f21c967f1f67a4678a1e15e49721f54e3b2"
     },
     {
       "file": "src/state.js",
-      "bytes": 6162,
-      "sha256": "ca2512dfecb873388f3fa4abaf2f163c8b606398509dede6eaa6323eb8144ad4"
+      "bytes": 6340,
+      "sha256": "a79a757fecf008224c034431ddd51675004c4ec0390ae19a5e67584764d37300"
     },
     {
       "file": "src/audio.js",
@@ -28,18 +28,18 @@
     },
     {
       "file": "src/terrain.js",
-      "bytes": 4246,
-      "sha256": "eafa67f13a8f6dfbda70de18274e844547c59336d6f3d6adecdaa4662057ca49"
+      "bytes": 4281,
+      "sha256": "8509ca96cea6033a746d22c7076cda82baa1e8c08b74ff3135a748bac02e8e49"
     },
     {
       "file": "src/turns.js",
-      "bytes": 5634,
-      "sha256": "2fabebf8d7aeb58fc3c944f2da7ba2dc06263bda61ecde727c88c7cb81a9c9ee"
+      "bytes": 6984,
+      "sha256": "c37080c17c9fdbc1d624537962764e7b05ce9a2e98747b6cfaa885dca913bcbe"
     },
     {
       "file": "src/ui.js",
-      "bytes": 6202,
-      "sha256": "55cd1f552a78a88387b8c3c2fcd5308b1784510778d58fd4fe8c0794cc7d646e"
+      "bytes": 6633,
+      "sha256": "9c8b090d52f64a76be09c86249f04e36d34c5b2e56740f1ac861a7bc93d9656b"
     },
     {
       "file": "src/combat.js",
@@ -68,13 +68,13 @@
     },
     {
       "file": "src/loop.js",
-      "bytes": 1947,
-      "sha256": "0837fcca1854c0b13f7cab7c33023213c9e176900cd02bf0d912be33af1b4201"
+      "bytes": 2070,
+      "sha256": "92043208fae6fffc0b1231acba9fd5e054271fea8671df3767bed62c2aa73fed"
     },
     {
       "file": "src/input.js",
-      "bytes": 6995,
-      "sha256": "c01e8afe132e8d1ef39a46df3f6874e19f22e494ddd7f3a06437d54b58d76f5d"
+      "bytes": 9371,
+      "sha256": "0c9015aaee7ab819318f0d853e868e0e2dfb3d4aed7d1c1bc6ca3d42eb206ccb"
     },
     {
       "file": "src/graphics.js",
@@ -88,8 +88,8 @@
     },
     {
       "file": "src/boot.js",
-      "bytes": 120,
-      "sha256": "0926c5f58970709b94155857c495110dd7e47c6318c9279238201dbbdecc03d6"
+      "bytes": 144,
+      "sha256": "40a5e4cfe614caf231cd3732155cd7fe2d9e9da2a66690d68383316cd5d07e72"
     },
     {
       "file": "assets/images/coast.png",
@@ -249,7 +249,7 @@
     {
       "file": "sw.js",
       "bytes": 1798,
-      "sha256": "adafebb3e6233bf18ca9ed2bb37843e8f711dc9268ca04419157d228a8eed3ee"
+      "sha256": "28655f97e58d6b24ffc4de8c57833ded12de6d9db546f1caafacbc5f28a6519d"
     },
     {
       "file": "ys-install.js",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59838641,
-      "sha256": "e725aee383a37406376843d619be3baee3c1bb8f727f0e1178f9c8691d808ba7"
+      "bytes": 59846825,
+      "sha256": "cef2a6d5941e0e59212696ec369d13e77c81d39e22daf1f323cc5a9c8d0193bd"
     }
   ]
 }

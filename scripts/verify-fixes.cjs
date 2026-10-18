@@ -1,7 +1,8 @@
+require('./test-presentation.cjs')();
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),baseline=process.argv.includes('--baseline');
-const out=path.join(root,'verification',live?'live-stage19':'stage19');fs.mkdirSync(out,{recursive:true});
+const out=path.join(root,'verification',live?'live-stage20':'stage20');fs.mkdirSync(out,{recursive:true});
 const fixture=`
 shotFocus=null;injuredWorms=[];injuryZoom=null;cameraZoom=1;overview=false;camera.manualUntil=0;clearInput();physicsAccumulator=0;settledSince=null;combatTasks=[];pendingEmissions=0;started=true;paused=false;gameOver=false;mode='pvp';activeTeam=0;activeIdx=[0,0];turnWorm=null;turnEnding=false;attackCommitted=false;turnLocked=false;retreatUntil=0;turnSec=45;turnStart=gameNow;turnNo=1;selected='bazooka';charging=false;shotgunRemain=0;aim=-45;facing=1;sudden=false;
 if(typeof deploymentRetreatUntil!=='undefined')deploymentRetreatUntil=0;

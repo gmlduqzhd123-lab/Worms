@@ -1,3 +1,3 @@
 'use strict';
 
-initGraphics();initPersistence();initThemes();updateAudioButtons();resize();requestAnimationFrame(loop);
+initGraphics();initPersistence();initThemes();syncMobileOrientation();updateAudioButtons();resize();requestAnimationFrame(loop);

@@ -1,8 +1,9 @@
+require('./test-presentation.cjs')();
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const evidence=path.join(root,'verification','stage19');fs.mkdirSync(evidence,{recursive:true});
+const evidence=path.join(root,'verification','stage20');fs.mkdirSync(evidence,{recursive:true});
 const injection=`
 function resetCheck(){
  shotFocus=null;injuredWorms=[];injuryZoom=null;deploymentRetreatUntil=0;

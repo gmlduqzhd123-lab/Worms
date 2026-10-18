@@ -1,10 +1,32 @@
 'use strict';
 
+function isMobileDevice(){return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>0&&matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<=1024)}
+function syncMobileOrientation(){
+  const mobile=isMobileDevice(),blocked=mobile&&innerHeight>innerWidth,changed=blocked!==orientationBlocked;
+  orientationBlocked=blocked;document.documentElement.dataset.mobile=String(mobile);document.documentElement.dataset.portrait=String(blocked);
+  document.getElementById('rotateNotice').hidden=!blocked;document.getElementById('ui').inert=blocked;
+  if(started&&!gameOver&&(changed||(blocked&&!paused)))applyGamePause(pauseIntent||blocked);
+  updateFullscreenButton();
+}
+function updateFullscreenButton(){const button=document.getElementById('fullscreenBtn');button.hidden=!isMobileDevice()||!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);button.textContent=(document.fullscreenElement||document.webkitFullscreenElement)?'전체 화면 해제':'전체 화면'}
+async function requestGameFullscreen(){
+  if(!isMobileDevice()||document.fullscreenElement||document.webkitFullscreenElement)return false;
+  const root=document.documentElement,request=root.requestFullscreen||root.webkitRequestFullscreen;if(!request)return false;
+  try{await request.call(root,{navigationUI:'hide'});updateFullscreenButton();return true}catch{updateFullscreenButton();return false}
+}
+addEventListener('resize',syncMobileOrientation);addEventListener('orientationchange',syncMobileOrientation);
+if(window.visualViewport)visualViewport.addEventListener('resize',()=>{resize();syncMobileOrientation()});
+for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,()=>{resize();syncMobileOrientation()});
+document.getElementById('fullscreenBtn').addEventListener('click',()=>{if(document.fullscreenElement||document.webkitFullscreenElement){const exit=document.exitFullscreen||document.webkitExitFullscreen;try{const result=exit?.call(document);result?.catch(()=>{})}catch{}}else requestGameFullscreen()});
+document.getElementById('skipIntro').addEventListener('click',completeWormIntro);
+
 /* ---------------- Input ---------------- */
 function nativeKeyboardTarget(e){return e.target.closest?.('input,select,textarea,[contenteditable="true"]')||([' ','Enter'].includes(e.key)&&e.target.closest?.('button,summary,a[href]'))}
 addEventListener('keydown',e=>{
+  if(orientationBlocked)return;
   if(e.target.closest?.('#audioControls,#homeAudioControls'))return;
   if(nativeKeyboardTarget(e))return;
+  if(wormIntro&&e.key!=='Escape')return;
   if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open)return;
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
@@ -21,8 +43,9 @@ document.addEventListener('click',e=>{const button=e.target.closest?.('button');
 
 const cameraPointers=new Map();let dragCamera=null,pinchDistance=0;
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
-canvas.addEventListener('wheel',e=>{e.preventDefault();setCameraZoom(cameraZoom*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY)},{passive:false});
+canvas.addEventListener('wheel',e=>{e.preventDefault();if(!wormIntro&&!orientationBlocked)setCameraZoom(cameraZoom*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY)},{passive:false});
 canvas.addEventListener('pointerdown',e=>{
+  if(wormIntro||orientationBlocked)return;
   cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});canvas.setPointerCapture(e.pointerId);
   dragCamera={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,moved:false};
   if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()];pinchDistance=dist(a.x,a.y,b.x,b.y);dragCamera.moved=true}
@@ -52,13 +75,13 @@ document.querySelectorAll('.weapon').forEach(b=>b.addEventListener('click',()=>{
 document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paused));
 document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!musicEnabled));
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
-document.getElementById('start').addEventListener('click',()=>{document.querySelector('#panel h1').textContent='작은 전장의 탐사대';startGame()});
+document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();document.querySelector('#panel h1').textContent='작은 전장의 탐사대';startGame()});
 const heldControls=new Map();
 function controlKey(action){return{left:'a',right:'d',aimup:'ArrowUp',aimdown:'ArrowDown',rise:'w',descend:'s',ropein:'w',ropeout:'s'}[action]}
 function syncHeldKeys(){for(const k of ['a','d','ArrowUp','ArrowDown','w','s'])keys[k]=[...heldControls.values()].some(a=>controlKey(a)===k)}
 document.querySelectorAll('.ctrl').forEach(btn=>{
   const action=btn.dataset.act;btn.addEventListener('contextmenu',e=>e.preventDefault());
-  btn.addEventListener('pointerdown',e=>{e.preventDefault();if(heldControls.has(e.pointerId)||!started||paused||gameOver)return;btn.setPointerCapture(e.pointerId);heldControls.set(e.pointerId,action);syncHeldKeys();if(action==='jump')jump();if(action==='fire')fireStart()});
+  btn.addEventListener('pointerdown',e=>{e.preventDefault();if(heldControls.has(e.pointerId)||!started||paused||gameOver||wormIntro)return;btn.setPointerCapture(e.pointerId);heldControls.set(e.pointerId,action);syncHeldKeys();if(action==='jump')jump();if(action==='fire')fireStart()});
   function release(e,cancelled){if(!heldControls.has(e.pointerId))return;heldControls.delete(e.pointerId);syncHeldKeys();if(action==='fire'){if(cancelled){charging=false;ui.powerBox.classList.remove('show')}else fireEnd()}}
   btn.addEventListener('pointerup',e=>release(e,false));btn.addEventListener('pointercancel',e=>release(e,true));btn.addEventListener('lostpointercapture',e=>release(e,true));
 });

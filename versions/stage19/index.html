@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="웜즈 아마겟돈(Remake)">
+<head>
+<meta charset="UTF-8"/>
+<meta name="wormfront-version" content="19">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>웜프런트 — 작은 전장의 탐사대</title>
+<link rel="stylesheet" href="./styles/game.css">
+<meta name="description" content="바람을 읽고 한 방을 노리는 턴제 포격전 · 10가지 전장 테마, CPU 대전, 설치 없이 바로">
+<meta name="theme-color" content="#10263b">
+<!-- 공유 미리보기(카카오톡·문자 등) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="엽쌤의 바이브코딩 교실">
+<meta property="og:title" content="웜즈 아마겟돈(Remake)">
+<meta property="og:description" content="바람을 읽고 한 방을 노리는 턴제 포격전 · 10가지 전장 테마, CPU 대전, 설치 없이 바로">
+<meta property="og:url" content="https://gmlduqzhd123-lab.github.io/Worms/">
+<meta property="og:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image.jpg">
+<!-- 📲 앱 설치(홈 화면에 추가) · 📱 QR로 접속 -->
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="웜즈">
+<script src="./ys-install.js"></script>
+<script src="./ys-qr.js"></script>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="ui">
+  <div id="helpAccess"><button class="toolBtn" id="guideBtn" aria-label="플레이 가이드">?</button><button class="toolBtn" id="historyBtn" aria-label="대전 기록">기록</button></div>
+  <div id="top">
+    <div class="card team left"><div class="teamName" id="nameA">플레이어</div><div class="hp"><div id="fillA"></div></div><div class="meta" id="metaA"></div></div>
+    <div class="card" id="center"><div id="turnLabel">전투 준비</div><div id="timer">45</div><div id="wind"></div><div id="subhud"></div></div>
+    <div class="card team right"><div class="teamName" id="nameB">CPU</div><div class="hp"><div id="fillB"></div></div><div class="meta" id="metaB"></div></div>
+  </div>
+
+  <div id="toast"></div><div id="banner"></div>
+  <div id="targetTip">목표 지점을 클릭하세요.</div>
+  <div id="audioControls">
+    <button class="audioBtn" id="pauseBtn">⏸ 일시정지</button>
+    <button class="audioBtn" id="musicBtn">🎵 음악 ON</button>
+    <button class="audioBtn" id="sfxBtn">🔊 효과음 ON</button>
+    <details id="volumeControls"><summary class="audioBtn">음량</summary><div class="volumePanel">
+      <label for="musicVolume">배경음악 <output id="musicVolumeValue" for="musicVolume">18%</output></label><input id="musicVolume" type="range" min="0" max="100" step="1" value="18">
+      <label for="sfxVolume">효과음 <output id="sfxVolumeValue" for="sfxVolume">72%</output></label><input id="sfxVolume" type="range" min="0" max="100" step="1" value="72">
+    </div></details>
+  </div>
+  <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">웜 추적</button></div>
+  <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="제트팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="제트팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
+  <div id="powerBox"><div id="power"></div></div>
+
+  <div id="minimapWrap"><canvas id="minimap"></canvas></div>
+
+  <div id="hint">
+    <b>키보드</b> A/D 이동 · W 점프 · W 두 번 백플립 · ↑/↓ 조준 · Space 발사<br>
+    Z/X 카메라 좌우 이동 · C 웜 추적 · M 전체 맵 · +/− 확대·축소 · Enter 턴 넘김<br>
+    화면 드래그: 카메라 · 로프 A/D 스윙 · W/S 길이 · Space 해제 · 숫자 1~9 빠른 무기 선택
+  </div>
+
+  <div id="mobile">
+    <div class="pad"><button class="ctrl" data-act="left">◀</button><button class="ctrl" data-act="jump">⤒</button><button class="ctrl" data-act="right">▶</button></div>
+    <div class="pad"><button class="ctrl" data-act="aimup">↗</button><button class="ctrl" data-act="fire">🔥</button><button class="ctrl" data-act="aimdown">↘</button></div>
+  </div>
+
+  <div id="weaponDock">
+    <button class="weapon active" data-w="bazooka"><span class="ico">🚀</span><span>로켓</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="grenade"><span class="ico">💣</span><span>수류탄</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="shotgun"><span class="ico">🔫</span><span>산탄총</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="banana"><span class="ico">🍌</span><span>바나나탄</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="sacred"><span class="ico">✨</span><span>성스러운 폭탄</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="cluster"><span class="ico">🧨</span><span>클러스터</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="homing"><span class="ico">🎯</span><span>유도 미사일</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="mortar"><span class="ico">🟠</span><span>박격포</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="airstrike"><span class="ico">✈️</span><span>공습</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="dynamite"><span class="ico">🧯</span><span>다이너마이트</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="mine"><span class="ico">⚙️</span><span>지뢰</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="bat"><span class="ico">🏏</span><span>배트</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="punch"><span class="ico">👊</span><span>파이어 펀치</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="sheep"><span class="ico">🐑</span><span>양 폭탄</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="drill"><span class="ico">🛠️</span><span>드릴</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="rope"><span class="ico">🪢</span><span>닌자 로프</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="jetpack"><span class="ico">🎒</span><span>제트팩</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="teleport"><span class="ico">🌀</span><span>텔레포트</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="girder"><span class="ico">🧱</span><span>거더</span><span class="ammo"></span></button>
+  </div>
+
+  <div id="overlay">
+    <div id="panel">
+      <div class="homeTop"><button type="button" class="homeChip install" data-ys-install>📲 <span class="homeWide">앱 </span>설치</button><button type="button" class="homeChip" data-qr aria-label="QR 코드로 접속">📱 QR</button></div>
+      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/worm-soldier.png"><img src="./assets/images/worm-pirate.png"><img src="./assets/images/worm-astronaut.png"></div><div class="brandLine">WORMFRONT · WORLD EXPLORER 09</div>
+      <h1>작은 전장의 탐사대</h1>
+      <p>팀과 캐릭터, 맵을 고르면 준비 완료! 나머지는 추가 설정에서 바꿀 수 있어요.</p>
+      <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button></div>
+      <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
+      <p id="matchSummary" hidden></p>
+      <div class="grid coreSettings" aria-label="기본 게임 설정">
+        <div><label>게임 모드<select id="mode"><option value="cpu" selected>플레이어 vs PC</option><option value="pvp">2인 로컬 대전</option></select></label></div>
+        <div><label>팀 A 이름<input id="inputA" value="코랄 탐사대" maxlength="40"/></label></div>
+        <div><label>팀 B 이름<input id="inputB" value="민트 탐사대" maxlength="40"/></label></div>
+      </div>
+      <div class="row"><label>코랄 캐릭터<select id="appearanceA"></select></label><label>민트 캐릭터<select id="appearanceB"></select></label></div>
+      <section class="themePicker" aria-label="맵 테마 선택"><label for="mapTheme">맵 테마</label><select id="mapTheme"><option value="coast">햇살 해안</option><option value="ruins">폐허 도시</option><option value="canyon">사막 협곡</option><option value="fort">군사 해안</option><option value="meadow">초록 언덕</option><option value="snow">오로라 설원</option><option value="scrap">고철 야적장</option><option value="castle">용암 성채</option><option value="moon">달 기지</option><option value="sunset">노을 섬</option></select><div id="themePreview"><img id="themePreviewImage" alt="선택한 맵의 배경 미리보기" hidden><div class="themeCaption"><strong id="themeName"></strong><span id="themeDescription"></span></div></div><p class="themeRules">모든 테마에 동일한 중력·지형 파괴·수위 규칙이 적용됩니다.</p></section>
+      <details id="advancedSettings"><summary>추가 설정 <span>난이도 · 전투 규칙 · 음량</span></summary>
+        <div class="grid">
+        <div><label>CPU 난이도<select id="difficulty"><option value="easy">쉬움</option><option value="normal" selected>보통</option><option value="hard">어려움</option></select></label></div>
+        <div><label>팀당 웜 수<select id="count"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
+        <div><label>턴 시간<select id="turnTime"><option value="35">35초</option><option value="45" selected>45초</option><option value="60">60초</option></select></label></div>
+        <div><label>맵 크기<select id="mapSize"><option value="2.5">큼 (2.5배)</option><option value="4" selected>대형 (4배)</option><option value="6">초대형 (6배)</option></select></label></div>
+        <div><label>아이템 상자<select id="crateRate"><option value=".28">적게</option><option value=".58" selected>보통</option><option value=".86">많이</option></select></label></div>
+        <div><label>갑작스러운 죽음<select id="sdTurn"><option value="14">14턴</option><option value="20" selected>20턴</option><option value="28">28턴</option></select></label></div>
+        <div><label>초기 중립 지뢰<select id="mineCount"><option value="5">5개</option><option value="10" selected>10개</option><option value="18">18개</option></select></label></div>
+        </div>
+      <section id="homeAudioControls" aria-labelledby="homeAudioTitle"><h2 id="homeAudioTitle">음량 설정</h2><div class="homeAudioGrid">
+        <div><label for="homeMusicVolume">배경음악 <output id="homeMusicVolumeValue" for="homeMusicVolume">18%</output></label><input id="homeMusicVolume" type="range" min="0" max="100" step="1" value="18"></div>
+        <div><label for="homeSfxVolume">효과음 <output id="homeSfxVolumeValue" for="homeSfxVolume">72%</output></label><input id="homeSfxVolume" type="range" min="0" max="100" step="1" value="72"></div>
+      </div><p>게임 중 음량 설정과 함께 저장됩니다. 0%는 무음입니다.</p></section>
+      </details>
+      <div class="actions"><button class="btn primary" id="start">전투 시작</button></div>
+      <p class="ysFoot">© 2026 엽쌤. All rights reserved. · <a href="https://gmlduqzhd123-lab.github.io/YScode/">엽쌤의 다른 앱 보기 →</a></p>
+    </div>
+  </div>
+</div>
+
+<dialog id="guideDialog" class="gameDialog" aria-labelledby="guideTitle"><div class="dialogHead"><span id="guideProgress">01 / 06</span><button class="btn ghost" id="guideClose" aria-label="가이드 닫기">닫기</button></div><div id="guideArt"></div><h2 id="guideTitle"></h2><p id="guideBody"></p><p id="guideHint" class="guideHint"></p><div class="dialogActions"><button class="btn ghost" id="guidePrev">이전</button><button class="btn primary" id="guideNext">다음</button></div></dialog>
+<dialog id="historyDialog" class="gameDialog" aria-labelledby="historyTitle"><div class="dialogHead"><h2 id="historyTitle">탐사대의 전투 기록</h2><button class="btn ghost" id="historyClose">닫기</button></div><p>최근 완료한 대전 30개. 이 기기와 브라우저의 기록입니다.</p><div id="historyList"></div><div class="dialogActions"><button class="btn ghost" id="clearHistory">기록 삭제</button><button class="btn primary" id="exportHistory">JSON 내보내기</button></div></dialog>
+
+<script defer src="./src/state.js"></script>
+<script defer src="./src/audio.js"></script>
+<script defer src="./src/terrain.js"></script>
+<script defer src="./src/turns.js"></script>
+<script defer src="./src/ui.js"></script>
+<script defer src="./src/combat.js"></script>
+<script defer src="./src/weapons.js"></script>
+<script defer src="./src/physics.js"></script>
+<script defer src="./src/ai.js"></script>
+<script defer src="./src/render.js"></script>
+<script defer src="./src/loop.js"></script>
+<script defer src="./src/input.js"></script>
+<script defer src="./src/graphics.js"></script>
+<script defer src="./src/persistence.js"></script>
+<script defer src="./src/boot.js"></script>
+<script>
+// 📲 오프라인 열기(서비스 워커) — 설치 버튼은 ys-install.js가 맡음
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

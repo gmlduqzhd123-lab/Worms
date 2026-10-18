@@ -1,0 +1,42 @@
+{
+  "browser": "155.0.4283.62",
+  "tests": [
+    {
+      "test": "All 20 supplied character/item PNG files preserve exact original bytes",
+      "pass": true
+    },
+    {
+      "test": "21 artwork files load successfully",
+      "pass": true
+    },
+    {
+      "test": "Ten selectable characters and ten supplied weapon icons are connected",
+      "pass": true
+    },
+    {
+      "test": "Both team appearance choices persist after reload",
+      "pass": true
+    },
+    {
+      "test": "Chosen appearances map to live team characters",
+      "pass": true
+    },
+    {
+      "test": "Raster characters and equipment render through zoom and overview",
+      "pass": true
+    },
+    {
+      "test": "Artwork renders in mobile portrait and landscape",
+      "pass": true
+    },
+    {
+      "test": "Blocked images fall back to vectors and procedural scenery without crashing",
+      "pass": true
+    },
+    {
+      "test": "Artwork browser JS errors are zero",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,80 @@
+{
+  "total": 538,
+  "suites": [
+    {
+      "name": "mobile-intro",
+      "checks": 26,
+      "pass": true
+    },
+    {
+      "name": "range-setup",
+      "checks": 44,
+      "pass": true
+    },
+    {
+      "name": "results",
+      "checks": 170,
+      "pass": true
+    },
+    {
+      "name": "features",
+      "checks": 16,
+      "pass": true
+    },
+    {
+      "name": "tactics",
+      "checks": 20,
+      "pass": true
+    },
+    {
+      "name": "release",
+      "checks": 13,
+      "pass": true
+    },
+    {
+      "name": "artwork",
+      "checks": 9,
+      "pass": true
+    },
+    {
+      "name": "themes",
+      "checks": 41,
+      "pass": true
+    },
+    {
+      "name": "reference",
+      "checks": 14,
+      "pass": true
+    },
+    {
+      "name": "audio",
+      "checks": 15,
+      "pass": true
+    },
+    {
+      "name": "volume",
+      "checks": 19,
+      "pass": true
+    },
+    {
+      "name": "home-volume",
+      "checks": 14,
+      "pass": true
+    },
+    {
+      "name": "fixes",
+      "checks": 16,
+      "pass": true
+    },
+    {
+      "name": "sfx",
+      "checks": 118,
+      "pass": true
+    },
+    {
+      "name": "sfx-offline",
+      "checks": 3,
+      "pass": true
+    }
+  ]
+}

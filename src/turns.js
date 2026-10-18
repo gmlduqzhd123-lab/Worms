@@ -33,7 +33,8 @@ function current(){
 function isCPU(){return mode==='cpu'&&activeTeam===1}
 
 function startGame(){
-  injuredWorms=[];injuryZoom=null;deploymentRetreatUntil=0;
+  wormIntro=null;pauseIntent=false;
+  injuredWorms=[];injuryZoom=null;shotFocus=null;cameraShake=0;deploymentRetreatUntil=0;
   cpuWalk=null;cpuStatus='';saveSettings();beginMatchRecord();
   stopSFX();ensureAudio();
   cameraZoom=1;overview=false;physicsAccumulator=0;combatTasks=[];pendingEmissions=0;turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();aiBusy=false;
@@ -45,7 +46,25 @@ function startGame(){
   buildWorld(+document.getElementById('mapSize').value);placeWorms();seedMines(initialMineCount);
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
   activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
-  selected='bazooka';ui.overlay.style.display='none';ensureAudio();beginTurn()
+  selected='bazooka';ui.overlay.style.display='none';turnLeft=turnSec;turnStart=gameNow;ensureAudio();beginWormIntro();syncMobileOrientation();
+}
+
+function focusIntroWorm(){
+  if(!wormIntro)return;const w=wormIntro.worms[wormIntro.index];cameraZoom=1;overview=false;camera.manualUntil=0;focusOn(w.x,w.y,true);
+  document.getElementById('introName').textContent=teams[w.team].name+' · '+w.name+' · HP '+w.hp;
+  document.getElementById('introProgress').textContent=(wormIntro.index+1)+' / '+wormIntro.worms.length;
+}
+function beginWormIntro(){
+  last=performance.now();
+  wormIntro={worms:teams.flatMap(t=>t.worms).filter(w=>w.alive),index:0,elapsed:0};
+  turnLocked=true;clearInput();document.getElementById('ui').classList.add('introducing');document.getElementById('wormIntro').hidden=false;focusIntroWorm();updateHUD();
+}
+function advanceWormIntro(dt){
+  if(!wormIntro||paused||document.hidden)return;wormIntro.elapsed+=dt;
+  while(wormIntro&&wormIntro.elapsed+1e-9>=2){wormIntro.elapsed-=2;wormIntro.index++;if(wormIntro.index>=wormIntro.worms.length){completeWormIntro();return}focusIntroWorm()}
+}
+function completeWormIntro(){
+  if(!wormIntro)return;wormIntro=null;last=performance.now();physicsAccumulator=0;clearInput();document.getElementById('wormIntro').hidden=true;document.getElementById('ui').classList.remove('introducing');beginTurn();
 }
 
 function beginTurn(){
@@ -58,7 +77,7 @@ function beginTurn(){
   if(isCPU())scheduleAI()
 }
 function nextTurn(delay=900){
-  if(turnEnding||gameOver)return;
+  if(turnEnding||gameOver||wormIntro)return;
   if(combatUnsettled()||presentationPending()){commitAttack(0);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
