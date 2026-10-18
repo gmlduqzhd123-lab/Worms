@@ -28,4 +28,6 @@ CPU는 실제 탄환과 같은 createBallistic/advanceBallistic 함수를 사용
 
 이전 18단계 103개 파일을 versions/stage18에 보존하고 stage18-preservation.json의 SHA-256과 일치함을 확인했습니다. original/와 기존 보관본을 유지합니다. 배포 묶음은 release/wormfront-stage19-pages.zip(실행 파일 61개), 단일 HTML은 dist/wormfront-stage19-offline.html입니다. 공개 배포 결과는 ../live-stage19/REPORT.md에 기록합니다.
 
+GitHub Pages 작업 39085978978이 성공했고 실행 커밋 1d3e214192677983496abc5810141956d4277cd0의 공개 검사 260개가 통과했습니다. 공개 실행 파일 60개의 HTTP 200과 커밋 해시 일치를 확인했습니다.
+
 모바일 검수는 실제 Edge의 터치·화면 에뮬레이션입니다. 실제 휴대전화·iOS Safari 검수는 수행하지 않았습니다. 완전한 오프라인 실행은 모든 리소스를 포함한 단일 HTML을 사용합니다.
