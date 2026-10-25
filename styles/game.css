@@ -137,3 +137,43 @@ html[data-portrait="true"] .gameDialog{visibility:hidden}html[data-portrait="tru
 #angleControls :focus-visible{outline:2px solid #ffe49b;outline-offset:2px}
 /* Compact setup in short landscape viewports. */
 @media(pointer:coarse) and (orientation:landscape){#panel{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:12px}#panel>*{grid-column:1/-1}#panel .homeTop{position:absolute;top:10px;right:12px;margin:0}#panel h1{font-size:22px;margin:0;padding-right:190px;min-height:32px}#panel .homeCrew,#panel .brandLine,#panel>p:not(.ysFoot):not(#matchSummary),#panel #themePreview{display:none}#panel .homeExtras{display:flex;gap:8px;margin:0}#panel .homeExtras .btn{font-size:11px;padding:6px 10px;min-height:28px}#panel .coreSettings{grid-column:1;display:block;margin:0}#panel .themePicker{grid-column:2;margin:0}#panel #advancedSettings{margin:0}#panel #advancedSettings>summary{padding:10px 0}#panel #advancedSettings>summary span{display:inline;margin-left:8px}#panel .actions{margin:0;padding:4px 0 0;bottom:0}#panel .ysFoot{font-size:9px;margin:0}}
+
+/* Use the visible browser area, including URL-bar changes, for canvas and UI. */
+html,body{height:var(--app-height,100dvh);overscroll-behavior:none}
+#game,#ui,#rotateNotice{inset:auto;left:var(--app-left,0px);top:var(--app-top,0px);width:var(--app-width,100vw);height:var(--app-height,100dvh)}
+#panel{width:min(820px,calc(var(--app-width,100vw) - 24px));max-width:calc(var(--app-width,100vw) - var(--safe-left) - var(--safe-right) - 16px);max-height:calc(var(--app-height,100dvh) - var(--safe-top) - var(--safe-bottom) - 16px)}
+.gameDialog{position:fixed;inset:auto;left:calc(var(--app-left,0px) + var(--app-width,100vw)/2);top:calc(var(--app-top,0px) + var(--app-height,100dvh)/2);transform:translate(-50%,-50%);margin:0;width:min(600px,calc(var(--app-width,100vw) - 24px));max-height:calc(var(--app-height,100dvh) - var(--safe-top) - var(--safe-bottom) - 24px)}
+#sessionControls{position:absolute;right:12px;top:74px;display:flex;gap:5px;pointer-events:auto;z-index:4}
+#audioControls{top:113px}#cameraControls{top:154px}
+#battleOptions{display:contents}#battleOptions>summary{display:none}
+#quitBtn{color:#ffd4c4;border-color:#da9583}#quitDialog{max-width:440px}
+#ui.openingView #toast{display:none}
+html[data-mobile="true"][data-portrait="false"] #top{left:max(8px,var(--safe-left));right:max(8px,var(--safe-right));top:calc(4px + var(--safe-top));width:auto;transform:none;grid-template-columns:minmax(0,1fr) minmax(150px,1.4fr) minmax(0,1fr)}
+html[data-mobile="true"][data-portrait="false"] #top .team{padding:5px 7px}
+html[data-mobile="true"][data-portrait="false"] #sessionControls{right:calc(max(8px,var(--safe-right)) + 64px);top:calc(49px + var(--safe-top));gap:4px}
+html[data-mobile="true"][data-portrait="false"] #sessionControls .audioBtn{font-size:10px;padding:5px 8px;min-height:32px;white-space:nowrap}
+html[data-mobile="true"][data-portrait="false"] #battleOptions{position:absolute;display:block;right:max(8px,var(--safe-right));top:calc(49px + var(--safe-top));pointer-events:auto;z-index:5}
+html[data-mobile="true"][data-portrait="false"] #battleOptions>summary{display:block;list-style:none;padding:7px 12px;min-height:32px;font-size:10px;cursor:pointer}
+html[data-mobile="true"][data-portrait="false"] #battleOptionsPanel{position:absolute;right:0;top:38px;width:min(290px,calc(var(--app-width) - var(--safe-left) - var(--safe-right) - 16px));max-height:calc(var(--app-height) - var(--safe-top) - var(--safe-bottom) - 96px);overflow:auto;touch-action:pan-y;padding:10px;border:1px solid #7b9ba9;border-radius:12px;background:#102a3bf5;box-shadow:0 8px 30px #0007}
+html[data-mobile="true"][data-portrait="false"] :is(#audioControls,#cameraControls,#helpAccess){position:static;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;visibility:visible}
+html[data-mobile="true"][data-portrait="false"] #battleOptionsPanel .volumePanel{position:static;width:100%;max-width:100%;box-shadow:none;margin-top:6px}
+html[data-mobile="true"][data-portrait="false"] #volumeControls[open]{width:100%}
+html[data-mobile="true"][data-portrait="false"] #weaponDock{max-width:calc(var(--app-width) - var(--safe-left) - var(--safe-right) - 16px);bottom:calc(4px + var(--safe-bottom));padding:5px}
+html[data-mobile="true"][data-portrait="false"] #mobile{display:flex;left:max(8px,var(--safe-left));right:max(8px,var(--safe-right));bottom:calc(76px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #mobile .ctrl{width:44px;height:44px;font-size:18px}
+html[data-mobile="true"][data-portrait="false"] #utilityControls{bottom:calc(126px + var(--safe-bottom));left:max(8px,var(--safe-left));right:max(8px,var(--safe-right))}
+html[data-mobile="true"][data-portrait="false"] #angleControls{top:auto;bottom:calc(76px + var(--safe-bottom));left:50%;transform:translateX(-50%)}
+html[data-mobile="true"][data-portrait="false"] #powerBox{bottom:calc(128px + var(--safe-bottom));width:36%}
+@media(max-height:320px){
+html[data-mobile="true"][data-portrait="false"] #center{min-height:32px;grid-template-columns:1fr 26px;gap:0 4px;padding:3px 6px}
+html[data-mobile="true"][data-portrait="false"] #center :is(#wind,#subhud){display:none}
+html[data-mobile="true"][data-portrait="false"] #timer{grid-row:1;font-size:22px}
+html[data-mobile="true"][data-portrait="false"] :is(#sessionControls,#battleOptions){top:calc(42px + var(--safe-top))}
+html[data-mobile="true"][data-portrait="false"] #weaponDock .weapon{height:50px;min-width:58px;flex:0 0 58px;padding:2px;gap:1px;font-size:8px;overflow:hidden}
+html[data-mobile="true"][data-portrait="false"] #weaponDock .weapon span:not(.ico){white-space:nowrap}
+html[data-mobile="true"][data-portrait="false"] #weaponDock .ico,html[data-mobile="true"][data-portrait="false"] #weaponDock .ico svg{height:22px;width:28px;flex-shrink:0}
+html[data-mobile="true"][data-portrait="false"] :is(#mobile,#angleControls){bottom:calc(66px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #mobile .ctrl{width:38px;height:38px}
+html[data-mobile="true"][data-portrait="false"] #utilityControls{bottom:calc(108px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #utilityControls .toolBtn{min-height:28px;font-size:10px}
+}

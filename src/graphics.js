@@ -46,8 +46,9 @@ function initGraphics(){graphicsInitialized=true;loadArtwork();const labels=ART_
 function drawHealthLabel(w,x,y){
  const a=w.hpAnim,animating=!!(a&&gameNow<a.at+a.duration),hp=Math.ceil(displayedHP(w));
  if(!w.alive&&!animating&&!deathAnimating(w))return;
- ctx.save();ctx.translate(x,y);ctx.scale(1/cameraZoom,1/cameraZoom);x=0;y=-Math.max(0,(cameraZoom-1)*34);ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font='800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
- ctx.font='900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
+ const compact=VH<=320&&(initialBattleView||wormIntro?.overview);
+ ctx.save();ctx.translate(x,y);ctx.scale(1/cameraZoom,1/cameraZoom);x=0;y=(compact?18:0)-Math.max(0,(cameraZoom-1)*34);ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102337';ctx.font=compact?'800 8px system-ui':'800 10px system-ui';ctx.strokeText(w.name,x,y-64);ctx.fillStyle=teams[w.team].color;ctx.fillText(w.name,x,y-64);
+ ctx.font=compact?'900 10px system-ui':'900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
  ctx.fillStyle='#102337';ctx.fillRect(x-18,y-43,36,5);if(animating){ctx.fillStyle='#ffd387';ctx.fillRect(x-17,y-42,34*a.from/100,3)}ctx.fillStyle=animating?'#ff7373':teams[w.team].color;ctx.fillRect(x-17,y-42,34*hp/100,3);ctx.restore();
 }
 // Aim elevation is measured from the horizontal in the worm's facing direction.
@@ -86,7 +87,8 @@ function drawAimGuide(){
 function drawExplorer(w){
   const x=screenX(w.x),y=screenY(w.y),dying=!w.alive&&deathAnimating(w);if(!w.alive&&(!dying||gameNow>=w.death.burstAt)){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
   const active=w.alive&&w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
-  ctx.save();ctx.translate(x,y);ctx.scale(dir,1);ctx.rotate(w.hurt>0?Math.sin(worldTime*.09)*.1:clamp(w.vx*.025,-.1,.1));
+  const viewScale=(initialBattleView||wormIntro?.overview)?Math.max(1,.55/cameraZoom):1;
+  ctx.save();ctx.translate(x,y);ctx.scale(dir*viewScale,viewScale);ctx.rotate(w.hurt>0?Math.sin(worldTime*.09)*.1:clamp(w.vx*.025,-.1,.1));
   if(dying){const t=clamp((gameNow-w.death.at)/900,0,1);ctx.translate(0,-Math.sin(t*Math.PI)*12);ctx.rotate(Math.sin(t*Math.PI*5)*.22);ctx.scale(1-t*.25,1-t*.3);ctx.globalAlpha=1-t*.25}
   ctx.fillStyle='rgba(20,30,20,.28)';ctx.beginPath();ctx.ellipse(0,10,15,4,0,0,Math.PI*2);ctx.fill();
   const art=characterArt(w),h=44,ww=h*art.bounds.w/art.bounds.h,bob=w.onGround?Math.sin(worldTime*.016)*Math.min(1.5,Math.abs(w.vx)):0;

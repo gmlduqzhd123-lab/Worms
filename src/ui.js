@@ -4,7 +4,7 @@ function battlePhase(){
   if(gameOver)return {id:'over',text:'전투 종료',timer:'—'};
   if(!started)return {id:'ready',text:'전투 준비',timer:String(turnSec)};
   if(paused)return {id:'paused',text:'일시정지',timer:'Ⅱ'};
-  if(wormIntro)return {id:'intro',text:'전장 둘러보기 · '+(wormIntro.index+1)+' / '+wormIntro.worms.length,timer:(2-wormIntro.elapsed).toFixed(1)};
+  if(wormIntro)return {id:'intro',text:wormIntro.overview?'양 팀 전체 위치':'전장 둘러보기 · '+(wormIntro.index+1)+' / '+wormIntro.worms.length,timer:(2-wormIntro.elapsed).toFixed(1)};
   if(turnEnding)return {id:'handoff',text:'다음 팀으로 교대',timer:'↔'};
   if(deploymentRetreatActive())return {id:'retreat',text:'설치한 폭탄에서 벗어나세요',timer:((deploymentRetreatUntil-gameNow)/1000).toFixed(1)};
   if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':deathPending()?'사망 연출 중':'충돌 화면 확인',timer:'…'}};
@@ -20,7 +20,9 @@ function updateHUD(){
   ui.timer.setAttribute('aria-label',phase.text+' · '+phase.timer);ui.subhud.textContent=phase.text+(sudden?' · 수위 상승':'');
   ui.wind.textContent=`바람 ${Math.abs(wind*100).toFixed(1)} ${wind>=0?'→':'←'} · ${turnNo}턴`;
   document.getElementById('top').dataset.team=activeTeam;
+  document.getElementById('sessionControls').hidden=!started;
   document.getElementById('ui').classList.toggle('aiming',canShowAimGuide());
+  document.getElementById('ui').classList.toggle('openingView',initialBattleView);
   const angle=Math.round(-aim),preset=document.getElementById('aimPreset');document.getElementById('aimCurrent').textContent=angle+'°';preset.value=[0,30,45,60,90].includes(angle)?String(angle):'custom';
 
   document.querySelectorAll('.weapon').forEach(b=>{
@@ -42,15 +44,25 @@ function focusOn(x,y,instant=false){
   camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*(aimSpace ? .58 : .46),minY,Math.max(minY,WH-ch));
   if(instant){camera.x=camera.targetX;camera.y=camera.targetY}
 }
+function fitBattleView(){
+  const units=teams.flatMap(t=>t.worms).filter(w=>w.alive);if(!units.length)return;
+  const css=getComputedStyle(document.documentElement),safe=k=>parseFloat(css.getPropertyValue('--safe-'+k))||0;
+  const mobile=document.documentElement.dataset.mobile==='true',left=safe('left')+48,right=VW-safe('right')-48;
+  const short=mobile&&VH<=320,upper=safe('top')+(mobile?(short?76:84):155),lower=VH-safe('bottom')-(mobile?(short?100:112):180);
+  const minX=Math.min(...units.map(w=>w.x)),maxX=Math.max(...units.map(w=>w.x)),minY=Math.min(...units.map(w=>w.y)),maxY=Math.max(...units.map(w=>w.y));
+  cameraZoom=Math.max(.02,Math.min(1,(right-left)/Math.max(1,maxX-minX+120),(lower-upper-(short?64:84))/Math.max(40,maxY-minY)));
+  camera.x=(minX+maxX)/2-(left+right)/2/cameraZoom;camera.y=(minY+maxY)/2-(upper+lower+(short?44:64))/2/cameraZoom;
+  camera.targetX=camera.x;camera.targetY=camera.y;camera.manualUntil=0;
+}
 function setCameraZoom(value,sx=VW/2,sy=VH/2){
   if(wormIntro||orientationBlocked)return;
-  injuryZoom=null;
-  const point=worldFromScreen(sx,sy);cameraZoom=clamp(value,Math.min(.35,VW/WW,VH/WH),1.8);
+  injuryZoom=null;initialBattleView=false;
+  const point={x:sx/cameraZoom+camera.x,y:sy/cameraZoom+camera.y};cameraZoom=clamp(value,Math.min(.35,VW/WW,VH/WH),1.8);
   camera.x=point.x-sx/cameraZoom;camera.y=point.y-sy/cameraZoom;clampCamera();camera.manualUntil=Infinity
 }
 function toggleOverview(){if(wormIntro||orientationBlocked)return;overview=!overview;if(overview){setCameraZoom(Math.min(VW/WW,VH/WH));focusOn(WW/2,WH/2,true)}else followWorm();document.getElementById('overviewBtn').textContent=overview?'전투 보기':'전체 맵'}
-function followWorm(){if(wormIntro||orientationBlocked)return;injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
-function panCamera(dx,dy){if(wormIntro||orientationBlocked)return;injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
+function followWorm(){if(wormIntro||orientationBlocked)return;initialBattleView=false;injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
+function panCamera(dx,dy){if(wormIntro||orientationBlocked)return;initialBattleView=false;injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
 function injuryFrame(){
   const victims=injuredWorms.filter(w=>w.alive||deathAnimating(w)||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration);
   if(!victims.length||!presentationPending())return null;
@@ -64,6 +76,7 @@ function injuryFrame(){
 }
 function updateCamera(dt){
   if(wormIntro)return;
+  if(initialBattleView){if(!attackCommitted&&!projectiles.length&&!walkers.length&&!presentationPending()){fitBattleView();return}initialBattleView=false;cameraZoom=1;camera.manualUntil=0}
   if(gameNow<camera.manualUntil||overview)return;
   const blend=1-Math.pow(.002,dt);
   if(injuredWorms.length&&presentationPending()){

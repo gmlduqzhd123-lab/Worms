@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="25">
+<meta name="wormfront-version" content="26">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -39,7 +39,6 @@
 <div id="rotateNotice" hidden role="alert"><div class="rotateKeys"><button data-ys-install type="button" class="homeChip install">📲 설치</button><button data-qr type="button" class="homeChip" aria-label="QR 코드로 접속">📱 QR</button></div><div><span aria-hidden="true">↻</span><h2>스마트폰을 가로로 돌려주세요</h2><p>원활한 플레이를 위해 스마트폰을 가로로 돌려주세요.</p><small>가로로 돌아오면 회전으로 멈춘 게임이 이어집니다.</small></div></div>
 <canvas id="game"></canvas>
 <div id="ui">
-  <div id="helpAccess"><button class="toolBtn" id="guideBtn" aria-label="플레이 가이드">?</button><button class="toolBtn" id="historyBtn" aria-label="대전 기록">기록</button></div>
   <div id="top">
     <div class="card team left"><div class="teamName" id="nameA">플레이어</div><div class="hp"><div id="fillA"></div></div><div class="meta" id="metaA"></div></div>
     <div class="card" id="center"><div id="turnLabel">전투 준비</div><div id="timer">45</div><div id="wind"></div><div id="subhud"></div></div>
@@ -48,17 +47,23 @@
 
   <div id="toast"></div><div id="banner"></div>
   <div id="targetTip">목표 지점을 클릭하세요.</div>
-  <div id="audioControls">
+  <div id="sessionControls" hidden>
     <button class="audioBtn" id="pauseBtn">⏸ 일시정지</button>
+    <button class="audioBtn" id="fullscreenBtn" hidden>전체 화면</button>
+    <button class="audioBtn" id="quitBtn">게임 종료</button>
+  </div>
+  <details id="battleOptions" open><summary class="audioBtn">설정</summary><div id="battleOptionsPanel">
+  <div id="helpAccess"><button class="toolBtn" id="guideBtn" aria-label="플레이 가이드">?</button><button class="toolBtn" id="historyBtn" aria-label="대전 기록">기록</button></div>
+  <div id="audioControls">
     <button class="audioBtn" id="musicBtn">🎵 음악 ON</button>
     <button class="audioBtn" id="sfxBtn">🔊 효과음 ON</button>
-    <button class="audioBtn" id="fullscreenBtn" hidden>전체 화면</button>
     <details id="volumeControls"><summary class="audioBtn">음량</summary><div class="volumePanel">
       <label for="musicVolume">배경음악 <output id="musicVolumeValue" for="musicVolume">18%</output></label><input id="musicVolume" type="range" min="0" max="100" step="1" value="18">
       <label for="sfxVolume">효과음 <output id="sfxVolumeValue" for="sfxVolume">72%</output></label><input id="sfxVolume" type="range" min="0" max="100" step="1" value="72">
     </div></details>
   </div>
   <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">봇 추적</button></div>
+  </div></details>
   <div id="angleControls" aria-label="정밀 각도 조준"><button type="button" class="toolBtn" id="aimMinus" aria-label="조준 각도 1도 낮추기">−1°</button><select id="aimPreset" aria-label="조준 각도 선택"><option value="custom" id="aimCurrent" disabled>45°</option><option value="0">0°</option><option value="30">30°</option><option value="45">45°</option><option value="60">60°</option><option value="90">90°</option></select><button type="button" class="toolBtn" id="aimPlus" aria-label="조준 각도 1도 높이기">+1°</button></div>
   <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="쌍날개팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="쌍날개팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
   <div id="powerBox"><div id="power"></div></div>
@@ -163,5 +168,6 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
 }
 </script>
 <dialog id="creditsDialog" class="gameDialog" aria-labelledby="creditsTitle"><div class="dialogHead"><h2 id="creditsTitle">조준! 각도왕 제작 정보</h2><button class="btn ghost" id="creditsClose">닫기</button></div><p>기획·개발: 엽쌤</p><p>각도봇·도구 이미지: 이 프로젝트를 위해 AI로 제작하고 편집했습니다.</p><p>배경음악: Bouncy Tactical Groove · Suno 유료 요금제로 제작·다운로드한 사용자 제공 곡</p><p>효과음: 직접 합성한 기계음·알림·충돌음</p><p>각도는 수평선을 0°로 읽습니다. 30°·45°·60°·90°를 선택하거나 ±1°로 세밀하게 조준해 보세요. Shift+↑/↓도 1°씩 바꿉니다.</p></dialog>
+<dialog id="quitDialog" class="gameDialog" aria-labelledby="quitTitle"><h2 id="quitTitle">게임을 종료할까요?</h2><p>현재 대전을 끝내고 시작 화면으로 돌아갑니다. 진행 중인 대전은 저장되지 않으며 기존 설정과 완료한 대전 기록은 유지됩니다.</p><div class="dialogActions"><button type="button" class="btn ghost" id="quitCancel">계속 플레이</button><button type="button" class="btn primary" id="quitConfirm">게임 종료</button></div></dialog>
 </body>
 </html>

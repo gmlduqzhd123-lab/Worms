@@ -1,11 +1,13 @@
 'use strict';
 
 function resize(){
-  DPR=Math.max(1,Math.min(2,devicePixelRatio||1));VW=innerWidth;VH=innerHeight;
+  const view=window.visualViewport,usable=view&&Math.abs(view.scale-1)<.01;
+  DPR=Math.max(1,Math.min(2,devicePixelRatio||1));VW=Math.round(usable?view.width:innerWidth);VH=Math.round(usable?view.height:innerHeight);
+  const root=document.documentElement;root.style.setProperty('--app-width',VW+'px');root.style.setProperty('--app-height',VH+'px');root.style.setProperty('--app-left',(usable?view.offsetLeft:0)+'px');root.style.setProperty('--app-top',(usable?view.offsetTop:0)+'px');
   canvas.width=Math.round(VW*DPR);canvas.height=Math.round(VH*DPR);canvas.style.width=VW+'px';canvas.style.height=VH+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
   mini.width=500;mini.height=130;
   if(!graphicsInitialized)return;
-  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(wormIntro)focusIntroWorm();else clampCamera();
+  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(wormIntro)focusIntroWorm();else if(initialBattleView)fitBattleView();else clampCamera();
 }
 addEventListener('resize',resize);
 

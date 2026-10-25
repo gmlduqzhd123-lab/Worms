@@ -33,7 +33,7 @@ function current(){
 function isCPU(){return mode==='cpu'&&activeTeam===1}
 
 function startGame(){
-  wormIntro=null;pauseIntent=false;
+  wormIntro=null;pauseIntent=false;initialBattleView=false;
   injuredWorms=[];injuryZoom=null;shotFocus=null;cameraShake=0;deploymentRetreatUntil=0;
   cpuWalk=null;cpuStatus='';saveSettings();beginMatchRecord();
   stopSFX();ensureAudio();
@@ -50,18 +50,18 @@ function startGame(){
 }
 
 function focusIntroWorm(){
-  if(!wormIntro)return;const w=wormIntro.worms[wormIntro.index];cameraZoom=1;overview=false;camera.manualUntil=0;focusOn(w.x,w.y,true);
+  if(!wormIntro)return;if(wormIntro.overview){fitBattleView();document.getElementById('introName').textContent='아군과 적 NPC의 위치를 함께 확인하세요.';document.getElementById('introProgress').textContent='전체';return}const w=wormIntro.worms[wormIntro.index];cameraZoom=1;overview=false;camera.manualUntil=0;focusOn(w.x,w.y,true);
   document.getElementById('introName').textContent=teams[w.team].name+' · '+w.name+' · HP '+w.hp;
   document.getElementById('introProgress').textContent=(wormIntro.index+1)+' / '+wormIntro.worms.length;
 }
 function beginWormIntro(){
   last=performance.now();
-  wormIntro={worms:teams.flatMap(t=>t.worms).filter(w=>w.alive),index:0,elapsed:0};
+  wormIntro={worms:teams.flatMap(t=>t.worms).filter(w=>w.alive),index:0,elapsed:0,overview:true};
   turnLocked=true;clearInput();document.getElementById('ui').classList.add('introducing');document.getElementById('wormIntro').hidden=false;focusIntroWorm();updateHUD();
 }
 function advanceWormIntro(dt){
   if(!wormIntro||paused||document.hidden)return;wormIntro.elapsed+=dt;
-  while(wormIntro&&wormIntro.elapsed+1e-9>=2){wormIntro.elapsed-=2;wormIntro.index++;if(wormIntro.index>=wormIntro.worms.length){completeWormIntro();return}focusIntroWorm()}
+  while(wormIntro&&wormIntro.elapsed+1e-9>=2){wormIntro.elapsed-=2;if(wormIntro.overview){wormIntro.overview=false;focusIntroWorm();continue}wormIntro.index++;if(wormIntro.index>=wormIntro.worms.length){completeWormIntro();return}focusIntroWorm()}
 }
 function completeWormIntro(){
   if(!wormIntro)return;wormIntro=null;last=performance.now();physicsAccumulator=0;clearInput();document.getElementById('wormIntro').hidden=true;document.getElementById('ui').classList.remove('introducing');beginTurn();
@@ -74,7 +74,19 @@ function beginTurn(){
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
   const w=current();turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
+  initialBattleView=turnNo===1;if(initialBattleView)fitBattleView();
   if(isCPU())scheduleAI()
+}
+
+function returnToStart(){
+  clearInput();stopSFX();stopMusic();combatTasks=[];pendingEmissions=0;aiBusy=false;aiTimer=null;cpuWalk=null;cpuStatus='';
+  started=false;gameOver=true;paused=false;pauseIntent=false;wormIntro=null;initialBattleView=false;turnLocked=true;turnEnding=false;attackCommitted=false;physicsAccumulator=0;
+  projectiles=[];walkers=[];particles=[];explosions=[];damageLabels=[];injuredWorms=[];shotFocus=null;injuryZoom=null;rope=null;jetpack=false;deploymentRetreatUntil=0;retreatUntil=0;matchId='';matchRecorded=false;finishTarget();
+  document.getElementById('wormIntro').hidden=true;document.getElementById('ui').classList.remove('introducing','aiming');document.getElementById('battleOptions').open=!isMobileDevice();
+  document.querySelector('#panel h1').textContent='조준! 각도왕';document.querySelector('#panel p').textContent='각도를 읽고, 전략을 세우자!';document.getElementById('matchSummary').hidden=true;
+  clearTimeout(toast.t);clearTimeout(bigBanner.t);ui.toast.classList.remove('show');ui.banner.classList.remove('show');ui.overlay.style.display='flex';updateHUD();
+  if(document.fullscreenElement||document.webkitFullscreenElement){try{const result=(document.exitFullscreen||document.webkitExitFullscreen)?.call(document);result?.catch(()=>{})}catch{}}
+  document.getElementById('start').focus();
 }
 function nextTurn(delay=900){
   if(turnEnding||gameOver||wormIntro)return;

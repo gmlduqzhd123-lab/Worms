@@ -2,9 +2,10 @@
 
 function isMobileDevice(){return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>0&&matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<=1024)}
 function syncMobileOrientation(){
-  const mobile=isMobileDevice(),blocked=mobile&&innerHeight>innerWidth,changed=blocked!==orientationBlocked;
+  const mobile=isMobileDevice(),blocked=mobile&&VH>VW,changed=blocked!==orientationBlocked;
   orientationBlocked=blocked;document.documentElement.dataset.mobile=String(mobile);document.documentElement.dataset.portrait=String(blocked);
   document.getElementById('rotateNotice').hidden=!blocked;document.getElementById('ui').inert=blocked;
+  const options=document.getElementById('battleOptions'),layout=mobile?'mobile':'desktop';if(options.dataset.layout!==layout){options.open=!mobile;options.dataset.layout=layout}
   if(started&&!gameOver&&(changed||(blocked&&!paused)))applyGamePause(pauseIntent||blocked);
   updateFullscreenButton();
 }
@@ -27,7 +28,7 @@ addEventListener('keydown',e=>{
   if(e.target.closest?.('#audioControls,#homeAudioControls,#angleControls'))return;
   if(nativeKeyboardTarget(e))return;
   if(wormIntro&&e.key!=='Escape')return;
-  if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open||document.getElementById('creditsDialog').open)return;
+  if(document.querySelector('dialog[open]'))return;
   if(e.shiftKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(!e.repeat)nudgeAim(e.key==='ArrowUp'?1:-1);return}
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
@@ -44,7 +45,7 @@ document.addEventListener('click',e=>{const button=e.target.closest?.('button');
 
 const cameraPointers=new Map();let dragCamera=null,pinchDistance=0;
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
-canvas.addEventListener('wheel',e=>{e.preventDefault();if(!wormIntro&&!orientationBlocked)setCameraZoom(cameraZoom*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY)},{passive:false});
+canvas.addEventListener('wheel',e=>{e.preventDefault();const p=viewportPoint(e.clientX,e.clientY);if(!wormIntro&&!orientationBlocked)setCameraZoom(cameraZoom*(e.deltaY<0?1.15:1/1.15),p.x,p.y)},{passive:false});
 canvas.addEventListener('pointerdown',e=>{
   if(wormIntro||orientationBlocked)return;
   cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});canvas.setPointerCapture(e.pointerId);
@@ -53,7 +54,7 @@ canvas.addEventListener('pointerdown',e=>{
 });
 canvas.addEventListener('pointermove',e=>{
   if(!cameraPointers.has(e.pointerId))return;cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-  if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()],d=dist(a.x,a.y,b.x,b.y);if(pinchDistance>0)setCameraZoom(cameraZoom*d/pinchDistance,(a.x+b.x)/2,(a.y+b.y)/2);pinchDistance=d;dragCamera.moved=true;return}
+  if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()],d=dist(a.x,a.y,b.x,b.y),p=viewportPoint((a.x+b.x)/2,(a.y+b.y)/2);if(pinchDistance>0)setCameraZoom(cameraZoom*d/pinchDistance,p.x,p.y);pinchDistance=d;dragCamera.moved=true;return}
   if(!dragCamera)return;
   if(dist(dragCamera.startX,dragCamera.startY,e.clientX,e.clientY)>6)dragCamera.moved=true;
   if(dragCamera.moved)panCamera(dragCamera.x-e.clientX,dragCamera.y-e.clientY);
@@ -77,6 +78,11 @@ document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paus
 document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!musicEnabled));
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
 document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();startGame()});
+document.getElementById('quitBtn').addEventListener('click',()=>{if(started)openGameDialog(document.getElementById('quitDialog'))});
+document.getElementById('quitCancel').addEventListener('click',()=>document.getElementById('quitDialog').close());
+document.getElementById('quitDialog').addEventListener('close',()=>closeGameDialog());
+document.getElementById('quitConfirm').addEventListener('click',()=>{returnToStart();document.getElementById('quitDialog').close()});
+document.getElementById('battleOptions').addEventListener('click',e=>{if(document.documentElement.dataset.mobile==='true'&&e.target.closest('#helpAccess button,#cameraControls button'))document.getElementById('battleOptions').open=false});
 document.getElementById('aimMinus').addEventListener('click',()=>nudgeAim(-1));
 document.getElementById('aimPlus').addEventListener('click',()=>nudgeAim(1));
 document.getElementById('aimPreset').addEventListener('change',e=>{if(e.target.value!=='custom')setAimElevation(Number(e.target.value))});
