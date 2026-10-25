@@ -27,4 +27,16 @@ scripts/verify-angle-guide.cjs로 Edge 156.0.4314.42에서 43개 검사를 통�
 - JavaScript 오류와 검사 대상 리소스 누락 없음.
 - weapons.js, ai.js, physics.js, input.js, audio.js, persistence.js는 보존본과 해시 일치.
 
-모바일은 브라우저 에뮬레이션이며 실제 스마트폰이나 iOS Safari 검수는 수행하지 않았습니다. 이번 검사는 각도 표시와 관련 조준·발사 흐름에 집중했으며 전체 무기의 한 경기 완주를 새로 검수한 것은 아닙니다. 공개 배포 결과는 이어서 기록합니다.
+모바일은 브라우저 에뮬레이션이며 실제 스마트폰이나 iOS Safari 검수는 수행하지 않았습니다. 이번 검사는 각도 표시와 관련 조준·발사 흐름에 집중했으며 전체 무기의 한 경기 완주를 새로 검수한 것은 아닙니다.
+
+## 공개 배포 확인
+
+GitHub Pages 작업 40190335054가 성공했습니다.
+
+- 실행 주소: https://gmlduqzhd123-lab.github.io/Worms/
+- 배포 코드: 5dab207fcaecddbf70b33e687d49fc87b2ad9c2d
+- 작업: https://github.com/gmlduqzhd123-lab/Worms/actions/runs/40190335054
+- 공개 브라우저 검사: 50개 통과. JavaScript 오류·검사 대상 리소스 누락 없음.
+- 결과 및 화면: live/results.json, live/desktop-45.png, live/desktop-left.png, live/mobile-844x390.png, live/mobile-568x320.png, live/offline-angle.png
+
+공개 데스크톱과 모바일 에뮬레이션에서 같은 조준·발사·표시 검사를 통과했고 공개 단일 HTML에서도 각도 입력 갱신을 확인했습니다. index.html, graphics.js, render.js, ui.js, game.css, sw.js, offline/wormfront.html의 HTTP 200과 배포 커밋 파일의 SHA-256 일치를 확인했습니다. 줄바꿈을 정규화하는 Git 게시 특성을 반영해 공개 파일은 커밋 원문과 비교합니다.
