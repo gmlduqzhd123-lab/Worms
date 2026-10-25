@@ -27,4 +27,9 @@
 
 ## 공개 배포
 
-배포 후 공개 버전·파일 해시·브라우저 실행 결과를 이어서 기록합니다.
+- 코드 커밋: `1ebc0730c593cfcae7ffa3e9bdfeb34d0adb3080`.
+- [Pages 배포 실행](https://github.com/gmlduqzhd123-lab/Worms/actions/runs/40196891479): completed / success. 공개 HTTP 200, HTML 버전 26 확인.
+- [새 버전 실행](https://gmlduqzhd123-lab.github.io/Worms/?v=26).
+- `node scripts/verify-mobile-fit.cjs --live`: 55개 통과, 실패 0, JavaScript 오류 0, 검사 대상 리소스 누락 0. 결과 `live/results.json`.
+- 공개 사이트에서도 모바일 4가지 가로 크기·회전·종료·재시작·전체 소개·첫 차례 전체 보기·표시 영역 모의 축소·노치 모의 여백·전체 화면 요청 거절·설정·포탄 추적·공개 단일 HTML을 검사했습니다. index, CSS, terrain/ui/turns/input 코드, 공개 단일 HTML, 서비스 워커의 8개 파일 해시가 배포 커밋과 일치합니다. Git의 줄바꿈 정규화를 고려해 Git blob 바이트와 비교했습니다.
+- 공개 실행 화면은 `live/844x390-battle.png`, `live/740x280-battle.png`, `live/notch-safe-area.png`, `live/desktop-battle.png` 등에 보존합니다. 모바일 에뮬레이션을 이번 버전의 실기기 검수로 표시하지 않습니다.
