@@ -2,7 +2,7 @@ require('./test-presentation.cjs')();
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live');
-const folder=path.join(root,'verification',live?'live-stage20':'stage20');fs.mkdirSync(folder,{recursive:true});
+const folder=process.env.WORMFRONT_QA_DIR?path.resolve(root,process.env.WORMFRONT_QA_DIR):path.join(root,'verification',live?'live-stage20':'stage20');fs.mkdirSync(folder,{recursive:true});
 const tests=[],errors=[],measurements={};let browser;
 const server=http.createServer((req,res)=>{
  const relative=decodeURIComponent(new URL(req.url,'http://localhost').pathname).slice(1)||'index.html';

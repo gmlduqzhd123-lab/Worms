@@ -21,6 +21,7 @@ function updateHUD(){
   ui.wind.textContent=`바람 ${Math.abs(wind*100).toFixed(1)} ${wind>=0?'→':'←'} · ${turnNo}턴`;
   document.getElementById('top').dataset.team=activeTeam;
   document.getElementById('ui').classList.toggle('aiming',canShowAimGuide());
+  const angle=Math.round(-aim),preset=document.getElementById('aimPreset');document.getElementById('aimCurrent').textContent=angle+'°';preset.value=[0,30,45,60,90].includes(angle)?String(angle):'custom';
 
   document.querySelectorAll('.weapon').forEach(b=>{
     const id=b.dataset.w;b.classList.toggle('active',id===selected);
@@ -36,7 +37,7 @@ function clampCamera(){
   camera.targetX=camera.x;camera.targetY=camera.y
 }
 function focusOn(x,y,instant=false){
-  const cw=VW/cameraZoom,ch=VH/cameraZoom,minX=Math.min(0,(WW-cw)/2),minY=Math.min(0,(WH-ch)/2);
+  const cw=VW/cameraZoom,ch=VH/cameraZoom,minX=Math.min(0,(WW-cw)/2),minY=Math.min(0,(WH-ch)/2,projectiles.length?y-ch*.46:0);
   const aimSpace=VH<=360&&VW>VH&&matchMedia('(pointer:coarse)').matches&&canShowAimGuide();
   camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*(aimSpace ? .58 : .46),minY,Math.max(minY,WH-ch));
   if(instant){camera.x=camera.targetX;camera.y=camera.targetY}

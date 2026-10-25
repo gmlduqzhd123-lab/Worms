@@ -1,0 +1,945 @@
+{
+  "browser": "156.0.4314.42",
+  "tests": [
+    {
+      "name": "Initial page does not autoplay audio",
+      "pass": true
+    },
+    {
+      "name": "Sound catalogue contains every existing and newly connected gameplay cue",
+      "pass": true
+    },
+    {
+      "name": "Synthesized farewell has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized farewell decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized explosion has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized explosion decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized rocketExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized rocketExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized grenadeExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized grenadeExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized dynamiteExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized dynamiteExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized holyBlast has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized holyBlast decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mineExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mineExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized clusterExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized clusterExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized smallExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized smallExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mortarExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mortarExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized airstrikeExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized airstrikeExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sheepExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sheepExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized drillExplode has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized drillExplode decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized launch has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized launch decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized throw has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized throw decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized homing has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized homing decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mortar has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mortar decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized shotgun has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized shotgun decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jump has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jump decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized pickup has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized pickup decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized turn has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized turn decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized rope has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized rope decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized ropeRelease has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized ropeRelease decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mine has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized mine decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized fuse has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized fuse decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized melee has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized melee decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized punch has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized punch decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized hurt has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized hurt decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized splash has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized splash decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized teleport has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized teleport decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized holy has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized holy decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized airstrike has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized airstrike decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sheep has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sheep decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jetpack has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jetpack decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jetpackStop has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized jetpackStop decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized drill has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized drill decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sudden has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized sudden decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized victory has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized victory decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized click has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized click decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized step has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized step decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized land has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized land decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized bounce has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized bounce decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized place has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized place decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Synthesized girder has finite audible output below full-scale clipping",
+      "pass": true
+    },
+    {
+      "name": "Synthesized girder decays before the end of its render window",
+      "pass": true
+    },
+    {
+      "name": "Simultaneous explosions and weapon effects remain finite and below full-scale clipping at 100%",
+      "pass": true
+    },
+    {
+      "name": "All effects are silent at 0%",
+      "pass": true
+    },
+    {
+      "name": "All effects are silent while SFX is OFF",
+      "pass": true
+    },
+    {
+      "name": "Real AudioContext explosion produces finite audible output",
+      "pass": true
+    },
+    {
+      "name": "Prominent weapon sound ducks selected background-music volume",
+      "pass": true
+    },
+    {
+      "name": "Background music recovers to its selected volume",
+      "pass": true
+    },
+    {
+      "name": "Quiet movement feedback does not repeatedly duck background music",
+      "pass": true
+    },
+    {
+      "name": "Real AudioContext SFX 0% remains silent",
+      "pass": true
+    },
+    {
+      "name": "Real AudioContext SFX OFF remains silent",
+      "pass": true
+    },
+    {
+      "name": "Jetpack engine remains audible while thrust is active",
+      "pass": true
+    },
+    {
+      "name": "Jetpack loop ends when flight ends",
+      "pass": true
+    },
+    {
+      "name": "Drill motor remains audible throughout the active drill projectile",
+      "pass": true
+    },
+    {
+      "name": "Drill loop ends when its projectile disappears",
+      "pass": true
+    },
+    {
+      "name": "stopSFX removes both scheduled effects and continuous engines",
+      "pass": true
+    },
+    {
+      "name": "Switching SFX OFF during thrust removes the continuous sound",
+      "pass": true
+    },
+    {
+      "name": "Enabling SFX restores an active engine through the state update",
+      "pass": true
+    },
+    {
+      "name": "Trusted pause button stops all active audio effects",
+      "pass": true
+    },
+    {
+      "name": "Paused gameplay cannot recreate effect voices",
+      "pass": true
+    },
+    {
+      "name": "Resume restores only currently active continuous effects",
+      "pass": true
+    },
+    {
+      "name": "Restart removes previous audio events and continuous engines",
+      "pass": true
+    },
+    {
+      "name": "Completed one-shot voices are removed after their envelopes end",
+      "pass": true
+    },
+    {
+      "name": "Repeated movement and overlapping weapons keep voice and node counts bounded",
+      "pass": true
+    },
+    {
+      "name": "Sound variation does not consume the gameplay Math.random sequence",
+      "pass": true
+    },
+    {
+      "name": "Suspending AudioContext releases continuous and scheduled sources",
+      "pass": true
+    },
+    {
+      "name": "Resuming AudioContext does not replay stale effects",
+      "pass": true
+    },
+    {
+      "name": "Closed AudioContext is recreated with the decoded music buffer retained",
+      "pass": true
+    },
+    {
+      "name": "Recreated AudioContext can output a new weapon effect",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors during audio verification",
+      "pass": true
+    }
+  ],
+  "measurements": {
+    "farewell": {
+      "peak": 0.022184200584888458,
+      "rms": 0.001179172305318946,
+      "finite": true,
+      "activeSamples": 21014,
+      "lastAudibleSampleSeconds": 0.26857142857142857,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "explosion": {
+      "peak": 0.22312185168266296,
+      "rms": 0.015643563159730187,
+      "finite": true,
+      "activeSamples": 56644,
+      "lastAudibleSampleSeconds": 0.6591383219954648,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "rocketExplode": {
+      "peak": 0.2400202602148056,
+      "rms": 0.015439528995987946,
+      "finite": true,
+      "activeSamples": 56676,
+      "lastAudibleSampleSeconds": 0.6591156462585034,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "grenadeExplode": {
+      "peak": 0.17555910348892212,
+      "rms": 0.011487514963754277,
+      "finite": true,
+      "activeSamples": 45304,
+      "lastAudibleSampleSeconds": 0.5291383219954648,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "dynamiteExplode": {
+      "peak": 0.22516803443431854,
+      "rms": 0.023494209108125465,
+      "finite": true,
+      "activeSamples": 75060,
+      "lastAudibleSampleSeconds": 0.8691383219954648,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "holyBlast": {
+      "peak": 0.24796655774116516,
+      "rms": 0.024701954212821703,
+      "finite": true,
+      "activeSamples": 85668,
+      "lastAudibleSampleSeconds": 0.9891383219954648,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "mineExplode": {
+      "peak": 0.1328166276216507,
+      "rms": 0.009089907447340399,
+      "finite": true,
+      "activeSamples": 37430,
+      "lastAudibleSampleSeconds": 0.4391383219954649,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "clusterExplode": {
+      "peak": 0.1381969451904297,
+      "rms": 0.010120748080240808,
+      "finite": true,
+      "activeSamples": 41762,
+      "lastAudibleSampleSeconds": 0.48913832199546486,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "smallExplode": {
+      "peak": 0.060532018542289734,
+      "rms": 0.003306932969744008,
+      "finite": true,
+      "activeSamples": 32432,
+      "lastAudibleSampleSeconds": 0.3841043083900227,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "mortarExplode": {
+      "peak": 0.18569301068782806,
+      "rms": 0.015594334840338666,
+      "finite": true,
+      "activeSamples": 61022,
+      "lastAudibleSampleSeconds": 0.7090249433106576,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "airstrikeExplode": {
+      "peak": 0.18046529591083527,
+      "rms": 0.01200224857613627,
+      "finite": true,
+      "activeSamples": 49632,
+      "lastAudibleSampleSeconds": 0.5791383219954649,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "sheepExplode": {
+      "peak": 0.163268581032753,
+      "rms": 0.014553498918775219,
+      "finite": true,
+      "activeSamples": 56590,
+      "lastAudibleSampleSeconds": 0.6591383219954648,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "drillExplode": {
+      "peak": 0.13538400828838348,
+      "rms": 0.008828512527835964,
+      "finite": true,
+      "activeSamples": 40826,
+      "lastAudibleSampleSeconds": 0.47913832199546486,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "launch": {
+      "peak": 0.07678436487913132,
+      "rms": 0.0031255263440812466,
+      "finite": true,
+      "activeSamples": 25238,
+      "lastAudibleSampleSeconds": 0.3239229024943311,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "throw": {
+      "peak": 0.01958661526441574,
+      "rms": 0.0005380636269434968,
+      "finite": true,
+      "activeSamples": 11886,
+      "lastAudibleSampleSeconds": 0.1539455782312925,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "homing": {
+      "peak": 0.1609639823436737,
+      "rms": 0.00637568640119723,
+      "finite": true,
+      "activeSamples": 33902,
+      "lastAudibleSampleSeconds": 0.4233106575963719,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "mortar": {
+      "peak": 0.0829584151506424,
+      "rms": 0.0045846721008281355,
+      "finite": true,
+      "activeSamples": 40420,
+      "lastAudibleSampleSeconds": 0.4741269841269841,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "shotgun": {
+      "peak": 0.051486045122146606,
+      "rms": 0.002717337226769923,
+      "finite": true,
+      "activeSamples": 30004,
+      "lastAudibleSampleSeconds": 0.37430839002267574,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "jump": {
+      "peak": 0.02114255353808403,
+      "rms": 0.001078705009443475,
+      "finite": true,
+      "activeSamples": 12264,
+      "lastAudibleSampleSeconds": 0.1539455782312925,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "pickup": {
+      "peak": 0.11166470497846603,
+      "rms": 0.007138200795226888,
+      "finite": true,
+      "activeSamples": 30862,
+      "lastAudibleSampleSeconds": 0.3640816326530612,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "turn": {
+      "peak": 0.0900736078619957,
+      "rms": 0.004843278008205379,
+      "finite": true,
+      "activeSamples": 28990,
+      "lastAudibleSampleSeconds": 0.3441496598639456,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "rope": {
+      "peak": 0.5596437454223633,
+      "rms": 0.001894693203166654,
+      "finite": true,
+      "activeSamples": 11396,
+      "lastAudibleSampleSeconds": 0.14414965986394557,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "ropeRelease": {
+      "peak": 0.005067292135208845,
+      "rms": 0.0001458041148460095,
+      "finite": true,
+      "activeSamples": 7870,
+      "lastAudibleSampleSeconds": 0.10403628117913832,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "mine": {
+      "peak": 0.06908735632896423,
+      "rms": 0.002916408963178576,
+      "finite": true,
+      "activeSamples": 17446,
+      "lastAudibleSampleSeconds": 0.4391383219954649,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "fuse": {
+      "peak": 0.008677075617015362,
+      "rms": 0.0003143567485589365,
+      "finite": true,
+      "activeSamples": 11320,
+      "lastAudibleSampleSeconds": 0.14396825396825397,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "melee": {
+      "peak": 0.0379721075296402,
+      "rms": 0.0015278940125996942,
+      "finite": true,
+      "activeSamples": 11422,
+      "lastAudibleSampleSeconds": 0.14414965986394557,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "punch": {
+      "peak": 0.1118173897266388,
+      "rms": 0.0061258030710210805,
+      "finite": true,
+      "activeSamples": 20652,
+      "lastAudibleSampleSeconds": 0.2491156462585034,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "hurt": {
+      "peak": 0.006254453212022781,
+      "rms": 0.00030693776069242904,
+      "finite": true,
+      "activeSamples": 8778,
+      "lastAudibleSampleSeconds": 0.11412698412698413,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "splash": {
+      "peak": 0.13618820905685425,
+      "rms": 0.008055800542629499,
+      "finite": true,
+      "activeSamples": 46176,
+      "lastAudibleSampleSeconds": 0.5441043083900227,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "teleport": {
+      "peak": 0.07173658162355423,
+      "rms": 0.006099797076602404,
+      "finite": true,
+      "activeSamples": 46658,
+      "lastAudibleSampleSeconds": 0.5439455782312925,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "holy": {
+      "peak": 0.06470196694135666,
+      "rms": 0.004980683517353761,
+      "finite": true,
+      "activeSamples": 35720,
+      "lastAudibleSampleSeconds": 0.4191156462585034,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "airstrike": {
+      "peak": 0.06997033953666687,
+      "rms": 0.005140344351310327,
+      "finite": true,
+      "activeSamples": 82238,
+      "lastAudibleSampleSeconds": 0.9739682539682539,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "sheep": {
+      "peak": 0.04103879630565643,
+      "rms": 0.0011283949403373833,
+      "finite": true,
+      "activeSamples": 19418,
+      "lastAudibleSampleSeconds": 0.26414965986394556,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "jetpack": {
+      "peak": 0.05702167749404907,
+      "rms": 0.01647354835700552,
+      "finite": true,
+      "samples": 40960
+    },
+    "jetpackStop": {
+      "peak": 0.010157455690205097,
+      "rms": 0.0004348162230839044,
+      "finite": true,
+      "activeSamples": 14204,
+      "lastAudibleSampleSeconds": 0.18396825396825398,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "drill": {
+      "peak": 0.03648155927658081,
+      "rms": 0.011335729150590279,
+      "finite": true,
+      "samples": 40960
+    },
+    "sudden": {
+      "peak": 0.09374850988388062,
+      "rms": 0.005811523178246815,
+      "finite": true,
+      "activeSamples": 57852,
+      "lastAudibleSampleSeconds": 0.7041496598639456,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "victory": {
+      "peak": 0.09383425861597061,
+      "rms": 0.00909673934675051,
+      "finite": true,
+      "activeSamples": 77040,
+      "lastAudibleSampleSeconds": 0.8939909297052154,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "click": {
+      "peak": 0.0022064424119889736,
+      "rms": 0.00006671863157563982,
+      "finite": true,
+      "activeSamples": 3952,
+      "lastAudibleSampleSeconds": 0.0591156462585034,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "step": {
+      "peak": 0.0020703563932329416,
+      "rms": 0.00008523919578904625,
+      "finite": true,
+      "activeSamples": 5756,
+      "lastAudibleSampleSeconds": 0.0790249433106576,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "land": {
+      "peak": 0.010395452380180359,
+      "rms": 0.0006438137881110672,
+      "finite": true,
+      "activeSamples": 10584,
+      "lastAudibleSampleSeconds": 0.13401360544217686,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "bounce": {
+      "peak": 0.005523189436644316,
+      "rms": 0.00016550734170545347,
+      "finite": true,
+      "activeSamples": 6998,
+      "lastAudibleSampleSeconds": 0.09401360544217686,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "place": {
+      "peak": 0.004900455940514803,
+      "rms": 0.0002043285929953584,
+      "finite": true,
+      "activeSamples": 7878,
+      "lastAudibleSampleSeconds": 0.10399092970521542,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "girder": {
+      "peak": 0.034959934651851654,
+      "rms": 0.0017309175787689549,
+      "finite": true,
+      "activeSamples": 19022,
+      "lastAudibleSampleSeconds": 0.2342403628117914,
+      "sampleRate": 44100,
+      "seconds": 3.5
+    },
+    "overlap": {
+      "peak": 0.41307270526885986,
+      "rms": 0.02561167444623842,
+      "finite": true,
+      "activeSamples": 77284,
+      "lastAudibleSampleSeconds": 0.8939909297052154,
+      "sampleRate": 44100,
+      "seconds": 4
+    },
+    "runtimeExplosion": {
+      "peak": 0.3231164216995239,
+      "rms": 0.03290276256569618,
+      "finite": true,
+      "samples": 106496
+    },
+    "runtimeZero": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 30720
+    },
+    "runtimeOff": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 30720
+    },
+    "jetpackEnded": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 28672
+    },
+    "drillEnded": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 30720
+    },
+    "stopped": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 34816
+    },
+    "mutedLoop": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 24576
+    },
+    "paused": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 28672
+    },
+    "voiceStorm": {
+      "repeated": 1,
+      "events": 6,
+      "nodes": 123
+    },
+    "afterResume": {
+      "peak": 0,
+      "rms": 0,
+      "finite": true,
+      "samples": 30720
+    },
+    "recreatedContext": {
+      "peak": 0.11182072013616562,
+      "rms": 0.014836963292511936,
+      "finite": true,
+      "samples": 57344
+    }
+  },
+  "errors": [],
+  "scope": "Real Edge AudioContext output and controlled OfflineAudioContext synthesis. Physical speaker listening and perceptual similarity to original game audio are not verified."
+}

@@ -163,9 +163,9 @@ function playSFX(name){
     case 'hurt': tone(290*v,.09,'triangle',.055,0,'sfx',175*v);noise(.055,.035,850,0,'bandpass');break;
     case 'splash': noise(.13,.18,1600,0,'bandpass',600);noise(.48,.10,4200,.04,'highpass');[0,.06,.13,.23].forEach((t,i)=>tone(390-i*48,.11,'sine',.035,t,'sfx',110+i*30));break;
     case 'teleport': [1,1.5,2].forEach((f,i)=>tone(250*f,.34,'sine',.04,i*.025,'sfx',1700*f));noise(.20,.055,3000,.2,'bandpass',700);tone(1080,.18,'sine',.055,.34,'sfx',360);break;
-    case 'holy': [523,659,784,1046].forEach((f,i)=>{tone(f,.8,'sine',.045,i*.035);tone(f*2,.65,'triangle',.009,i*.035)});break;
+    case 'holy': [880,1320,1760,2200].forEach((f,i)=>{tone(f,.17,'sine',.04,i*.075);tone(f*1.01,.09,'triangle',.008,i*.075)});break;
     case 'airstrike': noise(.95,.11,400,0,'bandpass',1600);tone(95,.85,'sawtooth',.045,0,'sfx',150);tone(99,.85,'sawtooth',.025,.015,'sfx',154);noise(.35,.05,1900,.55,'bandpass',500);break;
-    case 'sheep': [0,.09,.18].forEach((t,i)=>{tone(255-i*16,.12,'sawtooth',.035,t,'sfx',330-i*48);tone(765-i*48,.11,'sine',.019,t,'sfx',900-i*100)});break;
+    case 'sheep': [0,.065,.13,.195].forEach((t,i)=>{noise(.022,.035,2200+i*180,t,'bandpass');tone(420+i*90,.045,'triangle',.024,t,'sfx',300+i*70)});break;
     case 'jetpack': noise(.12,.10,1700,0,'bandpass');tone(95,.12,'triangle',.045,0,'sfx',155);break;
     case 'jetpackStop': noise(.16,.05,1800,0,'bandpass',200);tone(120,.15,'triangle',.03,0,'sfx',45);break;
     case 'drill': noise(.08,.085,1800,0,'bandpass');tone(120,.12,'square',.04,0,'sfx',77);break;

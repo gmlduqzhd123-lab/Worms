@@ -7,225 +7,415 @@
   "icons": {
     "bazooka": {
       "id": "bazooka",
-      "file": "item-bazooka.png",
+      "file": "tool-bazooka.png",
+      "width": 256,
+      "height": 205,
       "bounds": {
-        "x": 16,
-        "y": 335,
-        "w": 1229,
-        "h": 600
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 205
       },
-      "source": "source-11.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 0,
+      "sourceCrop": {
+        "left": 20,
+        "top": 52,
+        "width": 376,
+        "height": 301
+      }
     },
     "grenade": {
       "id": "grenade",
-      "file": "item-grenade.png",
+      "file": "tool-grenade.png",
+      "width": 256,
+      "height": 200,
       "bounds": {
-        "x": 251,
-        "y": 82,
-        "w": 766,
-        "h": 1106
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 200
       },
-      "source": "source-12.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 1,
+      "sourceCrop": {
+        "left": 396,
+        "top": 64,
+        "width": 361,
+        "height": 282
+      }
     },
     "sacred": {
       "id": "sacred",
-      "file": "item-sacred.png",
+      "file": "tool-sacred.png",
+      "width": 212,
+      "height": 256,
       "bounds": {
-        "x": 48,
-        "y": 31,
-        "w": 1158,
-        "h": 1165
+        "x": 0,
+        "y": 0,
+        "w": 212,
+        "h": 256
       },
-      "source": "source-13.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 2,
+      "sourceCrop": {
+        "left": 840,
+        "top": 31,
+        "width": 302,
+        "height": 365
+      }
     },
     "rope": {
       "id": "rope",
-      "file": "item-rope.png",
+      "file": "tool-rope.png",
+      "width": 256,
+      "height": 200,
       "bounds": {
-        "x": 9,
-        "y": 338,
-        "w": 1236,
-        "h": 670
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 200
       },
-      "source": "source-14.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 3,
+      "sourceCrop": {
+        "left": 1216,
+        "top": 73,
+        "width": 365,
+        "height": 285
+      }
     },
     "sheep": {
       "id": "sheep",
-      "file": "item-sheep.png",
+      "file": "tool-sheep.png",
+      "width": 233,
+      "height": 256,
       "bounds": {
-        "x": 72,
-        "y": 97,
-        "w": 1135,
-        "h": 1030
+        "x": 0,
+        "y": 0,
+        "w": 233,
+        "h": 256
       },
-      "source": "source-15.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 4,
+      "sourceCrop": {
+        "left": 1624,
+        "top": 18,
+        "width": 325,
+        "height": 357
+      }
     },
     "dynamite": {
       "id": "dynamite",
-      "file": "item-dynamite.png",
+      "file": "tool-dynamite.png",
+      "width": 248,
+      "height": 256,
       "bounds": {
-        "x": 244,
-        "y": 39,
-        "w": 883,
-        "h": 1172
+        "x": 0,
+        "y": 0,
+        "w": 248,
+        "h": 256
       },
-      "source": "source-16.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 5,
+      "sourceCrop": {
+        "left": 44,
+        "top": 408,
+        "width": 322,
+        "height": 333
+      }
     },
     "mine": {
       "id": "mine",
-      "file": "item-mine.png",
+      "file": "tool-mine.png",
+      "width": 256,
+      "height": 207,
       "bounds": {
-        "x": 57,
-        "y": 327,
-        "w": 1139,
-        "h": 654
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 207
       },
-      "source": "source-17.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 6,
+      "sourceCrop": {
+        "left": 422,
+        "top": 442,
+        "width": 352,
+        "height": 284
+      }
     },
     "punch": {
       "id": "punch",
-      "file": "item-punch.png",
+      "file": "tool-punch.png",
+      "width": 256,
+      "height": 247,
       "bounds": {
-        "x": 245,
-        "y": 41,
-        "w": 985,
-        "h": 1123
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 247
       },
-      "source": "source-18.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 7,
+      "sourceCrop": {
+        "left": 823,
+        "top": 396,
+        "width": 363,
+        "height": 350
+      }
     },
     "teleport": {
       "id": "teleport",
-      "file": "item-teleport.png",
+      "file": "tool-teleport.png",
+      "width": 256,
+      "height": 254,
       "bounds": {
-        "x": 81,
-        "y": 279,
-        "w": 1096,
-        "h": 748
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 254
       },
-      "source": "source-19.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 8,
+      "sourceCrop": {
+        "left": 1226,
+        "top": 403,
+        "width": 349,
+        "height": 346
+      }
     },
     "jetpack": {
       "id": "jetpack",
-      "file": "item-jetpack.png",
+      "file": "tool-jetpack.png",
+      "width": 256,
+      "height": 232,
       "bounds": {
-        "x": 19,
-        "y": 148,
-        "w": 1212,
-        "h": 944
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 232
       },
-      "source": "source-20.png"
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 9,
+      "sourceCrop": {
+        "left": 1606,
+        "top": 411,
+        "width": 363,
+        "height": 329
+      }
     }
   },
   "characters": [
     {
-      "id": "soldier",
-      "file": "worm-soldier.png",
+      "id": "scout",
+      "name": "삼각봇",
+      "file": "bot-scout.png",
+      "width": 324,
+      "height": 369,
       "bounds": {
-        "x": 188,
-        "y": 100,
-        "w": 881,
-        "h": 1055
+        "x": 0,
+        "y": 0,
+        "w": 324,
+        "h": 369
       },
-      "source": "source-21.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 0,
+      "sourceCrop": {
+        "left": 38,
+        "top": 13,
+        "width": 324,
+        "height": 369
+      }
     },
     {
-      "id": "pilot",
-      "file": "worm-pilot.png",
+      "id": "prism",
+      "name": "프리즘봇",
+      "file": "bot-prism.png",
+      "width": 319,
+      "height": 363,
       "bounds": {
-        "x": 166,
-        "y": 83,
-        "w": 923,
-        "h": 1088
+        "x": 0,
+        "y": 0,
+        "w": 319,
+        "h": 363
       },
-      "source": "source-22.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 1,
+      "sourceCrop": {
+        "left": 441,
+        "top": 18,
+        "width": 319,
+        "height": 363
+      }
     },
     {
-      "id": "miner",
-      "file": "worm-miner.png",
+      "id": "orbit",
+      "name": "궤도봇",
+      "file": "bot-orbit.png",
+      "width": 314,
+      "height": 369,
       "bounds": {
-        "x": 208,
-        "y": 80,
-        "w": 856,
-        "h": 1103
+        "x": 0,
+        "y": 0,
+        "w": 314,
+        "h": 369
       },
-      "source": "source-23.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 2,
+      "sourceCrop": {
+        "left": 841,
+        "top": 13,
+        "width": 314,
+        "height": 369
+      }
     },
     {
-      "id": "pirate",
-      "file": "worm-pirate.png",
+      "id": "maker",
+      "name": "공작봇",
+      "file": "bot-maker.png",
+      "width": 323,
+      "height": 367,
       "bounds": {
-        "x": 162,
-        "y": 28,
-        "w": 1009,
-        "h": 1167
+        "x": 0,
+        "y": 0,
+        "w": 323,
+        "h": 367
       },
-      "source": "source-24.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 3,
+      "sourceCrop": {
+        "left": 1242,
+        "top": 15,
+        "width": 323,
+        "height": 367
+      }
     },
     {
-      "id": "ninja",
-      "file": "worm-ninja.png",
+      "id": "spark",
+      "name": "번개봇",
+      "file": "bot-spark.png",
+      "width": 308,
+      "height": 371,
       "bounds": {
-        "x": 98,
-        "y": 94,
-        "w": 1131,
-        "h": 1061
+        "x": 0,
+        "y": 0,
+        "w": 308,
+        "h": 371
       },
-      "source": "source-25.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 4,
+      "sourceCrop": {
+        "left": 1649,
+        "top": 11,
+        "width": 308,
+        "height": 371
+      }
     },
     {
-      "id": "scientist",
-      "file": "worm-scientist.png",
+      "id": "relay",
+      "name": "통신봇",
+      "file": "bot-relay.png",
+      "width": 331,
+      "height": 360,
       "bounds": {
-        "x": 184,
-        "y": 29,
-        "w": 972,
-        "h": 1130
+        "x": 0,
+        "y": 0,
+        "w": 331,
+        "h": 360
       },
-      "source": "source-26.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 5,
+      "sourceCrop": {
+        "left": 30,
+        "top": 412,
+        "width": 331,
+        "height": 360
+      }
     },
     {
-      "id": "cowboy",
-      "file": "worm-cowboy.png",
+      "id": "comet",
+      "name": "혜성봇",
+      "file": "bot-comet.png",
+      "width": 336,
+      "height": 346,
       "bounds": {
-        "x": 165,
-        "y": 58,
-        "w": 1012,
-        "h": 1103
+        "x": 0,
+        "y": 0,
+        "w": 336,
+        "h": 346
       },
-      "source": "source-27.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 6,
+      "sourceCrop": {
+        "left": 434,
+        "top": 427,
+        "width": 336,
+        "height": 346
+      }
     },
     {
-      "id": "winter",
-      "file": "worm-winter.png",
+      "id": "polar",
+      "name": "빙하봇",
+      "file": "bot-polar.png",
+      "width": 335,
+      "height": 311,
       "bounds": {
-        "x": 155,
-        "y": 70,
-        "w": 996,
-        "h": 1088
+        "x": 0,
+        "y": 0,
+        "w": 335,
+        "h": 311
       },
-      "source": "source-28.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 7,
+      "sourceCrop": {
+        "left": 837,
+        "top": 459,
+        "width": 335,
+        "height": 311
+      }
     },
     {
-      "id": "knight",
-      "file": "worm-knight.png",
+      "id": "captain",
+      "name": "대장봇",
+      "file": "bot-captain.png",
+      "width": 335,
+      "height": 362,
       "bounds": {
-        "x": 148,
-        "y": 42,
-        "w": 1027,
-        "h": 1130
+        "x": 0,
+        "y": 0,
+        "w": 335,
+        "h": 362
       },
-      "source": "source-29.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 8,
+      "sourceCrop": {
+        "left": 1238,
+        "top": 411,
+        "width": 335,
+        "height": 362
+      }
     },
     {
-      "id": "astronaut",
-      "file": "worm-astronaut.png",
+      "id": "nova",
+      "name": "새별봇",
+      "file": "bot-nova.png",
+      "width": 321,
+      "height": 359,
       "bounds": {
-        "x": 181,
-        "y": 100,
-        "w": 936,
-        "h": 1070
+        "x": 0,
+        "y": 0,
+        "w": 321,
+        "h": 359
       },
-      "source": "source-30.png"
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 9,
+      "sourceCrop": {
+        "left": 1640,
+        "top": 411,
+        "width": 321,
+        "height": 359
+      }
     }
   ],
   "themes": [

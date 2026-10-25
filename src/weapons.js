@@ -34,7 +34,8 @@ function fireEnd(){
 }
 // Single source for direct explosions and the CPU damage estimate.
 const weaponBalance={bazooka:{radius:58,damage:50},grenade:{radius:60,damage:55},homing:{radius:55,damage:45},sacred:{radius:78,damage:75},air:{radius:40,damage:30},mini:{radius:30,damage:18},banana:{radius:38,damage:30,children:4,childDamage:24},cluster:{radius:32,damage:24,children:6,childDamage:18},mortar:{radius:32,damage:24,children:4,childDamage:18}};
-// Double horizontal reach while retaining each weapon's fuse, gravity and vertical arc.
+// Scale both velocity components equally so the aiming angle is the launch angle.
+// Scaling acceleration equally keeps fuse timing and roughly doubled reach.
 // Live shots and CPU simulations both use these shared rules.
 const SHOT_RANGE_SCALE=2;
 const ballisticRules={
@@ -48,9 +49,9 @@ const ballisticRules={
 };
 function createBallistic(type,w,pwr,ang,face,target=null){
   const rule=ballisticRules[type];if(!rule||rule.base===undefined)throw Error('Unknown ballistic weapon: '+type);
-  const rad=ang*Math.PI/180,speed=rule.base+pwr*rule.mul;
+  const rad=ang*Math.PI/180,speed=(rule.base+pwr*rule.mul)*SHOT_RANGE_SCALE;
   return{type,x:w.x+Math.cos(rad)*face*16,y:w.y+Math.sin(rad)*16,
-    vx:Math.cos(rad)*face*speed*SHOT_RANGE_SCALE,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
+    vx:Math.cos(rad)*face*speed,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
 }
 function spawnBallistic(type,w,pwr,ang,face,target=null){
   projectiles.push(createBallistic(type,w,pwr,ang,face,target));commitAttack();
@@ -61,9 +62,9 @@ function advanceBallistic(p,dt){
   p.life-=dt;
   if(p.life<=1e-9)return 'fuse';
   if(p.type==='homing'&&p.target){
-    const dx=(p.target.x-p.x)/SHOT_RANGE_SCALE,dy=p.target.y-p.y,n=Math.max(1,Math.hypot(dx,dy));
-    p.vx=lerp(p.vx,dx/n*11*SHOT_RANGE_SCALE,.035*dt*60);p.vy=lerp(p.vy,dy/n*11,.035*dt*60)
-  }else{if(ballisticRules[p.type]?.wind)p.vx+=wind*dt*60*(ballisticRules[p.type].base===undefined?1:SHOT_RANGE_SCALE);p.vy+=G*dt*60}
+    const dx=p.target.x-p.x,dy=p.target.y-p.y,n=Math.max(1,Math.hypot(dx,dy));
+    p.vx=lerp(p.vx,dx/n*11*SHOT_RANGE_SCALE,.035*dt*60);p.vy=lerp(p.vy,dy/n*11*SHOT_RANGE_SCALE,.035*dt*60)
+  }else{const scale=ballisticRules[p.type]?.base===undefined?1:SHOT_RANGE_SCALE;if(ballisticRules[p.type]?.wind)p.vx+=wind*dt*60*scale;p.vy+=G*dt*60*scale}
   const dx=p.vx*dt*60,dy=p.vy*dt*60,slices=Math.max(1,Math.ceil(Math.hypot(dx,dy)/2));
   for(let i=0;i<slices;i++){
     const ox=p.x,oy=p.y;p.x+=dx/slices;p.y+=dy/slices;
@@ -89,13 +90,13 @@ function shootShotgun(w,pwr){
     for(const t of teams)for(const o of t.worms)if(o.alive&&o!==w&&dist(x,y,o.x,o.y)<o.r+3){hit=o;break}
     if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH)break}
   rememberImpact(x,y);carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
-  if(shotgunRemain>0)toast('산탄총 1발 남음',800);else{startRetreat(2.6)}
+  if(shotgunRemain>0)toast('확산포 1발 남음',800);else{startRetreat(2.6)}
 }
 function placeMine(){
-  if(!hasAmmo('mine')){toast('지뢰가 없습니다');return}const w=current();spend('mine');mines.push({x:w.x+facing*15,y:w.y+4,armed:true,armAt:gameNow+1800,timer:0,owner:activeTeam});playSFX('place');beginDeploymentRetreat(2.5);updateHUD()
+  if(!hasAmmo('mine')){toast('감응타일이 없습니다');return}const w=current();spend('mine');mines.push({x:w.x+facing*15,y:w.y+4,armed:true,armAt:gameNow+1800,timer:0,owner:activeTeam});playSFX('place');beginDeploymentRetreat(2.5);updateHUD()
 }
 function placeDynamite(){
-  if(!hasAmmo('dynamite')){toast('다이너마이트가 없습니다');return}const w=current();spend('dynamite');
+  if(!hasAmmo('dynamite')){toast('시간큐브가 없습니다');return}const w=current();spend('dynamite');
   projectiles.push({type:'dynamite',x:w.x+facing*13,y:w.y+3,vx:0,vy:0,r:6,life:3,bounce:0,owner:w});playSFX('place');toast('3… 2… 1…');beginDeploymentRetreat(3);updateHUD()
 }
 function meleeBat(){
@@ -108,15 +109,15 @@ function firePunch(){
   if(!targets.length){toast('공격 범위에 상대가 없습니다');return}spend('punch');const o=targets[0];damage(o,35,facing*2,-7);burst(o.x,o.y,'#ff9b4d',12);playSFX('punch');startRetreat(2.4);updateHUD()
 }
 function releaseSheep(){
-  if(!hasAmmo('sheep')){toast('양 폭탄이 없습니다');return}const w=current();spend('sheep');playSFX('sheep');walkers.push({type:'sheep',x:w.x+facing*16,y:w.y,vx:facing*1.65,vy:0,life:7,team:activeTeam});commitAttack();updateHUD()
+  if(!hasAmmo('sheep')){toast('태엽수레가 없습니다');return}const w=current();spend('sheep');playSFX('sheep');walkers.push({type:'sheep',x:w.x+facing*16,y:w.y,vx:facing*1.65,vy:0,life:7,team:activeTeam});commitAttack();updateHUD()
 }
 function dropDrill(){
   if(!hasAmmo('drill')){toast('드릴이 없습니다');return}const w=current();spend('drill');playSFX('drill');projectiles.push({type:'drill',x:w.x,y:w.y+14,vx:0,vy:3,r:5,life:4,owner:w});commitAttack();updateHUD()
 }
 function toggleJetpack(){
   const w=current();if(!w)return;
-  if(jetpack){jetpack=false;playSFX('jetpackStop');toast('제트팩 종료');startRetreat(2.2);return}
-  if(!hasAmmo('jetpack')){toast('제트팩이 없습니다');return}spend('jetpack');jetpack=true;jetFuel=5;playSFX('jetpack');toast('제트팩: A/D 이동 · W 상승 · S 하강',1700);updateHUD()
+  if(jetpack){jetpack=false;playSFX('jetpackStop');toast('쌍날개팩 종료');startRetreat(2.2);return}
+  if(!hasAmmo('jetpack')){toast('쌍날개팩이 없습니다');return}spend('jetpack');jetpack=true;jetFuel=5;playSFX('jetpack');toast('쌍날개팩: A/D 이동 · W 상승 · S 하강',1700);updateHUD()
 }
 function toggleRope(){
   const w=current();if(!w)return;if(rope){rope=null;w.knockTime=.45;playSFX('ropeRelease');toast('로프 해제');return}
@@ -167,7 +168,7 @@ function projectileStep(p,dt){
   if(event==='bounds')return true;
   if(['banana','cluster'].includes(p.type)){splitBomb(p,weaponBalance[p.type].children);return true}
   if(p.type==='mortar'){splitBomb(p,4);return true}
-  if(p.type==='sacred'){if(!p.holyPlayed)playSFX('holy');explode(p.x,p.y,weaponBalance.sacred.radius,weaponBalance.sacred.damage,'sacred');bigBanner('HALLELUJAH!',850);return true}
+  if(p.type==='sacred'){if(!p.holyPlayed)playSFX('holy');explode(p.x,p.y,weaponBalance.sacred.radius,weaponBalance.sacred.damage,'sacred');bigBanner('별빛 방출!',850);return true}
   const balance=weaponBalance[p.type]||weaponBalance.bazooka;
   explode(p.x,p.y,balance.radius,p.damage??balance.damage,p.type);return true
 }

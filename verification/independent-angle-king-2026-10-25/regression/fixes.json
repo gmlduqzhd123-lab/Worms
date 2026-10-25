@@ -1,0 +1,94 @@
+{
+  "url": "http://127.0.0.1:51170/",
+  "baseline": false,
+  "checks": 16,
+  "results": [
+    {
+      "test": "Home team name accepts spaces with native keyboard input",
+      "pass": true,
+      "observed": "Team A"
+    },
+    {
+      "test": "Placed mine allows retreat, arms after grace, does not auto-damage moving owner",
+      "pass": true
+    },
+    {
+      "test": "Dynamite allows escape but blocks a second attack until explosion resolves",
+      "pass": true
+    },
+    {
+      "test": "Idle mine owner is vulnerable after the arming grace",
+      "pass": true
+    },
+    {
+      "test": "Placement timers freeze while paused and resume on the game clock",
+      "pass": true
+    },
+    {
+      "test": "Placement retreat supports jumping and the ordinary attack remains locked",
+      "pass": true
+    },
+    {
+      "test": "Deep terrain teleport finds a supported clear position",
+      "pass": true
+    },
+    {
+      "test": "Out-of-world teleport is rejected without ammo loss or relocation",
+      "pass": true
+    },
+    {
+      "test": "Teleport refuses occupied destinations and keeps targeting active",
+      "pass": true
+    },
+    {
+      "test": "A restarted match clears the temporary placement retreat",
+      "pass": true
+    },
+    {
+      "test": "Space on a keyboard-focused weapon selects it without firing",
+      "pass": true
+    },
+    {
+      "test": "Enter on a keyboard-focused weapon selects it without ending the turn",
+      "pass": true
+    },
+    {
+      "test": "Keyboard pause button toggles pause without firing",
+      "pass": true
+    },
+    {
+      "test": "Pointer weapon selection still allows subsequent keyboard firing",
+      "pass": true
+    },
+    {
+      "test": "Trusted pinch-to-one-finger drag stays continuous and does not teleport",
+      "pass": true,
+      "observed": {
+        "delta": 8.333333333333371,
+        "zoom": 1.2,
+        "ammo": 2,
+        "target": "teleport",
+        "pointers": [
+          [
+            2,
+            {
+              "x": 170,
+              "y": 180
+            }
+          ]
+        ],
+        "dragCamera": {
+          "x": 170,
+          "y": 180,
+          "startX": 180,
+          "startY": 180,
+          "moved": true
+        }
+      }
+    },
+    {
+      "test": "No browser JavaScript errors",
+      "pass": true
+    }
+  ]
+}

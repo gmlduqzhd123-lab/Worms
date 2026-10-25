@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="24">
+<meta name="wormfront-version" content="25">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -14,20 +14,20 @@
 <meta property="og:title" content="조준! 각도왕">
 <meta property="og:description" content="각도와 바람을 읽고 조준하는 수학 각도 학습 게임 · CPU·2인 턴제 대전">
 <meta property="og:url" content="https://gmlduqzhd123-lab.github.io/Worms/">
-<meta property="og:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image-angle-king.png">
+<meta property="og:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image-angle-bots.png">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1731">
+<meta property="og:image:width" content="1730">
 <meta property="og:image:height" content="909">
 <meta property="og:image:alt" content="조준! 각도왕 — 각도를 읽고, 전략을 세우자!">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="조준! 각도왕">
 <meta name="twitter:description" content="각도와 바람을 읽고 조준하는 수학 각도 학습 게임 · CPU·2인 턴제 대전">
-<meta name="twitter:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image-angle-king.png">
+<meta name="twitter:image" content="https://gmlduqzhd123-lab.github.io/Worms/og-image-angle-bots.png">
 <meta name="twitter:image:alt" content="조준! 각도왕 — 각도를 읽고, 전략을 세우자!">
 <!-- 📲 앱 설치(홈 화면에 추가) · 📱 QR로 접속 -->
-<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png?v=25">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png?v=25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="조준! 각도왕">
@@ -58,16 +58,17 @@
       <label for="sfxVolume">효과음 <output id="sfxVolumeValue" for="sfxVolume">72%</output></label><input id="sfxVolume" type="range" min="0" max="100" step="1" value="72">
     </div></details>
   </div>
-  <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">웜 추적</button></div>
-  <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="제트팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="제트팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
+  <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">봇 추적</button></div>
+  <div id="angleControls" aria-label="정밀 각도 조준"><button type="button" class="toolBtn" id="aimMinus" aria-label="조준 각도 1도 낮추기">−1°</button><select id="aimPreset" aria-label="조준 각도 선택"><option value="custom" id="aimCurrent" disabled>45°</option><option value="0">0°</option><option value="30">30°</option><option value="45">45°</option><option value="60">60°</option><option value="90">90°</option></select><button type="button" class="toolBtn" id="aimPlus" aria-label="조준 각도 1도 높이기">+1°</button></div>
+  <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="쌍날개팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="쌍날개팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
   <div id="powerBox"><div id="power"></div></div>
-  <section id="wormIntro" hidden aria-label="웜 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">소개 건너뛰기</button></section>
+  <section id="wormIntro" hidden aria-label="각도봇 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">소개 건너뛰기</button></section>
 
   <div id="minimapWrap"><canvas id="minimap"></canvas></div>
 
   <div id="hint">
     <b>키보드</b> A/D 이동 · W 점프 · W 두 번 백플립 · ↑/↓ 조준 · Space 발사<br>
-    Z/X 카메라 좌우 이동 · C 웜 추적 · M 전체 맵 · +/− 확대·축소 · Enter 턴 넘김<br>
+    Z/X 카메라 좌우 이동 · C 봇 추적 · M 전체 맵 · +/− 확대·축소 · Enter 턴 넘김<br>
     화면 드래그: 카메라 · 로프 A/D 스윙 · W/S 길이 · Space 해제 · 숫자 1~9 빠른 무기 선택
   </div>
 
@@ -77,34 +78,34 @@
   </div>
 
   <div id="weaponDock">
-    <button class="weapon active" data-w="bazooka"><span class="ico">🚀</span><span>로켓</span><span class="ammo">∞</span></button>
-    <button class="weapon" data-w="grenade"><span class="ico">💣</span><span>수류탄</span><span class="ammo">∞</span></button>
-    <button class="weapon" data-w="shotgun"><span class="ico">🔫</span><span>산탄총</span><span class="ammo">∞</span></button>
-    <button class="weapon" data-w="banana"><span class="ico">🍌</span><span>바나나탄</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="sacred"><span class="ico">✨</span><span>성스러운 폭탄</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="cluster"><span class="ico">🧨</span><span>클러스터</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="homing"><span class="ico">🎯</span><span>유도 미사일</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="mortar"><span class="ico">🟠</span><span>박격포</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="airstrike"><span class="ico">✈️</span><span>공습</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="dynamite"><span class="ico">🧯</span><span>다이너마이트</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="mine"><span class="ico">⚙️</span><span>지뢰</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="bat"><span class="ico">🏏</span><span>배트</span><span class="ammo">∞</span></button>
-    <button class="weapon" data-w="punch"><span class="ico">👊</span><span>파이어 펀치</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="sheep"><span class="ico">🐑</span><span>양 폭탄</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="drill"><span class="ico">🛠️</span><span>드릴</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="rope"><span class="ico">🪢</span><span>닌자 로프</span><span class="ammo">∞</span></button>
-    <button class="weapon" data-w="jetpack"><span class="ico">🎒</span><span>제트팩</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="teleport"><span class="ico">🌀</span><span>텔레포트</span><span class="ammo"></span></button>
-    <button class="weapon" data-w="girder"><span class="ico">🧱</span><span>거더</span><span class="ammo"></span></button>
+    <button class="weapon active" data-w="bazooka"><span class="ico">◈</span><span>바람포</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="grenade"><span class="ico">◈</span><span>통통캡슐</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="shotgun"><span class="ico">◈</span><span>확산포</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="banana"><span class="ico">🌰</span><span>파편씨앗</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="sacred"><span class="ico">💠</span><span>별빛코어</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="cluster"><span class="ico">◈</span><span>조각캡슐</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="homing"><span class="ico">◈</span><span>추적광구</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="mortar"><span class="ico">◈</span><span>곡사발사기</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="airstrike"><span class="ico">◈</span><span>별똥지원</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="dynamite"><span class="ico">⏱️</span><span>시간큐브</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="mine"><span class="ico">🔶</span><span>감응타일</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="bat"><span class="ico">◈</span><span>반동해머</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="punch"><span class="ico">🦾</span><span>충격글러브</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="sheep"><span class="ico">⚙️</span><span>태엽수레</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="drill"><span class="ico">◈</span><span>회전말뚝</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="rope"><span class="ico">🧲</span><span>자석와이어</span><span class="ammo">∞</span></button>
+    <button class="weapon" data-w="jetpack"><span class="ico">🚀</span><span>쌍날개팩</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="teleport"><span class="ico">📍</span><span>좌표비콘</span><span class="ammo"></span></button>
+    <button class="weapon" data-w="girder"><span class="ico">◈</span><span>연결발판</span><span class="ammo"></span></button>
   </div>
 
   <div id="overlay">
     <div id="panel">
       <div class="homeTop"><button type="button" class="homeChip install" data-ys-install>📲 <span class="homeWide">앱 </span>설치</button><button type="button" class="homeChip" data-qr aria-label="QR 코드로 접속">📱 QR</button></div>
-      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/worm-soldier.png"><img src="./assets/images/worm-pirate.png"><img src="./assets/images/worm-astronaut.png"></div><div class="brandLine">각도 학습 · 턴제 전략 게임</div>
+      <div class="homeCrew" aria-hidden="true"><img src="./assets/images/bot-scout.png"><img src="./assets/images/bot-relay.png"><img src="./assets/images/bot-nova.png"></div><div class="brandLine">각도 학습 · 턴제 전략 게임</div>
       <h1>조준! 각도왕</h1>
       <p>게임 모드와 맵만 고르면 준비 완료! 팀 이름과 캐릭터는 추가 설정에서 바꿀 수 있어요.</p>
-      <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button></div>
+      <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button><button class="btn ghost" id="homeCredits">제작 정보</button></div>
       <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
       <p id="matchSummary" hidden></p>
       <div class="grid coreSettings" aria-label="기본 게임 설정">
@@ -116,15 +117,15 @@
           <div><label>팀 A 이름<input id="inputA" value="코랄 탐사대" maxlength="40"/></label></div>
           <div><label>팀 B 이름<input id="inputB" value="민트 탐사대" maxlength="40"/></label></div>
         </div>
-        <div class="row"><label>코랄 캐릭터<select id="appearanceA"></select></label><label>민트 캐릭터<select id="appearanceB"></select></label></div>
+        <div class="row"><label>코랄 각도봇<select id="appearanceA"></select></label><label>민트 각도봇<select id="appearanceB"></select></label></div>
         <div class="grid">
         <div><label>CPU 난이도<select id="difficulty"><option value="easy">쉬움</option><option value="normal" selected>보통</option><option value="hard">어려움</option></select></label></div>
-        <div><label>팀당 웜 수<select id="count"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
+        <div><label>팀당 봇 수<select id="count"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
         <div><label>턴 시간<select id="turnTime"><option value="35">35초</option><option value="45" selected>45초</option><option value="60">60초</option></select></label></div>
         <div><label>맵 크기<select id="mapSize"><option value="2.5">큼 (2.5배)</option><option value="4" selected>대형 (4배)</option><option value="6">초대형 (6배)</option></select></label></div>
         <div><label>아이템 상자<select id="crateRate"><option value=".28">적게</option><option value=".58" selected>보통</option><option value=".86">많이</option></select></label></div>
         <div><label>갑작스러운 죽음<select id="sdTurn"><option value="14">14턴</option><option value="20" selected>20턴</option><option value="28">28턴</option></select></label></div>
-        <div><label>초기 중립 지뢰<select id="mineCount"><option value="5">5개</option><option value="10" selected>10개</option><option value="18">18개</option></select></label></div>
+        <div><label>초기 감응타일<select id="mineCount"><option value="5">5개</option><option value="10" selected>10개</option><option value="18">18개</option></select></label></div>
         </div>
       <section id="homeAudioControls" aria-labelledby="homeAudioTitle"><h2 id="homeAudioTitle">음량 설정</h2><div class="homeAudioGrid">
         <div><label for="homeMusicVolume">배경음악 <output id="homeMusicVolumeValue" for="homeMusicVolume">18%</output></label><input id="homeMusicVolume" type="range" min="0" max="100" step="1" value="18"></div>
@@ -132,7 +133,7 @@
       </div><p>게임 중 음량 설정과 함께 저장됩니다. 0%는 무음입니다.</p></section>
       </details>
       <div class="actions"><button class="btn primary" id="start">전투 시작</button></div>
-      <p class="ysFoot">© 2026 엽쌤. All rights reserved. · <a href="https://gmlduqzhd123-lab.github.io/YScode/">엽쌤의 다른 앱 보기 →</a></p>
+      <p class="ysFoot">기획·개발 © 2026 엽쌤 · <a href="https://gmlduqzhd123-lab.github.io/YScode/">엽쌤의 다른 앱 보기 →</a></p>
     </div>
   </div>
 </div>
@@ -161,5 +162,6 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
 </script>
+<dialog id="creditsDialog" class="gameDialog" aria-labelledby="creditsTitle"><div class="dialogHead"><h2 id="creditsTitle">조준! 각도왕 제작 정보</h2><button class="btn ghost" id="creditsClose">닫기</button></div><p>기획·개발: 엽쌤</p><p>각도봇·도구 이미지: 이 프로젝트를 위해 AI로 제작하고 편집했습니다.</p><p>배경음악: Bouncy Tactical Groove · Suno 유료 요금제로 제작·다운로드한 사용자 제공 곡</p><p>효과음: 직접 합성한 기계음·알림·충돌음</p><p>각도는 수평선을 0°로 읽습니다. 30°·45°·60°·90°를 선택하거나 ±1°로 세밀하게 조준해 보세요. Shift+↑/↓도 1°씩 바꿉니다.</p></dialog>
 </body>
 </html>

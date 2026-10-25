@@ -1,0 +1,314 @@
+Browser tab: 1, Title: "홈 > 지식재산정보검색 > 국내 상표 검색 (검색어: TNM=[조준각도왕])", URL: "https://www.kipris.or.kr/khome/search/searchResult.do".
+1 AXWebArea 홈 > 지식재산정보검색 > 국내 상표 검색 (검색어: TNM=[조준각도왕]), URL: kipris.or.kr/khome/search/searchResult.do
+	2 container wrap
+		3 container skip
+			4 link Description: 주메뉴 바로가기, Value: kipris.or.kr/khome/search/searchResult.do#gnb
+			5 link Description: 본문 바로가기, Value: kipris.or.kr/khome/search/searchResult.do#content
+		6 container
+			7 heading KIPRIS, Value: 1, ID: logo
+				8 link Description: KIPRIS, Value: kipris.or.kr/khome/main.do
+			9 content list
+				10 link Description: 지식재산정보 검색, Value: kipris.or.kr/khome/search/searchResult.do?tab=patent
+				11 link Description: KIPRIS 정보, Value: kipris.or.kr/khome/info/archive/timeline.do
+				12 link Description: 고객지원, Value: kipris.or.kr/khome/board/notice/list.do
+			13 content list
+				14 button (collapsed) 알림열기 N, Help: 펼치기, Secondary Actions: Expand
+					15 text 알림열기
+					450 text N
+				17 button 로그인
+				18 link Description: 회원가입, Value: kipris.or.kr/khome/member/join/agreement.do
+				19 link Description: MY KIPRIS, Value: kipris.or.kr/khome/myKipris/mainFrame.do?service=myInterest&page=frame2
+				20 button 영문으로 번역하기
+				21 button 전체메뉴 열기
+		22 container container
+			23 container mainSearchArea
+				24 container mainSearch
+					25 content list
+						26 button 내 검색식
+						27 button 추천검색식, Help: 새 창, 추천검색식
+						28 checkbox (settable, integer) Description: 결과 내 재검색, Value: 0, ID: reSearch
+					29 container
+						30 text entry area (settable) Description: 검색어 입력, Value: TNM=[조준각도왕], ID: queryText
+						31 text 지식재산권 검색
+						32 button 검색식 저장
+						33 button 검색
+					34 button 상세검색, ID: btnOpenSearchDetail
+					35 content list
+						36 button 검색도움말, Help: 검색도움말, 새 창
+						37 button Tooltip, Help: 선택되지 않음
+				38 container
+					39 content list
+						40 tab (selectable, settable, boolean) 특허ㆍ실용신안, Help: 선택되지 않음, ID: patentTab, Value: 0
+특허ㆍ실용신안
+						41 tab (selectable, settable, boolean) 디자인, Help: 선택되지 않음, ID: designTab, Value: 0
+디자인
+						42 tab (selected, settable, boolean) 상표 0, Help: 선택됨, ID: trademarkTab, Value: 1
+상표
+0
+						43 tab (selectable, settable, boolean) 심판, Help: 선택되지 않음, ID: judgementTab, Value: 0
+심판
+						44 tab (selectable, settable, boolean) 기타문헌, Help: 선택되지 않음, ID: etcTab, Value: 0
+기타문헌
+					194 container Description: 상표, ID: trademarkTabPannel
+						195 content list
+							196 link Description: 국내 0, Value: kipris.or.kr/khome/search/searchResult.do#
+							197 link Description: 해외 0, Value: kipris.or.kr/khome/search/searchResult.do#
+			51 container
+				52 container ID: mainResultFilter, Description: 검색필터 닫기 권리구분 전체 상표(40) 도움말 서비스표(41) 도움말 업무표장(42) 도움말 단체표장(43) 도움말 지리적표시단체표장(44) 도움말 상표/서비스표(45) 도움말 증명표장(47) 도움말 지리적표시증명표장(48) 도움말 국제등록상표(마드리드) 도움말 유형 전체 문자상표 도움말 도형상표 도움말 복합문자 도움말
+					53 text 검색필터
+					54 button 닫기, ID: btnCloseResultFilter
+					771 content list
+						772 container
+							773 text 권리구분
+							774 content list
+								775 checkbox (settable, integer) Description: 전체, Value: 1, ID: allCheckMd
+								776 container
+									777 checkbox (settable, integer) Description: 상표(40), Value: 1, ID: merchandise01
+									778 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								779 container
+									780 checkbox (settable, integer) Description: 서비스표(41), Value: 1, ID: merchandise02
+									781 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								782 container
+									783 checkbox (settable, integer) Description: 업무표장(42), Value: 1, ID: merchandise03
+									784 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								785 container
+									786 checkbox (settable, integer) Description: 단체표장(43), Value: 1, ID: merchandise04
+									787 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								788 container
+									789 checkbox (settable, integer) Description: 지리적표시단체표장(44), Value: 1, ID: merchandise05
+									790 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								791 container
+									792 checkbox (settable, integer) Description: 상표/서비스표(45), Value: 1, ID: merchandise06
+									793 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								794 container
+									795 checkbox (settable, integer) Description: 증명표장(47), Value: 1, ID: merchandise07
+									796 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								797 container
+									798 checkbox (settable, integer) Description: 지리적표시증명표장(48), Value: 1, ID: merchandise08
+									799 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								800 container
+									801 checkbox (settable, integer) Description: 국제등록상표(마드리드), Value: 1, ID: merchandise09
+									802 button (collapsed) Description: 도움말, Secondary Actions: Expand
+						803 container
+							804 text 유형
+							805 content list
+								806 checkbox (settable, integer) Description: 전체, Value: 1, ID: allCheckPt
+								807 container
+									808 checkbox (settable, integer) Description: 문자상표, Value: 1, ID: pattern01
+									809 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								810 container
+									811 checkbox (settable, integer) Description: 도형상표, Value: 1, ID: pattern02
+									812 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								813 container
+									814 checkbox (settable, integer) Description: 복합문자, Value: 1, ID: pattern03
+									815 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								816 container
+									817 checkbox (settable, integer) Description: 도형복합, Value: 1, ID: pattern04
+									818 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								819 container
+									820 checkbox (settable, integer) Description: 소리상표, Value: 1, ID: pattern05
+									821 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								822 container
+									823 checkbox (settable, integer) Description: 냄새상표, Value: 1, ID: pattern06
+									824 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								825 container
+									826 checkbox (settable, integer) Description: 일반상표, Value: 1, ID: pattern07
+									827 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								828 container
+									829 checkbox (settable, integer) Description: 색채상표, Value: 1, ID: pattern08
+									830 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								831 container
+									832 checkbox (settable, integer) Description: 색채만으로된상표, Value: 1, ID: pattern09
+									833 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								834 container
+									835 checkbox (settable, integer) Description: 입체상표, Value: 1, ID: pattern10
+									836 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								837 container
+									838 checkbox (settable, integer) Description: 색채결합, Value: 1, ID: pattern11
+									839 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								840 container
+									841 checkbox (settable, integer) Description: 입체상표,색채상표, Value: 1, ID: pattern12
+									842 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								843 container
+									844 checkbox (settable, integer) Description: 홀로그램, Value: 1, ID: pattern13
+									845 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								846 container
+									847 checkbox (settable, integer) Description: 동작상표, Value: 1, ID: pattern14
+									848 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								849 container
+									850 checkbox (settable, integer) Description: 기타시각적인식가능, Value: 1, ID: pattern15
+									851 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								852 container
+									853 checkbox (settable, integer) Description: 기타시각적인식불가능, Value: 1, ID: pattern16
+									854 button (collapsed) Description: 도움말, Secondary Actions: Expand
+						855 container
+							856 text 행정상태
+							857 content list
+								858 checkbox (settable, integer) Description: 전체, Value: 1, ID: allCheckMs
+								859 container
+									860 checkbox (settable, integer) Description: 출원, Value: 1, ID: measure01
+									861 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								862 container
+									863 checkbox (settable, integer) Description: 공고, Value: 1, ID: measure02
+									864 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								865 container
+									866 checkbox (settable, integer) Description: 등록, Value: 1, ID: measure08
+									867 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								868 button (collapsed) 행정상태 전체보기 ↓, Secondary Actions: Expand
+									869 text 행정상태 전체보기
+									870 text ↓
+						871 container
+							872 text 사용권정보
+							873 content list
+								874 checkbox (settable, integer) Description: 전체, Value: 0, ID: allCheck_leftLicensee
+								875 container
+									876 checkbox (settable, integer) Description: 전용, Value: 0, ID: leftLicensee01
+									877 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								878 container
+									879 checkbox (settable, integer) Description: 통상, Value: 0, ID: leftLicensee02
+									880 button (collapsed) Description: 도움말, Secondary Actions: Expand
+						881 container
+							882 text 기타항목
+							883 content list
+								884 container
+									885 checkbox (settable, integer) Description: 공존동의 여부, Value: 0, ID: coexistenceAgreement
+									886 button (collapsed) Description: 도움말, Secondary Actions: Expand
+								887 container
+									888 checkbox (settable, integer) Description: 마드리드 출원 여부, Value: 0, ID: madridApplication
+									889 button (collapsed) Description: 마드리드 시스템 도움말, Secondary Actions: Expand
+					55 button 초기화, Help: 검색필터 초기화
+					56 button 적용, Help: 검색필터 적용
+				57 button KIPRIS 서비스 설정
+				58 text KIPRIS 서비스 설정
+				59 text 사용자가 원하는 방식으로 서비스 제공 기준을 설정하여 이용해보세요.
+				60 button 설정 화면 열기, Help: KIPRIS 서비스 설정, 화면 열기, ID: btnOpenPersonalizeSetting
+					61 text 설정 화면 열기
+					62 image
+				63 button 숨기기, Help: KIPRIS 서비스 설정, 숨기기, ID: btnHidePersonalizeSetting
+					64 text 숨기기
+					65 image
+				66 container mainResultListArea
+					67 container
+						570 heading Value: 3, ID: resultTotal
+						70 content list
+							71 button 결과 분류통계
+							72 button 다운로드, Help: 검색결과 목록 다운로드
+							73 button 인쇄, Help: 검색결과 목록 인쇄, 새 창 열림
+							74 button (collapsed) 마이폴더, Secondary Actions: Expand
+							75 link Description: 특허로 새창열기, Value: patent.go.kr/
+					76 container
+						77 checkbox (settable, integer) Description: 전체선택, Value: 0, ID: resultCheckAll
+						78 text 전체선택
+					79 content list
+						80 button 선택됨
+						81 button 선택되지 않음
+					84 content list
+						85 container
+							86 pop up button (collapsed, settable) 정렬, Value: 기본정렬, ID: sortCondition01, Secondary Actions: Expand
+								87 menu
+									747 (selected) 기본정렬
+									748 출원번호
+									749 출원일자
+									750 출원공고번호
+									751 출원공고일자
+									752 등록번호
+									753 등록일자
+									754 등록공고번호
+									755 등록공고일자
+									756 우선권주장번호
+									757 우선권주장일자
+									758 국제등록번호
+									759 국제등록일자
+									760 행정상태
+									761 상품분류
+									762 도형코드
+									763 출원인
+									764 대리인
+									765 최종권리자
+									766 상표명칭
+							112 text 정렬
+						113 container
+							114 pop up button (collapsed, settable) 정렬 순서, Value: 내림차순, ID: sortCondition02, Secondary Actions: Expand
+								115 menu
+									116 (selected) 내림차순
+									117 오름차순
+							118 text 정렬 순서
+						119 container
+							120 pop up button (collapsed, settable) Description: 결과 목록 갯수, Value: 30개, ID: sortCondition03, Secondary Actions: Expand
+								121 menu
+									767 10개
+									768 (selected) 30개
+									769 60개
+									770 90개
+							126 text 결과 목록 갯수
+					127 button 적용, Help: 결과 목록 정렬 적용
+					128 container resultSection
+						890 heading ‘TNM=[조준각도왕]’에 대한 검색결과가 없습니다., Value: 4
+							891 text ‘TNM=[조준각도왕]’
+							892 text 에 대한 검색결과가 없습니다.
+						893 container
+							894 text 문제해결 팁
+							895 content list
+								896 container
+									897 text · 검색어를 정확히 입력했는지 확인해 보세요.
+								898 container
+									899 text · 특수문자나 연산식을 잘못 입력하지 않았는지 확인해보세요.
+								900 container
+									901 text · 검색어의 단어수를 줄이거나 일반적인 검색어를 다시 입력해 보세요.
+								902 container
+									903 text · 다른 권리를 선택하여 검색해보세요.
+								904 container
+									905 text · 영문입력의 경우 단어의 스펠링이 정확한지 확인해 보세요.
+								906 container
+									907 text · 한글입력의 경우 띄어쓰기나 맞춤법이 정확한지 확인해 보세요.
+					144 container Description: 페이지 만족도 조사, ID: surveyContainer
+						145 container surveyForm
+							146 heading 현재 페이지의 구성과 내용에 만족하시나요?, Value: 4
+								147 text 현재 페이지의 구성과 내용에 만족하시나요?
+							148 container 만족도 점수 선택(5점 만점)
+								149 text 만족도 점수 선택(5점 만점)
+								150 container
+									151 radio button (settable, integer) Description: 매우 만족, Value: 0, ID: rating-5
+									152 text 매우 만족
+								153 container
+									154 radio button (settable, integer) Description: 만족, Value: 0, ID: rating-4
+									155 text 만족
+								156 container
+									157 radio button (settable, integer) Description: 보통, Value: 0, ID: rating-3
+									158 text 보통
+								159 container
+									160 radio button (settable, integer) Description: 불만족, Value: 0, ID: rating-2
+									161 text 불만족
+								162 container
+									163 radio button (settable, integer) Description: 매우 불만족, Value: 0, ID: rating-1
+									164 text 매우 불만족
+		166 container footer
+			167 content list
+				168 button KIPRIS 서비스 설정, Help: KIPRIS 서비스 설정, 화면 열기
+				169 button 고객의소리, Help: 고객의소리, 새 창 열림
+			170 content list
+				171 button (collapsed) 국내 지식재산정보 검색사이트, Help: 펼치기, Secondary Actions: Expand
+				172 button (collapsed) 해외 지식재산정보 검색사이트, Help: 펼치기, Secondary Actions: Expand
+				173 button (collapsed) 각국 특허청 사이트, Help: 펼치기, Secondary Actions: Expand
+				174 button (collapsed) 유관기관 사이트, Help: 펼치기, Secondary Actions: Expand
+			175 button 맨 위로, ID: btnTop
+			176 content list
+				177 link Description: 개인정보 처리방침, Help: 새 창, 개인정보 처리방침, Value: moip.go.kr/kipo/kipoContentView.do?menuCd=SCD0201406
+				178 link Description: 이용약관, Value: kipris.or.kr/khome/member/rules/terms.do
+				179 link Description: 저작권정책, Value: kipris.or.kr/khome/member/rules/copyright.do
+				180 link Description: (사)한국장애인단체총연합회 한국웹접근성인증평가원 웹 접근성 우수사이트 인증마크(WA인증마크), Help: 새 창, 한국웹접근성인증평가원 인증현황, Value: wa.or.kr/board/list.asp?BoardID=0006
+			181 container
+				182 content list
+					183 container
+						184 text 산업재산권 제도·출원 심사 등록 수수료 등 특허고객상담센터  : 1544-8080( 유료 )
+					185 container
+						186 text 검색시스템 헬프데스크  : 042-483-4710( 유료 )
+				187 text (우)35208 대전광역시 서구 청사로 189 © KIPI. All rights reserved.
+				188 content list
+					189 link Description: 챗봇상담, Help: 새 창, 국민비서 특허상담, Value: chatbot.ips.go.kr/chatbotPop.ndo?bnrId=cuO6jXZLsIFMFrO
+					190 link Description: 채팅상담, Help: 새 창, 특허고객 채팅상담, Value: chat.patent.go.kr:10443/#/ttalk_main/KIPO_160635643985448436
+				191 content list
+					192 link Description: 지식재산처, Help: 새 창, 지식재산처, Value: moip.go.kr/
+					193 link Description: 한국특허정보원, Help: 새 창, 한국특허정보원, Value: kipi.or.kr/
+
+The focused UI element is 52 container ID: mainResultFilter, Description: 검색필터 닫기 권리구분 전체 상표(40) 도움말 서비스표(41) 도움말 업무표장(42) 도움말 단체표장(43) 도움말 지리적표시단체표장(44) 도움말 상표/서비스표(45) 도움말 증명표장(47) 도움말 지리적표시증명표장(48) 도움말 국제등록상표(마드리드) 도움말 유형 전체 문자상표 도움말 도형상표 도움말 복합문자 도움말

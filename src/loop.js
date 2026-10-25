@@ -8,7 +8,7 @@ function update(dt,ts){
   if(!turnLocked&&retreatUntil===0){turnLeft=turnSec-(ts-turnStart)/1000;if(turnLeft<=0){turnLeft=0;nextTurn(600)}}
   if(retreatUntil>0&&ts>=retreatUntil){retreatUntil=0;nextTurn(0)}
   const w=current();
-  if(w&&!turnLocked&&projectiles.length===0&&walkers.length===0&&!isCPU()){if(keys.ArrowUp)aim=clamp(aim-.68*dt*60,-89,13);if(keys.ArrowDown)aim=clamp(aim+.68*dt*60,-89,13)}
+  if(w&&!turnLocked&&projectiles.length===0&&walkers.length===0&&!isCPU()&&!keys.Shift){aim=Math.round(aim);if(keys.ArrowUp)aim=clamp(aim-1,-90,13);if(keys.ArrowDown)aim=clamp(aim+1,-90,13)}
   if(keys.z&&!isCPU())panCamera(-6,0)
   if(keys.x&&!isCPU())panCamera(6,0)
 

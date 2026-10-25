@@ -1,0 +1,338 @@
+{
+  "recordedOn": "2026-10-25",
+  "scope": "Provenance and evidence only; not legal clearance",
+  "files": [
+    {
+      "file": "assets/images/bot-scout.png",
+      "name": "삼각봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 0,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "21104a6305b1eeaa7ebe7c0846ab04000baa8aa066a9fce53c1f355e9f08e516"
+    },
+    {
+      "file": "assets/images/bot-prism.png",
+      "name": "프리즘봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 1,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "76ab1b563c47dc183889684cc17a6819d51f049ac06444fe4417a22d165565c3"
+    },
+    {
+      "file": "assets/images/bot-orbit.png",
+      "name": "궤도봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 2,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "8126ec7183cba328938991768063971400cdf66976dd67f84bf58a1d5923c97a"
+    },
+    {
+      "file": "assets/images/bot-maker.png",
+      "name": "공작봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 3,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "a27b390117c6ba47487998a6510375bba9589dcd9c510f75ea38b98da951dfbd"
+    },
+    {
+      "file": "assets/images/bot-spark.png",
+      "name": "번개봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 4,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "e4bbee8de40e1cf9c72e69ed80fd5c452ca89c3c88b5f86499c677203b7f1309"
+    },
+    {
+      "file": "assets/images/bot-relay.png",
+      "name": "통신봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 5,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "19732651cafcb10bfe18b24414a91eb290e4648bd6490cf96147727a9f9a4ebb"
+    },
+    {
+      "file": "assets/images/bot-comet.png",
+      "name": "혜성봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 6,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "3ebe52485c09fd783842aa346d81bde1b1dba547c300fcd19be0c34ce88035cf"
+    },
+    {
+      "file": "assets/images/bot-polar.png",
+      "name": "빙하봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 7,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "5b86bdb3855f2bc73a1be1523f3f80e5677b1699c6b63ec7179506873d358129"
+    },
+    {
+      "file": "assets/images/bot-captain.png",
+      "name": "대장봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 8,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "72bdf3bbafd529575f564b42e9a1217a598989c178c643b625bcb4300de2f40d"
+    },
+    {
+      "file": "assets/images/bot-nova.png",
+      "name": "새별봇",
+      "category": "character",
+      "source": "project-generated angle-bots-atlas.png",
+      "sourceCell": 9,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "e6d275859576884ff8db817c60c1f1ed5cb493a5b26456bf3d5e109bc6efc766"
+    },
+    {
+      "file": "assets/images/tool-bazooka.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 0,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "65f3326741a0594d865d35dca9b07c7d852005f21da7df55b13dfe55f6b98df2"
+    },
+    {
+      "file": "assets/images/tool-grenade.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 1,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "86f8e56577aab1e2abf948ed24d50cab4bca6cae19e12854b5cd62efd8603626"
+    },
+    {
+      "file": "assets/images/tool-sacred.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 2,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "d1fafbd1a80db53a62474bf0a07450b60b90f219c4ef1024729ea03dd24a3393"
+    },
+    {
+      "file": "assets/images/tool-rope.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 3,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "c0ea351ee3e1667af338969e63b3a5022391fdd494639820f52fdd509bbdf952"
+    },
+    {
+      "file": "assets/images/tool-sheep.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 4,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "540376b63c2907ea74cb7e6496e53efff92c0e2e7d26d54f74664a24e171e681"
+    },
+    {
+      "file": "assets/images/tool-dynamite.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 5,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "99d5dcbb9002219c5ab4913437bfcff42d174b9a35fb6f3dbc04662ab997fa65"
+    },
+    {
+      "file": "assets/images/tool-mine.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 6,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "98a66732d6bbf9c04e010b5c2b5693d55baf95c2f90e59697b3b70071709626e"
+    },
+    {
+      "file": "assets/images/tool-punch.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 7,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "64f924b437b850f13972c7b939504813dc05fc73669dec2ec2ef7031a15538cd"
+    },
+    {
+      "file": "assets/images/tool-teleport.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 8,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "334d07acf88c67c16d97bb9aedcd8c6a14486a5a435fce3bdf8903e5a92c107f"
+    },
+    {
+      "file": "assets/images/tool-jetpack.png",
+      "category": "tool",
+      "source": "project-generated angle-tools-atlas.png",
+      "sourceCell": 9,
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPTS.md",
+      "rightsStatus": "project-generated-ai-assisted; no exclusivity or noninfringement guarantee",
+      "sha256": "66ddbc361d7d563ee425f5f1b9c564683f3d6428d5d061348686f203cba64ce6"
+    },
+    {
+      "file": "assets/images/coast.png",
+      "category": "background",
+      "source": "source-01.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "a5354848c2a30405b3cfec400c12053967441d1f23ee45a9b2393f0b99c8ece6"
+    },
+    {
+      "file": "assets/images/theme-ruins.png",
+      "category": "background",
+      "source": "source-02.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "c893a7022d33785088f7d3cf5d070e88913bfcd9a2705bad7e084256009d064a"
+    },
+    {
+      "file": "assets/images/theme-canyon.png",
+      "category": "background",
+      "source": "source-03.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "744e7c52afd5d371b3a720c21fb6ffac379b91032bf3d7c15deb7dca0525df77"
+    },
+    {
+      "file": "assets/images/theme-fort.png",
+      "category": "background",
+      "source": "source-04.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "f461c76cc8516417b37f09e6a744c167639bb24336d8caeed0578c4addce0b30"
+    },
+    {
+      "file": "assets/images/theme-meadow.png",
+      "category": "background",
+      "source": "source-05.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "f8ebe4ec79b1e645059b321c66ccbc81ab9177a5450da99bbf2b0839d4fc072a"
+    },
+    {
+      "file": "assets/images/theme-snow.png",
+      "category": "background",
+      "source": "source-06.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "12c39ae7746b2b6ce405765470d87b5e11d89d4ff0ea169e017b34e91c591cac"
+    },
+    {
+      "file": "assets/images/theme-scrap.png",
+      "category": "background",
+      "source": "source-07.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "23df6e68914cb4bc63a2ddae983e8a8d4297385dba86db88f4326135c43ec419"
+    },
+    {
+      "file": "assets/images/theme-castle.png",
+      "category": "background",
+      "source": "source-08.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "f571d5c18e0d11cc9b81d36e2de358601a32e76a18d3be83dda8fcc72181eaad"
+    },
+    {
+      "file": "assets/images/theme-moon.png",
+      "category": "background",
+      "source": "source-09.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "a3df04e8d176ae9a5da8ea328b8c9ff7007e05312f7274ecc246dc5a5d21d684"
+    },
+    {
+      "file": "assets/images/theme-sunset.png",
+      "category": "background",
+      "source": "source-10.png",
+      "evidence": "assets/THEME_PROMPTS.json and assets/BACKGROUND_PROMPT.txt",
+      "rightsStatus": "previous AI generation from supplied examples; reference rights not independently verified",
+      "sha256": "4fd1042d6fb3a8d58867ac9dd36584183c8fe1f4b37d4e5f606821e423da4d75"
+    },
+    {
+      "file": "icons/apple-touch-icon.png",
+      "category": "app-icon",
+      "source": "project-generated app-icon-master.png",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_icon.md",
+      "rightsStatus": "AI-assisted; resized export only",
+      "sha256": "5ef2f6b42c4eaeac4f326c51dba18b3c23c4f186819e5733b09656ea26925538"
+    },
+    {
+      "file": "icons/favicon-32.png",
+      "category": "app-icon",
+      "source": "project-generated app-icon-master.png",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_icon.md",
+      "rightsStatus": "AI-assisted; resized export only",
+      "sha256": "aa7b6af0810f594f3b38d312f3f620ee2e29dff2a69ddadba41677c66143c010"
+    },
+    {
+      "file": "icons/icon-192.png",
+      "category": "app-icon",
+      "source": "project-generated app-icon-master.png",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_icon.md",
+      "rightsStatus": "AI-assisted; resized export only",
+      "sha256": "9767c54b690a5fbf1d29c9f42595c932f99c81fa4e222b55b87c6cd0192ab155"
+    },
+    {
+      "file": "icons/icon-512.png",
+      "category": "app-icon",
+      "source": "project-generated app-icon-master.png",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_icon.md",
+      "rightsStatus": "AI-assisted; resized export only",
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
+    },
+    {
+      "file": "icons/icon-maskable-512.png",
+      "category": "app-icon",
+      "source": "project-generated app-icon-master.png",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_icon.md",
+      "rightsStatus": "AI-assisted; resized export only",
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
+    },
+    {
+      "file": "og-image-angle-bots.png",
+      "category": "social-cover",
+      "source": "new project robot/tool atlases",
+      "evidence": "verification/independent-angle-king-2026-10-25/artwork/PROMPT_social.md",
+      "rightsStatus": "AI-assisted",
+      "sha256": "aacaf18c65e5afb986a33c38a07ad24078798b29a078e3d59a09c40e3e54a5fe"
+    },
+    {
+      "file": "assets/audio/bouncy-tactical-groove.mp3",
+      "category": "music",
+      "source": "User Suno generation",
+      "rightsEvidence": {
+        "kind": "user statement in chat",
+        "date": "2026-10-25",
+        "tier": "Pro/Premier at creation and download",
+        "receiptIndependentlyVerified": false
+      },
+      "officialTerms": "https://help.suno.com/en/articles/9601665",
+      "rightsStatus": "use based on stated paid-plan download; third-party redistribution not licensed by this document",
+      "sha256": "f13482d68e76573722f0a44e80ad229c1c011b416331fc14e60e8c61ff0b6ea5"
+    }
+  ]
+}

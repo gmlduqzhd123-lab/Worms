@@ -1,3 +1,5 @@
-사용자 ZIP의 투명 PNG 20장은 원본 바이트 그대로 사용합니다. 렌더링 때 manifest의 알파 경계로 여백을 제외합니다. coast.png는 화면 예시 source-01의 화풍을 참고해 imagegen으로 만든 UI 없는 배경입니다. 나머지 9개 무기는 기존 벡터 아이콘을 유지합니다. 캐릭터별 이동/피격 프레임은 제공되지 않아 원본 한 장에 이동·점프·피격 변환을 적용합니다. 원본 ZIP 및 30장 전체는 original/artwork에 보존합니다.
+# 현재 각도봇 리소스
 
-9단계: 제공된 나머지 화면 예시 9장을 참고한 배경 9장을 theme-ID.png에 추가했습니다. 기존 coast.png와 제공 PNG 20장은 변경하지 않았습니다. 맵 테마 메타데이터는 manifest.json의 themes에, built-in imagegen 제작 프롬프트와 저장 경로는 THEME_PROMPTS.json에 있습니다.
+캐릭터 10종(bot-*.png)과 도구 10종(tool-*.png)은 이번 프로젝트의 새 콘셉트로 imagegen에서 생성했습니다. 기존 게임 이미지는 입력하지 않았습니다. 생성 원본 아틀라스, 프롬프트, 셀 경계와 내보내기 기록은 verification/independent-angle-king-2026-10-25/artwork/에 보존했습니다. scripts/build-identity-art.cjs가 알파 경계로 셀을 분리하고 크기를 내보내며 src/graphics.js와 assets/manifest.json의 경계를 맞춥니다.
+
+교체 전 worm-*.png 및 item-*.png 20개는 versions/pre-independent-angle-king-2026-10-25-6e772c8/assets/images/에 바이트 그대로 보존했습니다. 현재 실행 리소스에는 넣지 않습니다. 배경 10종은 이전 생성본을 유지하며 이전 출처·프롬프트 기록을 함께 보존합니다. 개별 파일 SHA-256과 권리 확인 범위는 rights-manifest.json, 전체 안내는 ASSET_RIGHTS.md에 있습니다.

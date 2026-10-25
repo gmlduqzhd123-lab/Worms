@@ -1,10 +1,10 @@
 {
-  "version": "24",
+  "version": "25",
   "files": [
     {
       "file": "index.html",
-      "bytes": 16333,
-      "sha256": "fbd10f6a3ecefee6cc8c8b91c8faeea4236837b43db6875a197382aa894a42dd"
+      "bytes": 17703,
+      "sha256": "f5d3b6940902a412fb5a3e92be11d1b8e4ae17f5d509f032a4df21161c8c47a1"
     },
     {
       "file": ".nojekyll",
@@ -13,18 +13,18 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 22165,
-      "sha256": "43f8ef9036d744582800d40b972fe6d80abd94666d5ba70c3dbaffb54f251753"
+      "bytes": 23075,
+      "sha256": "09bbc5514d78f10f579d3d6edddd2ead676f2eacc755d4d8d8421efdc00785dc"
     },
     {
       "file": "src/state.js",
-      "bytes": 6340,
-      "sha256": "a79a757fecf008224c034431ddd51675004c4ec0390ae19a5e67584764d37300"
+      "bytes": 6629,
+      "sha256": "df1ffa136905219892fa89e4b13303f2138f0068bb92f211378729ec07d2aae2"
     },
     {
       "file": "src/audio.js",
-      "bytes": 20044,
-      "sha256": "ff81727691d972ea453a76d942299c15da35f1104a9c455b33762f75b7ebc432"
+      "bytes": 20048,
+      "sha256": "895bcd7975db64768fb6eee3770115df0f16ad9c261718870a77044760519aa7"
     },
     {
       "file": "src/terrain.js",
@@ -38,8 +38,8 @@
     },
     {
       "file": "src/ui.js",
-      "bytes": 6822,
-      "sha256": "04e004ee72349cb6c8b1f8c4fcf59771a0d19f21b8e4e39000fb270e8fd4f05a"
+      "bytes": 7057,
+      "sha256": "7c95a254338215ac4fa825498e08a6fc250eb9df80f99899af252fdfcf2584ce"
     },
     {
       "file": "src/combat.js",
@@ -48,13 +48,13 @@
     },
     {
       "file": "src/weapons.js",
-      "bytes": 12463,
-      "sha256": "9b3bd7c3ed2b0dff9b6856886c7c24aae247194ec9a5fa21926e2132604cacb0"
+      "bytes": 12571,
+      "sha256": "3a59b87e045f83f5a84796d70bba1495769f292a30e2778b079e2c9196d276a2"
     },
     {
       "file": "src/physics.js",
-      "bytes": 4551,
-      "sha256": "8a4c183a0cc54cd6f5b473435e440e8941a010fa63f4200425767be59ecbf002"
+      "bytes": 4554,
+      "sha256": "7a07cc489aef3cf0e1d5ac87e3c512861d5c797cc88de4545cd32e8ce9ed3087"
     },
     {
       "file": "src/ai.js",
@@ -63,28 +63,28 @@
     },
     {
       "file": "src/render.js",
-      "bytes": 6565,
-      "sha256": "8d3f11d573afd9ed355fe31d42552240dc0e592d1fc072005462d66145e96d4f"
+      "bytes": 6676,
+      "sha256": "c4be886fb2b847461eb31f3a802ae1ebab5067c3acf1219032212ed88c588867"
     },
     {
       "file": "src/loop.js",
-      "bytes": 2070,
-      "sha256": "92043208fae6fffc0b1231acba9fd5e054271fea8671df3767bed62c2aa73fed"
+      "bytes": 2087,
+      "sha256": "396f2594fdac457814eccbbb259e91b1e26d65382bf333a2f0f652181319972f"
     },
     {
       "file": "src/input.js",
-      "bytes": 9294,
-      "sha256": "5208fd845912024879aaffa8b17301a6de0fb8b6ea456cd113342400c7a88d5c"
+      "bytes": 9784,
+      "sha256": "1218ca1dbd64153c4040443fd57b751e7cd3a2bcc580c9d975ef23347cf914a5"
     },
     {
       "file": "src/graphics.js",
-      "bytes": 16528,
-      "sha256": "6cfa9012fca7ff32d94f83960f7706c0cf23c284271329de02e884724f6d0e7f"
+      "bytes": 19431,
+      "sha256": "cf6551fcbf0384b71711e831bbfb19a9568d3e711522982465cc79960705a3fc"
     },
     {
       "file": "src/persistence.js",
-      "bytes": 10440,
-      "sha256": "f6549749e7ae656fe8e370f748cb3abf6ac9e3e48b2764268dce4a5c89a5b5ac"
+      "bytes": 10897,
+      "sha256": "1b1e5cff587407c195e4c030502655e1994c91f71e6a9fbd5ed233f25d5da78f"
     },
     {
       "file": "src/boot.js",
@@ -92,59 +92,59 @@
       "sha256": "40a5e4cfe614caf231cd3732155cd7fe2d9e9da2a66690d68383316cd5d07e72"
     },
     {
+      "file": "assets/images/bot-captain.png",
+      "bytes": 210914,
+      "sha256": "72bdf3bbafd529575f564b42e9a1217a598989c178c643b625bcb4300de2f40d"
+    },
+    {
+      "file": "assets/images/bot-comet.png",
+      "bytes": 206213,
+      "sha256": "3ebe52485c09fd783842aa346d81bde1b1dba547c300fcd19be0c34ce88035cf"
+    },
+    {
+      "file": "assets/images/bot-maker.png",
+      "bytes": 206216,
+      "sha256": "a27b390117c6ba47487998a6510375bba9589dcd9c510f75ea38b98da951dfbd"
+    },
+    {
+      "file": "assets/images/bot-nova.png",
+      "bytes": 194264,
+      "sha256": "e6d275859576884ff8db817c60c1f1ed5cb493a5b26456bf3d5e109bc6efc766"
+    },
+    {
+      "file": "assets/images/bot-orbit.png",
+      "bytes": 203558,
+      "sha256": "8126ec7183cba328938991768063971400cdf66976dd67f84bf58a1d5923c97a"
+    },
+    {
+      "file": "assets/images/bot-polar.png",
+      "bytes": 191269,
+      "sha256": "5b86bdb3855f2bc73a1be1523f3f80e5677b1699c6b63ec7179506873d358129"
+    },
+    {
+      "file": "assets/images/bot-prism.png",
+      "bytes": 198186,
+      "sha256": "76ab1b563c47dc183889684cc17a6819d51f049ac06444fe4417a22d165565c3"
+    },
+    {
+      "file": "assets/images/bot-relay.png",
+      "bytes": 206816,
+      "sha256": "19732651cafcb10bfe18b24414a91eb290e4648bd6490cf96147727a9f9a4ebb"
+    },
+    {
+      "file": "assets/images/bot-scout.png",
+      "bytes": 208170,
+      "sha256": "21104a6305b1eeaa7ebe7c0846ab04000baa8aa066a9fce53c1f355e9f08e516"
+    },
+    {
+      "file": "assets/images/bot-spark.png",
+      "bytes": 186436,
+      "sha256": "e4bbee8de40e1cf9c72e69ed80fd5c452ca89c3c88b5f86499c677203b7f1309"
+    },
+    {
       "file": "assets/images/coast.png",
       "bytes": 1813395,
       "sha256": "a5354848c2a30405b3cfec400c12053967441d1f23ee45a9b2393f0b99c8ece6"
-    },
-    {
-      "file": "assets/images/item-bazooka.png",
-      "bytes": 649807,
-      "sha256": "bc53e131121c31fc713a92c74aeadbdb63f46c14e6139f9d708dbef0da504dc3"
-    },
-    {
-      "file": "assets/images/item-dynamite.png",
-      "bytes": 940412,
-      "sha256": "65d413b2c7ce420f6e5e0d50a03659c3102ca0dc91868c519801628b306adc01"
-    },
-    {
-      "file": "assets/images/item-grenade.png",
-      "bytes": 1012090,
-      "sha256": "eb01c31734af554bc5108a227d4643470878bd58015766f7da30623de1c17e7b"
-    },
-    {
-      "file": "assets/images/item-jetpack.png",
-      "bytes": 1230512,
-      "sha256": "6f4dc0059743c95e86c5d2d20477f602e3300c42a037a5e4d07395125dd573d4"
-    },
-    {
-      "file": "assets/images/item-mine.png",
-      "bytes": 777059,
-      "sha256": "fda8749bef5a465cae7085fda4d7bbaf0ee3c086fb93993fef3c69a59ea378f1"
-    },
-    {
-      "file": "assets/images/item-punch.png",
-      "bytes": 645731,
-      "sha256": "b03f2bd25da58fd1cce6c80ee6402a042bf8117d3bab3f41a25539079f108168"
-    },
-    {
-      "file": "assets/images/item-rope.png",
-      "bytes": 714333,
-      "sha256": "d96c30e56ac81b05794447157570d7cca3bede1c956415eb260acfe1d20dabdd"
-    },
-    {
-      "file": "assets/images/item-sacred.png",
-      "bytes": 1347363,
-      "sha256": "5b2de7d28e0010c1b025c82b425c33b44cd7f0784e5cfc719596d819aff4f208"
-    },
-    {
-      "file": "assets/images/item-sheep.png",
-      "bytes": 1055153,
-      "sha256": "b8b89e0464a043c0079263a60b35bda3928ad3126a84feb80fc4460f35fbcd58"
-    },
-    {
-      "file": "assets/images/item-teleport.png",
-      "bytes": 1002892,
-      "sha256": "aede33187da67fa8decf3578e2ffe73ccb6f756e5bc0a9c23715425993dadd7c"
     },
     {
       "file": "assets/images/theme-canyon.png",
@@ -192,64 +192,64 @@
       "sha256": "4fd1042d6fb3a8d58867ac9dd36584183c8fe1f4b37d4e5f606821e423da4d75"
     },
     {
-      "file": "assets/images/worm-astronaut.png",
-      "bytes": 1153954,
-      "sha256": "9c09d860543c99d29e08919602b175c17ef87616226bbc12256b171792c2d50b"
+      "file": "assets/images/tool-bazooka.png",
+      "bytes": 117892,
+      "sha256": "65f3326741a0594d865d35dca9b07c7d852005f21da7df55b13dfe55f6b98df2"
     },
     {
-      "file": "assets/images/worm-cowboy.png",
-      "bytes": 1092862,
-      "sha256": "7abb7af57a56e6976ffe2056ac08ed9d0d6769dfda1d5eae8810ae8d8aac9cd4"
+      "file": "assets/images/tool-dynamite.png",
+      "bytes": 134519,
+      "sha256": "99d5dcbb9002219c5ab4913437bfcff42d174b9a35fb6f3dbc04662ab997fa65"
     },
     {
-      "file": "assets/images/worm-knight.png",
-      "bytes": 1224357,
-      "sha256": "7f6e5d234be56708cbf4972efdef06db202c80c4a88288266a3cfbb0f15ace14"
+      "file": "assets/images/tool-grenade.png",
+      "bytes": 108677,
+      "sha256": "86f8e56577aab1e2abf948ed24d50cab4bca6cae19e12854b5cd62efd8603626"
     },
     {
-      "file": "assets/images/worm-miner.png",
-      "bytes": 1046140,
-      "sha256": "3b32ec8c3b8d80d5901a94a257a8ee3a999ece7a2a12c9301b94c8084fe0510b"
+      "file": "assets/images/tool-jetpack.png",
+      "bytes": 119909,
+      "sha256": "66ddbc361d7d563ee425f5f1b9c564683f3d6428d5d061348686f203cba64ce6"
     },
     {
-      "file": "assets/images/worm-ninja.png",
-      "bytes": 1089250,
-      "sha256": "39d1c0c3d56dbc224dfcb862f9e7b44f8f3880e24b112036b1d4af7d5fee0d0b"
+      "file": "assets/images/tool-mine.png",
+      "bytes": 97905,
+      "sha256": "98a66732d6bbf9c04e010b5c2b5693d55baf95c2f90e59697b3b70071709626e"
     },
     {
-      "file": "assets/images/worm-pilot.png",
-      "bytes": 1152797,
-      "sha256": "12b67f5021bd5a47d2b9f6c096b26c029e3817ec761789b4c921a3087412c4e2"
+      "file": "assets/images/tool-punch.png",
+      "bytes": 108464,
+      "sha256": "64f924b437b850f13972c7b939504813dc05fc73669dec2ec2ef7031a15538cd"
     },
     {
-      "file": "assets/images/worm-pirate.png",
-      "bytes": 1102705,
-      "sha256": "919b67ff030ee1da8ec2b96d5e184cb7bf6444a15c268793d8fe5da944e7a548"
+      "file": "assets/images/tool-rope.png",
+      "bytes": 102041,
+      "sha256": "c0ea351ee3e1667af338969e63b3a5022391fdd494639820f52fdd509bbdf952"
     },
     {
-      "file": "assets/images/worm-scientist.png",
-      "bytes": 1181307,
-      "sha256": "2d0f4d1caf88bb59486d9b9bee53eefe1447536bf1c9e1bae651f5a9f7c5d0ab"
+      "file": "assets/images/tool-sacred.png",
+      "bytes": 107848,
+      "sha256": "d1fafbd1a80db53a62474bf0a07450b60b90f219c4ef1024729ea03dd24a3393"
     },
     {
-      "file": "assets/images/worm-soldier.png",
-      "bytes": 882416,
-      "sha256": "b2d24668533a25e2763003ef4a5b1547cc5fffdcc8f50971bd7eb2db8314feed"
+      "file": "assets/images/tool-sheep.png",
+      "bytes": 118206,
+      "sha256": "540376b63c2907ea74cb7e6496e53efff92c0e2e7d26d54f74664a24e171e681"
     },
     {
-      "file": "assets/images/worm-winter.png",
-      "bytes": 1210727,
-      "sha256": "3557b594b41ccb6dd8928a1787f76ec01bc8f40b4a4f454ea2055c842435dbfd"
+      "file": "assets/images/tool-teleport.png",
+      "bytes": 101083,
+      "sha256": "334d07acf88c67c16d97bb9aedcd8c6a14486a5a435fce3bdf8903e5a92c107f"
     },
     {
       "file": "manifest.webmanifest",
-      "bytes": 708,
-      "sha256": "d942361c6ffd29dd3335d0e9bbd22d885de58ebf537f3107767461949e315de2"
+      "bytes": 789,
+      "sha256": "f8a75713d7d8f7349f1645b9569507c5fadac8ebf00825d9559f7fa30b6ca922"
     },
     {
       "file": "sw.js",
-      "bytes": 1796,
-      "sha256": "e70b65ff5c2faa625b677800d065a954124d4b553b35067c411659b72627dc7c"
+      "bytes": 1912,
+      "sha256": "31eed8400c310e61d95b85b4f9a38ed1cb3dc7dd6114561e34e3d503ca294466"
     },
     {
       "file": "ys-install.js",
@@ -267,34 +267,34 @@
       "sha256": "3b4027b74cd21cee8fd5b726e1805bcb036e5d4e75e54ba253cc7981d88fd009"
     },
     {
-      "file": "og-image-angle-king.png",
-      "bytes": 1499084,
-      "sha256": "10240e704bd5adfb6aa750372d9af697a9e8c33a10c16c02eb2ce540d4ba409a"
+      "file": "og-image-angle-bots.png",
+      "bytes": 2203732,
+      "sha256": "aacaf18c65e5afb986a33c38a07ad24078798b29a078e3d59a09c40e3e54a5fe"
     },
     {
       "file": "icons/apple-touch-icon.png",
-      "bytes": 36881,
-      "sha256": "7e1888a792e1facd34f78643aa8205bae14db7d9e0deb6be7ac71d97a7224021"
+      "bytes": 58536,
+      "sha256": "5ef2f6b42c4eaeac4f326c51dba18b3c23c4f186819e5733b09656ea26925538"
     },
     {
       "file": "icons/favicon-32.png",
-      "bytes": 2073,
-      "sha256": "bcbe737e48d18f3e6c6cd3dafb74fcf76c203761530c9dd29d0f4d511224c340"
+      "bytes": 2596,
+      "sha256": "aa7b6af0810f594f3b38d312f3f620ee2e29dff2a69ddadba41677c66143c010"
     },
     {
       "file": "icons/icon-192.png",
-      "bytes": 41501,
-      "sha256": "8006037ae1d6e9ed5713bf135ffff76add24dea8bd208fe833302c09ac6ad62a"
+      "bytes": 65603,
+      "sha256": "9767c54b690a5fbf1d29c9f42595c932f99c81fa4e222b55b87c6cd0192ab155"
     },
     {
       "file": "icons/icon-512.png",
-      "bytes": 224828,
-      "sha256": "455c14e5848343b79b6df9e681e4b1d8868c141ee1d594d372141b703309f397"
+      "bytes": 444265,
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
     },
     {
       "file": "icons/icon-maskable-512.png",
-      "bytes": 187828,
-      "sha256": "f49898a780d33e619b10570d6d812129e196d7b2a32ca67fc950ec2fed18ee02"
+      "bytes": 444265,
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
     },
     {
       "file": "assets/audio/bouncy-tactical-groove.mp3",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59851838,
-      "sha256": "cca7c7b3dac91a3915bf999b1cb328afc9413799d0cc30020743256d7a0b19ed"
+      "bytes": 33337469,
+      "sha256": "85497d49c09febd708afdaa6a5a17360e7790b4595a47b2e2d8204c132912b12"
     }
   ]
 }

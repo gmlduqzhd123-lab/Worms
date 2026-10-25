@@ -24,10 +24,11 @@ document.getElementById('skipIntro').addEventListener('click',completeWormIntro)
 function nativeKeyboardTarget(e){return e.target.closest?.('input,select,textarea,[contenteditable="true"]')||([' ','Enter'].includes(e.key)&&e.target.closest?.('button,summary,a[href]'))}
 addEventListener('keydown',e=>{
   if(orientationBlocked)return;
-  if(e.target.closest?.('#audioControls,#homeAudioControls'))return;
+  if(e.target.closest?.('#audioControls,#homeAudioControls,#angleControls'))return;
   if(nativeKeyboardTarget(e))return;
   if(wormIntro&&e.key!=='Escape')return;
-  if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open)return;
+  if(document.getElementById('guideDialog').open||document.getElementById('historyDialog').open||document.getElementById('creditsDialog').open)return;
+  if(e.shiftKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(!e.repeat)nudgeAim(e.key==='ArrowUp'?1:-1);return}
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
   if(e.key==='Enter'&&!paused&&!turnLocked&&!isCPU()&&retreatUntil===0)nextTurn(0);
@@ -76,6 +77,9 @@ document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paus
 document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!musicEnabled));
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
 document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();startGame()});
+document.getElementById('aimMinus').addEventListener('click',()=>nudgeAim(-1));
+document.getElementById('aimPlus').addEventListener('click',()=>nudgeAim(1));
+document.getElementById('aimPreset').addEventListener('change',e=>{if(e.target.value!=='custom')setAimElevation(Number(e.target.value))});
 const heldControls=new Map();
 function controlKey(action){return{left:'a',right:'d',aimup:'ArrowUp',aimdown:'ArrowDown',rise:'w',descend:'s',ropein:'w',ropeout:'s'}[action]}
 function syncHeldKeys(){for(const k of ['a','d','ArrowUp','ArrowDown','w','s'])keys[k]=[...heldControls.values()].some(a=>controlKey(a)===k)}

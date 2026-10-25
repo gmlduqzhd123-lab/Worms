@@ -49,15 +49,18 @@ function closeGameDialog(){if(modalPauseOwned&&!gameOver)setPaused(false);modalP
 const GUIDE_STEPS=[
   {title:'작은 전장, 큰 한 수',body:'두 팀이 번갈아 움직입니다. 상대 팀을 모두 쓰러뜨리거나 물에 빠뜨리면 승리합니다. 코랄 탐사대와 민트 탐사대의 전장을 시작해 보세요.',hint:'처음에는 로컬 2인 대전과 작은 맵을 선택하면 조작을 익히기 쉽습니다.',icon:'target'},
   {title:'움직이고, 두 번 뛰기',body:'A/D 또는 좌우 버튼으로 이동합니다. W 또는 점프 버튼으로 뛰고, 0.33초 안에 다시 누르면 뒤로 백플립합니다.',hint:'높은 곳에서 떨어지면 피해를 받습니다. 물에 닿으면 탈락합니다.',icon:'jump'},
-  {title:'조준, 충전, 발사',body:'위/아래 화살표 또는 조준 버튼으로 각도를 조절합니다. Space나 발사 버튼을 누른 채 힘을 모으고 놓으면 발사합니다. 로켓은 바람의 영향을 받습니다.',hint:'산탄총은 한 턴에 두 발입니다. 공격 후 폭발과 낙하가 정리되면 짧은 후퇴 시간이 생깁니다.',icon:'rocket'},
-  {title:'전장을 멀리 보기',body:'화면을 드래그하면 카메라가 이동합니다. 휠·확대 버튼·두 손가락으로 확대하고 전체 맵에서 상대 위치를 찾으세요. 웜 추적 버튼이나 C로 돌아옵니다.',hint:'공습·텔레포트는 목표를 탭합니다. 목표 선택 중 드래그하면 카메라만 이동합니다.',icon:'map'},
-  {title:'로프와 제트팩',body:'로프를 선택해 발사하면 지형에 연결됩니다. A/D로 흔들고 W/S 또는 로프 버튼으로 길이를 바꿉니다. Space를 다시 누르면 해제됩니다. 제트팩은 상승·하강 버튼 또는 W/S로 조절합니다.',hint:'고정 지형이 파괴되면 로프가 해제됩니다. 제트팩 연료와 제한된 탄약을 확인하세요.',icon:'rope'},
+  {title:'수평선부터 각도 읽기',body:'수평선은 0°입니다. 30°·45°·60°·90°를 선택하거나 ±1°로 조준합니다. Shift+↑/↓도 1°씩 바꿉니다. Space나 발사 버튼을 누른 채 힘을 모으고 놓으면 발사합니다.',hint:'발사 직후 방향과 표시 각도가 같습니다. 비행 중에는 중력과 바람 때문에 경로가 굽습니다. 같은 각도에서도 힘과 바람에 따라 도착점이 달라집니다.',icon:'target'},
+  {title:'전장을 멀리 보기',body:'화면을 드래그하면 카메라가 이동합니다. 휠·확대 버튼·두 손가락으로 확대하고 전체 맵에서 상대 위치를 찾으세요. 봇 추적 버튼이나 C로 돌아옵니다.',hint:'별똥지원·좌표비콘은 목표를 탭합니다. 목표 선택 중 드래그하면 카메라만 이동합니다.',icon:'map'},
+  {title:'자석와이어와 쌍날개팩',body:'자석와이어를 선택해 발사하면 지형에 연결됩니다. A/D로 흔들고 W/S 또는 로프 버튼으로 길이를 바꿉니다. Space를 다시 누르면 해제됩니다. 쌍날개팩은 상승·하강 버튼 또는 W/S로 조절합니다.',hint:'고정 지형이 파괴되면 와이어가 해제됩니다. 연료와 제한된 탄약을 확인하세요.',icon:'rope'},
   {title:'준비 완료',body:'Enter나 턴 넘김 버튼으로 차례를 넘길 수 있습니다. 정지 버튼을 누르거나 가이드를 열면 전투가 멈춥니다. 완료한 대전 결과와 선택한 설정은 이 브라우저에 저장됩니다.',hint:'다른 기기·브라우저로 자동 동기화되지 않습니다. 기록 화면에서 JSON으로 내보낼 수 있습니다.',icon:'flag'}
 ];
 function renderGuide(){const step=GUIDE_STEPS[guideStep];document.getElementById('guideTitle').textContent=step.title;document.getElementById('guideBody').textContent=step.body;document.getElementById('guideHint').textContent=step.hint;document.getElementById('guideProgress').textContent=String(guideStep+1).padStart(2,'0')+' / 06';document.getElementById('guideArt').innerHTML=weaponIcon(step.icon);document.getElementById('guidePrev').disabled=guideStep===0;document.getElementById('guideNext').textContent=guideStep===5?'가이드 완료':'다음'}
 function openGuide(){guideStep=0;renderGuide();openGameDialog(document.getElementById('guideDialog'))}
 function openHistory(){deleteArmed=false;document.getElementById('clearHistory').textContent='기록 삭제';renderHistory();openGameDialog(document.getElementById('historyDialog'))}
 function initPersistence(){
+  document.getElementById('homeCredits').addEventListener('click',()=>openGameDialog(document.getElementById('creditsDialog')));
+  document.getElementById('creditsClose').addEventListener('click',()=>document.getElementById('creditsDialog').close());
+  document.getElementById('creditsDialog').addEventListener('close',closeGameDialog);
   loadSettings();loadResults();
   if(readSaved(STORAGE_KEYS.guide)?.completed===true)document.getElementById('homeGuide').textContent='플레이 가이드 다시 보기';
   for(const id of OPTION_IDS)document.getElementById(id).addEventListener('change',saveSettings);

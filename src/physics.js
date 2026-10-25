@@ -22,7 +22,7 @@ function wormStep(w,dt){
   if(jetpack&&w===cw&&can){
     jetFuel-=dt;if(keys.a){w.vx-=.16;facing=-1}if(keys.d){w.vx+=.16;facing=1}
     w.vy+=.07;if(keys.w)w.vy-=.24;if(keys.s)w.vy+=.20;w.vx=clamp(w.vx*.97,-4,4);w.vy=clamp(w.vy*.97,-5,5);
-    moveBody(w,w.vx,w.vy);if(jetFuel<=0){jetpack=false;w.knockTime=.45;playSFX('jetpackStop');toast('제트팩 연료 소진');startRetreat(2)}
+    moveBody(w,w.vx,w.vy);if(jetFuel<=0){jetpack=false;w.knockTime=.45;playSFX('jetpackStop');toast('쌍날개팩 연료 소진');startRetreat(2)}
   }else if(rope&&w===cw){
     if(!pointBlocked(rope.ax,rope.ay)){rope=null;w.knockTime=.45;playSFX('ropeRelease');toast('로프 고정점이 사라졌습니다');return}
     if(can){if(keys.a)w.vx-=.14;if(keys.d)w.vx+=.14;if(keys.w)rope.len=clamp(rope.len-1.5,30,300);if(keys.s)rope.len=clamp(rope.len+1.5,30,300)}

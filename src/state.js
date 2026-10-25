@@ -54,11 +54,7 @@ const ui={
   powerBox:document.getElementById('powerBox'),power:document.getElementById('power'),targetTip:document.getElementById('targetTip')
 };
 
-const weaponNames={
-  bazooka:'로켓',grenade:'수류탄',shotgun:'산탄총',banana:'바나나탄',sacred:'성스러운 폭탄',cluster:'클러스터',
-  homing:'유도 미사일',mortar:'박격포',airstrike:'공습',dynamite:'다이너마이트',mine:'지뢰',bat:'야구 배트',
-  punch:'파이어 펀치',sheep:'양 폭탄',drill:'드릴',rope:'닌자 로프',jetpack:'제트팩',teleport:'텔레포트',girder:'거더'
-};
+const weaponNames={"bazooka":"바람포","grenade":"통통캡슐","shotgun":"확산포","banana":"파편씨앗","sacred":"별빛코어","cluster":"조각캡슐","homing":"추적광구","mortar":"곡사발사기","airstrike":"별똥지원","dynamite":"시간큐브","mine":"감응타일","bat":"반동해머","punch":"충격글러브","sheep":"태엽수레","drill":"회전말뚝","rope":"자석와이어","jetpack":"쌍날개팩","teleport":"좌표비콘","girder":"연결발판"};
 const limited=['banana','sacred','cluster','homing','mortar','airstrike','dynamite','mine','punch','sheep','drill','jetpack','teleport','girder'];
 const defaultAmmo={banana:1,sacred:1,cluster:3,homing:2,mortar:3,airstrike:1,dynamite:2,mine:3,punch:2,sheep:2,drill:2,jetpack:2,teleport:2,girder:3};
 
@@ -73,4 +69,6 @@ function lerp(a,b,t){return a+(b-a)*t}
 function dist(a,b,c,d){return Math.hypot(c-a,d-b)}
 function screenX(x){return x-camera.x}
 function screenY(y){return y-camera.y}
+function setAimElevation(degrees){if(!canShowAimGuide()||!Number.isFinite(degrees))return false;aim=-clamp(Math.round(degrees),-13,90);updateHUD();return true}
+function nudgeAim(degrees){return setAimElevation(Math.round(-aim)+degrees)}
 function worldFromScreen(sx,sy){return{x:sx/cameraZoom+camera.x,y:sy/cameraZoom+camera.y}}
