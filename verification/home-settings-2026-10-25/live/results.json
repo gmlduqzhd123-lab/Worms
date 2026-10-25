@@ -1,0 +1,131 @@
+{
+  "tests": [
+    {
+      "name": "desktop: only mode and map are exposed in the initial setup",
+      "pass": true
+    },
+    {
+      "name": "desktop: mode, map, advanced summary and start are onscreen and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "desktop: all four moved fields open once inside advanced settings",
+      "pass": true
+    },
+    {
+      "name": "desktop: edited team names and characters persist after reload while collapsed",
+      "pass": true
+    },
+    {
+      "name": "desktop: moved controls fit within the viewport",
+      "pass": true
+    },
+    {
+      "name": "desktop: collapsed settings apply to the introduction and first battle turn",
+      "pass": true
+    },
+    {
+      "name": "phone: only mode and map are exposed in the initial setup",
+      "pass": true
+    },
+    {
+      "name": "phone: mode, map, advanced summary and start are onscreen and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "phone: all four moved fields open once inside advanced settings",
+      "pass": true
+    },
+    {
+      "name": "phone: edited team names and characters persist after reload while collapsed",
+      "pass": true
+    },
+    {
+      "name": "phone: moved controls fit within the viewport",
+      "pass": true
+    },
+    {
+      "name": "phone: collapsed settings apply to the introduction and first battle turn",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: only mode and map are exposed in the initial setup",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: mode, map, advanced summary and start are onscreen and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: all four moved fields open once inside advanced settings",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: edited team names and characters persist after reload while collapsed",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: moved controls fit within the viewport",
+      "pass": true
+    },
+    {
+      "name": "wide-phone: collapsed settings apply to the introduction and first battle turn",
+      "pass": true
+    },
+    {
+      "name": "small-phone: only mode and map are exposed in the initial setup",
+      "pass": true
+    },
+    {
+      "name": "small-phone: mode, map, advanced summary and start are onscreen and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "small-phone: all four moved fields open once inside advanced settings",
+      "pass": true
+    },
+    {
+      "name": "small-phone: edited team names and characters persist after reload while collapsed",
+      "pass": true
+    },
+    {
+      "name": "small-phone: moved controls fit within the viewport",
+      "pass": true
+    },
+    {
+      "name": "small-phone: collapsed settings apply to the introduction and first battle turn",
+      "pass": true
+    },
+    {
+      "name": "Portrait rotation guidance retains the remote install/QR fix",
+      "pass": true
+    },
+    {
+      "name": "Standalone HTML has the same grouping, saved values and playable first turn",
+      "pass": true
+    },
+    {
+      "name": "Public index.html matches the deployed commit",
+      "pass": true
+    },
+    {
+      "name": "Public sw.js matches the deployed commit",
+      "pass": true
+    },
+    {
+      "name": "Public styles/game.css matches the deployed commit",
+      "pass": true
+    },
+    {
+      "name": "Public offline/wormfront.html matches the deployed commit",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors or missing resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "browser": "156.0.4314.42"
+}
