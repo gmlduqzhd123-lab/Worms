@@ -49,4 +49,10 @@ WebKit은 닫힌 details 내부의 요소를 자동화의 isVisible에서 보이
 
 ## 공개 배포
 
-배포 후 Actions 상태·공개 파일 해시·세 엔진 실행 결과를 이어서 기록합니다.
+- 배포 코드 커밋: `859394106144d9f27445d77739706963fa4f8196`.
+- [GitHub Pages 배포 실행](https://github.com/gmlduqzhd123-lab/Worms/actions/runs/40199142364): completed / success.
+- [공개 실행 주소](https://gmlduqzhd123-lab.github.io/Worms/?v=27): HTTP 200, HTML 버전 27.
+- `node scripts/verify-platforms.cjs --live`: **212개 통과**, 실패 0, JavaScript 오류 0, 검사 대상 온라인 리소스 누락 0. 세 엔진·12개 프로필을 공개 주소에서 다시 실행했습니다. 결과는 `live/results.json`이며 화면은 `live/*-home.png`, `live/*-battle.png`에 보존합니다.
+- 공개 사이트에서도 첫 방문 후 이미지 캐시 30개, 네트워크 차단 재접속과 새 테마·전투·종료, 세 엔진의 CPU 충돌 예측, 공개 단일 HTML을 확인했습니다.
+- 공개 index, CSS, input/terrain/ui 코드, 서비스 워커, 단일 HTML의 7개 해시가 배포 커밋의 Git blob과 일치합니다. Git의 줄바꿈 정규화를 고려한 비교입니다.
+- 실제 스마트폰·태블릿 실물 확인으로 표시하지 않습니다. 공개 검수도 앞서 명시한 Windows 브라우저 및 에뮬레이션 범위입니다.
