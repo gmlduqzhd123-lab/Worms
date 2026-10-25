@@ -20,6 +20,7 @@ function updateHUD(){
   ui.timer.setAttribute('aria-label',phase.text+' · '+phase.timer);ui.subhud.textContent=phase.text+(sudden?' · 수위 상승':'');
   ui.wind.textContent=`바람 ${Math.abs(wind*100).toFixed(1)} ${wind>=0?'→':'←'} · ${turnNo}턴`;
   document.getElementById('top').dataset.team=activeTeam;
+  document.getElementById('ui').classList.toggle('aiming',canShowAimGuide());
 
   document.querySelectorAll('.weapon').forEach(b=>{
     const id=b.dataset.w;b.classList.toggle('active',id===selected);
@@ -36,7 +37,8 @@ function clampCamera(){
 }
 function focusOn(x,y,instant=false){
   const cw=VW/cameraZoom,ch=VH/cameraZoom,minX=Math.min(0,(WW-cw)/2),minY=Math.min(0,(WH-ch)/2);
-  camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*.46,minY,Math.max(minY,WH-ch));
+  const aimSpace=VH<=360&&VW>VH&&matchMedia('(pointer:coarse)').matches&&canShowAimGuide();
+  camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*(aimSpace ? .58 : .46),minY,Math.max(minY,WH-ch));
   if(instant){camera.x=camera.targetX;camera.y=camera.targetY}
 }
 function setCameraZoom(value,sx=VW/2,sy=VH/2){

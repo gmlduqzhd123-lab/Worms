@@ -50,6 +50,38 @@ function drawHealthLabel(w,x,y){
  ctx.font='900 12px system-ui';ctx.strokeText('HP '+hp,x,y-48);ctx.fillStyle=animating?'#ffdd8b':'#fff8df';ctx.fillText('HP '+hp,x,y-48);
  ctx.fillStyle='#102337';ctx.fillRect(x-18,y-43,36,5);if(animating){ctx.fillStyle='#ffd387';ctx.fillRect(x-17,y-42,34*a.from/100,3)}ctx.fillStyle=animating?'#ff7373':teams[w.team].color;ctx.fillRect(x-17,y-42,34*hp/100,3);ctx.restore();
 }
+// Aim elevation is measured from the horizontal in the worm's facing direction.
+// Keep this HUD in screen pixels so camera zoom cannot shrink the degree labels.
+function canShowAimGuide(){
+ const w=current();
+ return !!(w?.alive&&started&&!paused&&!wormIntro&&!gameOver&&!overview&&!turnLocked&&!turnEnding&&retreatUntil<=gameNow&&!isCPU()&&!projectiles.length&&!walkers.length&&!targetMode&&!rope&&!jetpack&&['bazooka','grenade','shotgun','banana','sacred','cluster','mortar','homing','rope'].includes(selected));
+}
+function aimGuideState(){
+ if(!canShowAimGuide())return null;const w=current();
+ const x=screenX(w.x)*cameraZoom,y=screenY(w.y)*cameraZoom;
+ if(x<0||x>VW||y<0||y>VH)return null;
+ return{x,y,radius:Math.min(VW,VH)<500?68:96,angle:-aim,facing};
+}
+function drawAimGuide(){
+ const guide=aimGuideState();if(!guide)return;
+ const {x,y,radius,angle,facing:dir}=guide;
+ const point=(deg,r)=>({x:Math.cos(deg*Math.PI/180)*dir*r,y:-Math.sin(deg*Math.PI/180)*r});
+ ctx.save();ctx.scale(1/cameraZoom,1/cameraZoom);ctx.translate(x,y);
+ ctx.save();ctx.scale(dir,1);ctx.fillStyle='rgba(16,42,61,.14)';ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,radius,-Math.PI/2,Math.max(0,-angle*Math.PI/180));ctx.closePath();ctx.fill();
+ ctx.strokeStyle='rgba(245,250,255,.85)';ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(0,0,radius,-Math.PI/2,0);ctx.stroke();ctx.beginPath();ctx.moveTo(18,0);ctx.lineTo(radius,0);ctx.moveTo(0,-radius+6);ctx.lineTo(0,-radius-5);ctx.stroke();ctx.restore();
+ ctx.font='800 '+(radius===68?10:12)+'px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
+ for(let deg=0;deg<=90;deg+=15){
+  const a=point(deg,radius-5),b=point(deg,radius+3);ctx.strokeStyle='rgba(245,250,255,.9)';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+  if([0,30,45,60,90].includes(deg)&&Math.abs(angle-deg)>=8){const p=point(deg,radius+15);if(deg===90&&radius===68)p.x+=dir*20;ctx.strokeStyle='#153044';ctx.lineWidth=3;ctx.strokeText(deg+'°',p.x,p.y);ctx.fillStyle='#fff8e6';ctx.fillText(deg+'°',p.x,p.y)}
+ }
+ const end=point(angle,radius+66),tickA=point(angle,radius-7),tickB=point(angle,radius+6),start=point(angle,17);
+ ctx.strokeStyle='#ffe49b';ctx.lineWidth=1.8;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.lineTo(end.x,end.y);ctx.stroke();ctx.setLineDash([]);
+ ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tickA.x,tickA.y);ctx.lineTo(tickB.x,tickB.y);ctx.stroke();ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(end.x,end.y,3,0,Math.PI*2);ctx.moveTo(end.x-6,end.y);ctx.lineTo(end.x+6,end.y);ctx.moveTo(end.x,end.y-6);ctx.lineTo(end.x,end.y+6);ctx.stroke();
+ // Put the readout outside the tick labels and keep it inside the viewport.
+ const label=point(angle,radius+38),labelX=clamp(x+label.x,24,VW-24)-x,labelY=clamp(y+label.y,13,VH-13)-y;
+ ctx.fillStyle='rgba(17,43,61,.94)';ctx.strokeStyle='rgba(255,228,155,.7)';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(labelX-23,labelY-11,46,22,10);ctx.fill();ctx.stroke();
+ ctx.fillStyle='#ffe49b';ctx.font='900 12px system-ui';ctx.fillText((Math.round(angle)<0?'−'+Math.abs(Math.round(angle)):Math.round(angle))+'°',labelX,labelY);ctx.restore();
+}
 function drawExplorer(w){
   const x=screenX(w.x),y=screenY(w.y),dying=!w.alive&&deathAnimating(w);if(!w.alive&&(!dying||gameNow>=w.death.burstAt)){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
   const active=w.alive&&w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
@@ -64,5 +96,4 @@ function drawExplorer(w){
   if(active){ctx.strokeStyle='#ffe49b';ctx.lineWidth=1.6;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
     const ay=y-78+Math.sin(worldTime*.008)*2;ctx.fillStyle='#ffe49b';ctx.strokeStyle='#153044';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-6,ay-7);ctx.lineTo(x+6,ay-7);ctx.lineTo(x,ay);ctx.closePath();ctx.fill();ctx.stroke()}
   drawHealthLabel(w,x,y);
-  if(active&&!turnLocked&&!isCPU()&&!projectiles.length&&!targetMode&&!['mine','dynamite','bat','punch','sheep','drill','jetpack'].includes(selected)){const a=aim*Math.PI/180,tx=x+Math.cos(a)*facing*48,ty=y+Math.sin(a)*48;ctx.strokeStyle='#fff1c7';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(tx,ty);ctx.stroke();ctx.strokeStyle='#ffe49b';ctx.beginPath();ctx.arc(tx,ty,4,0,Math.PI*2);ctx.moveTo(tx-7,ty);ctx.lineTo(tx+7,ty);ctx.stroke()}
 }

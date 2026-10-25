@@ -1,0 +1,179 @@
+{
+  "tests": [
+    {
+      "name": "Home has no angle overlay",
+      "pass": true
+    },
+    {
+      "name": "Worm introduction has no aiming overlay",
+      "pass": true
+    },
+    {
+      "name": "Rendered ticks have correct 0/30/45/60/90 geometry and yellow current-angle readout",
+      "pass": true
+    },
+    {
+      "name": "Real keyboard input updates the current angle and rendered readout",
+      "pass": true
+    },
+    {
+      "name": "Down key lowers the angle again",
+      "pass": true
+    },
+    {
+      "name": "Moving left mirrors the guide while keeping numbers readable",
+      "pass": true
+    },
+    {
+      "name": "Angle scale stays 96 screen pixels at camera zoom 0.45",
+      "pass": true
+    },
+    {
+      "name": "Angle scale stays 96 screen pixels at camera zoom 1",
+      "pass": true
+    },
+    {
+      "name": "Angle scale stays 96 screen pixels at camera zoom 1.8",
+      "pass": true
+    },
+    {
+      "name": "Downward aim displays a signed negative elevation",
+      "pass": true
+    },
+    {
+      "name": "Near-vertical readout does not duplicate the nearby tick label",
+      "pass": true
+    },
+    {
+      "name": "All nine direction-aimed weapons and tools display the guide",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for mine",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for dynamite",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for bat",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for punch",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for sheep",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for drill",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for jetpack",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for teleport",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for airstrike",
+      "pass": true
+    },
+    {
+      "name": "No misleading aiming guide for girder",
+      "pass": true
+    },
+    {
+      "name": "Choosing a map target hides the angle guide",
+      "pass": true
+    },
+    {
+      "name": "Attached rope hides the aiming guide",
+      "pass": true
+    },
+    {
+      "name": "Whole-map overview hides the guide",
+      "pass": true
+    },
+    {
+      "name": "Pause hides the guide",
+      "pass": true
+    },
+    {
+      "name": "CPU turn has no player aiming guide",
+      "pass": true
+    },
+    {
+      "name": "Real rocket release starts combat and hides the overlay",
+      "pass": true
+    },
+    {
+      "name": "Aiming and charging still release a real projectile",
+      "pass": true
+    },
+    {
+      "name": "844x390: travel controls return when the jetpack is active",
+      "pass": true
+    },
+    {
+      "name": "844x390: compact angle labels fit at device scale 2",
+      "pass": true
+    },
+    {
+      "name": "844x390: mobile aim button changes elevation",
+      "pass": true
+    },
+    {
+      "name": "844x390: angle label centers are clear of visible HUD controls",
+      "pass": true
+    },
+    {
+      "name": "844x390: mobile fire control still charges and launches",
+      "pass": true
+    },
+    {
+      "name": "568x320: travel controls return when the jetpack is active",
+      "pass": true
+    },
+    {
+      "name": "568x320: compact angle labels fit at device scale 2",
+      "pass": true
+    },
+    {
+      "name": "568x320: mobile aim button changes elevation",
+      "pass": true
+    },
+    {
+      "name": "568x320: angle label centers are clear of visible HUD controls",
+      "pass": true
+    },
+    {
+      "name": "568x320: mobile fire control still charges and launches",
+      "pass": true
+    },
+    {
+      "name": "Standalone HTML displays live angle updates without network requests",
+      "pass": true
+    },
+    {
+      "name": "All 61 previous runtime files retain their preserved SHA-256",
+      "pass": true
+    },
+    {
+      "name": "Projectile range, CPU, physics, input, sound and saved-setting code remain unchanged",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors or missing resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "browser": "156.0.4314.42"
+}

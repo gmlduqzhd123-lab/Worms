@@ -1,3 +1,9 @@
+# Wormfront Armageddon — 조준 각도 눈금
+
+조준 중 캐릭터 주변에 0°·30°·45°·60°·90° 눈금과 노란색 현재 각도를 표시합니다. 좌우 방향과 조준 입력을 따라 갱신하며 확대·축소에도 글자 크기를 유지합니다. 발사·목표 지정·CPU 턴·소개·일시정지·전체 맵에서는 숨깁니다. 모바일에서는 작은 눈금을 사용하고 조준 중 불필요한 이동 도구 버튼을 접어 공간을 확보합니다. 로프·제트팩 사용 시 보조 버튼이 다시 표시됩니다.
+
+이전 실행 파일 61개는 `versions/pre-angle-guide-2026-10-25-b271a9f/`에 보존했습니다. 새 단일 HTML은 `dist/wormfront-stage23-offline.html`이며 검수 기록은 `verification/angle-guide-2026-10-25/REPORT.md`입니다.
+
 # Wormfront Armageddon — 간편한 시작 화면
 
 시작 화면에는 게임 모드와 맵 테마만 표시하며 팀 A/B 이름과 코랄/민트 캐릭터 선택은 추가 설정에 모았습니다. 기존 기본값·저장 값을 유지합니다. 이전 실행 파일 61개는 versions/pre-home-settings-2026-10-25-fbe51c1에 보존했습니다. 검수 기록은 verification/home-settings-2026-10-25/REPORT.md입니다.

@@ -41,6 +41,6 @@ function drawMini(){
 }
 function render(dt){
   let sx=0,sy=0;if(cameraShake>0){sx=rand(-cameraShake,cameraShake);sy=rand(-cameraShake,cameraShake);}
-  ctx.save();ctx.translate(sx,sy);drawSky();ctx.save();ctx.scale(cameraZoom,cameraZoom);drawTerrain();drawObjects();for(const t of teams)for(const w of t.worms)drawWorm(w);for(const p of projectiles)drawProjectile(p);drawEffects(dt);ctx.restore();ctx.restore();drawMini();
+  ctx.save();ctx.translate(sx,sy);drawSky();ctx.save();ctx.scale(cameraZoom,cameraZoom);drawTerrain();drawObjects();drawAimGuide();for(const t of teams)for(const w of t.worms)drawWorm(w);for(const p of projectiles)drawProjectile(p);drawEffects(dt);ctx.restore();ctx.restore();drawMini();
   if(paused){ctx.fillStyle='rgba(5,8,14,.55)';ctx.fillRect(0,0,VW,VH);ctx.fillStyle='#fff';ctx.font='900 38px system-ui';ctx.textAlign='center';ctx.fillText('일시정지',VW/2,VH/2)}
 }

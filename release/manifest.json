@@ -1,10 +1,10 @@
 {
-  "version": "22",
+  "version": "23",
   "files": [
     {
       "file": "index.html",
       "bytes": 15881,
-      "sha256": "3d62b322fdbaa1758bc2d2b8be69584915aaf3e09d11ecc8c88826b1dc7091c8"
+      "sha256": "5b587def99eae2c54a39fc3b1244fc8cb5b4f2b138304c9cf676c670d26e8174"
     },
     {
       "file": ".nojekyll",
@@ -13,8 +13,8 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 21980,
-      "sha256": "4da1cdd8969fe62e23c38e3c41b3584947a664c05f1c917d2f617129336a5020"
+      "bytes": 22165,
+      "sha256": "43f8ef9036d744582800d40b972fe6d80abd94666d5ba70c3dbaffb54f251753"
     },
     {
       "file": "src/state.js",
@@ -38,8 +38,8 @@
     },
     {
       "file": "src/ui.js",
-      "bytes": 6633,
-      "sha256": "9c8b090d52f64a76be09c86249f04e36d34c5b2e56740f1ac861a7bc93d9656b"
+      "bytes": 6822,
+      "sha256": "04e004ee72349cb6c8b1f8c4fcf59771a0d19f21b8e4e39000fb270e8fd4f05a"
     },
     {
       "file": "src/combat.js",
@@ -63,8 +63,8 @@
     },
     {
       "file": "src/render.js",
-      "bytes": 6550,
-      "sha256": "503431588987277304b8b99338e8cbf46faefb9fb12271472046120b98769777"
+      "bytes": 6565,
+      "sha256": "8d3f11d573afd9ed355fe31d42552240dc0e592d1fc072005462d66145e96d4f"
     },
     {
       "file": "src/loop.js",
@@ -78,8 +78,8 @@
     },
     {
       "file": "src/graphics.js",
-      "bytes": 13798,
-      "sha256": "71686f7c4ea96715410c78b9e4c5595ce1d96bfcdcb00cadd5306d9054f95a5d"
+      "bytes": 16528,
+      "sha256": "6cfa9012fca7ff32d94f83960f7706c0cf23c284271329de02e884724f6d0e7f"
     },
     {
       "file": "src/persistence.js",
@@ -249,7 +249,7 @@
     {
       "file": "sw.js",
       "bytes": 1798,
-      "sha256": "d3216fb64b3e7eb7c20c890f07e3414055ef0b3c17c3acb93b5d1a4423abbc1b"
+      "sha256": "975bd57a2d22c09ecb27a52a93ca41bbb0bffa3530f3e3e3b67338aeaad1739c"
     },
     {
       "file": "ys-install.js",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59848344,
-      "sha256": "fcb68468dcfe7022ef78d12794602bf77b79bff7c0509bcf515748afa3d026a9"
+      "bytes": 59851463,
+      "sha256": "07a1320f096b95131174492177d5933412eef5ec174562fc1cacb433de39ffbc"
     }
   ]
 }
