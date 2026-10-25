@@ -1,6 +1,6 @@
 'use strict';
 
-function isMobileDevice(){return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>0&&matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<=1024)}
+function isMobileDevice(){const touch=navigator.maxTouchPoints>0||'ontouchstart' in window;return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(touch&&(matchMedia('(pointer:coarse)').matches||matchMedia('(any-pointer:coarse)').matches))}
 function syncMobileOrientation(){
   const mobile=isMobileDevice(),blocked=mobile&&VH>VW,changed=blocked!==orientationBlocked;
   orientationBlocked=blocked;document.documentElement.dataset.mobile=String(mobile);document.documentElement.dataset.portrait=String(blocked);
@@ -16,6 +16,7 @@ async function requestGameFullscreen(){
   try{await request.call(root,{navigationUI:'hide'});updateFullscreenButton();return true}catch{updateFullscreenButton();return false}
 }
 addEventListener('resize',syncMobileOrientation);addEventListener('orientationchange',syncMobileOrientation);
+for(const query of ['(pointer:coarse)','(any-pointer:coarse)']){const media=matchMedia(query);if(media.addEventListener)media.addEventListener('change',syncMobileOrientation);else media.addListener(syncMobileOrientation)}
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{resize();syncMobileOrientation()});
 for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,()=>{resize();syncMobileOrientation()});
 document.getElementById('fullscreenBtn').addEventListener('click',()=>{if(document.fullscreenElement||document.webkitFullscreenElement){const exit=document.exitFullscreen||document.webkitExitFullscreen;try{const result=exit?.call(document);result?.catch(()=>{})}catch{}}else requestGameFullscreen()});

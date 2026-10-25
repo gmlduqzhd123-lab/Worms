@@ -1,0 +1,2820 @@
+{
+  "version": "26",
+  "tests": [
+    {
+      "profile": "edge-desktop-1920",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-desktop-1920",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-laptop-1280",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "chrome-desktop-1024",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "chrome-small-window-800",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "chrome-android-phone",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-short-phone",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#volumeControls>summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary class=\"audioBtn\">음량</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "remaining profile flow",
+      "pass": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'18' !== '29'\n\n    at C:\\Users\\user\\Documents\\ChatGPT\\웜즈 아마겟돈 리메이크\\scripts\\verify-platforms.cjs:48:84"
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-android-tablet",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-windows-tablet",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "home loads all character/tool art and current version",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "home core controls fit and can be activated",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "theme selection persists across reload",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "fresh player turn shows all eight characters with no startup damage",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "primary battle controls fit and are not covered",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": false,
+      "error": "The expression evaluated to a falsy value:\n\n  assert.ok(await p.locator('#mobile').isVisible())\n"
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "jump input changes the player to an airborne state",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "movement input moves the player without entering solid terrain",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "90-degree preset and exact one-degree adjustments work",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "trusted fire input creates an initially vertical projectile",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "damage and delayed death keep presentation active until HP/death effects finish",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "quit cancellation preserves pause and confirmation returns home",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "completed result remains local and next battle uses a fresh ID",
+      "pass": true
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "settings survive exit, new battle and browser reload",
+      "pass": true
+    },
+    {
+      "profile": "offline-first-visit",
+      "name": "first visit caches every image so offline art and unseen map themes remain available",
+      "pass": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 30\n"
+    },
+    {
+      "profile": "offline-first-visit",
+      "name": "first offline reload preserves all artwork and allows previously unseen theme",
+      "pass": false,
+      "error": "Expected values to be strictly equal:\n\n21 !== 0\n"
+    },
+    {
+      "profile": "all",
+      "name": "no browser JavaScript errors or missing online resources",
+      "pass": true
+    }
+  ],
+  "failed": [
+    {
+      "profile": "webkit-iphone",
+      "name": "camera/guide/audio tools remain usable after restart",
+      "pass": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#volumeControls>summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary class=\"audioBtn\">음량</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas id=\"game\" width=\"1704\" height=\"786\"></canvas> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+    },
+    {
+      "profile": "webkit-iphone",
+      "name": "remaining profile flow",
+      "pass": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'18' !== '29'\n\n    at C:\\Users\\user\\Documents\\ChatGPT\\웜즈 아마겟돈 리메이크\\scripts\\verify-platforms.cjs:48:84"
+    },
+    {
+      "profile": "webkit-ipad-desktop-ua",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "profile": "webkit-ipad-pro",
+      "name": "portrait rotation pauses and landscape resumes without sticky input",
+      "pass": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded."
+    },
+    {
+      "profile": "edge-hybrid-touch-mouse",
+      "name": "touch tablet/phone exposes movement jump and fire controls",
+      "pass": false,
+      "error": "The expression evaluated to a falsy value:\n\n  assert.ok(await p.locator('#mobile').isVisible())\n"
+    },
+    {
+      "profile": "offline-first-visit",
+      "name": "first visit caches every image so offline art and unseen map themes remain available",
+      "pass": false,
+      "error": "Expected values to be strictly equal:\n\n0 !== 30\n"
+    },
+    {
+      "profile": "offline-first-visit",
+      "name": "first offline reload preserves all artwork and allows previously unseen theme",
+      "pass": false,
+      "error": "Expected values to be strictly equal:\n\n21 !== 0\n"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "observations": {
+    "edgeVersion": "156.0.4314.42",
+    "chromeVersion": "155.0.8059.86",
+    "webkitVersion": "26.5",
+    "edge-desktop-1920Controls": [
+      {
+        "id": "pauseBtn",
+        "left": 1756.65625,
+        "right": 1835.328125,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1840.328125,
+        "right": 1908,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 12,
+        "right": 48,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 52,
+        "right": 92.671875,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 1677.4375,
+        "right": 1760.21875,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 1766.21875,
+        "right": 1860,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 1692.125,
+        "right": 1734.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 1739.125,
+        "right": 1781.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 1786.125,
+        "right": 1844.5625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 1849.5625,
+        "right": 1908,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 104,
+        "right": 138,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 142,
+        "right": 210,
+        "top": 122,
+        "bottom": 154,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 214,
+        "right": 248,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1920,
+        "vh": 1080,
+        "hit": true
+      }
+    ],
+    "edge-laptop-1280Controls": [
+      {
+        "id": "pauseBtn",
+        "left": 1116.65625,
+        "right": 1195.328125,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1200.328125,
+        "right": 1268,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 12,
+        "right": 48,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 52,
+        "right": 92.671875,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 1037.4375,
+        "right": 1120.21875,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 1126.21875,
+        "right": 1220,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 1052.125,
+        "right": 1094.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 1099.125,
+        "right": 1141.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 1146.125,
+        "right": 1204.5625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 1209.5625,
+        "right": 1268,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 104,
+        "right": 138,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 142,
+        "right": 210,
+        "top": 122,
+        "bottom": 154,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 214,
+        "right": 248,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1280,
+        "vh": 720,
+        "hit": true
+      }
+    ],
+    "chrome-desktop-1024Controls": [
+      {
+        "id": "pauseBtn",
+        "left": 860.65625,
+        "right": 939.328125,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 944.328125,
+        "right": 1012,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 12,
+        "right": 48,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 52,
+        "right": 92.671875,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 781.4375,
+        "right": 864.21875,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 870.21875,
+        "right": 964,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 796.125,
+        "right": 838.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 843.125,
+        "right": 885.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 890.125,
+        "right": 948.5625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 953.5625,
+        "right": 1012,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 104,
+        "right": 138,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 142,
+        "right": 210,
+        "top": 122,
+        "bottom": 154,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 214,
+        "right": 248,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1024,
+        "vh": 768,
+        "hit": true
+      }
+    ],
+    "chrome-small-window-800Controls": [
+      {
+        "id": "pauseBtn",
+        "left": 636.65625,
+        "right": 715.328125,
+        "top": 74,
+        "bottom": 105,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 720.328125,
+        "right": 788,
+        "top": 74,
+        "bottom": 105,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 12,
+        "right": 48,
+        "top": 113,
+        "bottom": 149,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 52,
+        "right": 92.671875,
+        "top": 113,
+        "bottom": 149,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 557.4375,
+        "right": 640.21875,
+        "top": 113,
+        "bottom": 144,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 646.21875,
+        "right": 740,
+        "top": 113,
+        "bottom": 144,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 572.125,
+        "right": 614.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 619.125,
+        "right": 661.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 666.125,
+        "right": 724.5625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 729.5625,
+        "right": 788,
+        "top": 154,
+        "bottom": 190,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 104,
+        "right": 138,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 142,
+        "right": 210,
+        "top": 122,
+        "bottom": 154,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 214,
+        "right": 248,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 10,
+        "right": 68.4375,
+        "top": 411,
+        "bottom": 447,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 10,
+        "right": 63,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 69,
+        "right": 122,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 128,
+        "right": 181,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 619,
+        "right": 672,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 678,
+        "right": 731,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 737,
+        "right": 790,
+        "top": 456,
+        "bottom": 509,
+        "vw": 800,
+        "vh": 600,
+        "hit": true
+      }
+    ],
+    "chrome-android-phoneControls": [
+      {
+        "id": "pauseBtn",
+        "left": 635.3125,
+        "right": 706.65625,
+        "top": 49,
+        "bottom": 81,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 710.65625,
+        "right": 772,
+        "top": 49,
+        "bottom": 81,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 790,
+        "right": 836,
+        "top": 49,
+        "bottom": 81,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 354.5,
+        "right": 386.5,
+        "top": 275.5,
+        "bottom": 311.5,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 389.5,
+        "right": 454.5,
+        "top": 280,
+        "bottom": 312,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 457.5,
+        "right": 489.5,
+        "top": 275.5,
+        "bottom": 311.5,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.4375,
+        "top": 228,
+        "bottom": 264,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 52,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 58,
+        "right": 102,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 108,
+        "right": 152,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 692,
+        "right": 736,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 742,
+        "right": 786,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 792,
+        "right": 836,
+        "top": 270,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      }
+    ],
+    "edge-short-phoneControls": [
+      {
+        "id": "pauseBtn",
+        "left": 531.3125,
+        "right": 602.65625,
+        "top": 42,
+        "bottom": 74,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 606.65625,
+        "right": 668,
+        "top": 42,
+        "bottom": 74,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 686,
+        "right": 732,
+        "top": 42,
+        "bottom": 74,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 302.5,
+        "right": 334.5,
+        "top": 175.5,
+        "bottom": 211.5,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 337.5,
+        "right": 402.5,
+        "top": 180,
+        "bottom": 212,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 405.5,
+        "right": 437.5,
+        "top": 175.5,
+        "bottom": 211.5,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 55.34375,
+        "top": 144,
+        "bottom": 172,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 46,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 52,
+        "right": 90,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 96,
+        "right": 134,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 606,
+        "right": 644,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 650,
+        "right": 688,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 694,
+        "right": 732,
+        "top": 176,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      }
+    ],
+    "webkit-iphoneControls": [
+      {
+        "id": "pauseBtn",
+        "left": 638.03125,
+        "right": 713.875,
+        "top": 49,
+        "bottom": 81,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 717.875,
+        "right": 780,
+        "top": 49,
+        "bottom": 81,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 799.59375,
+        "right": 844,
+        "top": 49,
+        "bottom": 81,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 358.5,
+        "right": 390.5,
+        "top": 278.5,
+        "bottom": 314.5,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 393.5,
+        "right": 458.5,
+        "top": 283,
+        "bottom": 315,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 461.5,
+        "right": 493.5,
+        "top": 278.5,
+        "bottom": 314.5,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.09375,
+        "top": 231,
+        "bottom": 267,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 52,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 58,
+        "right": 102,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 108,
+        "right": 152,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 700,
+        "right": 744,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 750,
+        "right": 794,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 800,
+        "right": 844,
+        "top": 273,
+        "bottom": 317,
+        "vw": 852,
+        "vh": 393,
+        "hit": true
+      }
+    ],
+    "edge-android-tabletControls": [
+      {
+        "id": "pauseBtn",
+        "left": 1071.3125,
+        "right": 1142.65625,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1146.65625,
+        "right": 1208,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 1226,
+        "right": 1272,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 572.5,
+        "right": 604.5,
+        "top": 685.5,
+        "bottom": 721.5,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 607.5,
+        "right": 672.5,
+        "top": 690,
+        "bottom": 722,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 675.5,
+        "right": 707.5,
+        "top": 685.5,
+        "bottom": 721.5,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.4375,
+        "top": 638,
+        "bottom": 674,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 52,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 58,
+        "right": 102,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 108,
+        "right": 152,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 1128,
+        "right": 1172,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 1178,
+        "right": 1222,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 1228,
+        "right": 1272,
+        "top": 680,
+        "bottom": 724,
+        "vw": 1280,
+        "vh": 800,
+        "hit": true
+      }
+    ],
+    "webkit-ipad-desktop-uaControls": [
+      {
+        "id": "pauseBtn",
+        "left": 1010.828125,
+        "right": 1094.46875,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1099.46875,
+        "right": 1168,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 8,
+        "right": 44,
+        "top": 67,
+        "bottom": 103,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 48,
+        "right": 88.515625,
+        "top": 67,
+        "bottom": 103,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 949.625,
+        "right": 1031.078125,
+        "top": 113,
+        "bottom": 145,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 1035.078125,
+        "right": 1127.75,
+        "top": 113,
+        "bottom": 145,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 956.8125,
+        "right": 998.8125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 1003.8125,
+        "right": 1045.8125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 1050.8125,
+        "right": 1108.90625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 1113.90625,
+        "right": 1172,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 522.5,
+        "right": 554.5,
+        "top": 699.5,
+        "bottom": 735.5,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 557.5,
+        "right": 622.5,
+        "top": 704,
+        "bottom": 736,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 625.5,
+        "right": 657.5,
+        "top": 699.5,
+        "bottom": 735.5,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.09375,
+        "top": 643,
+        "bottom": 679,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 61,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 67,
+        "right": 120,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 126,
+        "right": 179,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 1001,
+        "right": 1054,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 1060,
+        "right": 1113,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 1119,
+        "right": 1172,
+        "top": 685,
+        "bottom": 738,
+        "vw": 1180,
+        "vh": 820,
+        "hit": true
+      }
+    ],
+    "webkit-ipad-proControls": [
+      {
+        "id": "pauseBtn",
+        "left": 1196.828125,
+        "right": 1280.46875,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1285.46875,
+        "right": 1354,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 8,
+        "right": 44,
+        "top": 67,
+        "bottom": 103,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 48,
+        "right": 88.515625,
+        "top": 67,
+        "bottom": 103,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 1135.625,
+        "right": 1217.078125,
+        "top": 113,
+        "bottom": 145,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 1221.078125,
+        "right": 1313.75,
+        "top": 113,
+        "bottom": 145,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 1142.8125,
+        "right": 1184.8125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 1189.8125,
+        "right": 1231.8125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 1236.8125,
+        "right": 1294.90625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 1299.90625,
+        "right": 1358,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 615.5,
+        "right": 647.5,
+        "top": 903.5,
+        "bottom": 939.5,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 650.5,
+        "right": 715.5,
+        "top": 908,
+        "bottom": 940,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 718.5,
+        "right": 750.5,
+        "top": 903.5,
+        "bottom": 939.5,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.09375,
+        "top": 847,
+        "bottom": 883,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 61,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 67,
+        "right": 120,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 126,
+        "right": 179,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 1187,
+        "right": 1240,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 1246,
+        "right": 1299,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 1305,
+        "right": 1358,
+        "top": 889,
+        "bottom": 942,
+        "vw": 1366,
+        "vh": 1024,
+        "hit": true
+      }
+    ],
+    "edge-windows-tabletControls": [
+      {
+        "id": "pauseBtn",
+        "left": 1159.3125,
+        "right": 1230.65625,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1234.65625,
+        "right": 1296,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 1314,
+        "right": 1360,
+        "top": 49,
+        "bottom": 81,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 616.5,
+        "right": 648.5,
+        "top": 797.5,
+        "bottom": 833.5,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 651.5,
+        "right": 716.5,
+        "top": 802,
+        "bottom": 834,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 719.5,
+        "right": 751.5,
+        "top": 797.5,
+        "bottom": 833.5,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "endTurnBtn",
+        "left": 8,
+        "right": 66.4375,
+        "top": 750,
+        "bottom": 786,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "left",
+        "left": 8,
+        "right": 52,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "jump",
+        "left": 58,
+        "right": 102,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "right",
+        "left": 108,
+        "right": 152,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "aimup",
+        "left": 1216,
+        "right": 1260,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "fire",
+        "left": 1266,
+        "right": 1310,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      },
+      {
+        "id": "aimdown",
+        "left": 1316,
+        "right": 1360,
+        "top": 792,
+        "bottom": 836,
+        "vw": 1368,
+        "vh": 912,
+        "hit": true
+      }
+    ],
+    "edge-hybrid-touch-mouseControls": [
+      {
+        "id": "pauseBtn",
+        "left": 1276.65625,
+        "right": 1355.328125,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "quitBtn",
+        "left": 1360.328125,
+        "right": 1428,
+        "top": 74,
+        "bottom": 105,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "guideBtn",
+        "left": 12,
+        "right": 48,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "historyBtn",
+        "left": 52,
+        "right": 92.671875,
+        "top": 113,
+        "bottom": 149,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "musicBtn",
+        "left": 1197.4375,
+        "right": 1280.21875,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "sfxBtn",
+        "left": 1286.21875,
+        "right": 1380,
+        "top": 113,
+        "bottom": 144,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "zoomOut",
+        "left": 1212.125,
+        "right": 1254.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "zoomIn",
+        "left": 1259.125,
+        "right": 1301.125,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "overviewBtn",
+        "left": 1306.125,
+        "right": 1364.5625,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "followBtn",
+        "left": 1369.5625,
+        "right": 1428,
+        "top": 154,
+        "bottom": 190,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 104,
+        "right": 138,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 142,
+        "right": 210,
+        "top": 122,
+        "bottom": 154,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 214,
+        "right": 248,
+        "top": 117.5,
+        "bottom": 153.5,
+        "vw": 1440,
+        "vh": 900,
+        "hit": true
+      }
+    ],
+    "firstVisitCache": {
+      "images": 0,
+      "urls": [
+        "http://127.0.0.1:64438/assets/audio/bouncy-tactical-groove.mp3",
+        "http://127.0.0.1:64438/",
+        "http://127.0.0.1:64438/index.html",
+        "http://127.0.0.1:64438/manifest.webmanifest",
+        "http://127.0.0.1:64438/ys-install.js",
+        "http://127.0.0.1:64438/ys-qr.js",
+        "http://127.0.0.1:64438/qr.svg",
+        "http://127.0.0.1:64438/icons/icon-192.png?v=25",
+        "http://127.0.0.1:64438/icons/icon-512.png?v=25",
+        "http://127.0.0.1:64438/icons/icon-maskable-512.png?v=25",
+        "http://127.0.0.1:64438/icons/apple-touch-icon.png?v=25",
+        "http://127.0.0.1:64438/icons/favicon-32.png?v=25",
+        "http://127.0.0.1:64438/styles/game.css",
+        "http://127.0.0.1:64438/src/state.js",
+        "http://127.0.0.1:64438/src/audio.js",
+        "http://127.0.0.1:64438/src/terrain.js",
+        "http://127.0.0.1:64438/src/turns.js",
+        "http://127.0.0.1:64438/src/ui.js",
+        "http://127.0.0.1:64438/src/combat.js",
+        "http://127.0.0.1:64438/src/weapons.js",
+        "http://127.0.0.1:64438/src/physics.js",
+        "http://127.0.0.1:64438/src/ai.js",
+        "http://127.0.0.1:64438/src/render.js",
+        "http://127.0.0.1:64438/src/loop.js",
+        "http://127.0.0.1:64438/src/input.js",
+        "http://127.0.0.1:64438/src/graphics.js",
+        "http://127.0.0.1:64438/src/persistence.js",
+        "http://127.0.0.1:64438/src/boot.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,2464 @@
+{
+  "tests": [
+    {
+      "name": "bazooka power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "bazooka power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "bazooka power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "grenade power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "grenade power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "grenade power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "banana power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "banana power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "banana power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "sacred power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "sacred power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "sacred power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "cluster power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "cluster power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "cluster power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "mortar power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "mortar power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "mortar power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "homing power 0.12: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "homing power 0.5: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "homing power 1: doubled legacy horizontal reach and unchanged fuse duration",
+      "pass": true
+    },
+    {
+      "name": "desktop: all new robot and tool artwork loads",
+      "pass": true
+    },
+    {
+      "name": "desktop: heading, core setup and credits fit the viewport",
+      "pass": true
+    },
+    {
+      "name": "desktop: browser installation metadata retains the name and app identity with new icon files",
+      "pass": true
+    },
+    {
+      "name": "desktop: credits and angle-reading guide are available without blocking play",
+      "pass": true
+    },
+    {
+      "name": "desktop: saved character index and audio settings remain compatible",
+      "pass": true
+    },
+    {
+      "name": "desktop: precision controls are visible and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "desktop: every preset including 90 degrees matches the actual initial velocity direction",
+      "pass": true
+    },
+    {
+      "name": "desktop: buttons and Shift arrows adjust exactly one degree with a 90-degree limit",
+      "pass": true
+    },
+    {
+      "name": "desktop: real charge/release fires vertically and hides the aiming controls during combat",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: all new robot and tool artwork loads",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: heading, core setup and credits fit the viewport",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: browser installation metadata retains the name and app identity with new icon files",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: credits and angle-reading guide are available without blocking play",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: saved character index and audio settings remain compatible",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: precision controls are visible and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: every preset including 90 degrees matches the actual initial velocity direction",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: buttons and Shift arrows adjust exactly one degree with a 90-degree limit",
+      "pass": true
+    },
+    {
+      "name": "android-landscape: real charge/release fires vertically and hides the aiming controls during combat",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: all new robot and tool artwork loads",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: heading, core setup and credits fit the viewport",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: browser installation metadata retains the name and app identity with new icon files",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: credits and angle-reading guide are available without blocking play",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: saved character index and audio settings remain compatible",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: precision controls are visible and unobstructed",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: every preset including 90 degrees matches the actual initial velocity direction",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: buttons and Shift arrows adjust exactly one degree with a 90-degree limit",
+      "pass": true
+    },
+    {
+      "name": "small-landscape: real charge/release fires vertically and hides the aiming controls during combat",
+      "pass": true
+    },
+    {
+      "name": "All 294 weapon/power/facing/angle combinations have mathematically correct launch direction",
+      "pass": true
+    },
+    {
+      "name": "CPU finds a damaging shot and its predicted impact matches live projectile physics",
+      "pass": true
+    },
+    {
+      "name": "Camera follows a high vertical projectile above the top of the world",
+      "pass": true
+    },
+    {
+      "name": "All 20 new transparent sprite exports match their bounds; retired sprites are absent from active assets",
+      "pass": true
+    },
+    {
+      "name": "All five app icon exports have the correct dimensions",
+      "pass": true
+    },
+    {
+      "name": "New robot representative image loads with the declared dimensions",
+      "pass": true
+    },
+    {
+      "name": "Portrait guidance and rotation back to landscape retain usable angle controls",
+      "pass": true
+    },
+    {
+      "name": "Standalone file has new art, credits and precision aiming without network requests",
+      "pass": true
+    },
+    {
+      "name": "Blocked sprite files fall back to new vector robots and tools without stopping battle",
+      "pass": true
+    },
+    {
+      "name": "All 61 previous runtime files remain byte-for-byte preserved",
+      "pass": true
+    },
+    {
+      "name": "User-provided paid-plan BGM remains unchanged",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors or missing checked resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "observations": {
+    "ranges": [
+      {
+        "type": "bazooka",
+        "power": 0.12,
+        "ratio": 1.9999999999999238,
+        "steps": 479
+      },
+      {
+        "type": "bazooka",
+        "power": 0.5,
+        "ratio": 2.0000000000001084,
+        "steps": 479
+      },
+      {
+        "type": "bazooka",
+        "power": 1,
+        "ratio": 1.999999999999907,
+        "steps": 479
+      },
+      {
+        "type": "grenade",
+        "power": 0.12,
+        "ratio": 2.0000000000002367,
+        "steps": 179
+      },
+      {
+        "type": "grenade",
+        "power": 0.5,
+        "ratio": 1.999999999999876,
+        "steps": 179
+      },
+      {
+        "type": "grenade",
+        "power": 1,
+        "ratio": 1.9999999999998608,
+        "steps": 179
+      },
+      {
+        "type": "banana",
+        "power": 0.12,
+        "ratio": 1.999999999999942,
+        "steps": 191
+      },
+      {
+        "type": "banana",
+        "power": 0.5,
+        "ratio": 2.000000000000147,
+        "steps": 191
+      },
+      {
+        "type": "banana",
+        "power": 1,
+        "ratio": 1.9999999999998954,
+        "steps": 191
+      },
+      {
+        "type": "sacred",
+        "power": 0.12,
+        "ratio": 1.9999999999999436,
+        "steps": 209
+      },
+      {
+        "type": "sacred",
+        "power": 0.5,
+        "ratio": 1.9999999999999967,
+        "steps": 209
+      },
+      {
+        "type": "sacred",
+        "power": 1,
+        "ratio": 2.0000000000002096,
+        "steps": 209
+      },
+      {
+        "type": "cluster",
+        "power": 0.12,
+        "ratio": 1.9999999999996358,
+        "steps": 179
+      },
+      {
+        "type": "cluster",
+        "power": 0.5,
+        "ratio": 1.9999999999997633,
+        "steps": 179
+      },
+      {
+        "type": "cluster",
+        "power": 1,
+        "ratio": 1.9999999999997946,
+        "steps": 179
+      },
+      {
+        "type": "mortar",
+        "power": 0.12,
+        "ratio": 1.9999999999998148,
+        "steps": 359
+      },
+      {
+        "type": "mortar",
+        "power": 0.5,
+        "ratio": 1.9999999999997635,
+        "steps": 359
+      },
+      {
+        "type": "mortar",
+        "power": 1,
+        "ratio": 2.000000000000867,
+        "steps": 359
+      },
+      {
+        "type": "homing",
+        "power": 0.12,
+        "ratio": 1.9999999999999238,
+        "steps": 479
+      },
+      {
+        "type": "homing",
+        "power": 0.5,
+        "ratio": 2.0000000000001084,
+        "steps": 479
+      },
+      {
+        "type": "homing",
+        "power": 1,
+        "ratio": 1.999999999999907,
+        "steps": 479
+      }
+    ],
+    "launchDirections": [
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "bazooka",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "bazooka",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "grenade",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "grenade",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "grenade",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "grenade",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "banana",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "banana",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "sacred",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "sacred",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "sacred",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000004
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "cluster",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "cluster",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "mortar",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "mortar",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 45
+      },
+      {
+        "type": "mortar",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "mortar",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": -1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": -1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": -1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": 1,
+        "power": 0.12,
+        "actual": -13.000000000000002
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": 1,
+        "power": 0.5,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": -13,
+        "face": 1,
+        "power": 1,
+        "actual": -12.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": -1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": -1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": -1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": 1,
+        "power": 0.12,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": 1,
+        "power": 0.5,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 0,
+        "face": 1,
+        "power": 1,
+        "actual": 0
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": -1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": -1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": -1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": 1,
+        "power": 0.12,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": 1,
+        "power": 0.5,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 15,
+        "face": 1,
+        "power": 1,
+        "actual": 14.999999999999998
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": -1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": -1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": -1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": 1,
+        "power": 0.12,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": 1,
+        "power": 0.5,
+        "actual": 29.999999999999996
+      },
+      {
+        "type": "homing",
+        "a": 30,
+        "face": 1,
+        "power": 1,
+        "actual": 29.999999999999993
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": -1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": -1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": -1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": 1,
+        "power": 0.12,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": 1,
+        "power": 0.5,
+        "actual": 44.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 45,
+        "face": 1,
+        "power": 1,
+        "actual": 45
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": -1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": -1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": -1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": 1,
+        "power": 0.12,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": 1,
+        "power": 0.5,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 60,
+        "face": 1,
+        "power": 1,
+        "actual": 59.99999999999999
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": -1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": -1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": -1,
+        "power": 1,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": 1,
+        "power": 0.12,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": 1,
+        "power": 0.5,
+        "actual": 90
+      },
+      {
+        "type": "homing",
+        "a": 90,
+        "face": 1,
+        "power": 1,
+        "actual": 90
+      }
+    ],
+    "cpu": {
+      "plan": {
+        "type": "grenade",
+        "angle": -16,
+        "power": 0.7799999999999999,
+        "score": 43.513678306233764,
+        "simulations": 360
+      },
+      "done": true,
+      "predicted": {
+        "x": 1288.3654889752713,
+        "y": 494.66415517841506,
+        "hit": true,
+        "event": "worm",
+        "steps": 38,
+        "bounces": 1
+      },
+      "actual": {
+        "x": 1288.3654889752713,
+        "y": 494.66415517841506
+      },
+      "targetHp": 56
+    },
+    "verticalCamera": {
+      "minProjectile": -1110.4999999999993,
+      "minCamera": -1420.843630297796
+    }
+  },
+  "browser": "156.0.4314.42"
+}

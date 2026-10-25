@@ -1,0 +1,249 @@
+{
+  "previousCommit": "dc5c56d9cd2faed5cf45f86d7e6fe1f80d42a303",
+  "files": [
+    {
+      "file": "index.html",
+      "sha256": "959d049aeb062f8a67f62ebff7b5381ef442494401f9433b1a2b80a64218f8cf"
+    },
+    {
+      "file": ".nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "styles/game.css",
+      "sha256": "6f621c8dd60a791ae788eeb2adc945eede17e0afb25e79af6b58a8c6f8cf9f27"
+    },
+    {
+      "file": "src/state.js",
+      "sha256": "ed6ce1a2512b2a689a0f73b7e749878d3a66ebc9e3324ba40c8b01beb4ee86b4"
+    },
+    {
+      "file": "src/audio.js",
+      "sha256": "895bcd7975db64768fb6eee3770115df0f16ad9c261718870a77044760519aa7"
+    },
+    {
+      "file": "src/terrain.js",
+      "sha256": "98b80be78dd3e4410da05e8421c9cb367d2d0a878e8d7e4eec5ac5ed0515a3df"
+    },
+    {
+      "file": "src/turns.js",
+      "sha256": "c484df56d56b4192aff7e57a24af913409d6fd3d9bd98491e80ca4bf4ac4417f"
+    },
+    {
+      "file": "src/ui.js",
+      "sha256": "a57852c854ddcd821998d6257d6ab338c2621f89bade2656271c3220b96e880b"
+    },
+    {
+      "file": "src/combat.js",
+      "sha256": "54f0bbff49e03c51114305af4ea5cb6564a349de4beedaf6cc3a2eb1dbf6bbaa"
+    },
+    {
+      "file": "src/weapons.js",
+      "sha256": "3a59b87e045f83f5a84796d70bba1495769f292a30e2778b079e2c9196d276a2"
+    },
+    {
+      "file": "src/physics.js",
+      "sha256": "7a07cc489aef3cf0e1d5ac87e3c512861d5c797cc88de4545cd32e8ce9ed3087"
+    },
+    {
+      "file": "src/ai.js",
+      "sha256": "62e13cfd461418443823adea7cd734c87769c7759753ccbde9fee7d4c4b7f1fd"
+    },
+    {
+      "file": "src/render.js",
+      "sha256": "c4be886fb2b847461eb31f3a802ae1ebab5067c3acf1219032212ed88c588867"
+    },
+    {
+      "file": "src/loop.js",
+      "sha256": "396f2594fdac457814eccbbb259e91b1e26d65382bf333a2f0f652181319972f"
+    },
+    {
+      "file": "src/input.js",
+      "sha256": "669eb8e209f23571a0bbf4ffd10389e9618cd56e7c18dc97f1f4ba354183c35e"
+    },
+    {
+      "file": "src/graphics.js",
+      "sha256": "970d8f833bc75c55be01fc6c55cbffae1c17a5952a139cf4797ba0e2e8333c29"
+    },
+    {
+      "file": "src/persistence.js",
+      "sha256": "1b1e5cff587407c195e4c030502655e1994c91f71e6a9fbd5ed233f25d5da78f"
+    },
+    {
+      "file": "src/boot.js",
+      "sha256": "40a5e4cfe614caf231cd3732155cd7fe2d9e9da2a66690d68383316cd5d07e72"
+    },
+    {
+      "file": "assets/images/bot-captain.png",
+      "sha256": "72bdf3bbafd529575f564b42e9a1217a598989c178c643b625bcb4300de2f40d"
+    },
+    {
+      "file": "assets/images/bot-comet.png",
+      "sha256": "3ebe52485c09fd783842aa346d81bde1b1dba547c300fcd19be0c34ce88035cf"
+    },
+    {
+      "file": "assets/images/bot-maker.png",
+      "sha256": "a27b390117c6ba47487998a6510375bba9589dcd9c510f75ea38b98da951dfbd"
+    },
+    {
+      "file": "assets/images/bot-nova.png",
+      "sha256": "e6d275859576884ff8db817c60c1f1ed5cb493a5b26456bf3d5e109bc6efc766"
+    },
+    {
+      "file": "assets/images/bot-orbit.png",
+      "sha256": "8126ec7183cba328938991768063971400cdf66976dd67f84bf58a1d5923c97a"
+    },
+    {
+      "file": "assets/images/bot-polar.png",
+      "sha256": "5b86bdb3855f2bc73a1be1523f3f80e5677b1699c6b63ec7179506873d358129"
+    },
+    {
+      "file": "assets/images/bot-prism.png",
+      "sha256": "76ab1b563c47dc183889684cc17a6819d51f049ac06444fe4417a22d165565c3"
+    },
+    {
+      "file": "assets/images/bot-relay.png",
+      "sha256": "19732651cafcb10bfe18b24414a91eb290e4648bd6490cf96147727a9f9a4ebb"
+    },
+    {
+      "file": "assets/images/bot-scout.png",
+      "sha256": "21104a6305b1eeaa7ebe7c0846ab04000baa8aa066a9fce53c1f355e9f08e516"
+    },
+    {
+      "file": "assets/images/bot-spark.png",
+      "sha256": "e4bbee8de40e1cf9c72e69ed80fd5c452ca89c3c88b5f86499c677203b7f1309"
+    },
+    {
+      "file": "assets/images/coast.png",
+      "sha256": "a5354848c2a30405b3cfec400c12053967441d1f23ee45a9b2393f0b99c8ece6"
+    },
+    {
+      "file": "assets/images/theme-canyon.png",
+      "sha256": "744e7c52afd5d371b3a720c21fb6ffac379b91032bf3d7c15deb7dca0525df77"
+    },
+    {
+      "file": "assets/images/theme-castle.png",
+      "sha256": "f571d5c18e0d11cc9b81d36e2de358601a32e76a18d3be83dda8fcc72181eaad"
+    },
+    {
+      "file": "assets/images/theme-fort.png",
+      "sha256": "f461c76cc8516417b37f09e6a744c167639bb24336d8caeed0578c4addce0b30"
+    },
+    {
+      "file": "assets/images/theme-meadow.png",
+      "sha256": "f8ebe4ec79b1e645059b321c66ccbc81ab9177a5450da99bbf2b0839d4fc072a"
+    },
+    {
+      "file": "assets/images/theme-moon.png",
+      "sha256": "a3df04e8d176ae9a5da8ea328b8c9ff7007e05312f7274ecc246dc5a5d21d684"
+    },
+    {
+      "file": "assets/images/theme-ruins.png",
+      "sha256": "c893a7022d33785088f7d3cf5d070e88913bfcd9a2705bad7e084256009d064a"
+    },
+    {
+      "file": "assets/images/theme-scrap.png",
+      "sha256": "23df6e68914cb4bc63a2ddae983e8a8d4297385dba86db88f4326135c43ec419"
+    },
+    {
+      "file": "assets/images/theme-snow.png",
+      "sha256": "12c39ae7746b2b6ce405765470d87b5e11d89d4ff0ea169e017b34e91c591cac"
+    },
+    {
+      "file": "assets/images/theme-sunset.png",
+      "sha256": "4fd1042d6fb3a8d58867ac9dd36584183c8fe1f4b37d4e5f606821e423da4d75"
+    },
+    {
+      "file": "assets/images/tool-bazooka.png",
+      "sha256": "65f3326741a0594d865d35dca9b07c7d852005f21da7df55b13dfe55f6b98df2"
+    },
+    {
+      "file": "assets/images/tool-dynamite.png",
+      "sha256": "99d5dcbb9002219c5ab4913437bfcff42d174b9a35fb6f3dbc04662ab997fa65"
+    },
+    {
+      "file": "assets/images/tool-grenade.png",
+      "sha256": "86f8e56577aab1e2abf948ed24d50cab4bca6cae19e12854b5cd62efd8603626"
+    },
+    {
+      "file": "assets/images/tool-jetpack.png",
+      "sha256": "66ddbc361d7d563ee425f5f1b9c564683f3d6428d5d061348686f203cba64ce6"
+    },
+    {
+      "file": "assets/images/tool-mine.png",
+      "sha256": "98a66732d6bbf9c04e010b5c2b5693d55baf95c2f90e59697b3b70071709626e"
+    },
+    {
+      "file": "assets/images/tool-punch.png",
+      "sha256": "64f924b437b850f13972c7b939504813dc05fc73669dec2ec2ef7031a15538cd"
+    },
+    {
+      "file": "assets/images/tool-rope.png",
+      "sha256": "c0ea351ee3e1667af338969e63b3a5022391fdd494639820f52fdd509bbdf952"
+    },
+    {
+      "file": "assets/images/tool-sacred.png",
+      "sha256": "d1fafbd1a80db53a62474bf0a07450b60b90f219c4ef1024729ea03dd24a3393"
+    },
+    {
+      "file": "assets/images/tool-sheep.png",
+      "sha256": "540376b63c2907ea74cb7e6496e53efff92c0e2e7d26d54f74664a24e171e681"
+    },
+    {
+      "file": "assets/images/tool-teleport.png",
+      "sha256": "334d07acf88c67c16d97bb9aedcd8c6a14486a5a435fce3bdf8903e5a92c107f"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "sha256": "f8a75713d7d8f7349f1645b9569507c5fadac8ebf00825d9559f7fa30b6ca922"
+    },
+    {
+      "file": "sw.js",
+      "sha256": "7196908c70ea3f8ee2a46b8ad0444c58e6a06aceafa1d99f0cfe6d3162fac730"
+    },
+    {
+      "file": "ys-install.js",
+      "sha256": "a70169efee22552c8505767c88a3a333b92671fcf9b6ffecfa2f286ad7cddbaa"
+    },
+    {
+      "file": "ys-qr.js",
+      "sha256": "9942da1c4fd0582bd82e750846bad93c2723236e7649c580c7972c711b2b78bf"
+    },
+    {
+      "file": "qr.svg",
+      "sha256": "3b4027b74cd21cee8fd5b726e1805bcb036e5d4e75e54ba253cc7981d88fd009"
+    },
+    {
+      "file": "og-image-angle-bots.png",
+      "sha256": "aacaf18c65e5afb986a33c38a07ad24078798b29a078e3d59a09c40e3e54a5fe"
+    },
+    {
+      "file": "icons/apple-touch-icon.png",
+      "sha256": "5ef2f6b42c4eaeac4f326c51dba18b3c23c4f186819e5733b09656ea26925538"
+    },
+    {
+      "file": "icons/favicon-32.png",
+      "sha256": "aa7b6af0810f594f3b38d312f3f620ee2e29dff2a69ddadba41677c66143c010"
+    },
+    {
+      "file": "icons/icon-192.png",
+      "sha256": "9767c54b690a5fbf1d29c9f42595c932f99c81fa4e222b55b87c6cd0192ab155"
+    },
+    {
+      "file": "icons/icon-512.png",
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
+    },
+    {
+      "file": "icons/icon-maskable-512.png",
+      "sha256": "4fc3158dd0ff02334ad745624697c3779fd871e57fcb7f602dbc27bc7a9c6804"
+    },
+    {
+      "file": "assets/audio/bouncy-tactical-groove.mp3",
+      "sha256": "f13482d68e76573722f0a44e80ad229c1c011b416331fc14e60e8c61ff0b6ea5"
+    },
+    {
+      "file": "offline/wormfront.html",
+      "sha256": "2d62ee03b9dac65c9421a6ed3be6b5c52bf0e4cd86e4c72167c950272d23ca86"
+    }
+  ]
+}
