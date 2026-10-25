@@ -1,8 +1,8 @@
 {
   "id": "/Worms/",
-  "name": "웜즈 아마겟돈(Remake)",
-  "short_name": "웜즈",
-  "description": "바람을 읽고 한 방을 노리는 턴제 포격전 · 10가지 전장 테마, CPU 대전, 설치 없이 바로",
+  "name": "조준! 각도왕",
+  "short_name": "조준! 각도왕",
+  "description": "각도와 바람을 읽고 조준하는 수학 각도 학습 게임 · CPU·2인 턴제 대전",
   "lang": "ko",
   "start_url": "./",
   "scope": "./",

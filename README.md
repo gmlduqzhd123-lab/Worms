@@ -1,3 +1,13 @@
+# 조준! 각도왕
+
+각도와 바람을 읽고 조준하는 수학 각도 학습 게임입니다. CPU 또는 로컬 2인 턴제 대전을 지원합니다.
+
+시작 화면·브라우저 제목·앱 설치 이름·QR 창·Open Graph·Twitter 공유 정보를 새 이름으로 통일했습니다. 대표 이미지는 og-image-angle-king.png이며 제작 기록과 전체 프롬프트는 verification/rename-angle-king-2026-10-25/IMAGE_PROMPT.md에 있습니다. 설치 ID·접속 주소·저장 키를 유지해 기존 설정과 기록을 이어갑니다.
+
+이전 실행 파일 61개는 versions/pre-angle-king-2026-10-25-328b34f/에 보존했습니다. 새 단일 HTML은 dist/wormfront-stage24-offline.html, 배포 묶음은 release/wormfront-stage24-pages.zip입니다. 검수 기록은 verification/rename-angle-king-2026-10-25/REPORT.md입니다.
+
+## 이전 변경 기록
+
 # Wormfront Armageddon — 조준 각도 눈금
 
 조준 중 캐릭터 주변에 0°·30°·45°·60°·90° 눈금과 노란색 현재 각도를 표시합니다. 좌우 방향과 조준 입력을 따라 갱신하며 확대·축소에도 글자 크기를 유지합니다. 발사·목표 지정·CPU 턴·소개·일시정지·전체 맵에서는 숨깁니다. 모바일에서는 작은 눈금을 사용하고 조준 중 불필요한 이동 도구 버튼을 접어 공간을 확보합니다. 로프·제트팩 사용 시 보조 버튼이 다시 표시됩니다.

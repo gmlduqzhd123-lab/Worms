@@ -1,0 +1,151 @@
+{
+  "tests": [
+    {
+      "name": "desktop: home, browser title, installation and sharing metadata use the exact new name",
+      "pass": true
+    },
+    {
+      "name": "desktop: new heading and main setup controls fit and are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "desktop: actual installation-help dialog displays the new app name",
+      "pass": true
+    },
+    {
+      "name": "desktop: QR dialog uses the new name and retains a working QR image",
+      "pass": true
+    },
+    {
+      "name": "desktop: Edge reads the renamed web app manifest with the same installation identity",
+      "pass": true
+    },
+    {
+      "name": "desktop: match-history heading uses the new name",
+      "pass": true
+    },
+    {
+      "name": "desktop: renamed app retains settings after a browser reload",
+      "pass": true
+    },
+    {
+      "name": "desktop: start retains the new heading and enters a playable first turn with angle controls",
+      "pass": true
+    },
+    {
+      "name": "desktop: real input still charges and fires after the rename",
+      "pass": true
+    },
+    {
+      "name": "phone: home, browser title, installation and sharing metadata use the exact new name",
+      "pass": true
+    },
+    {
+      "name": "phone: new heading and main setup controls fit and are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "phone: actual installation-help dialog displays the new app name",
+      "pass": true
+    },
+    {
+      "name": "phone: QR dialog uses the new name and retains a working QR image",
+      "pass": true
+    },
+    {
+      "name": "phone: Edge reads the renamed web app manifest with the same installation identity",
+      "pass": true
+    },
+    {
+      "name": "phone: match-history heading uses the new name",
+      "pass": true
+    },
+    {
+      "name": "phone: renamed app retains settings after a browser reload",
+      "pass": true
+    },
+    {
+      "name": "phone: start retains the new heading and enters a playable first turn with angle controls",
+      "pass": true
+    },
+    {
+      "name": "phone: real input still charges and fires after the rename",
+      "pass": true
+    },
+    {
+      "name": "small-phone: home, browser title, installation and sharing metadata use the exact new name",
+      "pass": true
+    },
+    {
+      "name": "small-phone: new heading and main setup controls fit and are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "small-phone: actual installation-help dialog displays the new app name",
+      "pass": true
+    },
+    {
+      "name": "small-phone: QR dialog uses the new name and retains a working QR image",
+      "pass": true
+    },
+    {
+      "name": "small-phone: Edge reads the renamed web app manifest with the same installation identity",
+      "pass": true
+    },
+    {
+      "name": "small-phone: match-history heading uses the new name",
+      "pass": true
+    },
+    {
+      "name": "small-phone: renamed app retains settings after a browser reload",
+      "pass": true
+    },
+    {
+      "name": "small-phone: start retains the new heading and enters a playable first turn with angle controls",
+      "pass": true
+    },
+    {
+      "name": "small-phone: real input still charges and fires after the rename",
+      "pass": true
+    },
+    {
+      "name": "New representative PNG loads as an image with the declared 1731x909 dimensions",
+      "pass": true
+    },
+    {
+      "name": "Sharing metadata references the new image URL, dimensions and angle-learning description",
+      "pass": true
+    },
+    {
+      "name": "Portrait rotation screen installation and QR entry points use the new name",
+      "pass": true
+    },
+    {
+      "name": "Settings saved through the preserved previous version survive opening the renamed app on the same origin",
+      "pass": true
+    },
+    {
+      "name": "Service-worker cached reload keeps the new branding without a network connection",
+      "pass": true
+    },
+    {
+      "name": "Standalone HTML uses the new branding and starts a battle with zero network requests",
+      "pass": true
+    },
+    {
+      "name": "All 61 previous runtime files retain their preservation hashes",
+      "pass": true
+    },
+    {
+      "name": "Gameplay, angle rendering, physics, audio, storage and CSS remain byte-for-byte unchanged",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors or missing checked resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "browser": "156.0.4314.42"
+}

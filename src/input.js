@@ -75,7 +75,7 @@ document.querySelectorAll('.weapon').forEach(b=>b.addEventListener('click',()=>{
 document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paused));
 document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!musicEnabled));
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
-document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();document.querySelector('#panel h1').textContent='작은 전장의 탐사대';startGame()});
+document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();startGame()});
 const heldControls=new Map();
 function controlKey(action){return{left:'a',right:'d',aimup:'ArrowUp',aimdown:'ArrowDown',rise:'w',descend:'s',ropein:'w',ropeout:'s'}[action]}
 function syncHeldKeys(){for(const k of ['a','d','ArrowUp','ArrowDown','w','s'])keys[k]=[...heldControls.values()].some(a=>controlKey(a)===k)}

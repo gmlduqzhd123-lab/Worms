@@ -1,0 +1,18 @@
+{
+  "id": "/Worms/",
+  "name": "웜즈 아마겟돈(Remake)",
+  "short_name": "웜즈",
+  "description": "바람을 읽고 한 방을 노리는 턴제 포격전 · 10가지 전장 테마, CPU 대전, 설치 없이 바로",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#10263b",
+  "theme_color": "#10263b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

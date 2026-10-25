@@ -1,10 +1,10 @@
 {
-  "version": "23",
+  "version": "24",
   "files": [
     {
       "file": "index.html",
-      "bytes": 15881,
-      "sha256": "5b587def99eae2c54a39fc3b1244fc8cb5b4f2b138304c9cf676c670d26e8174"
+      "bytes": 16333,
+      "sha256": "fbd10f6a3ecefee6cc8c8b91c8faeea4236837b43db6875a197382aa894a42dd"
     },
     {
       "file": ".nojekyll",
@@ -73,8 +73,8 @@
     },
     {
       "file": "src/input.js",
-      "bytes": 9371,
-      "sha256": "0c9015aaee7ab819318f0d853e868e0e2dfb3d4aed7d1c1bc6ca3d42eb206ccb"
+      "bytes": 9294,
+      "sha256": "5208fd845912024879aaffa8b17301a6de0fb8b6ea456cd113342400c7a88d5c"
     },
     {
       "file": "src/graphics.js",
@@ -243,13 +243,13 @@
     },
     {
       "file": "manifest.webmanifest",
-      "bytes": 727,
-      "sha256": "48c904ad62c132a8c9105991a719a38cb937b97ced2a65876e2158c4bab1b662"
+      "bytes": 708,
+      "sha256": "d942361c6ffd29dd3335d0e9bbd22d885de58ebf537f3107767461949e315de2"
     },
     {
       "file": "sw.js",
-      "bytes": 1798,
-      "sha256": "975bd57a2d22c09ecb27a52a93ca41bbb0bffa3530f3e3e3b67338aeaad1739c"
+      "bytes": 1796,
+      "sha256": "e70b65ff5c2faa625b677800d065a954124d4b553b35067c411659b72627dc7c"
     },
     {
       "file": "ys-install.js",
@@ -267,9 +267,9 @@
       "sha256": "3b4027b74cd21cee8fd5b726e1805bcb036e5d4e75e54ba253cc7981d88fd009"
     },
     {
-      "file": "og-image.jpg",
-      "bytes": 54587,
-      "sha256": "54f5410fdb7dca02083edbea191e091ee96c31744be725e4757b715ad350f587"
+      "file": "og-image-angle-king.png",
+      "bytes": 1499084,
+      "sha256": "10240e704bd5adfb6aa750372d9af697a9e8c33a10c16c02eb2ce540d4ba409a"
     },
     {
       "file": "icons/apple-touch-icon.png",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59851463,
-      "sha256": "07a1320f096b95131174492177d5933412eef5ec174562fc1cacb433de39ffbc"
+      "bytes": 59851838,
+      "sha256": "cca7c7b3dac91a3915bf999b1cb328afc9413799d0cc30020743256d7a0b19ed"
     }
   ]
 }
