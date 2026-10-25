@@ -1,10 +1,10 @@
 {
-  "version": "20",
+  "version": "22",
   "files": [
     {
       "file": "index.html",
-      "bytes": 15588,
-      "sha256": "4554ccba9e5ff9dbd95c07e58f2e553dc5ed678401aafb82ebc9126878e8e432"
+      "bytes": 15881,
+      "sha256": "3d62b322fdbaa1758bc2d2b8be69584915aaf3e09d11ecc8c88826b1dc7091c8"
     },
     {
       "file": ".nojekyll",
@@ -13,8 +13,8 @@
     },
     {
       "file": "styles/game.css",
-      "bytes": 20754,
-      "sha256": "783badc207b128c1ac8b1b7bf4f52f21c967f1f67a4678a1e15e49721f54e3b2"
+      "bytes": 21980,
+      "sha256": "4da1cdd8969fe62e23c38e3c41b3584947a664c05f1c917d2f617129336a5020"
     },
     {
       "file": "src/state.js",
@@ -249,7 +249,7 @@
     {
       "file": "sw.js",
       "bytes": 1798,
-      "sha256": "28655f97e58d6b24ffc4de8c57833ded12de6d9db546f1caafacbc5f28a6519d"
+      "sha256": "d3216fb64b3e7eb7c20c890f07e3414055ef0b3c17c3acb93b5d1a4423abbc1b"
     },
     {
       "file": "ys-install.js",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 59846825,
-      "sha256": "cef2a6d5941e0e59212696ec369d13e77c81d39e22daf1f323cc5a9c8d0193bd"
+      "bytes": 59848344,
+      "sha256": "fcb68468dcfe7022ef78d12794602bf77b79bff7c0509bcf515748afa3d026a9"
     }
   ]
 }

@@ -1,4 +1,8 @@
-# Wormfront Armageddon — 20단계 모바일 가로 화면과 웜 소개
+# Wormfront Armageddon — 간편한 시작 화면
+
+시작 화면에는 게임 모드와 맵 테마만 표시하며 팀 A/B 이름과 코랄/민트 캐릭터 선택은 추가 설정에 모았습니다. 기존 기본값·저장 값을 유지합니다. 이전 실행 파일 61개는 versions/pre-home-settings-2026-10-25-fbe51c1에 보존했습니다. 검수 기록은 verification/home-settings-2026-10-25/REPORT.md입니다.
+
+## 유지된 모바일 가로 화면과 웜 소개
 
 모바일 세로 화면에서는 가로 회전 안내를 표시하고 전투를 멈춥니다. 가로로 돌아오면 회전 때문에 멈춘 경우에만 이어집니다. 게임 시작 시 지원되는 모바일 브라우저에 전체 화면을 요청하며, 화면과 노치·홈 영역에 맞춰 조작부를 배치합니다.
 
@@ -39,7 +43,7 @@ GitHub Pages에서 실행할 수 있는 정적 웹 게임입니다. 배포에는
 
 제공한 나머지 화면 예시 9장을 참고해 UI와 캐릭터 없는 배경을 built-in imagegen으로 제작했습니다. 저장 경로와 프롬프트 전체는 assets/THEME_PROMPTS.json에 있습니다. 새 테마 배경은 선택할 때만 로딩하며 실패 시 해당 테마의 절차적 색상 표시를 사용합니다. 원본 PNG와 8단계 전체 56개 파일은 versions/stage8/에 보존하고 해시를 확인했습니다.
 
-release/wormfront-stage20-pages.zip에는 61개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
+release/wormfront-stage22-pages.zip에는 61개 실행 파일이 있습니다. 이미지 30장 합계와 단일 HTML 크기는 검수 보고서에 기록합니다. 단일 HTML은 모든 테마를 포함하여 파일 크기가 더 큽니다.
 
 ## 유지된 8단계 시각 개선
 
@@ -51,7 +55,7 @@ release/wormfront-stage20-pages.zip에는 61개 실행 파일이 있습니다. �
 
 ## 실행
 
-폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage20-offline.html`을 열면 됩니다.
+폴더 구조를 유지한 채 `index.html`을 브라우저에서 열거나, 이 폴더에서 다음 명령으로 로컬 미리보기를 실행합니다. 파일 하나만 사용하려면 `dist/wormfront-stage22-offline.html`을 열면 됩니다.
 
 ```powershell
 node scripts/serve.cjs
