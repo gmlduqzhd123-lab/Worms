@@ -5,7 +5,7 @@ function hasAmmo(id){return !limited.includes(id)||teams[activeTeam].ammo[id]>0}
 function spend(id){if(limited.includes(id))teams[activeTeam].ammo[id]--}
 
 function beginTargeting(type,text){
-  if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
+  if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;if(type==='homing'){const enemy=nearestEnemy(current());targetPoint=enemy?{x:enemy.x,y:enemy.y}:null}ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
 }
 function fireStart(){
   const w=current();if(!w||!w.alive||gameOver||paused||turnLocked||retreatUntil>gameNow||projectiles.length||walkers.length||isCPU())return;
@@ -84,11 +84,33 @@ function advanceBallistic(p,dt){
   }
   return null
 }
-function shootShotgun(w,pwr){
-  const rad=aim*Math.PI/180,range=(450+pwr*560)*SHOT_RANGE_SCALE,step=7;let x=w.x+Math.cos(rad)*facing*14,y=w.y+Math.sin(rad)*14,hit=null;
-  for(let i=0;i<range/step;i++){x+=Math.cos(rad)*facing*step;y+=Math.sin(rad)*step;
+function traceShot(w,type,pwr,ang,face,target=null){
+  const p=createBallistic(type,w,pwr,ang,face,target),points=[{x:p.x,y:p.y}],maxSteps=Math.ceil(p.life/FIXED_DT)+1;let bounces=0;
+  for(let i=0;i<maxSteps;i++){const before=p.bounce,event=advanceBallistic(p,FIXED_DT);if(before>p.bounce)bounces++;if(i%2===0||before>p.bounce||event)points.push({x:p.x,y:p.y});if(event)return{points,end:{x:p.x,y:p.y,event},steps:i+1,bounces}}
+  return{points,end:{x:p.x,y:p.y,event:'limit'},steps:maxSteps,bounces};
+}
+function traceShotgun(w,pwr,ang,face){
+  const rad=ang*Math.PI/180,range=(450+pwr*560)*SHOT_RANGE_SCALE,step=7;let x=w.x+Math.cos(rad)*face*14,y=w.y+Math.sin(rad)*14,hit=null,event='range';const points=[{x,y}];
+  for(let i=0;i<range/step;i++){x+=Math.cos(rad)*face*step;y+=Math.sin(rad)*step;
     for(const t of teams)for(const o of t.worms)if(o.alive&&o!==w&&dist(x,y,o.x,o.y)<o.r+3){hit=o;break}
-    if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH)break}
+    if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH){event=hit?'worm':solid(x,y)?'terrain':'bounds';break}}
+  points.push({x,y});return{points,end:{x,y,event},hit,bounces:0};
+}
+function traceRope(w,ang,face){
+  const rad=ang*Math.PI/180,points=[{x:w.x,y:w.y}];let x=w.x,y=w.y,event='range';
+  for(let i=0;i<300;i+=4){x+=Math.cos(rad)*face*4;y+=Math.sin(rad)*4;if(solid(x,y)){event='anchor';break}}
+  points.push({x,y});return{points,end:{x,y,event},bounces:0};
+}
+function getShotPreview(){
+  if(!canShowAimGuide())return null;const w=current(),type=selected;if(type==='homing'&&(!targetPoint||targetMode!=='homing'))return null;
+  const power=type==='homing'?.72:type==='shotgun'&&shotgunRemain===1?1:charging?clamp((gameNow-chargeAt)/1600,.12,1):.12;
+  const key=[matchId,type,w.x,w.y,aim,facing,power,wind,waterY,terrainReadbacks,WW,WH,targetPoint?.x,targetPoint?.y,teams.flatMap(t=>t.worms).map(o=>[o.x,o.y,o.alive].join(':')).join(';'),JSON.stringify(girders)].join('|');
+  if(shotPreviewCache?.key===key)return shotPreviewCache.value;
+  const trace=type==='shotgun'?traceShotgun(w,power,aim,facing):type==='rope'?traceRope(w,aim,facing):traceShot(w,type,power,aim,facing,type==='homing'?targetPoint:null);
+  const value={...trace,type,power,angle:aim,face:facing};shotPreviewCache={key,value};return value;
+}
+function shootShotgun(w,pwr){
+  const trace=traceShotgun(w,pwr,aim,facing),{x,y}=trace.end,hit=trace.hit;
   rememberImpact(x,y);carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
   if(shotgunRemain>0)toast('확산포 1발 남음',800);else{startRetreat(2.6)}
 }
@@ -121,8 +143,7 @@ function toggleJetpack(){
 }
 function toggleRope(){
   const w=current();if(!w)return;if(rope){rope=null;w.knockTime=.45;playSFX('ropeRelease');toast('로프 해제');return}
-  const rad=aim*Math.PI/180;let x=w.x,y=w.y,hit=null;
-  for(let i=0;i<300;i+=4){x+=Math.cos(rad)*facing*4;y+=Math.sin(rad)*4;if(solid(x,y)){hit={x,y};break}}
+  const trace=traceRope(w,aim,facing),hit=trace.end.event==='anchor'?trace.end:null;
   if(!hit){toast('로프가 닿지 않습니다');return}rope={ax:hit.x,ay:hit.y,len:Math.max(35,dist(hit.x,hit.y,w.x,w.y))};playSFX('rope')
 }
 function teleportDestination(w,x,y){
@@ -155,6 +176,7 @@ function splitBomb(p,count=5){
   for(let i=0;i<count;i++){const a=lerp(-Math.PI*.92,-Math.PI*.08,i/(count-1));projectiles.push({type:'mini',damage:balance.childDamage,x:p.x,y:p.y-4,vx:Math.cos(a)*rand(4,6.6),vy:Math.sin(a)*rand(4,6.6),r:4,life:2.7,bounce:1})}
 }
 function projectileStep(p,dt){
+  if(!p.trail)p.trail=[];p.trail.push({x:p.x,y:p.y});if(p.trail.length>28)p.trail.shift();
   if(['grenade','banana','sacred','cluster','dynamite'].includes(p.type)&&p.life>0){
     const tick=Math.ceil(p.life);if(p.fuseTick!==tick){p.fuseTick=tick;playSFX('fuse')}
     if(p.type==='sacred'&&p.life<=.85&&!p.holyPlayed){p.holyPlayed=true;playSFX('holy')}

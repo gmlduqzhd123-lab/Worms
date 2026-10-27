@@ -1,10 +1,10 @@
 {
-  "version": "27",
+  "version": "28",
   "files": [
     {
       "file": "index.html",
-      "bytes": 18454,
-      "sha256": "b828304ef4752d988052dd06b610e1ae51c8784af64bcf6b0a033f697f94a651"
+      "bytes": 18610,
+      "sha256": "58e4a2942d1dd7c0b61b1183c9ee911b10615f5ee120bc18fc47848313a1d3db"
     },
     {
       "file": ".nojekyll",
@@ -18,8 +18,8 @@
     },
     {
       "file": "src/state.js",
-      "bytes": 6785,
-      "sha256": "ed6ce1a2512b2a689a0f73b7e749878d3a66ebc9e3324ba40c8b01beb4ee86b4"
+      "bytes": 6895,
+      "sha256": "16681e849a6e14b85ba92efd26f55b7b0ef39a5572727b2342d414e4b21b8580"
     },
     {
       "file": "src/audio.js",
@@ -28,63 +28,63 @@
     },
     {
       "file": "src/terrain.js",
-      "bytes": 4728,
-      "sha256": "98b80be78dd3e4410da05e8421c9cb367d2d0a878e8d7e4eec5ac5ed0515a3df"
+      "bytes": 4787,
+      "sha256": "f0a2916367c5d18414e3a6028589b70e36a4674d32d890ab259c39c1324d88c2"
     },
     {
       "file": "src/turns.js",
-      "bytes": 8732,
-      "sha256": "c484df56d56b4192aff7e57a24af913409d6fd3d9bd98491e80ca4bf4ac4417f"
+      "bytes": 9515,
+      "sha256": "3604d0cf1973f2431d79aca35cad786793b1666f3dae0b33696718965ed19934"
     },
     {
       "file": "src/ui.js",
-      "bytes": 8472,
-      "sha256": "a57852c854ddcd821998d6257d6ab338c2621f89bade2656271c3220b96e880b"
+      "bytes": 10078,
+      "sha256": "a50221712a59b561f9deded4c1098f4a2681ca92b033de577ab4e0c3527bdff5"
     },
     {
       "file": "src/combat.js",
-      "bytes": 2790,
-      "sha256": "54f0bbff49e03c51114305af4ea5cb6564a349de4beedaf6cc3a2eb1dbf6bbaa"
+      "bytes": 3254,
+      "sha256": "64b5c1b7721167c01e876f0f6a940fca8518ea2da1799c03227457216afcef67"
     },
     {
       "file": "src/weapons.js",
-      "bytes": 12571,
-      "sha256": "3a59b87e045f83f5a84796d70bba1495769f292a30e2778b079e2c9196d276a2"
+      "bytes": 14594,
+      "sha256": "a03be5967926f4662e748cb566f315b2f06a263fee222a291e42599507975107"
     },
     {
       "file": "src/physics.js",
-      "bytes": 4554,
-      "sha256": "7a07cc489aef3cf0e1d5ac87e3c512861d5c797cc88de4545cd32e8ce9ed3087"
+      "bytes": 4636,
+      "sha256": "45271eae7470c7835254b89d6c7257c30a7d3d81bb59b533b62ddb3b22031a8e"
     },
     {
       "file": "src/ai.js",
-      "bytes": 6199,
-      "sha256": "62e13cfd461418443823adea7cd734c87769c7759753ccbde9fee7d4c4b7f1fd"
+      "bytes": 6271,
+      "sha256": "ff427273992eca43ba166050583a100946debb19c225643aa9f41327a0dc3a34"
     },
     {
       "file": "src/render.js",
-      "bytes": 6676,
-      "sha256": "c4be886fb2b847461eb31f3a802ae1ebab5067c3acf1219032212ed88c588867"
+      "bytes": 9585,
+      "sha256": "a78f875fafd338f2fcf5649d468430971ad4789785edbdef49bfa0c3675310a1"
     },
     {
       "file": "src/loop.js",
-      "bytes": 2087,
-      "sha256": "396f2594fdac457814eccbbb259e91b1e26d65382bf333a2f0f652181319972f"
+      "bytes": 2089,
+      "sha256": "942d907c81bf09130f3acd1d21ee4676c1123d63c65bc7fbcdc33142c37d289b"
     },
     {
       "file": "src/input.js",
-      "bytes": 10883,
-      "sha256": "1a791d21fe7929003157df4738874fc08e53c354d87adf3bafc72f2b8902ac0e"
+      "bytes": 11065,
+      "sha256": "216debcf4d9e4c4f34ecdf1433841ff67ebf2a8b4c8cfe487912e00dfc3425ee"
     },
     {
       "file": "src/graphics.js",
-      "bytes": 19675,
-      "sha256": "970d8f833bc75c55be01fc6c55cbffae1c17a5952a139cf4797ba0e2e8333c29"
+      "bytes": 20044,
+      "sha256": "eb15bafa4ae010f9848579ffdc05f17e2e41dfdc7ceb920430ab556d1064fb48"
     },
     {
       "file": "src/persistence.js",
-      "bytes": 10897,
-      "sha256": "1b1e5cff587407c195e4c030502655e1994c91f71e6a9fbd5ed233f25d5da78f"
+      "bytes": 10947,
+      "sha256": "5f74bdb9e96e59f4ac17f77214145a73a6512e3068681a122c818bbdcc70ea8b"
     },
     {
       "file": "src/boot.js",
@@ -249,7 +249,7 @@
     {
       "file": "sw.js",
       "bytes": 3150,
-      "sha256": "692ffe829ed35f9cc90065a2d43ad71938dcd54438708df7eed2622ea0d59ebb"
+      "sha256": "96655dacfd90f620256a91c0148b9252b46b4328a2da21e9ca6db03e592e2a18"
     },
     {
       "file": "ys-install.js",
@@ -303,8 +303,8 @@
     },
     {
       "file": "offline/wormfront.html",
-      "bytes": 33349240,
-      "sha256": "5325fd6912e29468bc511d9d1bdafa07de686782ead5b6449be4b2819fd456e7"
+      "bytes": 33358107,
+      "sha256": "7bbabff9923bcae8e51aa92ed340c24a9c274ba405806d6ffc62d3597a98b20a"
     }
   ]
 }

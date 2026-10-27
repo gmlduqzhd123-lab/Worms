@@ -9,7 +9,7 @@ function battlePhase(){
   if(deploymentRetreatActive())return {id:'retreat',text:'설치한 폭탄에서 벗어나세요',timer:((deploymentRetreatUntil-gameNow)/1000).toFixed(1)};
   if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':deathPending()?'사망 연출 중':'충돌 화면 확인',timer:'…'}};
   if(retreatUntil>gameNow)return {id:'retreat',text:'안전한 곳으로 후퇴',timer:((retreatUntil-gameNow)/1000).toFixed(1)};
-  if(charging)return {id:'charge',text:'발사력 '+Math.round(clamp((gameNow-chargeAt)/1600,0,1)*100)+'%',timer:String(Math.max(0,Math.ceil(turnLeft)))};
+  if(charging)return {id:'charge',text:'발사력 '+Math.round(clamp((gameNow-chargeAt)/1600,.12,1)*100)+'%',timer:String(Math.max(0,Math.ceil(turnLeft)))};
   return {id:'aim',text:isCPU()?'CPU · '+(cpuStatus||'상황 판단 중'):'이동 · 무기 선택 · 조준',timer:String(Math.max(0,Math.ceil(turnLeft)))};
 }
 function updateHUD(){
@@ -23,6 +23,7 @@ function updateHUD(){
   document.getElementById('sessionControls').hidden=!started;
   document.getElementById('ui').classList.toggle('aiming',canShowAimGuide());
   document.getElementById('ui').classList.toggle('openingView',initialBattleView);
+  const previewButton=document.getElementById('previewFitBtn');previewButton.setAttribute('aria-pressed',String(previewFit));previewButton.textContent=previewFit?'봇 보기':'탄도 전체';
   const angle=Math.round(-aim),preset=document.getElementById('aimPreset');document.getElementById('aimCurrent').textContent=angle+'°';preset.value=[0,30,45,60,90].includes(angle)?String(angle):'custom';
 
   document.querySelectorAll('.weapon').forEach(b=>{
@@ -54,28 +55,37 @@ function fitBattleView(){
   camera.x=(minX+maxX)/2-(left+right)/2/cameraZoom;camera.y=(minY+maxY)/2-(upper+lower+(short?44:64))/2/cameraZoom;
   camera.targetX=camera.x;camera.targetY=camera.y;camera.manualUntil=0;
 }
+function fitShotPreview(instant=false,dt=FIXED_DT){
+  const trace=getShotPreview();if(!trace)return;const w=current(),points=[...trace.points,{x:w.x,y:w.y}],left=40,right=VW-40,top=VH<500?94:150,bottom=VH-(VH<500?142:180);
+  const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y));
+  const zoom=Math.max(.02,Math.min(1,(right-left)/Math.max(1,maxX-minX+110),(bottom-top)/Math.max(1,maxY-minY+160)));
+  const blend=instant?1:1-Math.pow(.001,dt);cameraZoom=zoom<cameraZoom?zoom:lerp(cameraZoom,zoom,blend);
+  camera.targetX=(minX+maxX)/2-(left+right)/2/cameraZoom;camera.targetY=(minY+maxY)/2-(top+bottom)/2/cameraZoom;camera.x=lerp(camera.x,camera.targetX,blend);camera.y=lerp(camera.y,camera.targetY,blend);camera.manualUntil=0;
+}
+function togglePreviewFit(){if(!canShowAimGuide())return;if(!getShotPreview()){toast('목표를 선택하면 예상 경로가 표시됩니다');return}if(previewFit){followWorm();return}previewFit=true;initialBattleView=false;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';fitShotPreview(true);updateHUD()}
 function setCameraZoom(value,sx=VW/2,sy=VH/2){
   if(wormIntro||orientationBlocked)return;
-  injuryZoom=null;initialBattleView=false;
+  injuryZoom=null;initialBattleView=false;previewFit=false;
   const point={x:sx/cameraZoom+camera.x,y:sy/cameraZoom+camera.y};cameraZoom=clamp(value,Math.min(.35,VW/WW,VH/WH),1.8);
   camera.x=point.x-sx/cameraZoom;camera.y=point.y-sy/cameraZoom;clampCamera();camera.manualUntil=Infinity
 }
 function toggleOverview(){if(wormIntro||orientationBlocked)return;overview=!overview;if(overview){setCameraZoom(Math.min(VW/WW,VH/WH));focusOn(WW/2,WH/2,true)}else followWorm();document.getElementById('overviewBtn').textContent=overview?'전투 보기':'전체 맵'}
-function followWorm(){if(wormIntro||orientationBlocked)return;initialBattleView=false;injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
-function panCamera(dx,dy){if(wormIntro||orientationBlocked)return;initialBattleView=false;injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
+function followWorm(){if(wormIntro||orientationBlocked)return;initialBattleView=false;previewFit=false;injuryZoom=null;overview=false;document.getElementById('overviewBtn').textContent='전체 맵';cameraZoom=1;camera.manualUntil=0;const w=current();if(w)focusOn(w.x,w.y,true)}
+function panCamera(dx,dy){if(wormIntro||orientationBlocked)return;initialBattleView=false;previewFit=false;injuryZoom=null;overview=false;camera.x+=dx/cameraZoom;camera.y+=dy/cameraZoom;clampCamera();camera.manualUntil=Infinity}
 function injuryFrame(){
   const victims=injuredWorms.filter(w=>w.alive||deathAnimating(w)||w.hpAnim&&gameNow<w.hpAnim.at+w.hpAnim.duration);
   if(!victims.length||!presentationPending())return null;
   // Reserve space for the HUD and keep labels readable at every zoom.
-  const top=VH<500?92:150,bottom=VH<500?94:VW<=900?184:180;
+  const short=VH<=320,top=short?70:VH<500?84:150,bottom=short?105:VH<500?128:180;
   const left=72,right=VW-72,upper=Math.min(top,VH*.3),lower=Math.max(upper+90,VH-bottom);
   const minX=Math.min(...victims.map(w=>w.x)),maxX=Math.max(...victims.map(w=>w.x));
   const minY=Math.min(...victims.map(w=>w.y)),maxY=Math.max(...victims.map(w=>w.y));
-  const zoom=Math.max(.02,Math.min(1,injuryZoom??cameraZoom,(right-left)/Math.max(1,maxX-minX),(lower-upper-120)/Math.max(1,maxY-minY)));
-  return {minX,maxX,minY,maxY,left,right,upper,lower,zoom};
+  const head=short?80:120,foot=16,zoom=Math.max(.02,Math.min(1,injuryZoom??cameraZoom,(right-left)/Math.max(1,maxX-minX),(lower-upper-head-foot)/Math.max(1,maxY-minY)));
+  return {minX,maxX,minY,maxY,left,right,upper,lower,head,foot,zoom};
 }
 function updateCamera(dt){
   if(wormIntro)return;
+  if(previewFit&&canShowAimGuide()){if(targetMode!=='homing')fitShotPreview(false,dt);return}
   if(initialBattleView){if(!attackCommitted&&!projectiles.length&&!walkers.length&&!presentationPending()){fitBattleView();return}initialBattleView=false;cameraZoom=1;camera.manualUntil=0}
   if(gameNow<camera.manualUntil||overview)return;
   const blend=1-Math.pow(.002,dt);
@@ -87,11 +97,11 @@ function updateCamera(dt){
       cameraZoom=frame.zoom<cameraZoom?frame.zoom:lerp(cameraZoom,frame.zoom,blend);
       const z=cameraZoom;
       camera.targetX=(frame.minX+frame.maxX)/2-VW/2/z;
-      camera.targetY=(frame.minY+frame.maxY)/2-(frame.upper+frame.lower+64)/2/z;
+      camera.targetY=(frame.minY+frame.maxY)/2-(frame.upper+frame.lower+frame.head-frame.foot)/2/z;
       camera.x=lerp(camera.x,camera.targetX,blend);camera.y=lerp(camera.y,camera.targetY,blend);
       // Constrain smoothing so fast knockback never leaves a victim offscreen.
       camera.x=clamp(camera.x,frame.maxX-frame.right/z,frame.minX-frame.left/z);
-      camera.y=clamp(camera.y,frame.maxY-(frame.lower-32)/z,frame.minY-(frame.upper+88)/z);
+      camera.y=clamp(camera.y,frame.maxY-(frame.lower-frame.foot)/z,frame.minY-(frame.upper+frame.head)/z);
       return;
     }
   }

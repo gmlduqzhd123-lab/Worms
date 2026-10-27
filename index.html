@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="27">
+<meta name="wormfront-version" content="28">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -64,7 +64,7 @@
   </div>
   <div id="cameraControls"><button class="toolBtn" id="zoomOut" aria-label="축소">−</button><button class="toolBtn" id="zoomIn" aria-label="확대">＋</button><button class="toolBtn" id="overviewBtn">전체 맵</button><button class="toolBtn" id="followBtn">봇 추적</button></div>
   </div></details>
-  <div id="angleControls" aria-label="정밀 각도 조준"><button type="button" class="toolBtn" id="aimMinus" aria-label="조준 각도 1도 낮추기">−1°</button><select id="aimPreset" aria-label="조준 각도 선택"><option value="custom" id="aimCurrent" disabled>45°</option><option value="0">0°</option><option value="30">30°</option><option value="45">45°</option><option value="60">60°</option><option value="90">90°</option></select><button type="button" class="toolBtn" id="aimPlus" aria-label="조준 각도 1도 높이기">+1°</button></div>
+  <div id="angleControls" aria-label="정밀 각도 조준"><button type="button" class="toolBtn" id="aimMinus" aria-label="조준 각도 1도 낮추기">−1°</button><select id="aimPreset" aria-label="조준 각도 선택"><option value="custom" id="aimCurrent" disabled>45°</option><option value="0">0°</option><option value="30">30°</option><option value="45">45°</option><option value="60">60°</option><option value="90">90°</option></select><button type="button" class="toolBtn" id="aimPlus" aria-label="조준 각도 1도 높이기">+1°</button><button type="button" class="toolBtn" id="previewFitBtn" aria-pressed="false" title="전체 예상 경로를 화면에 맞춰 보기">탄도 전체</button></div>
   <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="쌍날개팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="쌍날개팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
   <div id="powerBox"><div id="power"></div></div>
   <section id="wormIntro" hidden aria-label="각도봇 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">소개 건너뛰기</button></section>

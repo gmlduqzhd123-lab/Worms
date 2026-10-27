@@ -54,6 +54,7 @@ canvas.addEventListener('pointerdown',e=>{
   if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()];pinchDistance=dist(a.x,a.y,b.x,b.y);dragCamera.moved=true}
 });
 canvas.addEventListener('pointermove',e=>{
+  if(targetMode==='homing'&&!dragCamera?.moved)targetPoint=worldFromScreen(e.clientX,e.clientY);
   if(!cameraPointers.has(e.pointerId))return;cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()],d=dist(a.x,a.y,b.x,b.y),p=viewportPoint((a.x+b.x)/2,(a.y+b.y)/2);if(pinchDistance>0)setCameraZoom(cameraZoom*d/pinchDistance,p.x,p.y);pinchDistance=d;dragCamera.moved=true;return}
   if(!dragCamera)return;
@@ -87,6 +88,7 @@ document.getElementById('battleOptions').addEventListener('click',e=>{if(documen
 document.getElementById('aimMinus').addEventListener('click',()=>nudgeAim(-1));
 document.getElementById('aimPlus').addEventListener('click',()=>nudgeAim(1));
 document.getElementById('aimPreset').addEventListener('change',e=>{if(e.target.value!=='custom')setAimElevation(Number(e.target.value))});
+document.getElementById('previewFitBtn').addEventListener('click',togglePreviewFit);
 const heldControls=new Map();
 function controlKey(action){return{left:'a',right:'d',aimup:'ArrowUp',aimdown:'ArrowDown',rise:'w',descend:'s',ropein:'w',ropeout:'s'}[action]}
 function syncHeldKeys(){for(const k of ['a','d','ArrowUp','ArrowDown','w','s'])keys[k]=[...heldControls.values()].some(a=>controlKey(a)===k)}

@@ -1,7 +1,7 @@
 'use strict';
 
 let cpuWalk=null,cpuStatus='';
-const cpuLevels={easy:{move:75,angles:12,powers:.18,error:9},normal:{move:130,angles:8,powers:.12,error:4},hard:{move:180,angles:6,powers:.10,error:1}};
+const cpuLevels={easy:{move:65,angles:12,powers:.18,error:11},normal:{move:110,angles:10,powers:.14,error:6},hard:{move:180,angles:6,powers:.10,error:1}};
 function scheduleAI(){cpuWalk=null;cpuStatus='상황 판단 중';aiBusy=true;updateHUD();aiTimer=scheduleCombat(cpuAct,650)}
 function nearestEnemy(w){return living(1-w.team).slice().sort((a,b)=>dist(w.x,w.y,a.x,a.y)-dist(w.x,w.y,b.x,b.y))[0]}
 // Probe one walking segment without mutating the terrain or live worm.
@@ -48,7 +48,7 @@ function cpuBlastValue(w,type,end){
 function planCpuShot(w){
  const cfg=cpuLevels[difficulty],targets=living(1-w.team).slice().sort((a,b)=>dist(w.x,w.y,a.x,a.y)-dist(w.x,w.y,b.x,b.y)).slice(0,2);
  let best={score:-Infinity,type:'bazooka',angle:-45,power:.65,face:1,target:targets[0]},simulations=0;
- const types=['bazooka','grenade','homing'].filter(type=>!limited.includes(type)||teams[w.team].ammo[type]>0);
+ const types=(difficulty==='hard'?['bazooka','grenade','homing']:['bazooka','grenade']).filter(type=>!limited.includes(type)||teams[w.team].ammo[type]>0);
  for(const target of targets){const face=target.x>=w.x?1:-1;for(const type of types)for(let angle=-82;angle<=6;angle+=cfg.angles)for(let power=.28;power<=1.001;power+=cfg.powers){
  const end=simulateShot(w,type,power,angle,face,type==='homing'?{x:target.x,y:target.y}:null);simulations++;
  const score=cpuBlastValue(w,type,end)-dist(end.x,end.y,target.x,target.y)*.025;
@@ -70,7 +70,7 @@ function cpuShoot(){
  if(plan.score<0){toast('CPU가 안전한 사격을 찾지 못해 턴을 넘깁니다');nextTurn(0);return}
  if(!hasAmmo(plan.type)){nextTurn(0);return}spend(plan.type);
  spawnBallistic(plan.type,w,power,angle,plan.face,plan.type==='homing'?{x:plan.target.x,y:plan.target.y}:null);updateHUD();
- },difficulty==='easy'?650:350);
+ },difficulty==='hard'?350:difficulty==='normal'?650:850);
 }
 function findShotSolution(w,target,type){
   const angles=[];for(let a=-82;a<=-18;a+=4)angles.push(a);

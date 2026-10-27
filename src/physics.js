@@ -54,9 +54,9 @@ function jump(){
 }
 
 function updateEffects(dt){
-  for(const label of damageLabels){label.life-=dt;label.y-=dt*24}damageLabels=damageLabels.filter(label=>label.life>0);
-  for(const e of explosions)e.life-=dt*2.5;explosions=explosions.filter(e=>e.life>0);
-  for(const p of particles){p.life-=dt;p.vy+=.08*dt*60;p.x+=p.vx*dt*60;p.y+=p.vy*dt*60}particles=particles.filter(p=>p.life>0);
+  for(const label of damageLabels){label.life-=dt;label.age=(label.age||0)+dt;label.rise=(label.rise||0)+dt*26}damageLabels=damageLabels.filter(label=>label.life>0);
+  for(const e of explosions)e.life-=dt*(e.decay||2.5);explosions=explosions.filter(e=>e.life>0);
+  for(const p of particles){p.life-=dt;p.vy+=(p.kind==='smoke'?-.004:.08)*dt*60;p.x+=p.vx*dt*60;p.y+=p.vy*dt*60}particles=particles.filter(p=>p.life>0);
   for(const c of clouds){c.x+=c.v*dt*60;if(c.x>WW+180)c.x=-180}
   if(cameraShake>0){cameraShake*=Math.pow(.86,dt*60);if(cameraShake<.35)cameraShake=0}
 }

@@ -1,0 +1,33 @@
+{
+  "id": "/Worms/",
+  "name": "조준! 각도왕",
+  "short_name": "조준! 각도왕",
+  "description": "각도와 바람을 읽고 조준하는 수학 각도 학습 게임 · CPU·2인 턴제 대전",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#10263b",
+  "theme_color": "#10263b",
+  "icons": [
+    {
+      "src": "icons/icon-192.png?v=25",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png?v=25",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png?v=25",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

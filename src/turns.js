@@ -3,24 +3,27 @@
 function createWorm(team,idx,x){
   return{team,idx,name:`${team===0?'내캐릭':'NPC'}${idx+1}`,x,y:groundY(x)-10,vx:0,vy:0,r:9,hp:100,alive:true,onGround:true,hurt:0}
 }
+const SPAWN_GAP=150;
 function safeSpawn(team,idx,desired,left,right){
   const candidates=[desired];for(let offset=8;offset<=right-left;offset+=8)candidates.push(desired-offset,desired+offset);
   for(const x of candidates){if(x<left||x>right)continue;const w=createWorm(team,idx,x);let top=Math.max(0,groundY(x)-4);while(top<waterY-60&&!solid(x,top))top++;
     if(top>=waterY-60)continue;w.y=top-w.r+.2;
-    if(!bodyBlocked(w,x,w.y)&&pointBlocked(x,w.y+w.r+.2)&&teams.every(t=>t.worms.every(other=>dist(x,w.y,other.x,other.y)>40)))return w;
+    if(!bodyBlocked(w,x,w.y)&&pointBlocked(x,w.y+w.r+.2)&&teams.every(t=>t.worms.every(other=>Math.abs(x-other.x)>=SPAWN_GAP)))return w;
   }
   return null;
 }
 function placeWorms(){
-  const n=+document.getElementById('count').value;teams.forEach(t=>t.worms=[]);
-  const leftA=WW*.05,rightA=WW*.42,leftB=WW*.58,rightB=WW*.95;
-  for(let i=0;i<n;i++){
-    const jitter=rand(-70,70);
-    const a=safeSpawn(0,i,clamp(lerp(leftA,rightA,n===1?.5:i/(n-1))+jitter,leftA,rightA),leftA,rightA);
-    const b=safeSpawn(1,i,clamp(lerp(leftB,rightB,n===1?.5:i/(n-1))+jitter,leftB,rightB),leftB,rightB);
-    if(!a||!b)throw Error('안전한 시작 지점을 찾을 수 없습니다.');
-    teams[0].worms.push(a);teams[1].worms.push(b)
+  const n=+document.getElementById('count').value,total=n*2,left=WW*.07,right=WW*.93,spacing=(right-left)/(total-1);let spots=null;
+  for(let attempt=0;attempt<24&&!spots;attempt++){
+    teams.forEach(t=>t.worms=[]);
+    for(let i=0;i<total;i++){const desired=clamp(left+i*spacing+rand(-.18,.18)*spacing,left,right),w=safeSpawn(0,i,desired,left,right);if(!w)break;teams[0].worms.push(w)}
+    if(teams[0].worms.length===total)spots=teams[0].worms.slice().sort((a,b)=>a.x-b.x);
   }
+  if(!spots)throw Error('안전한 시작 지점을 찾을 수 없습니다. 맵을 다시 선택해주세요.');
+  const order=Array.from({length:total},(_,i)=>i<n?0:1);
+  for(let attempt=0;attempt<24;attempt++){for(let i=total-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}if(n===1||order.slice(1).filter((t,i)=>t!==order[i]).length>=2)break;if(attempt===23)order.forEach((_,i)=>order[i]=i%2)}
+  teams.forEach(t=>t.worms=[]);
+  spots.forEach((w,i)=>{const team=order[i],idx=teams[team].worms.length;Object.assign(w,{team,idx,name:`${team===0?'내캐릭':'NPC'}${idx+1}`});teams[team].worms.push(w)});
 }
 function living(t){return teams[t].worms.filter(w=>w.alive)}
 function teamHP(t){return living(t).reduce((s,w)=>s+w.hp,0)}
@@ -33,7 +36,7 @@ function current(){
 function isCPU(){return mode==='cpu'&&activeTeam===1}
 
 function startGame(){
-  wormIntro=null;pauseIntent=false;initialBattleView=false;
+  wormIntro=null;pauseIntent=false;initialBattleView=false;previewFit=false;shotPreviewCache=null;
   injuredWorms=[];injuryZoom=null;shotFocus=null;cameraShake=0;deploymentRetreatUntil=0;
   cpuWalk=null;cpuStatus='';saveSettings();beginMatchRecord();
   stopSFX();ensureAudio();
@@ -69,16 +72,17 @@ function completeWormIntro(){
 
 function beginTurn(){
   if(gameOver)return;if(!living(0).length||!living(1).length){finishGame();return}
-  deploymentRetreatUntil=0;
+  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate();
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
-  const w=current();turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
+  const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
   initialBattleView=turnNo===1;if(initialBattleView)fitBattleView();
   if(isCPU())scheduleAI()
 }
 
 function returnToStart(){
+  previewFit=false;shotPreviewCache=null;
   clearInput();stopSFX();stopMusic();combatTasks=[];pendingEmissions=0;aiBusy=false;aiTimer=null;cpuWalk=null;cpuStatus='';
   started=false;gameOver=true;paused=false;pauseIntent=false;wormIntro=null;initialBattleView=false;turnLocked=true;turnEnding=false;attackCommitted=false;physicsAccumulator=0;
   projectiles=[];walkers=[];particles=[];explosions=[];damageLabels=[];injuredWorms=[];shotFocus=null;injuryZoom=null;rope=null;jetpack=false;deploymentRetreatUntil=0;retreatUntil=0;matchId='';matchRecorded=false;finishTarget();

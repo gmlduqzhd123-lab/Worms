@@ -11,6 +11,7 @@ let terrainReadbacks=0,terrainReadPixels=0;
 const FIXED_DT=1/60,MAX_FRAME_DELTA=.25;
 let physicsAccumulator=0,physicsSteps=0;
 let cameraZoom=1,overview=false;
+let previewFit=false,shotPreviewCache=null;
 let camera={x:0,y:0,targetX:0,targetY:0,manualUntil:0};
 let graphicsInitialized=false;
 let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
@@ -37,7 +38,7 @@ function cancelCombat(id){combatTasks=combatTasks.filter(t=>t.id!==id)}
 function runCombatTasks(){const due=combatTasks.filter(t=>t.at<=gameNow);combatTasks=combatTasks.filter(t=>t.at>gameNow);for(const t of due){if(!gameOver)t.fn()}}
 function deploymentRetreatActive(){return attackCommitted&&gameNow<deploymentRetreatUntil}
 function combatUnsettled(){return deploymentRetreatActive()||projectiles.length>0||walkers.length>0||pendingEmissions>0||mines.some(m=>m.armed&&m.timer>0)||teams.some(t=>t.worms.some(w=>w.alive&&!w.onGround&&Math.abs(w.vy)>.75))}
-function commitAttack(sec=2.5){deploymentRetreatUntil=0;attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
+function commitAttack(sec=2.5){if(previewFit){previewFit=false;cameraZoom=1;camera.manualUntil=0}deploymentRetreatUntil=0;attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
 function beginDeploymentRetreat(sec){commitAttack(0);deploymentRetreatUntil=gameNow+sec*1000}
 function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()||presentationPending()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
 function clearInput(){heldControls.clear();cameraPointers.clear();dragCamera=null;for(const k of Object.keys(keys))keys[k]=false;charging=false;ui.powerBox.classList.remove('show')}

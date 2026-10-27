@@ -7,7 +7,7 @@ function resize(){
   canvas.width=Math.round(VW*DPR);canvas.height=Math.round(VH*DPR);canvas.style.width=VW+'px';canvas.style.height=VH+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
   mini.width=500;mini.height=130;
   if(!graphicsInitialized)return;
-  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(wormIntro)focusIntroWorm();else if(initialBattleView)fitBattleView();else clampCamera();
+  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(wormIntro)focusIntroWorm();else if(previewFit&&canShowAimGuide())fitShotPreview(true);else if(initialBattleView)fitBattleView();else clampCamera();
 }
 addEventListener('resize',resize);
 

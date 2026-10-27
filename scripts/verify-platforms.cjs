@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),cp=require('node:child_process'),crypto=require('node:crypto'),sharp=require('sharp'),{chromium,webkit}=require('playwright');
-const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),phase=process.env.WORMFRONT_QA_PHASE||(live?'live':'local'),out=path.join(root,'verification/platform-audit-2026-10-25',phase),version=fs.readFileSync(path.join(root,'index.html'),'utf8').match(/name="wormfront-version" content="(\d+)"/)[1];fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'..'),live=process.argv.includes('--live'),phase=process.env.WORMFRONT_QA_PHASE||(live?'live':'local'),out=path.join(root,process.env.WORMFRONT_QA_DIR||'verification/platform-audit-2026-10-25',phase),version=fs.readFileSync(path.join(root,'index.html'),'utf8').match(/name="wormfront-version" content="(\d+)"/)[1];fs.mkdirSync(out,{recursive:true});
 const tests=[],errors=[],missing=[],observations={},engines={};let current='';
 function pass(name,extra){tests.push({profile:current,name,pass:true,...extra})}
 async function check(name,fn){try{const value=await fn();pass(name);return value}catch(e){tests.push({profile:current,name,pass:false,error:e.message});return null}}

@@ -55,7 +55,7 @@ function drawHealthLabel(w,x,y){
 // Keep this HUD in screen pixels so camera zoom cannot shrink the degree labels.
 function canShowAimGuide(){
  const w=current();
- return !!(w?.alive&&started&&!paused&&!wormIntro&&!gameOver&&!overview&&!turnLocked&&!turnEnding&&retreatUntil<=gameNow&&!isCPU()&&!projectiles.length&&!walkers.length&&!targetMode&&!rope&&!jetpack&&['bazooka','grenade','shotgun','banana','sacred','cluster','mortar','homing','rope'].includes(selected));
+ return !!(w?.alive&&started&&!paused&&!wormIntro&&!gameOver&&!overview&&!turnLocked&&!turnEnding&&retreatUntil<=gameNow&&!isCPU()&&!projectiles.length&&!walkers.length&&(!targetMode||targetMode==='homing')&&!rope&&!jetpack&&['bazooka','grenade','shotgun','banana','sacred','cluster','mortar','homing','rope'].includes(selected));
 }
 function aimGuideState(){
  if(!canShowAimGuide())return null;const w=current();
@@ -75,9 +75,9 @@ function drawAimGuide(){
   const a=point(deg,radius-5),b=point(deg,radius+3);ctx.strokeStyle='rgba(245,250,255,.9)';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
   if([0,30,45,60,90].includes(deg)&&Math.abs(angle-deg)>=8){const p=point(deg,deg===0&&radius===68?radius-12:radius+15);if(deg===0&&radius===68)p.y-=12;if(deg===90&&radius===68)p.x+=dir*20;ctx.strokeStyle='#153044';ctx.lineWidth=3;ctx.strokeText(deg+'°',p.x,p.y);ctx.fillStyle='#fff8e6';ctx.fillText(deg+'°',p.x,p.y)}
  }
- const end=point(angle,radius+66),tickA=point(angle,radius-7),tickB=point(angle,radius+6),start=point(angle,17);
- ctx.strokeStyle='#ffe49b';ctx.lineWidth=1.8;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.lineTo(end.x,end.y);ctx.stroke();ctx.setLineDash([]);
- ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tickA.x,tickA.y);ctx.lineTo(tickB.x,tickB.y);ctx.stroke();ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(end.x,end.y,3,0,Math.PI*2);ctx.moveTo(end.x-6,end.y);ctx.lineTo(end.x+6,end.y);ctx.moveTo(end.x,end.y-6);ctx.lineTo(end.x,end.y+6);ctx.stroke();
+ const tickA=point(angle,radius-7),tickB=point(angle,radius+6);
+ ctx.strokeStyle='#ffe49b';
+ ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tickA.x,tickA.y);ctx.lineTo(tickB.x,tickB.y);ctx.stroke();
  // Put the readout outside the tick labels and keep it inside the viewport.
  const label=point(angle,radius===68&&angle<15?radius-12:radius+38);if(radius===68&&angle<15)label.y-=24;
  const labelX=clamp(x+label.x,24,VW-24)-x,labelY=clamp(y+label.y,13,VH-13)-y;
@@ -87,15 +87,16 @@ function drawAimGuide(){
 function drawExplorer(w){
   const x=screenX(w.x),y=screenY(w.y),dying=!w.alive&&deathAnimating(w);if(!w.alive&&(!dying||gameNow>=w.death.burstAt)){drawHealthLabel(w,x,y);return;}if(x<-55||x>VW/cameraZoom+55||y<-70||y>VH/cameraZoom+70)return;
   const active=w.alive&&w===current()&&!gameOver,dir=w===current()?facing:w.team===0?1:-1,color=teams[w.team].color;
-  const viewScale=(initialBattleView||wormIntro?.overview)?Math.max(1,.55/cameraZoom):1;
-  ctx.save();ctx.translate(x,y);ctx.scale(dir*viewScale,viewScale);ctx.rotate(w.hurt>0?Math.sin(worldTime*.09)*.1:clamp(w.vx*.025,-.1,.1));
-  if(dying){const t=clamp((gameNow-w.death.at)/900,0,1);ctx.translate(0,-Math.sin(t*Math.PI)*12);ctx.rotate(Math.sin(t*Math.PI*5)*.22);ctx.scale(1-t*.25,1-t*.3);ctx.globalAlpha=1-t*.25}
+  const viewScale=(initialBattleView||previewFit||wormIntro?.overview||injuredWorms.includes(w)&&presentationPending())?Math.max(1,.55/cameraZoom):1,pulse=w.hitAt===undefined?w.hurt:clamp(1-(gameNow-w.hitAt)/600,0,1),strength=w.hitStrength||.5;
+  ctx.save();ctx.translate(x,y);ctx.scale(dir*viewScale,viewScale);if(pulse>0){const kick=Math.sin((1-pulse)*Math.PI)*strength;ctx.translate(-(w.hitDirection||1)*kick*5/(cameraZoom*viewScale),-kick*3/(cameraZoom*viewScale));ctx.scale(1+kick*.13,1-kick*.13)}ctx.rotate(pulse>0?Math.sin(worldTime*.065)*pulse*.32*strength:clamp(w.vx*.025,-.1,.1));
+  if(dying){const t=clamp((gameNow-w.death.at)/900,0,1);ctx.translate(0,-Math.sin(t*Math.PI)*18);ctx.rotate(Math.sin(t*Math.PI*5)*.32);ctx.scale(1-t*.25,1-t*.3);ctx.globalAlpha=1-t*.25}
   ctx.fillStyle='rgba(20,30,20,.28)';ctx.beginPath();ctx.ellipse(0,10,15,4,0,0,Math.PI*2);ctx.fill();
   const art=characterArt(w),h=44,ww=h*art.bounds.w/art.bounds.h,bob=w.onGround?Math.sin(worldTime*.016)*Math.min(1.5,Math.abs(w.vx)):0;
   if(!drawArt(art.file,art.bounds,-ww/2,-34+bob,ww,h)){ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,-30);ctx.lineTo(16,5);ctx.lineTo(-16,5);ctx.closePath();ctx.fill();ctx.fillStyle='#ffcf55';ctx.beginPath();ctx.arc(4,-8,5,0,Math.PI*2);ctx.fill()}
-  if(w.hurt>0){ctx.globalAlpha=w.hurt*.3;ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(0,-10,14,22,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
+  if(pulse>0){ctx.globalAlpha=pulse*.6;ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(0,-10,14,22,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
   if(active&&!turnLocked&&ART_MANIFEST.icons[selected]&&['bazooka','rope','teleport','punch'].includes(selected)){const tool=ART_MANIFEST.icons[selected];ctx.save();ctx.translate(7,-11);ctx.rotate(aim*Math.PI/180);drawArt(tool.file,tool.bounds,-2,-5,24,24*tool.bounds.h/tool.bounds.w);ctx.restore()}
   ctx.restore();
+  if(pulse>0){ctx.save();ctx.translate(x,y);ctx.scale(1/cameraZoom,1/cameraZoom);ctx.globalAlpha=pulse;ctx.strokeStyle='#ffe49b';ctx.lineWidth=2;for(let i=0;i<5;i++){const a=i*Math.PI*2/5+worldTime*.003,r=20+(1-pulse)*12;ctx.beginPath();ctx.moveTo(Math.cos(a)*r,-22+Math.sin(a)*r);ctx.lineTo(Math.cos(a)*(r+5),-22+Math.sin(a)*(r+5));ctx.stroke()}ctx.restore()}
   if(active){ctx.strokeStyle='#ffe49b';ctx.lineWidth=1.6;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
     const ay=y-78+Math.sin(worldTime*.008)*2;ctx.fillStyle='#ffe49b';ctx.strokeStyle='#153044';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-6,ay-7);ctx.lineTo(x+6,ay-7);ctx.lineTo(x,ay);ctx.closePath();ctx.fill();ctx.stroke()}
   drawHealthLabel(w,x,y);

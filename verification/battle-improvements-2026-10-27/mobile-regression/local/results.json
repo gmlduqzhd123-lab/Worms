@@ -1,0 +1,1029 @@
+{
+  "tests": [
+    {
+      "name": "844x390: canvas and UI fill the visible viewport without document overflow",
+      "pass": true
+    },
+    {
+      "name": "844x390: both teams are visible immediately on starting the introduction",
+      "pass": true
+    },
+    {
+      "name": "844x390: two-second overview continues into the preserved character tour",
+      "pass": true
+    },
+    {
+      "name": "844x390: the first playable turn retains all allied and enemy units on screen with unobstructed controls",
+      "pass": true
+    },
+    {
+      "name": "844x390: compact settings retain camera and synchronized music/effect volume controls",
+      "pass": true
+    },
+    {
+      "name": "844x390: exit confirmation pauses battle and cancel resumes it",
+      "pass": true
+    },
+    {
+      "name": "844x390: exit cancellation preserves a pre-existing user pause",
+      "pass": true
+    },
+    {
+      "name": "844x390: confirming exit clears pending combat and returns home without modifying saved settings or completed results",
+      "pass": true
+    },
+    {
+      "name": "844x390: a new battle starts cleanly and exiting during the introduction also works",
+      "pass": true
+    },
+    {
+      "name": "740x280: canvas and UI fill the visible viewport without document overflow",
+      "pass": true
+    },
+    {
+      "name": "740x280: both teams are visible immediately on starting the introduction",
+      "pass": true
+    },
+    {
+      "name": "740x280: two-second overview continues into the preserved character tour",
+      "pass": true
+    },
+    {
+      "name": "740x280: the first playable turn retains all allied and enemy units on screen with unobstructed controls",
+      "pass": true
+    },
+    {
+      "name": "740x280: compact settings retain camera and synchronized music/effect volume controls",
+      "pass": true
+    },
+    {
+      "name": "740x280: exit confirmation pauses battle and cancel resumes it",
+      "pass": true
+    },
+    {
+      "name": "740x280: exit cancellation preserves a pre-existing user pause",
+      "pass": true
+    },
+    {
+      "name": "740x280: confirming exit clears pending combat and returns home without modifying saved settings or completed results",
+      "pass": true
+    },
+    {
+      "name": "740x280: a new battle starts cleanly and exiting during the introduction also works",
+      "pass": true
+    },
+    {
+      "name": "568x320: canvas and UI fill the visible viewport without document overflow",
+      "pass": true
+    },
+    {
+      "name": "568x320: both teams are visible immediately on starting the introduction",
+      "pass": true
+    },
+    {
+      "name": "568x320: two-second overview continues into the preserved character tour",
+      "pass": true
+    },
+    {
+      "name": "568x320: the first playable turn retains all allied and enemy units on screen with unobstructed controls",
+      "pass": true
+    },
+    {
+      "name": "568x320: compact settings retain camera and synchronized music/effect volume controls",
+      "pass": true
+    },
+    {
+      "name": "568x320: exit confirmation pauses battle and cancel resumes it",
+      "pass": true
+    },
+    {
+      "name": "568x320: exit cancellation preserves a pre-existing user pause",
+      "pass": true
+    },
+    {
+      "name": "568x320: confirming exit clears pending combat and returns home without modifying saved settings or completed results",
+      "pass": true
+    },
+    {
+      "name": "568x320: a new battle starts cleanly and exiting during the introduction also works",
+      "pass": true
+    },
+    {
+      "name": "932x430: canvas and UI fill the visible viewport without document overflow",
+      "pass": true
+    },
+    {
+      "name": "932x430: both teams are visible immediately on starting the introduction",
+      "pass": true
+    },
+    {
+      "name": "932x430: two-second overview continues into the preserved character tour",
+      "pass": true
+    },
+    {
+      "name": "932x430: the first playable turn retains all allied and enemy units on screen with unobstructed controls",
+      "pass": true
+    },
+    {
+      "name": "932x430: compact settings retain camera and synchronized music/effect volume controls",
+      "pass": true
+    },
+    {
+      "name": "932x430: exit confirmation pauses battle and cancel resumes it",
+      "pass": true
+    },
+    {
+      "name": "932x430: exit cancellation preserves a pre-existing user pause",
+      "pass": true
+    },
+    {
+      "name": "932x430: confirming exit clears pending combat and returns home without modifying saved settings or completed results",
+      "pass": true
+    },
+    {
+      "name": "932x430: a new battle starts cleanly and exiting during the introduction also works",
+      "pass": true
+    },
+    {
+      "name": "Rejected fullscreen requests preserve fitted play and a visible retry button without cropping the session toolbar",
+      "pass": true
+    },
+    {
+      "name": "Natural overview and all eight two-second introductions preserve order and consume no battle time",
+      "pass": true
+    },
+    {
+      "name": "Escape dismisses exit confirmation and resumes without firing",
+      "pass": true
+    },
+    {
+      "name": "Simulated notch and home indicator keep battle controls inside safe areas",
+      "pass": true
+    },
+    {
+      "name": "Simulated visible viewport shrink/offset resizes canvas and HUD together and preserves pointer-to-world coordinates",
+      "pass": true
+    },
+    {
+      "name": "Portrait guidance freezes battle and returning to landscape restores the fitted view",
+      "pass": true
+    },
+    {
+      "name": "First shot releases the opening overview and resumes projectile-follow camera",
+      "pass": true
+    },
+    {
+      "name": "Desktop camera tools remain available after quitting and restarting",
+      "pass": true
+    },
+    {
+      "name": "Single-file version supports mobile fit, opening overview and exit without network requests",
+      "pass": true
+    },
+    {
+      "name": "All 61 previous runtime files remain byte-for-byte preserved",
+      "pass": true
+    },
+    {
+      "name": "No browser script errors or missing checked resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "observations": {
+    "844x390-intro": [
+      {
+        "team": 0,
+        "name": "내캐릭1",
+        "x": 63.45976647668876,
+        "y": 181.56514149739942,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 0,
+        "name": "내캐릭2",
+        "x": 153.65599804460862,
+        "y": 188.52203641190937,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 0,
+        "name": "내캐릭3",
+        "x": 568.8226158537423,
+        "y": 239.281603010371,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 0,
+        "name": "내캐릭4",
+        "x": 682.6874253893242,
+        "y": 195.9942568756423,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 1,
+        "name": "NPC1",
+        "x": 247.94542951440627,
+        "y": 223.56417375907068,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 1,
+        "name": "NPC2",
+        "x": 358.62351334367537,
+        "y": 219.69923213989847,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 1,
+        "name": "NPC3",
+        "x": 466.1544751149048,
+        "y": 244.43485850260058,
+        "vw": 844,
+        "vh": 390
+      },
+      {
+        "team": 1,
+        "name": "NPC4",
+        "x": 780.5402335233111,
+        "y": 199.601535720203,
+        "vw": 844,
+        "vh": 390
+      }
+    ],
+    "844x390-controls": [
+      {
+        "id": "top",
+        "left": 8,
+        "top": 4,
+        "right": 836,
+        "bottom": 63,
+        "vw": 844,
+        "vh": 390,
+        "hit": false
+      },
+      {
+        "id": "sessionControls",
+        "left": 634.96875,
+        "top": 49,
+        "right": 772,
+        "bottom": 81,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 790,
+        "top": 49,
+        "right": 836,
+        "bottom": 81,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 324.0625,
+        "top": 275.5,
+        "right": 356.0625,
+        "bottom": 311.5,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 359.0625,
+        "top": 280,
+        "right": 424.0625,
+        "bottom": 312,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 427.0625,
+        "top": 275.5,
+        "right": 459.0625,
+        "bottom": 311.5,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "previewFitBtn",
+        "left": 462.0625,
+        "top": 275.5,
+        "right": 519.9375,
+        "bottom": 311.5,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "◀",
+        "left": 8,
+        "top": 270,
+        "right": 52,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "⤒",
+        "left": 58,
+        "top": 270,
+        "right": 102,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "▶",
+        "left": 108,
+        "top": 270,
+        "right": 152,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "↗",
+        "left": 692,
+        "top": 270,
+        "right": 736,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "🔥",
+        "left": 742,
+        "top": 270,
+        "right": 786,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "↘",
+        "left": 792,
+        "top": 270,
+        "right": 836,
+        "bottom": 314,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      },
+      {
+        "id": "weaponDock",
+        "left": 8,
+        "top": 314,
+        "right": 836,
+        "bottom": 386,
+        "vw": 844,
+        "vh": 390,
+        "hit": true
+      }
+    ],
+    "740x280-intro": [
+      {
+        "team": 0,
+        "name": "내캐릭1",
+        "x": 177.3499188493379,
+        "y": 169.99999999999997,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 0,
+        "name": "내캐릭2",
+        "x": 399.929545429546,
+        "y": 147.48743718592962,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 0,
+        "name": "내캐릭3",
+        "x": 550.0610714934865,
+        "y": 157.73869346733665,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 0,
+        "name": "내캐릭4",
+        "x": 625.8391959798995,
+        "y": 168.79396984924622,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 1,
+        "name": "NPC1",
+        "x": 114.16080402010057,
+        "y": 160.55276381909545,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 1,
+        "name": "NPC2",
+        "x": 257.30132193573735,
+        "y": 136.03015075376882,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 1,
+        "name": "NPC3",
+        "x": 338.39523837093685,
+        "y": 129.99999999999997,
+        "vw": 740,
+        "vh": 280
+      },
+      {
+        "team": 1,
+        "name": "NPC4",
+        "x": 487.56666782761255,
+        "y": 142.66331658291455,
+        "vw": 740,
+        "vh": 280
+      }
+    ],
+    "740x280-controls": [
+      {
+        "id": "top",
+        "left": 8,
+        "top": 4,
+        "right": 732,
+        "bottom": 41,
+        "vw": 740,
+        "vh": 280,
+        "hit": false
+      },
+      {
+        "id": "sessionControls",
+        "left": 530.96875,
+        "top": 42,
+        "right": 668,
+        "bottom": 74,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 686,
+        "top": 42,
+        "right": 732,
+        "bottom": 74,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 272.0625,
+        "top": 175.5,
+        "right": 304.0625,
+        "bottom": 211.5,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 307.0625,
+        "top": 180,
+        "right": 372.0625,
+        "bottom": 212,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 375.0625,
+        "top": 175.5,
+        "right": 407.0625,
+        "bottom": 211.5,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "previewFitBtn",
+        "left": 410.0625,
+        "top": 175.5,
+        "right": 467.9375,
+        "bottom": 211.5,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "◀",
+        "left": 8,
+        "top": 176,
+        "right": 46,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "⤒",
+        "left": 52,
+        "top": 176,
+        "right": 90,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "▶",
+        "left": 96,
+        "top": 176,
+        "right": 134,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "↗",
+        "left": 606,
+        "top": 176,
+        "right": 644,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "🔥",
+        "left": 650,
+        "top": 176,
+        "right": 688,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "↘",
+        "left": 694,
+        "top": 176,
+        "right": 732,
+        "bottom": 214,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      },
+      {
+        "id": "weaponDock",
+        "left": 8,
+        "top": 212,
+        "right": 732,
+        "bottom": 276,
+        "vw": 740,
+        "vh": 280,
+        "hit": true
+      }
+    ],
+    "568x320-intro": [
+      {
+        "team": 0,
+        "name": "내캐릭1",
+        "x": 60.04423341178725,
+        "y": 166.98894164705317,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 0,
+        "name": "내캐릭2",
+        "x": 129.52547825200386,
+        "y": 197.7017368471107,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 0,
+        "name": "내캐릭3",
+        "x": 437.94935303456015,
+        "y": 155.14544545879568,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 0,
+        "name": "내캐릭4",
+        "x": 507.95576658821267,
+        "y": 142.29826315288926,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 1,
+        "name": "NPC1",
+        "x": 176.00467568081797,
+        "y": 188.2670873412107,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 1,
+        "name": "NPC2",
+        "x": 232.0764897432608,
+        "y": 176.2228539294234,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 1,
+        "name": "NPC3",
+        "x": 305.7103439691992,
+        "y": 165.9852555294042,
+        "vw": 568,
+        "vh": 320
+      },
+      {
+        "team": 1,
+        "name": "NPC4",
+        "x": 388.70382068154714,
+        "y": 168.19336498823188,
+        "vw": 568,
+        "vh": 320
+      }
+    ],
+    "568x320-controls": [
+      {
+        "id": "top",
+        "left": 8,
+        "top": 4,
+        "right": 560,
+        "bottom": 41,
+        "vw": 568,
+        "vh": 320,
+        "hit": false
+      },
+      {
+        "id": "sessionControls",
+        "left": 358.96875,
+        "top": 42,
+        "right": 496,
+        "bottom": 74,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 514,
+        "top": 42,
+        "right": 560,
+        "bottom": 74,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 186.0625,
+        "top": 215.5,
+        "right": 218.0625,
+        "bottom": 251.5,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 221.0625,
+        "top": 220,
+        "right": 286.0625,
+        "bottom": 252,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 289.0625,
+        "top": 215.5,
+        "right": 321.0625,
+        "bottom": 251.5,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "previewFitBtn",
+        "left": 324.0625,
+        "top": 215.5,
+        "right": 381.9375,
+        "bottom": 251.5,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "◀",
+        "left": 8,
+        "top": 216,
+        "right": 46,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "⤒",
+        "left": 52,
+        "top": 216,
+        "right": 90,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "▶",
+        "left": 96,
+        "top": 216,
+        "right": 134,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "↗",
+        "left": 434,
+        "top": 216,
+        "right": 472,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "🔥",
+        "left": 478,
+        "top": 216,
+        "right": 516,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "↘",
+        "left": 522,
+        "top": 216,
+        "right": 560,
+        "bottom": 254,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      },
+      {
+        "id": "weaponDock",
+        "left": 8,
+        "top": 252,
+        "right": 560,
+        "bottom": 316,
+        "vw": 568,
+        "vh": 320,
+        "hit": true
+      }
+    ],
+    "932x430-intro": [
+      {
+        "team": 0,
+        "name": "내캐릭1",
+        "x": 63.27244327310495,
+        "y": 228.03645593624086,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 0,
+        "name": "내캐릭2",
+        "x": 187.3295311318396,
+        "y": 263.92669762803763,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 0,
+        "name": "내캐릭3",
+        "x": 295.5270171074364,
+        "y": 242.03619560325376,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 0,
+        "name": "내캐릭4",
+        "x": 638.6343343942735,
+        "y": 202.07330237196234,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 1,
+        "name": "NPC1",
+        "x": 394.7472152463353,
+        "y": 256.79955743392196,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 1,
+        "name": "NPC2",
+        "x": 548.4483728769391,
+        "y": 220.14569357846995,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 1,
+        "name": "NPC3",
+        "x": 766.9576557385506,
+        "y": 223.70926367552775,
+        "vw": 932,
+        "vh": 430
+      },
+      {
+        "team": 1,
+        "name": "NPC4",
+        "x": 868.727556726895,
+        "y": 221.41839718456202,
+        "vw": 932,
+        "vh": 430
+      }
+    ],
+    "932x430-controls": [
+      {
+        "id": "top",
+        "left": 8,
+        "top": 4,
+        "right": 924,
+        "bottom": 63,
+        "vw": 932,
+        "vh": 430,
+        "hit": false
+      },
+      {
+        "id": "sessionControls",
+        "left": 722.96875,
+        "top": 49,
+        "right": 860,
+        "bottom": 81,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "설정",
+        "left": 878,
+        "top": 49,
+        "right": 924,
+        "bottom": 81,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "aimMinus",
+        "left": 368.0625,
+        "top": 315.5,
+        "right": 400.0625,
+        "bottom": 351.5,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "aimPreset",
+        "left": 403.0625,
+        "top": 320,
+        "right": 468.0625,
+        "bottom": 352,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "aimPlus",
+        "left": 471.0625,
+        "top": 315.5,
+        "right": 503.0625,
+        "bottom": 351.5,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "previewFitBtn",
+        "left": 506.0625,
+        "top": 315.5,
+        "right": 563.9375,
+        "bottom": 351.5,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "◀",
+        "left": 8,
+        "top": 310,
+        "right": 52,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "⤒",
+        "left": 58,
+        "top": 310,
+        "right": 102,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "▶",
+        "left": 108,
+        "top": 310,
+        "right": 152,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "↗",
+        "left": 780,
+        "top": 310,
+        "right": 824,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "🔥",
+        "left": 830,
+        "top": 310,
+        "right": 874,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "↘",
+        "left": 880,
+        "top": 310,
+        "right": 924,
+        "bottom": 354,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      },
+      {
+        "id": "weaponDock",
+        "left": 8,
+        "top": 354,
+        "right": 924,
+        "bottom": 426,
+        "vw": 932,
+        "vh": 430,
+        "hit": true
+      }
+    ]
+  },
+  "browser": "156.0.4314.42"
+}
