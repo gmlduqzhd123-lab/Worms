@@ -35,4 +35,10 @@ HTML 버전 28, 캐시 `worms-v28`, 단일 HTML `dist/wormfront-stage28-offline.
 
 ## 공개 배포
 
-배포 후 Actions 상태·공개 브라우저 실행·코드 해시를 이어서 기록합니다.
+- 배포 코드 커밋: `ea814688223b45616cee21fdcce07c290ff45fe4`.
+- [GitHub Pages 배포 실행](https://github.com/gmlduqzhd123-lab/Worms/actions/runs/40517301648): completed / success.
+- [새 버전 실행](https://gmlduqzhd123-lab.github.io/Worms/?v=28): HTTP 200, HTML 버전 28.
+- 공개 신규 검사 `verify-battle-improvements.cjs --live`: **92개 통과**, 실패·JavaScript 오류·리소스 누락 0. 공개 주소에서도 최소 맵 60회 배치와 504개 탄도 조합, 연출·정밀 조작·카메라·보존 해시를 확인했습니다.
+- 공개 플랫폼 검사 `verify-platforms.cjs --live`: **212개 통과**, 실패·JavaScript 오류·리소스 누락 0. Edge·Chrome·WebKit의 12개 프로필과 CPU 계산·오프라인 재접속·단일 HTML을 확인했습니다. 공개 검사 합계는 **304개**입니다.
+- index·AI·배치/턴·무기·렌더·피해·그래픽·단일 HTML 및 CSS·입력·지형·카메라·서비스 워커의 공개 해시가 배포 커밋의 Git blob과 일치합니다. 두 검사에 중복된 파일은 중복 검사 결과로 구분하며 Git 줄바꿈 정규화를 고려했습니다.
+- 결과는 `live/results.json`, `platforms/live/results.json`, 화면은 각 폴더의 PNG에 보존합니다. 이번 v28의 실제 모바일·태블릿 실물 확인으로 표시하지 않습니다.

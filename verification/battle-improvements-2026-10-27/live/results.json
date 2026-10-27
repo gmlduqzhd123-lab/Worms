@@ -1,0 +1,1785 @@
+{
+  "tests": [
+    {
+      "name": "Default normal CPU has modestly more aiming error and less aggressive movement; hard remains unchanged",
+      "pass": true
+    },
+    {
+      "name": "All weapon damage/radii, projectile collision radii, fuse and ballistic coefficients remain unchanged",
+      "pass": true
+    },
+    {
+      "name": "easy: CPU plans a valid shot with the intended weapon pool",
+      "pass": true
+    },
+    {
+      "name": "normal: CPU plans a valid shot with the intended weapon pool",
+      "pass": true
+    },
+    {
+      "name": "hard: CPU plans a valid shot with the intended weapon pool",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 4 per team / 00100111",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 4 per team / 00110101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 6 per team / 011010001101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn coast / 6 per team / 100111001010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 4 per team / 01000111",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 4 per team / 00011110",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 6 per team / 001100111001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn ruins / 6 per team / 101101010001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 2 per team / 0110",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 4 per team / 00110011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 4 per team / 01110001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 6 per team / 011011010001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn canyon / 6 per team / 011011000110",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 4 per team / 11001100",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 4 per team / 01001011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 6 per team / 010110010101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn fort / 6 per team / 110110001010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 4 per team / 10110010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 4 per team / 01101100",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 6 per team / 001111000101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn meadow / 6 per team / 100011100101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 4 per team / 01000111",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 4 per team / 11000101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 6 per team / 111001101000",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn snow / 6 per team / 111100001010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 2 per team / 1001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 4 per team / 01010011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 4 per team / 10011001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 6 per team / 100011001110",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn scrap / 6 per team / 111010010100",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 2 per team / 1001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 4 per team / 11100001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 4 per team / 01011010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 6 per team / 011010000111",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn castle / 6 per team / 000101111010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 2 per team / 1001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 2 per team / 1001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 4 per team / 10100011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 4 per team / 11001001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 6 per team / 011001011001",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn moon / 6 per team / 110000111010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 2 per team / 0101",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 2 per team / 1010",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 4 per team / 11000110",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 4 per team / 10001011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 6 per team / 001100011011",
+      "pass": true
+    },
+    {
+      "name": "Safe mixed spawn sunset / 6 per team / 110101100100",
+      "pass": true
+    },
+    {
+      "name": "Repeated starts produce varied interleavings instead of fixed left/right teams",
+      "pass": true
+    },
+    {
+      "name": "All 504 ballistic previews match actual fixed-step flight including wind, direction, bounces, collision and fuse endpoint",
+      "pass": true
+    },
+    {
+      "name": "Prediction does not mutate worms, HP, ammunition, terrain, combat time or effects",
+      "pass": true
+    },
+    {
+      "name": "Preview reuses stable results and refreshes for charge, selected weapon and terrain destruction",
+      "pass": true
+    },
+    {
+      "name": "Second shotgun shot, wire attachment and targeted homing preview share their actual launch rules",
+      "pass": true
+    },
+    {
+      "name": "Targeted homing view stays still while the pointer chooses a destination",
+      "pass": true
+    },
+    {
+      "name": "Homing click fires at the exact preview target and returns to projectile tracking",
+      "pass": true
+    },
+    {
+      "name": "Stronger hit pose/flash and floating damage do not change HP loss, physical impulse or collision geometry",
+      "pass": true
+    },
+    {
+      "name": "Death burst follows HP drain, holds the presentation, ends cleanly and causes no extra damage, crater or mine chain reaction",
+      "pass": true
+    },
+    {
+      "name": "desktop: full predicted curve and endpoint fit; all precision controls are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "desktop: charging updates power, release exits overview and projectile trails stay bounded",
+      "pass": true
+    },
+    {
+      "name": "phone: full predicted curve and endpoint fit; all precision controls are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "phone: charging updates power, release exits overview and projectile trails stay bounded",
+      "pass": true
+    },
+    {
+      "name": "small-phone: full predicted curve and endpoint fit; all precision controls are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "small-phone: charging updates power, release exits overview and projectile trails stay bounded",
+      "pass": true
+    },
+    {
+      "name": "tablet: full predicted curve and endpoint fit; all precision controls are unobstructed",
+      "pass": true
+    },
+    {
+      "name": "tablet: charging updates power, release exits overview and projectile trails stay bounded",
+      "pass": true
+    },
+    {
+      "name": "All 61 previous runtime files remain byte-for-byte preserved",
+      "pass": true
+    },
+    {
+      "name": "Public index.html matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/ai.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/turns.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/weapons.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/render.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/combat.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public src/graphics.js matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "Public offline/wormfront.html matches the release commit",
+      "pass": true
+    },
+    {
+      "name": "No browser JavaScript errors or missing checked resources",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "observations": {
+    "easyPlan": {
+      "type": "grenade",
+      "score": 43.57419489269671
+    },
+    "normalPlan": {
+      "type": "grenade",
+      "score": 43.573896510204776
+    },
+    "hardPlan": {
+      "type": "grenade",
+      "score": 43.222123166801055
+    },
+    "spawns": [
+      {
+        "theme": "coast",
+        "n": 2,
+        "order": "1010",
+        "minGap": 512.437524992836,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "coast",
+        "n": 2,
+        "order": "0101",
+        "minGap": 696.6327317592626,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "coast",
+        "n": 4,
+        "order": "00100111",
+        "minGap": 231.53731396971546,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC2",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "coast",
+        "n": 4,
+        "order": "00110101",
+        "minGap": 263.02454454252234,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "NPC2",
+          "내캐릭3",
+          "NPC3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "coast",
+        "n": 6,
+        "order": "011010001101",
+        "minGap": 152.5152212299305,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "NPC3",
+          "내캐릭3",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC4",
+          "NPC5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "coast",
+        "n": 6,
+        "order": "100111001010",
+        "minGap": 151.73664048802107,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC5",
+          "내캐릭5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 2,
+        "order": "0101",
+        "minGap": 570.2471523243314,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 2,
+        "order": "0101",
+        "minGap": 611.7187180335571,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 4,
+        "order": "01000111",
+        "minGap": 273.0815358673515,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC2",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 4,
+        "order": "00011110",
+        "minGap": 225.6144272790691,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 6,
+        "order": "001100111001",
+        "minGap": 156.81678032646482,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "NPC2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC3",
+          "NPC4",
+          "NPC5",
+          "내캐릭5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "ruins",
+        "n": 6,
+        "order": "101101010001",
+        "minGap": 151.08305103615294,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "NPC3",
+          "내캐릭2",
+          "NPC4",
+          "내캐릭3",
+          "NPC5",
+          "내캐릭4",
+          "내캐릭5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 2,
+        "order": "0110",
+        "minGap": 640.4479191702728,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 2,
+        "order": "1010",
+        "minGap": 592.7944298693664,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 4,
+        "order": "00110011",
+        "minGap": 234.83682386279634,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "NPC2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 4,
+        "order": "01110001",
+        "minGap": 263.02378646870784,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 6,
+        "order": "011011010001",
+        "minGap": 151.34404223367915,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "NPC5",
+          "내캐릭4",
+          "내캐릭5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "canyon",
+        "n": 6,
+        "order": "011011000110",
+        "minGap": 165.18737837697975,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 2,
+        "order": "0101",
+        "minGap": 668.3848791645592,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 2,
+        "order": "0101",
+        "minGap": 565.2538589744395,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 4,
+        "order": "11001100",
+        "minGap": 235.97741710303603,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 4,
+        "order": "01001011",
+        "minGap": 259.8248799760481,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC2",
+          "내캐릭4",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 6,
+        "order": "010110010101",
+        "minGap": 159.1436732338268,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2",
+          "NPC3",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC4",
+          "내캐릭5",
+          "NPC5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "fort",
+        "n": 6,
+        "order": "110110001010",
+        "minGap": 150.3565928367898,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "NPC3",
+          "NPC4",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC5",
+          "내캐릭5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 2,
+        "order": "1010",
+        "minGap": 591.1821933521454,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 2,
+        "order": "1010",
+        "minGap": 602.128221061987,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 4,
+        "order": "10110010",
+        "minGap": 271.28545593688,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "NPC3",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC4",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 4,
+        "order": "01101100",
+        "minGap": 273.6642113055982,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 6,
+        "order": "001111000101",
+        "minGap": 154.817496478845,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "내캐릭3",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "meadow",
+        "n": 6,
+        "order": "100011100101",
+        "minGap": 156.23797277151527,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 2,
+        "order": "1010",
+        "minGap": 692.8162188624343,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 2,
+        "order": "0101",
+        "minGap": 469.70104055569846,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 4,
+        "order": "01000111",
+        "minGap": 216.08286639948517,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC2",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 4,
+        "order": "11000101",
+        "minGap": 267.1674152029891,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 6,
+        "order": "111001101000",
+        "minGap": 166.5086992740259,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC4",
+          "NPC5",
+          "내캐릭3",
+          "NPC6",
+          "내캐릭4",
+          "내캐릭5",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "snow",
+        "n": 6,
+        "order": "111100001010",
+        "minGap": 157.70233469306413,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC5",
+          "내캐릭5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 2,
+        "order": "1001",
+        "minGap": 675.8741733797392,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 2,
+        "order": "0101",
+        "minGap": 658.5877571396654,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 4,
+        "order": "01010011",
+        "minGap": 236.7425691498015,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 4,
+        "order": "10011001",
+        "minGap": 226.2758745955835,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2",
+          "NPC3",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 6,
+        "order": "100011001110",
+        "minGap": 155.87542595667583,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC2",
+          "NPC3",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC4",
+          "NPC5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "scrap",
+        "n": 6,
+        "order": "111010010100",
+        "minGap": 163.87751811553449,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "내캐릭1",
+          "NPC4",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC5",
+          "내캐릭4",
+          "NPC6",
+          "내캐릭5",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 2,
+        "order": "1010",
+        "minGap": 637.8761623396102,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 2,
+        "order": "1001",
+        "minGap": 628.1898125502591,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 4,
+        "order": "11100001",
+        "minGap": 218.61999699209946,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "NPC3",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 4,
+        "order": "01011010",
+        "minGap": 241.55672492936785,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2",
+          "NPC3",
+          "내캐릭3",
+          "NPC4",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 6,
+        "order": "011010000111",
+        "minGap": 152.95204976374455,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "NPC3",
+          "내캐릭3",
+          "내캐릭4",
+          "내캐릭5",
+          "내캐릭6",
+          "NPC4",
+          "NPC5",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "castle",
+        "n": 6,
+        "order": "000101111010",
+        "minGap": 165.39232319650665,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC1",
+          "내캐릭4",
+          "NPC2",
+          "NPC3",
+          "NPC4",
+          "NPC5",
+          "내캐릭5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 2,
+        "order": "1001",
+        "minGap": 620.4531993919363,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 2,
+        "order": "1001",
+        "minGap": 652.6284870045383,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 4,
+        "order": "10100011",
+        "minGap": 228.66577089369855,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 4,
+        "order": "11001001",
+        "minGap": 265.53031042032444,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "내캐릭2",
+          "NPC3",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 6,
+        "order": "011001011001",
+        "minGap": 164.13269617804394,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "NPC2",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC3",
+          "내캐릭4",
+          "NPC4",
+          "NPC5",
+          "내캐릭5",
+          "내캐릭6",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "moon",
+        "n": 6,
+        "order": "110000111010",
+        "minGap": 162.5128817329251,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC3",
+          "NPC4",
+          "NPC5",
+          "내캐릭5",
+          "NPC6",
+          "내캐릭6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 2,
+        "order": "0101",
+        "minGap": 657.5804059200111,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "내캐릭1",
+          "NPC1",
+          "내캐릭2",
+          "NPC2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 2,
+        "order": "1010",
+        "minGap": 705.092665765745,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          2,
+          2
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "NPC2",
+          "내캐릭2"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 4,
+        "order": "11000110",
+        "minGap": 285.33406055883097,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC3",
+          "NPC4",
+          "내캐릭4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 4,
+        "order": "10001011",
+        "minGap": 192.90443856382478,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          4,
+          4
+        ],
+        "names": [
+          "NPC1",
+          "내캐릭1",
+          "내캐릭2",
+          "내캐릭3",
+          "NPC2",
+          "내캐릭4",
+          "NPC3",
+          "NPC4"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 6,
+        "order": "001100011011",
+        "minGap": 157.9541290728646,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "내캐릭1",
+          "내캐릭2",
+          "NPC1",
+          "NPC2",
+          "내캐릭3",
+          "내캐릭4",
+          "내캐릭5",
+          "NPC3",
+          "NPC4",
+          "내캐릭6",
+          "NPC5",
+          "NPC6"
+        ],
+        "facing": true
+      },
+      {
+        "theme": "sunset",
+        "n": 6,
+        "order": "110101100100",
+        "minGap": 150.83222799627956,
+        "minMine": null,
+        "safe": true,
+        "counts": [
+          6,
+          6
+        ],
+        "names": [
+          "NPC1",
+          "NPC2",
+          "내캐릭1",
+          "NPC3",
+          "내캐릭2",
+          "NPC4",
+          "NPC5",
+          "내캐릭3",
+          "내캐릭4",
+          "NPC6",
+          "내캐릭5",
+          "내캐릭6"
+        ],
+        "facing": true
+      }
+    ],
+    "prediction": {
+      "combinations": 504,
+      "maxDelta": 0,
+      "bouncingCases": 212
+    },
+    "feedback": {
+      "hp": 75,
+      "vx": 2,
+      "vy": -1,
+      "r": 9,
+      "hit": true,
+      "label": 25,
+      "unchanged": true
+    }
+  },
+  "browser": "156.0.4314.42"
+}
