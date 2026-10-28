@@ -59,8 +59,8 @@ async function battle(page,name,touch){
     assert.equal(await page.evaluate(()=>artFailures.length),0);
     await battle(page,profile.name,profile.hasTouch);await page.screenshot({path:path.join(out,profile.name+'-home.png')});
     if(profile.hasTouch){
-      await page.setViewportSize({width:390,height:844});assert.equal(await page.locator('#rotateNotice').isHidden(),false);
-      await page.setViewportSize(profile.viewport);pass('Phone orientation notice follows viewport changes');
+      await page.setViewportSize({width:390,height:844});await page.locator('#rotateNotice').waitFor({state:'visible'});assert.equal(await page.locator('#rotateNotice').isHidden(),false);
+      await page.setViewportSize(profile.viewport);await page.locator('#rotateNotice').waitFor({state:'hidden'});pass('Phone orientation notice follows viewport changes');
     }
     await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
     const cached=await page.evaluate(async()=>{const c=await caches.open('worms-v'+document.querySelector('meta[name="wormfront-version"]').content);return(await c.keys()).filter(r=>r.url.includes('/assets/images/')).length});
