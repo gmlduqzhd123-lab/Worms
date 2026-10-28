@@ -7,6 +7,9 @@ if(JSON.stringify(refs)!==JSON.stringify(order))throw Error('Script order differ
 const version=html.match(/name="wormfront-version" content="(\d+)"/)[1];
 const images=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')).map(f=>'assets/images/'+f):[];
 const files=['index.html','.nojekyll','styles/game.css',...order,...images,...JSON.parse(fs.readFileSync(path.join(root,'scripts/site-extras.json')))];
+// Only this generated directory is replaced; archived releases are retained.
+if(!site.startsWith(root+path.sep)||path.basename(site)!=='site')throw Error('Invalid release output path');
+fs.rmSync(site,{recursive:true,force:true});
 const rows=[];
 for(const file of files){const data=fs.readFileSync(path.join(root,file));const dest=path.join(site,file);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,data);rows.push({file,bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex')})}
 const offline=fs.readFileSync(path.join(root,'dist',`wormfront-stage${version}-offline.html`));

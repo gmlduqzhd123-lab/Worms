@@ -1,2 +1,5 @@
 _site/
 release/*.zip
+node_modules/
+release/site/
+test-results/
