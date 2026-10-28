@@ -1,34 +1,75 @@
 name: Publish Angle King to GitHub Pages
+
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
+
 jobs:
-  deploy:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+  verify-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # Archived versions and dist are not build inputs.
+          sparse-checkout: |
+            .github
+            assets
+            icons
+            release
+            scripts
+            src
+            styles
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked development dependencies
+        run: npm ci
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Check source structure and syntax
+        run: npm run check
+      - name: Build offline HTML and static site from current source
+        run: npm run build
+      - name: Verify combat, audio and built artifacts
+        run: npm test
+      - name: Save verification results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-results
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Upload verified Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: release/site
+
+  deploy:
+    needs: verify-build
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
-      - name: Prepare static site
-        run: |
-          mkdir -p _site/offline
-          cp index.html .nojekyll manifest.webmanifest sw.js ys-install.js ys-qr.js qr.svg og-image-angle-bots.png _site/
-          cp -R src styles assets icons _site/
-          cp dist/wormfront-stage28-offline.html _site/offline/wormfront.html
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-      - name: Deploy
+      - name: Deploy verified artifact
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,0 +1,17 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
+const html=read('index.html'),order=JSON.parse(read('scripts/source-order.json'));
+const scripts=[...html.matchAll(/<script defer src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
+assert.deepEqual(scripts,order,'HTML script order must match source-order.json');
+assert.equal(new Set(order).size,order.length,'Source entries must be unique');
+new vm.Script(order.map(read).join('\n'),{filename:'combined-game.js'});
+for(const file of ['sw.js','ys-install.js','ys-qr.js'])new vm.Script(read(file),{filename:file});
+for(const file of fs.readdirSync(__dirname).filter(f=>f.endsWith('.cjs')))new vm.Script(read('scripts/'+file),{filename:file});
+const version=html.match(/name="wormfront-version" content="(\d+)"/)?.[1];
+assert.ok(version,'HTML must declare its release version');
+const cache=vm.runInNewContext(read('sw.js')+'\n;({CACHE,CORE,ART})',{self:{addEventListener(){}}});
+assert.equal(cache.CACHE,'worms-v'+version,'HTML and service worker cache versions must match');
+const required=['.nojekyll','styles/game.css','qr.svg',...order,...JSON.parse(read('scripts/site-extras.json'))];
+for(const ref of [...cache.CORE,...cache.ART])required.push(ref==='./'?'index.html':ref.replace(/^\.\//,'').split('?')[0]);
+for(const file of required)assert.ok(fs.statSync(path.join(root,file)).isFile(),'Missing build/cache input: '+file);
+console.log(`Source checks passed: v${version}, ${order.length} ordered game scripts, ${new Set(required).size} required files.`);
