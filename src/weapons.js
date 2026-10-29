@@ -5,7 +5,7 @@ function hasAmmo(id){return !limited.includes(id)||teams[activeTeam].ammo[id]>0}
 function spend(id){if(limited.includes(id))teams[activeTeam].ammo[id]--}
 
 function beginTargeting(type,text){
-  if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;if(type==='homing'){const enemy=nearestEnemy(current());targetPoint=enemy?{x:enemy.x,y:enemy.y}:null}ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
+  if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;if(type==='homing'){const enemy=nearestEnemy(current());targetPoint=enemy?{x:enemy.x,y:enemy.y}:null}else if(type==='girder'){const w=current();targetPoint={x:w.x+facing*100,y:w.y-45}}ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
 }
 function fireStart(){
   const w=current();if(!w||!w.alive||gameOver||paused||turnLocked||retreatUntil>gameNow||projectiles.length||walkers.length||isCPU())return;
@@ -14,7 +14,7 @@ function fireStart(){
   if(selected==='teleport'){beginTargeting('teleport','이동할 지형을 클릭하세요.');return}
   if(selected==='airstrike'){beginTargeting('airstrike','공습 목표 지점을 클릭하세요.');return}
   if(selected==='homing'){beginTargeting('homing','유도 미사일의 목표 지점을 클릭하세요.');return}
-  if(selected==='girder'){beginTargeting('girder','거더를 놓을 위치를 클릭하세요.');return}
+  if(selected==='girder'){beginTargeting('girder','연결발판: 초록색은 설치 가능, 빨간색은 설치 불가입니다. 위치를 클릭하세요.');return}
   if(selected==='mine'){placeMine();return}
   if(selected==='dynamite'){placeDynamite();return}
   if(selected==='bat'){meleeBat();return}
@@ -70,7 +70,7 @@ function advanceBallistic(p,dt){
     const ox=p.x,oy=p.y;p.x+=dx/slices;p.y+=dy/slices;
     if(p.y>waterY)return 'water';
     if(p.x<-80||p.x>WW+80||p.y>WH+100)return 'bounds';
-    const hitGirder=girders.some(g=>p.x>=g.x-g.w/2&&p.x<=g.x+g.w/2&&p.y>=g.y-g.h/2&&p.y<=g.y+g.h/2);
+    const hitGirder=girders.some(g=>girderContains(g,p.x,p.y));
     if(solid(p.x,p.y)||hitGirder){
       if((ballisticRules[p.type]?.bounce||0)>0&&p.bounce>0){
         p.x=ox;p.y=oy;p.bounce--;
@@ -93,12 +93,12 @@ function traceShotgun(w,pwr,ang,face){
   const rad=ang*Math.PI/180,range=(450+pwr*560)*SHOT_RANGE_SCALE,step=7;let x=w.x+Math.cos(rad)*face*14,y=w.y+Math.sin(rad)*14,hit=null,event='range';const points=[{x,y}];
   for(let i=0;i<range/step;i++){x+=Math.cos(rad)*face*step;y+=Math.sin(rad)*step;
     for(const t of teams)for(const o of t.worms)if(o.alive&&o!==w&&dist(x,y,o.x,o.y)<o.r+3){hit=o;break}
-    if(hit||solid(x,y)||x<0||x>WW||y<0||y>WH){event=hit?'worm':solid(x,y)?'terrain':'bounds';break}}
+    if(hit||pointBlocked(x,y)||x<0||x>WW||y<0||y>WH){event=hit?'worm':pointBlocked(x,y)?'terrain':'bounds';break}}
   points.push({x,y});return{points,end:{x,y,event},hit,bounces:0};
 }
 function traceRope(w,ang,face){
   const rad=ang*Math.PI/180,points=[{x:w.x,y:w.y}];let x=w.x,y=w.y,event='range';
-  for(let i=0;i<300;i+=4){x+=Math.cos(rad)*face*4;y+=Math.sin(rad)*4;if(solid(x,y)){event='anchor';break}}
+  for(let i=0;i<300;i+=4){x+=Math.cos(rad)*face*4;y+=Math.sin(rad)*4;if(pointBlocked(x,y)){event='anchor';break}}
   points.push({x,y});return{points,end:{x,y,event},bounces:0};
 }
 function getShotPreview(){
@@ -157,6 +157,16 @@ function teleportDestination(w,x,y){
   }
   return best;
 }
+function girderPlacement(x,y){
+  if(!Number.isFinite(x)||!Number.isFinite(y))return{girder:null,valid:false,reason:'올바른 위치를 선택하세요.'};
+  const g={x,y,w:110,h:10},left=x-g.w/2,right=x+g.w/2,top=y-g.h/2,bottom=y+g.h/2;
+  const reject=reason=>({girder:g,valid:false,reason});
+  if(left<0||right>WW||y<60||y>waterY-30)return reject('전장 안의 물 위 공간을 선택하세요.');
+  for(let py=Math.floor(top);py<=Math.ceil(bottom);py++)for(let px=Math.floor(left);px<=Math.ceil(right);px++)if(solid(px,py))return reject('지형과 겹쳐 설치할 수 없습니다.');
+  if(girders.some(o=>Math.abs(o.x-x)<(o.w+g.w)/2&&Math.abs(o.y-y)<(o.h+g.h)/2))return reject('다른 연결발판과 겹쳐 설치할 수 없습니다.');
+  if(teams.some(t=>t.worms.some(w=>w.alive&&Math.hypot(w.x-clamp(w.x,left,right),w.y-clamp(w.y,top,bottom))<=w.r+2)))return reject('캐릭터와 겹쳐 설치할 수 없습니다.');
+  return{girder:g,valid:true,reason:'설치 가능'};
+}
 function useTarget(x,y){
   const w=current();if(!w||!w.alive||!targetMode||paused||gameOver||turnLocked||retreatUntil>gameNow)return;
   if(targetMode==='teleport'){
@@ -166,7 +176,8 @@ function useTarget(x,y){
   }else if(targetMode==='homing'){
     spend('homing');targetPoint={x,y};spawnBallistic('homing',w,.72,aim,facing,targetPoint);finishTarget()
   }else if(targetMode==='girder'){
-    spend('girder');girders.push({x:clamp(x,45,WW-45),y:clamp(y,60,waterY-30),w:110,h:10});playSFX('girder');finishTarget();startRetreat(1.5)
+    targetPoint={x,y};const placement=girderPlacement(x,y);if(!placement.valid){toast(placement.reason);return}if(!hasAmmo('girder')){toast('탄약이 없습니다');return}
+    spend('girder');girders.push(placement.girder);playSFX('girder');finishTarget();startRetreat(1.5)
   }updateHUD()
 }
 function finishTarget(){targetMode=null;ui.targetTip.style.display='none'}

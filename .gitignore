@@ -3,3 +3,4 @@ release/*.zip
 node_modules/
 release/site/
 test-results/
+dist/wormfront-stage*-offline.html

@@ -1,6 +1,7 @@
 'use strict';
 
-function pointBlocked(x,y){return solid(x,y)||girders.some(g=>x>=g.x-g.w/2&&x<=g.x+g.w/2&&y>=g.y-g.h/2&&y<=g.y+g.h/2)}
+function girderContains(g,x,y){return x>=g.x-g.w/2&&x<=g.x+g.w/2&&y>=g.y-g.h/2&&y<=g.y+g.h/2}
+function pointBlocked(x,y){return solid(x,y)||girders.some(g=>girderContains(g,x,y))}
 function bodyBlocked(w,x,y){
   const r=w.r-.6;
   return pointBlocked(x,y)||pointBlocked(x-r,y)||pointBlocked(x+r,y)||pointBlocked(x,y-r)||pointBlocked(x,y+r)||pointBlocked(x-r*.7,y-r*.7)||pointBlocked(x+r*.7,y-r*.7)||pointBlocked(x-r*.7,y+r*.7)||pointBlocked(x+r*.7,y+r*.7)

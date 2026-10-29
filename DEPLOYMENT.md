@@ -2,7 +2,7 @@
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [저장소](https://github.com/gmlduqzhd123-lab/Worms) · [현재 사용법](README.md)
 
-게임 버전은 v28입니다. 자동 배포는 저장소에 보관된 이전 단일 HTML을 그대로 복사하지 않고, 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다. 게임의 전투 규칙·리소스·설정 키는 그대로 유지합니다.
+게임 버전은 v29입니다. 자동 배포는 저장소에 보관된 이전 단일 HTML을 그대로 복사하지 않고, 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다. 게임의 전투 규칙·리소스·설정 키는 그대로 유지합니다.
 
 ## 자동 검증과 배포
 
@@ -24,7 +24,7 @@ npm run build
 npm test
 ```
 
-`npm run check`는 소스 순서·문법·버전·필수 파일을 확인합니다. `npm run build`는 오프라인 HTML과 배포 폴더를 생성합니다. `npm test`는 핵심 전투·효과음 회귀와 생성된 배포본의 기본 동작을 Chromium에서 검사합니다. 과거 보고서에 기록된 모든 플랫폼 검사를 매번 실행하는 구성은 아닙니다.
+`npm run check`는 소스 순서·문법·버전·필수 파일을 확인합니다. `npm run build`는 오프라인 HTML과 배포 폴더를 생성합니다. `npm test`는 핵심 전투·발판·저장 복구·504개 탄도 조합·효과음 회귀와 생성된 배포본의 기본 동작을 Chromium에서 검사합니다. 과거 보고서에 기록된 모든 플랫폼 검사를 매번 실행하는 구성은 아닙니다.
 
 어느 단계든 실패하면 배포를 진행하지 않습니다. 검증 결과는 실행의 **Artifacts → verification-results**에서 확인할 수 있으며 14일 동안 보관합니다. 결과 파일이 만들어지기 전에 실패했다면 해당 단계의 로그를 확인합니다.
 
@@ -61,11 +61,11 @@ npm test
 
 ## 빌드 산출물
 
-현재 버전 번호는 `index.html`에서 읽습니다. v28에서 생성되는 파일은 다음과 같습니다.
+현재 버전 번호는 `index.html`에서 읽습니다. v29에서 생성되는 파일은 다음과 같습니다.
 
 | 경로 | 내용 |
 | --- | --- |
-| `dist/wormfront-stage28-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
+| `dist/wormfront-stage29-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
 | `release/site/` | 정적 사이트로 배포할 실행 파일 |
 | `release/site/offline/wormfront.html` | 위 단일 HTML의 배포용 사본 |
 | `release/manifest.json` | 배포 파일의 크기와 SHA-256 명세 |
@@ -85,7 +85,7 @@ Windows PowerShell에서는 숨김 파일도 포함하는 .NET ZIP 기능을 사
 ```powershell
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $sitePath = (Resolve-Path 'release/site').Path
-$zipPath = Join-Path (Get-Location).Path 'release/wormfront-stage28-pages.zip'
+$zipPath = Join-Path (Get-Location).Path 'release/wormfront-stage29-pages.zip'
 [System.IO.Compression.ZipFile]::CreateFromDirectory($sitePath, $zipPath)
 ```
 
@@ -96,7 +96,7 @@ $zipPath = Join-Path (Get-Location).Path 'release/wormfront-stage28-pages.zip'
 ## 실행과 확인 범위
 
 - 로컬 미리보기는 `npm start` 또는 `node scripts/serve.cjs`를 실행하고 <http://127.0.0.1:4187>을 엽니다.
-- 단일 파일은 `dist/wormfront-stage28-offline.html`을 엽니다. ZIP 내부에서는 `offline/wormfront.html`입니다.
+- 단일 파일은 `dist/wormfront-stage29-offline.html`을 엽니다. ZIP 내부에서는 `offline/wormfront.html`입니다.
 - 분리된 `index.html`을 직접 여는 경우 브라우저의 `file://` 정책 때문에 MP3가 제한될 수 있습니다. 완전한 오프라인 파일 실행에는 단일 HTML을 사용합니다.
 - 설정과 완료 기록은 브라우저 `localStorage`에 저장하며 기기 간 동기화하지 않습니다. HTTP 주소와 `file://` 파일의 저장 공간은 다를 수 있습니다.
 
