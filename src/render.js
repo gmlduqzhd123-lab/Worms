@@ -21,10 +21,20 @@ function drawTrajectory(){
   ctx.font='700 10px system-ui';const label={water:'수면 도달',bounds:'맵 밖',range:'최대 거리',anchor:'연결 예상',worm:'피격 예상',fuse:'폭발 예상',terrain:'착탄 예상',limit:'예상 끝'}[trace.end.event]||'도착 예상',text=(outside?'화면 밖 · ':'')+label+(trace.type==='rope'?'':' · 힘 '+Math.round(trace.power*100)+'%'),width=Math.min(VW-24,ctx.measureText(text).width+22),lx=clamp(x,12+width/2,VW-12-width/2)-x,ly=clamp(y-24,96,Math.max(96,VH-166))-y;
   ctx.fillStyle='#102a3bed';ctx.beginPath();ctx.roundRect(lx-width/2,ly-11,width,22,6);ctx.fill();ctx.fillStyle='#ffe49b';ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,lx,ly);ctx.restore();
 }
+function drawGirderPreview(){
+  if(targetMode!=='girder'||!targetPoint||paused||gameOver)return;
+  const placement=girderPlacement(targetPoint.x,targetPoint.y),g=placement.girder;if(!g)return;
+  const color=placement.valid?'#55e6a8':'#ff6677',label=placement.valid?'설치 가능':'설치 불가';
+  ctx.save();ctx.translate(screenX(g.x),screenY(g.y));ctx.fillStyle=placement.valid?'#55e6a855':'#ff667755';ctx.strokeStyle=color;ctx.lineWidth=2/cameraZoom;
+  ctx.fillRect(-g.w/2,-g.h/2,g.w,g.h);ctx.strokeRect(-g.w/2,-g.h/2,g.w,g.h);
+  ctx.scale(1/cameraZoom,1/cameraZoom);ctx.font='700 12px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
+  const width=ctx.measureText(label).width+16,y=g.h*cameraZoom/2+16;ctx.fillStyle='#102a3bf2';ctx.fillRect(-width/2,y-10,width,20);ctx.fillStyle=color;ctx.fillText(label,0,y);ctx.restore();
+}
 function drawObjects(){
   for(const c of crates){if(c.taken)continue;const x=screenX(c.x),y=screenY(c.y);if(x<-20||x>VW+20)continue;ctx.save();ctx.translate(x,y);ctx.fillStyle=c.type==='health'?'#5bd17a':'#b88449';ctx.fillRect(-9,-9,18,18);ctx.strokeStyle='#fff8';ctx.strokeRect(-9,-9,18,18);ctx.fillStyle='#fff';ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillText(c.type==='health'?'+':'?',0,4);ctx.restore()}
   for(const m of mines){if(!m.armed)continue;const x=screenX(m.x),y=screenY(m.y);const art=ART_MANIFEST.icons.mine;if(drawArt(art.file,art.bounds,x-10,y-7,20,12)){if(m.timer>0){ctx.fillStyle='#ff5757';ctx.beginPath();ctx.arc(x,y-5,3,0,Math.PI*2);ctx.fill()}continue}ctx.fillStyle=m.timer>0?'#ff5a5f':'#303845';ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#eee';ctx.fillRect(x-1,y-10,2,5)}
   ctx.fillStyle='#778497';for(const g of girders){ctx.save();ctx.translate(screenX(g.x),screenY(g.y));ctx.fillRect(-g.w/2,-g.h/2,g.w,g.h);ctx.strokeStyle='#c5ced8';ctx.strokeRect(-g.w/2,-g.h/2,g.w,g.h);ctx.restore()}
+  drawGirderPreview();
   if(rope){const w=current();if(w){ctx.strokeStyle='#eee7cb';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(screenX(rope.ax),screenY(rope.ay));ctx.lineTo(screenX(w.x),screenY(w.y));ctx.stroke()}}
   for(const o of walkers){const x=screenX(o.x),y=screenY(o.y),a=ART_MANIFEST.icons.sheep;ctx.save();ctx.translate(x,y);ctx.scale(Math.sign(o.vx)||1,1);if(!drawArt(a.file,a.bounds,-16,-23,32,29)){ctx.fillStyle='#f5a443';ctx.fillRect(-12,-16,24,12);ctx.fillStyle='#133647';ctx.beginPath();ctx.arc(-7,-1,4,0,Math.PI*2);ctx.arc(7,-1,4,0,Math.PI*2);ctx.fill()}ctx.restore()}
 }

@@ -49,12 +49,13 @@ canvas.addEventListener('contextmenu',e=>e.preventDefault());
 canvas.addEventListener('wheel',e=>{e.preventDefault();const p=viewportPoint(e.clientX,e.clientY);if(!wormIntro&&!orientationBlocked)setCameraZoom(cameraZoom*(e.deltaY<0?1.15:1/1.15),p.x,p.y)},{passive:false});
 canvas.addEventListener('pointerdown',e=>{
   if(wormIntro||orientationBlocked)return;
+  if(targetMode==='girder')targetPoint=worldFromScreen(e.clientX,e.clientY);
   cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});canvas.setPointerCapture(e.pointerId);
   dragCamera={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,moved:false};
   if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()];pinchDistance=dist(a.x,a.y,b.x,b.y);dragCamera.moved=true}
 });
 canvas.addEventListener('pointermove',e=>{
-  if(targetMode==='homing'&&!dragCamera?.moved)targetPoint=worldFromScreen(e.clientX,e.clientY);
+  if((targetMode==='homing'||targetMode==='girder')&&!dragCamera?.moved)targetPoint=worldFromScreen(e.clientX,e.clientY);
   if(!cameraPointers.has(e.pointerId))return;cameraPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(cameraPointers.size===2){const [a,b]=[...cameraPointers.values()],d=dist(a.x,a.y,b.x,b.y),p=viewportPoint((a.x+b.x)/2,(a.y+b.y)/2);if(pinchDistance>0)setCameraZoom(cameraZoom*d/pinchDistance,p.x,p.y);pinchDistance=d;dragCamera.moved=true;return}
   if(!dragCamera)return;

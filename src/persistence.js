@@ -18,7 +18,7 @@ function settingsSnapshot(){
   const options={};for(const id of OPTION_IDS){const el=document.getElementById(id);options[id]=el.tagName==='INPUT'?el.value.trim().slice(0,40):el.value}
   return{version:1,options,audio:{music:musicEnabled,sfx:sfxEnabled,musicVolume,sfxVolume}}
 }
-function saveSettings(){if(writeSaved(STORAGE_KEYS.settings,settingsSnapshot()))storageStatus('설정이 이 브라우저에 저장됐습니다.')}
+function saveSettings(){if(writeSaved(STORAGE_KEYS.settings,settingsSnapshot())&&!blockedStorageKeys.has(STORAGE_KEYS.results))storageStatus('설정이 이 브라우저에 저장됐습니다.')}
 function loadSettings(){
   const saved=readSaved(STORAGE_KEYS.settings);if(!saved||saved.version!==1||!saved.options)return;
   for(const id of OPTION_IDS){const value=saved.options[id],el=document.getElementById(id);if(typeof value!=='string')continue;
@@ -28,8 +28,13 @@ function loadSettings(){
   if(typeof saved.audio?.sfx==='boolean')sfxEnabled=saved.audio.sfx;
   for(const kind of ['musicVolume','sfxVolume']){const value=saved.audio?.[kind];if(typeof value==='number'&&Number.isFinite(value)){const safe=Math.max(0,Math.min(1,value));if(kind==='musicVolume')musicVolume=safe;else sfxVolume=safe;}}
 }
-function validResult(r){return r&&typeof r.id==='string'&&typeof r.savedAt==='string'&&Number.isFinite(Date.parse(r.savedAt))&&['cpu','pvp'].includes(r.mode)&&Number.isInteger(r.turns)&&r.turns>=0&&Number.isFinite(r.seconds)&&r.seconds>=0&&(r.winner===null||r.winner===0||r.winner===1)&&Array.isArray(r.teams)&&r.teams.length===2&&r.teams.every(t=>typeof t.name==='string'&&Number.isFinite(t.hp)&&t.hp>=0&&Number.isInteger(t.survivors)&&t.survivors>=0)}
-function loadResults(){const saved=readSaved(STORAGE_KEYS.results);matchHistory=saved?.version===1&&Array.isArray(saved.matches)?saved.matches.filter(validResult).slice(0,30):[]}
+function validResult(r){return !!(r&&typeof r==='object'&&!Array.isArray(r)&&typeof r.id==='string'&&typeof r.savedAt==='string'&&Number.isFinite(Date.parse(r.savedAt))&&['cpu','pvp'].includes(r.mode)&&Number.isInteger(r.turns)&&r.turns>=0&&Number.isFinite(r.seconds)&&r.seconds>=0&&(r.winner===null||r.winner===0||r.winner===1)&&Array.isArray(r.teams)&&r.teams.length===2&&r.teams.every(t=>t&&typeof t==='object'&&!Array.isArray(t)&&typeof t.name==='string'&&Number.isFinite(t.hp)&&t.hp>=0&&Number.isInteger(t.survivors)&&t.survivors>=0))}
+function loadResults(){
+  const saved=readSaved(STORAGE_KEYS.results);matchHistory=[];if(saved===null)return;
+  const readable=saved?.version===1&&Array.isArray(saved.matches),valid=readable?saved.matches.filter(validResult):[];
+  matchHistory=valid.slice(0,30);
+  if(!readable||valid.length!==saved.matches.length){blockedStorageKeys.add(STORAGE_KEYS.results);storageStatus('일부 대전 기록을 읽을 수 없어 제외했습니다. 원본은 유지하며 새 기록은 이번 화면에서만 저장합니다. 기록 삭제로 초기화할 수 있습니다.')}
+}
 function beginMatchRecord(){matchId=globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);matchStartedAt=gameNow;matchRecorded=false;document.getElementById('matchSummary').hidden=true}
 function recordMatchResult(){
   if(matchRecorded)return;matchRecorded=true;
