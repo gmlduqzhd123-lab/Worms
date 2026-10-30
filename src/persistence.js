@@ -1,7 +1,7 @@
 'use strict';
 
 const STORAGE_KEYS={settings:'wormfront.settings.v1',results:'wormfront.results.v1',guide:'wormfront.guide.v1'};
-const OPTION_IDS=['mode','difficulty','inputA','inputB','count','turnTime','mapSize','crateRate','sdTurn','mineCount','appearanceA','appearanceB','mapTheme'];
+const OPTION_IDS=['difficulty','inputA','inputB','count','turnTime','mapSize','crateRate','sdTurn','mineCount','appearanceA','appearanceB','mapTheme'];
 const blockedStorageKeys=new Set();
 let matchId='',matchStartedAt=0,matchRecorded=false,matchHistory=[],guideStep=0,modalPauseOwned=false,modalReturnFocus=null,deleteArmed=false;
 function storageStatus(message){document.getElementById('storageStatus').textContent=message}
@@ -20,6 +20,7 @@ function settingsSnapshot(){
 }
 function saveSettings(){if(writeSaved(STORAGE_KEYS.settings,settingsSnapshot())&&!blockedStorageKeys.has(STORAGE_KEYS.results))storageStatus('설정이 이 브라우저에 저장됐습니다.')}
 function loadSettings(){
+  document.getElementById('mode').value='cpu';
   const saved=readSaved(STORAGE_KEYS.settings);if(!saved||saved.version!==1||!saved.options)return;
   for(const id of OPTION_IDS){const value=saved.options[id],el=document.getElementById(id);if(typeof value!=='string')continue;
     if(el.tagName==='INPUT')el.value=value.slice(0,40);else if([...el.options].some(o=>o.value===value))el.value=value;
@@ -52,7 +53,7 @@ function renderHistory(){
 function openGameDialog(dialog){modalReturnFocus=document.activeElement;modalPauseOwned=started&&!paused&&!gameOver;if(modalPauseOwned)setPaused(true);dialog.showModal()}
 function closeGameDialog(){if(modalPauseOwned&&!gameOver)setPaused(false);modalPauseOwned=false;modalReturnFocus?.focus()}
 const GUIDE_STEPS=[
-  {title:'작은 전장, 큰 한 수',body:'두 팀이 번갈아 움직입니다. 상대 팀을 모두 쓰러뜨리거나 물에 빠뜨리면 승리합니다. 코랄 탐사대와 민트 탐사대의 전장을 시작해 보세요.',hint:'처음에는 로컬 2인 대전과 작은 맵을 선택하면 조작을 익히기 쉽습니다.',icon:'target'},
+  {title:'작은 전장, 큰 한 수',body:'두 팀이 번갈아 움직입니다. 상대 팀을 모두 쓰러뜨리거나 물에 빠뜨리면 승리합니다. 코랄 탐사대와 민트 탐사대의 전장을 시작해 보세요.',hint:'기본 모드는 플레이어 vs PC입니다. 처음에는 CPU 난이도 쉬움과 작은 맵으로 조작을 익혀 보세요. 함께 플레이하려면 2인 로컬 대전을 선택하세요.',icon:'target'},
   {title:'움직이고, 두 번 뛰기',body:'A/D 또는 좌우 버튼으로 이동합니다. W 또는 점프 버튼으로 뛰고, 0.33초 안에 다시 누르면 뒤로 백플립합니다.',hint:'높은 곳에서 떨어지면 피해를 받습니다. 물에 닿으면 탈락합니다.',icon:'jump'},
   {title:'수평선부터 각도 읽기',body:'수평선은 0°입니다. 30°·45°·60°·90°를 선택하거나 ±1°로 조준합니다. Shift+↑/↓도 1°씩 바꿉니다. Space나 발사 버튼을 누른 채 힘을 모으고 놓으면 발사합니다.',hint:'점선은 현재 힘으로 계산한 예상 경로입니다. 힘을 모으면 경로가 바뀌고, 탄도 전체로 도착점까지 볼 수 있습니다. 미충전은 최소 힘 12%입니다. 유도탄은 목표 선택 후 경로가 표시됩니다.',icon:'target'},
   {title:'전장을 멀리 보기',body:'화면을 드래그하면 카메라가 이동합니다. 휠·확대 버튼·두 손가락으로 확대하고 전체 맵에서 상대 위치를 찾으세요. 봇 추적 버튼이나 C로 돌아옵니다.',hint:'별똥지원·좌표비콘은 목표를 탭합니다. 목표 선택 중 드래그하면 카메라만 이동합니다.',icon:'map'},
