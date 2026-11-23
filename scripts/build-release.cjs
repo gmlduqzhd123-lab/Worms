@@ -5,13 +5,24 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const refs=[...html.matchAll(/<script defer src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
 if(JSON.stringify(refs)!==JSON.stringify(order))throw Error('Script order differs from source-order.json');
 const version=html.match(/name="wormfront-version" content="(\d+)"/)[1];
+const versionedAssets=new Set(['styles/game.css','ys-install.js','ys-qr.js',...order]);
+function appendAssetVersion(source){
+  return source.replace(/(\.\/)([a-z0-9./-]+)(?=['"])/g,(match,relative,file)=>
+    versionedAssets.has(file)?relative+file+'?v='+version:match);
+}
 const images=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')).map(f=>'assets/images/'+f):[];
 const files=['index.html','.nojekyll','styles/game.css',...order,...images,...JSON.parse(fs.readFileSync(path.join(root,'scripts/site-extras.json')))];
 // Only this generated directory is replaced; archived releases are retained.
 if(!site.startsWith(root+path.sep)||path.basename(site)!=='site')throw Error('Invalid release output path');
 fs.rmSync(site,{recursive:true,force:true});
 const rows=[];
-for(const file of files){const data=fs.readFileSync(path.join(root,file));const dest=path.join(site,file);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,data);rows.push({file,bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex')})}
+for(const file of files){
+  const source=fs.readFileSync(path.join(root,file));
+  // These two files reference the same runtime URLs, including when offline.
+  const data=['index.html','sw.js'].includes(file)?Buffer.from(appendAssetVersion(source.toString('utf8'))):source;
+  const dest=path.join(site,file);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,data);
+  rows.push({file,bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex')});
+}
 const offline=fs.readFileSync(path.join(root,'dist',`wormfront-stage${version}-offline.html`));
 fs.mkdirSync(path.join(site,'offline'),{recursive:true});fs.writeFileSync(path.join(site,'offline','wormfront.html'),offline);rows.push({file:'offline/wormfront.html',bytes:offline.length,sha256:crypto.createHash('sha256').update(offline).digest('hex')});
 fs.writeFileSync(path.join(root,'release','manifest.json'),JSON.stringify({version,files:rows},null,2));

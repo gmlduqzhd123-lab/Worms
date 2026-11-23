@@ -33,18 +33,29 @@ async function battle(page,name,touch){
 (async()=>{
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'release/manifest.json'),'utf8'));
   const version=fs.readFileSync(path.join(root,'index.html'),'utf8').match(/name="wormfront-version" content="(\d+)"/)[1];
+  const order=JSON.parse(fs.readFileSync(path.join(root,'scripts/source-order.json'),'utf8'));
+  const versionedAssets=['styles/game.css','ys-install.js','ys-qr.js',...order];
   assert.equal(manifest.version,version);
   const actual=fs.readdirSync(site,{recursive:true}).filter(f=>fs.statSync(path.join(site,f)).isFile()).map(f=>f.split(path.sep).join('/')).sort();
   assert.deepEqual(actual,manifest.files.map(f=>f.file).sort(),'Unexpected or missing files in release/site');
   for(const row of manifest.files){
     const data=fs.readFileSync(path.join(site,row.file));assert.equal(data.length,row.bytes,row.file);assert.equal(hash(data),row.sha256,row.file);
     const source=row.file==='offline/wormfront.html'?`dist/wormfront-stage${version}-offline.html`:row.file;
-    assert.equal(hash(data),hash(fs.readFileSync(path.join(root,source))),row.file+' differs from source');
+    const original=fs.readFileSync(path.join(root,source));
+    if(['index.html','sw.js'].includes(row.file)){
+      let unversioned=data.toString('utf8');
+      for(const file of versionedAssets){
+        const versioned='./'+file+'?v='+version;
+        assert.ok(unversioned.includes(versioned),row.file+' is missing the current asset URL for '+file);
+        unversioned=unversioned.replaceAll(versioned,'./'+file);
+      }
+      assert.equal(hash(Buffer.from(unversioned)),hash(original),row.file+' differs beyond versioned asset URLs');
+    }else assert.equal(hash(data),hash(original),row.file+' differs from source');
   }
   pass('Built file set, version, sizes and SHA-256 match manifest and current inputs');
   const offline=fs.readFileSync(path.join(site,'offline/wormfront.html'),'utf8');
   assert.equal(/<script[^>]+src=|<link[^>]+rel="(?:stylesheet|manifest)"/.test(offline),false);
-  for(const source of JSON.parse(fs.readFileSync(path.join(root,'scripts/source-order.json'),'utf8')))assert.ok(offline.includes(fs.readFileSync(path.join(root,source),'utf8')),'Stale offline script: '+source);
+  for(const source of order)assert.ok(offline.includes(fs.readFileSync(path.join(root,source),'utf8')),'Stale offline script: '+source);
   assert.ok(offline.includes(fs.readFileSync(path.join(root,'styles/game.css'),'utf8')),'Stale offline CSS');
   pass('Standalone embeds every current game script and stylesheet');
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
@@ -63,8 +74,10 @@ async function battle(page,name,touch){
       await page.setViewportSize(profile.viewport);await page.locator('#rotateNotice').waitFor({state:'hidden'});pass('Phone orientation notice follows viewport changes');
     }
     await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
-    const cached=await page.evaluate(async()=>{const c=await caches.open('worms-v'+document.querySelector('meta[name="wormfront-version"]').content);return(await c.keys()).filter(r=>r.url.includes('/assets/images/')).length});
-    assert.equal(cached,30);await context.setOffline(true);await page.reload();await page.waitForFunction(()=>artReady);
+    const cached=await page.evaluate(async()=>{const c=await caches.open('worms-v'+document.querySelector('meta[name="wormfront-version"]').content);return (await c.keys()).map(r=>r.url)});
+    assert.equal(cached.filter(url=>url.includes('/assets/images/')).length,30);
+    for(const file of versionedAssets)assert.ok(cached.includes(base+file+'?v='+version),'Missing cached asset: '+file);
+    await context.setOffline(true);await page.reload();await page.waitForFunction(()=>artReady);
     await page.selectOption('#mapTheme','snow');await page.waitForFunction(()=>!document.getElementById('themePreviewImage').hidden);assert.equal(await page.evaluate(()=>artFailures.length),0);
     await battle(page,profile.name+' cached offline',profile.hasTouch);pass(profile.name+': first-visit cache retains all 30 images and unseen theme');
     await context.close();
