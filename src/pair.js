@@ -5,6 +5,8 @@ const pairResume=document.getElementById('pairResume');
 const pairSetup=document.getElementById('pairSetup');
 const pairSkipDialog=document.getElementById('pairSkipDialog');
 const readyAngles=[...document.querySelectorAll('[data-pair-angle]')];
+const readyPredictions=[...document.querySelectorAll('[data-pair-prediction]')];
+const PAIR_PREDICTION_LABELS={before:'언덕 앞',beyond:'언덕 너머',unsure:'잘 모르겠어요'};
 const PAIR_LANDING_LABELS={terrain:'지형 착탄',worm:'봇 명중',water:'수면 도달',bounds:'전장 밖',fuse:'신관 폭발',range:'최대 거리'};
 let recentPair=null,pairStored=true,queuedPairLimit=null;
 
@@ -16,13 +18,14 @@ function validSavedPair(s){
     finite(w.hp,0,100)&&typeof w.alive==='boolean'&&typeof w.onGround==='boolean'&&finite(w.knockTime,0,20);
   const team=t=>t&&list(t.worms,2,worm)&&t.worms.length===2&&
     Object.keys(defaultAmmo).every(id=>Number.isInteger(t.ammo?.[id])&&finite(t.ammo[id],0,99));
-  const shot=o=>o===null||(o&&Object.hasOwn(weaponNames,o.weapon)&&finite(o.angle,-13,90)&&finite(o.power,0,100)&&
+  const prediction=value=>value==null||Object.hasOwn(PAIR_PREDICTION_LABELS,value);
+  const shot=o=>o===null||(o&&Object.hasOwn(weaponNames,o.weapon)&&finite(o.angle,-13,90)&&finite(o.power,0,100)&&prediction(o.prediction)&&
     [null,30,60].includes(o.plannedAngle??null)&&finite(o.wind,-.1,.1)&&
     (o.landing===null||(position(o.landing)&&Object.hasOwn(PAIR_LANDING_LABELS,o.landing.event))));
   return s?.version===1&&typeof s.id==='string'&&s.id.length>0&&s.id.length<=80&&
     [2,4].includes(s.limit)&&Number.isInteger(s.turn)&&finite(s.turn,1,s.limit)&&s.team===(s.turn-1)%2&&
     list(s.activeIdx,2,i=>[0,1].includes(i))&&s.activeIdx.length===2&&
-    [-1,1].includes(s.facing)&&[null,30,60].includes(s.plannedAngle)&&finite(s.wind,-.1,.1)&&
+    [-1,1].includes(s.facing)&&[null,30,60].includes(s.plannedAngle)&&prediction(s.prediction)&&finite(s.wind,-.1,.1)&&
     Object.hasOwn(weaponNames,s.selected)&&finite(s.clock,0,1e12)&&finite(s.startedAt,0,s.clock)&&typeof s.classroom==='boolean'&&
     Number.isInteger(s.width)&&Number.isInteger(s.height)&&finite(s.width,1,20000)&&finite(s.height,1,6000)&&
     s.width*s.height<=26000000&&finite(s.water,0,s.height)&&finite(s.baseWater,0,s.height)&&
@@ -51,7 +54,7 @@ function savePairCheckpoint(){
   try{
     const checkpoint={
       version:1,id:matchId,limit:pairTurnLimit,turn:turnNo,team:activeTeam,activeIdx:[...activeIdx],
-      clock:gameNow,startedAt:matchStartedAt,facing,plannedAngle:pairPlannedAngle,selected,wind,
+      clock:gameNow,startedAt:matchStartedAt,facing,plannedAngle:pairPlannedAngle,prediction:pairPrediction,selected,wind,
       classroom:!!classroomAudioBase,width:WW,height:WH,water:waterY,baseWater,
       field:terrain.toDataURL('image/png'),
       teams:teams.map(t=>({ammo:{...t.ammo},worms:t.worms.map(w=>({
@@ -65,12 +68,10 @@ function savePairCheckpoint(){
     pairStored=writeSaved(PAIR_KEY,checkpoint);
   }catch{}
 }
-function setPairReadyAngle(degrees){
-  if(!pairNeedsReady||paused||gameOver||orientationBlocked)return;
-  pairPlannedAngle=pairPlannedAngle===degrees?null:degrees;
-  aim=-(pairPlannedAngle??45);
+function savePairPreparation(){
   if(recentPair?.id===matchId&&recentPair.turn===turnNo){
     recentPair.plannedAngle=pairPlannedAngle;
+    recentPair.prediction=pairPrediction;
     pairStored=writeSaved(PAIR_KEY,recentPair);
   }
   updateHUD();
@@ -89,7 +90,8 @@ function resumePairTurn(s){
   matchId=s.id;matchStartedAt=s.startedAt;gameNow=s.clock;worldTime=gameNow;
   turnNo=s.turn;activeTeam=s.team;activeIdx=[...s.activeIdx];turnWorm=current();turnLocked=false;
   retreatUntil=0;settledSince=null;shotgunRemain=0;turnStart=gameNow;turnLeft=turnSec;
-  pairNeedsReady=true;pairTurnFired=false;pairPlannedAngle=s.plannedAngle;pairLastShots=s.shots.map(o=>o&&{...o});
+  pairNeedsReady=true;pairTurnFired=false;pairPlannedAngle=s.plannedAngle;pairPrediction=s.prediction??null;
+  pairLastShots=s.shots.map(o=>o&&{...o});
   selected=s.selected;wind=s.wind;aim=-(pairPlannedAngle??45);facing=s.facing;
   if(turnNo===1){initialBattleView=true;fitBattleView()}else focusOn(turnWorm.x,turnWorm.y,true);
   last=performance.now();updateHUD();
@@ -127,17 +129,27 @@ pairSkipDialog.addEventListener('close',()=>{
   closeGameDialog();
   if(pairSkipDialog.returnValue==='skip'&&canEndCurrentTurn())nextTurn(0);
 });
+function pairLandingLabel(landing){
+  if(!landing)return '착탄 기록 없음';
+  const label=PAIR_LANDING_LABELS[landing.event];
+  return landing.event==='bounds'?label:label+' · 왼쪽에서 '+Math.round(clamp(landing.x,0,WW)/10)+'칸';
+}
 function formatPairShot(shot,i){
   const player=(i+1)+'P · ';
   if(!shot)return player+'조준 발사 기록 없음';
   const plan=shot.plannedAngle==null?'준비 각도 선택 없음':shot.plannedAngle+'° 준비';
   const breeze=Math.abs(shot.wind*100).toFixed(1);
   const windLabel=breeze==='0.0'?'없음':(shot.wind<0?'← ':'→ ')+breeze;
-  const landing=shot.landing;
-  const destination=!landing?'도착 기록 없음':PAIR_LANDING_LABELS[landing.event]+
-    (landing.event==='bounds'?'':' · 왼쪽에서 '+Math.round(clamp(landing.x,0,WW)/10)+'칸');
-  return player+plan+' → '+shot.angle+'° 발사 → '+destination+
+  const destination=pairLandingLabel(shot.landing);
+  const prediction=PAIR_PREDICTION_LABELS[shot.prediction];
+  const comparison=prediction?' · 예상 '+prediction+' → 실제 '+destination:' → '+destination;
+  return player+plan+' → '+shot.angle+'° 발사'+comparison+
     ' · '+weaponNames[shot.weapon]+' · 힘 '+shot.power+'% · 바람 '+windLabel;
+}
+function formatPairShotSummary(shot,i){
+  const actual=pairLandingLabel(shot?.landing);
+  const prediction=PAIR_PREDICTION_LABELS[shot?.prediction];
+  return (i+1)+'P · '+(prediction?'예상 '+prediction+' → 실제 '+actual:shot?.landing?shot.angle+'° 발사 · '+actual:actual);
 }
 function renderPairReflection(){
   const map=document.getElementById('pairShotMap'),pen=map.getContext('2d');
@@ -159,9 +171,25 @@ function renderPairReflection(){
     }
     document.getElementById('pairShot'+(i+1)).textContent=formatPairShot(shot,i);
   });
+  const unfired=pairLastShots.flatMap((shot,i)=>shot?[]:[(i+1)+'P']);
+  document.getElementById('pairUnfired').hidden=!unfired.length;
+  document.getElementById('pairUnfiredText').textContent=unfired.join('·')+'의 조준 발사 기록이 없어요. 시간을 재지 않고 한 발 쏴 볼 수 있어요.';
 }
 
-readyAngles.forEach(btn=>btn.addEventListener('click',()=>setPairReadyAngle(Number(btn.dataset.pairAngle))));
+readyAngles.forEach(btn=>btn.addEventListener('click',()=>{
+  if(!pairNeedsReady||paused||gameOver||orientationBlocked)return;
+  const degrees=Number(btn.dataset.pairAngle);
+  pairPlannedAngle=pairPlannedAngle===degrees?null:degrees;
+  aim=-(pairPlannedAngle??45);
+  savePairPreparation();
+}));
+readyPredictions.forEach(btn=>btn.addEventListener('click',()=>{
+  if(!pairNeedsReady||paused||gameOver||orientationBlocked)return;
+  const prediction=btn.dataset.pairPrediction;
+  pairPrediction=pairPrediction===prediction?null:prediction;
+  savePairPreparation();
+}));
+document.getElementById('pairPracticeTry').addEventListener('click',()=>{requestGameFullscreen();startGame({training:true})});
 pairResume.addEventListener('click',resumeSavedPair);
 document.getElementById('pairSetupClose').addEventListener('click',()=>pairSetup.close());
 document.querySelectorAll('[data-pair-turns]').forEach(btn=>btn.addEventListener('click',()=>{

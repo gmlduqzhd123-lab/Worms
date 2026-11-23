@@ -2,6 +2,7 @@
 
 const LESSON_POWER=.35;
 const LESSON_KEY='wormfront.lesson.v1';
+const CLASS_CARD_KEY='wormfront.class-card.v1';
 const lessonIntro=document.getElementById('lessonIntro');
 const practiceResult=document.getElementById('practiceResult');
 const lessonBegin=document.getElementById('lessonBegin');
@@ -9,9 +10,10 @@ const observationInput=document.getElementById('practiceObservation');
 const previousTrack={color:'#e3bbff',dash:[5,6],shape:'diamond'};
 const currentTrack={color:'#72e4ff',dash:[],shape:'circle'};
 let openSharedLesson=false;
-let pairAfterClose=false;
+let pairAfterClose=false,nextGroupAfterCard=false;
 let sharedLessonLink=false,sharedPairLimit=null,recentLesson=null,lessonStored=true;
-let afterLessonIntro=null,shownResult=null,shownPairReport=null;
+let recentClassCard=null,classCardStored=true;
+let afterLessonIntro=null,shownResult=null,shownClassCard=null;
 
 function readingLessonAngle(){
   return !!practice?.lesson&&!practice.previous&&!practice.prediction;
@@ -22,12 +24,44 @@ function validLessonShot(shot,angle){
   return shot?.prediction?.angle===angle&&shot.prediction.powerValue===LESSON_POWER&&shot.prediction.power===35&&
     point(shot.origin)&&point(shot.impact)&&point(shot.prediction.end)&&list(shot.path)&&list(shot.prediction.points);
 }
+function validLessonDraft(saved){
+  const guesses=[...lessonIntro.querySelectorAll('input')].map(choice=>choice.value);
+  return saved?.version===1&&guesses.includes(saved.guess)&&Array.isArray(saved.shots)&&saved.shots.length<=2&&
+    saved.shots.every((shot,i)=>validLessonShot(shot,[30,60][i]))&&typeof saved.observation==='string';
+}
 function readLessonCheckpoint(){
   const saved=readSaved(LESSON_KEY);
-  const guesses=[...lessonIntro.querySelectorAll('input')].map(choice=>choice.value);
-  if(saved?.version!==1||!guesses.includes(saved.guess)||!Array.isArray(saved.shots)||saved.shots.length>2||
-    !saved.shots.every((shot,i)=>validLessonShot(shot,[30,60][i]))||typeof saved.observation!=='string')return null;
+  if(!validLessonDraft(saved))return null;
   return {version:1,guess:saved.guess,shots:saved.shots,observation:saved.observation.slice(0,100)};
+}
+function readClassCard(){
+  const card=readSaved(CLASS_CARD_KEY);
+  const labels=list=>Array.isArray(list)&&list.length===2&&list.every(label=>typeof label==='string'&&label.length<=300);
+  if(card?.version!==1||typeof card.id!=='string'||!/^[a-z0-9-]{1,80}$/i.test(card.id)||
+    !Number.isFinite(Date.parse(card.completedAt))||!validLessonDraft(card.lesson)||card.lesson.shots.length!==2||
+    typeof card.report?.title!=='string'||card.report.title.length>100||
+    !labels(card.report.lines)||!labels(card.report.summary))return null;
+  card.lesson.observation=card.lesson.observation.slice(0,100);
+  return card;
+}
+function persistClassCard(card){
+  recentClassCard=card;
+  classCardStored=writeSaved(CLASS_CARD_KEY,card);
+  updateClassCardAccess();
+}
+function saveClassCard(){
+  if(!recentLesson?.shots[1])return;
+  persistClassCard({
+    version:1,id:matchId,completedAt:new Date().toISOString(),lesson:{...recentLesson},
+    report:{
+      title:'짝 대전 · 마지막 조준 발사 ('+turnNo+'/'+pairTurnLimit+'턴)',
+      lines:pairLastShots.map(formatPairShot),
+      summary:pairLastShots.map(formatPairShotSummary)
+    }
+  });
+}
+function updateClassCardAccess(){
+  document.getElementById('homeClassCard').hidden=!recentClassCard;
 }
 function persistLesson(draft){
   recentLesson=draft;
@@ -63,14 +97,21 @@ function openLessonDraft(draft){
 function showLessonChoice(fresh=false){
   const saved=!fresh&&!!recentLesson;
   const resumePair=!fresh&&!!recentPair;
+  const differentLimit=resumePair&&sharedPairLimit&&sharedPairLimit!==recentPair.limit;
   document.getElementById('lessonSaved').hidden=!saved&&!resumePair;
   document.getElementById('lessonPrediction').hidden=saved||resumePair;
+  document.getElementById('lessonClassCard').hidden=fresh||!recentClassCard;
   document.getElementById('pairSaved').hidden=!resumePair;
+  pairResume.hidden=!resumePair;
   document.getElementById('lessonSavedText').hidden=!saved;
   document.getElementById('lessonResume').hidden=!saved;
+  document.getElementById('lessonRestart').textContent=sharedPairLimit?'새 '+sharedPairLimit+'턴 활동 시작':'새 모둠 시작';
+  if(sharedPairLimit)document.getElementById('lessonPairPreset').textContent=differentLimit
+    ?'이 수업 링크의 새 활동은 '+sharedPairLimit+'턴으로 진행해요.'
+    :'수업 링크 · 탐구를 마치면 '+sharedPairLimit+'턴 짝 대전을 해요.';
   if(resumePair){
     document.getElementById('pairSavedText').textContent='저장된 준비 화면 · '+recentPair.turn+'/'+recentPair.limit+'턴 · '+(recentPair.team+1)+'P 차례';
-    pairResume.textContent=(recentPair.team+1)+'P 준비부터 이어하기';
+    pairResume.textContent=differentLimit?'이전 '+recentPair.limit+'턴 이어하기':(recentPair.team+1)+'P 준비부터 이어하기';
     document.getElementById('pairResumeStatus').textContent='';
   }
   if(saved){
@@ -94,6 +135,7 @@ function maybeOpenSharedLesson(){
 function initLessonSharing(){
   recentLesson=readLessonCheckpoint();
   recentPair=loadPairCheckpoint();
+  recentClassCard=readClassCard();updateClassCardAccess();
   const params=new URL(location.href).searchParams;
   sharedLessonLink=params.get('lesson')==='angle';
   const limit=params.get('turns');
@@ -101,7 +143,6 @@ function initLessonSharing(){
     sharedPairLimit=Number(limit);
     const preset=document.getElementById('lessonPairPreset');
     preset.hidden=false;
-    preset.textContent='수업 링크로 접속했어요. 탐구를 마치면 '+limit+'턴 짝 대전을 해요.';
   }
   openSharedLesson=sharedLessonLink;
   maybeOpenSharedLesson();
@@ -172,10 +213,24 @@ function resultCondition(rows){
 function explainLessonFinding(rows,guess){
   const highest=rows.reduce((a,b)=>a.height>b.height?a:b);
   const difference=Math.abs(rows[0].distance-rows[1].distance);
-  return '내 예상 '+guess+' · 이 조건에서는 '+highest.angle+'°가 더 높았고, 가로로 간 거리는 '+cells(difference)+' 차이였어요.';
+  return '내 예상 '+guess+' · '+highest.angle+'°가 더 높았어요. 가로 거리 차이는 '+cells(difference)+'이에요.';
+}
+function drawWrappedResultText(pen,text,y,step){
+  let line='';
+  for(const char of text){
+    if(line&&pen.measureText(line+char).width>890){
+      const lastSpace=line.lastIndexOf(' ');
+      const end=lastSpace>0?lastSpace:line.length;
+      pen.fillText(line.slice(0,end),30,y);
+      line=line.slice(end).trimStart();y+=step;
+    }
+    line+=char;
+  }
+  if(line)pen.fillText(line,30,y);
+  return y+step;
 }
 function drawResultFigure(surface,rows,note=null,pairReport=null){
-  surface.width=960;surface.height=pairReport?697:note===null?410:555;
+  surface.width=960;surface.height=pairReport?745:note===null?410:555;
   const pen=surface.getContext('2d');
   pen.fillStyle='#0c2639';pen.fillRect(0,0,surface.width,surface.height);
   pen.fillStyle='#fff2c2';pen.font='800 28px system-ui';pen.fillText('조준! 각도왕 · '+(pairReport?'수업 결과 카드':'탄도 비교'),30,41);
@@ -212,25 +267,22 @@ function drawResultFigure(surface,rows,note=null,pairReport=null){
   if(note!==null){
     pen.fillStyle='#fff2c2';pen.font='800 21px system-ui';pen.fillText('내가 발견한 점',30,444);
     pen.fillStyle='#e3edf3';pen.font='500 22px system-ui';
-    let line='',lineY=475;
-    for(const char of note||'________________________________'){
-      if(line&&pen.measureText(line+char).width>890){pen.fillText(line,30,lineY);line='';lineY+=26}
-      line+=char;
-    }
-    if(line)pen.fillText(line,30,lineY);
+    drawWrappedResultText(pen,note||'________________________________',475,26);
   }
   if(pairReport){
     pen.strokeStyle='#6c8799';pen.lineWidth=1;pen.beginPath();pen.moveTo(30,548);pen.lineTo(930,548);pen.stroke();
     pen.fillStyle='#fff2c2';pen.font='800 21px system-ui';pen.fillText(pairReport.title,30,580);
     pen.fillStyle='#e3edf3';pen.font='600 20px system-ui';
-    pairReport.lines.forEach((line,i)=>pen.fillText(line,30,618+i*37,900));
+    let y=618;
+    for(const line of pairReport.lines)y=drawWrappedResultText(pen,line,y,26)+10;
   }
 }
-function showPracticeResult(result=practice,{quickReview=false,pairReport=null}={}){
+function showPracticeResult(result=practice,{quickReview=false,classCard=null}={}){
   if(!result?.complete)return;
-  shownResult=result;shownPairReport=pairReport;
+  shownResult=result;shownClassCard=classCard;
+  const pairReport=classCard?.report;
   document.getElementById('practiceResultTitle').textContent=pairReport?'수업 결과 카드':'탄도 비교 결과';
-  document.getElementById('practiceDownloadStatus').textContent='';
+  document.getElementById('practiceDownloadStatus').textContent=classCard&&!classCardStored?'이 카드가 브라우저에 저장되지 않았어요. PNG로 남길 수 있어요.':'';
   document.getElementById('practiceResultScroll').scrollTop=0;
   const rows=trajectoryRows(result),summary=document.getElementById('trajectoryDetails');
   const condition=document.getElementById('practiceCondition');
@@ -240,10 +292,11 @@ function showPracticeResult(result=practice,{quickReview=false,pairReport=null}=
   summary.textContent=rows.map(row=>row.angle+'° · 최고 높이 '+cells(row.height)+' · 가로 거리 '+cells(row.distance)+
     (row.matched?' · 이 각도의 예상점과 실제 착탄점이 일치했어요.':' · 이 각도의 예상점과 실제 착탄점을 비교해 보세요.')).join(' ');
   const finding=document.getElementById('lessonFinding'),paired=!!result.lesson&&rows.length===2;
-  finding.hidden=!paired||quickReview;
-  if(paired)finding.textContent=explainLessonFinding(rows,result.lesson.guess)+
-    (pairReport?'':' 짝 대전에서는 언덕을 넘기려면 어떤 각도가 좋을지 시험해 보세요.');
+  document.getElementById('lessonQuickSummary').hidden=!paired||quickReview;
+  document.getElementById('lessonQuickShots').hidden=!pairReport;
+  if(paired)finding.textContent=explainLessonFinding(rows,result.lesson.guess);
   document.getElementById('resultPair').hidden=!paired||result!==practice;
+  document.getElementById('cardNextGroup').hidden=!classCard;
   if(paired&&sharedPairLimit)document.getElementById('resultPair').textContent=sharedPairLimit+'턴 짝 대전 시작';
   document.getElementById('practiceObservationGroup').hidden=quickReview;
   document.getElementById('practiceResultFooter').hidden=quickReview;
@@ -251,6 +304,7 @@ function showPracticeResult(result=practice,{quickReview=false,pairReport=null}=
   if(pairReport){
     document.getElementById('practicePairReportTitle').textContent=pairReport.title;
     pairReport.lines.forEach((line,i)=>{document.getElementById('practicePairShot'+(i+1)).textContent=line});
+    pairReport.summary.forEach((line,i)=>{document.getElementById('lessonQuickShot'+(i+1)).textContent=line});
   }
   observationInput.value=result.observation;
   openGameDialog(practiceResult);
@@ -291,46 +345,69 @@ document.getElementById('lessonRevealAngle').addEventListener('click',()=>{
   updateHUD();
 });
 document.getElementById('practiceLarge').addEventListener('click',()=>showPracticeResult());
-function showSavedLessonResult({quickReview=false,pairReport=null}={}){
-  if(!recentLesson?.shots[1])return;
+function showSavedLessonResult({quickReview=false,classCard=null}={}){
+  const draft=classCard?.lesson??recentLesson;
+  if(!draft?.shots[1])return;
   showPracticeResult({
-    ...restoreLessonShot(recentLesson.shots[1]),previous:restoreLessonShot(recentLesson.shots[0]),
-    lesson:{guess:recentLesson.guess},observation:recentLesson.observation,complete:true
-  },{quickReview,pairReport});
+    ...restoreLessonShot(draft.shots[1]),previous:restoreLessonShot(draft.shots[0]),
+    lesson:{guess:draft.guess},observation:draft.observation,complete:true
+  },{quickReview,classCard});
 }
-document.getElementById('pairLessonReview').addEventListener('click',()=>showSavedLessonResult({
-  pairReport:{
-    title:'짝 대전 · 마지막 조준 발사 ('+turnNo+'/'+pairTurnLimit+'턴)',
-    lines:pairLastShots.map(formatPairShot)
-  }
-}));
+function openClassCard(){if(recentClassCard)showSavedLessonResult({classCard:recentClassCard})}
+document.getElementById('pairLessonReview').addEventListener('click',openClassCard);
+document.getElementById('homeClassCard').addEventListener('click',openClassCard);
+document.getElementById('lessonClassCard').addEventListener('click',()=>{
+  afterLessonIntro=openClassCard;
+  lessonIntro.close();
+});
 document.getElementById('pairReadyStudy').addEventListener('click',()=>{if(pairNeedsReady)showSavedLessonResult({quickReview:true})});
 document.getElementById('pairNextGroup').addEventListener('click',()=>openLessonIntro(true));
 document.getElementById('practicePair').addEventListener('click',startPairBattle);
 document.getElementById('resultPair').addEventListener('click',startPairBattle);
 document.getElementById('practiceResultClose').addEventListener('click',()=>practiceResult.close());
+document.getElementById('cardNextGroup').addEventListener('click',()=>{
+  nextGroupAfterCard=true;
+  practiceResult.close();
+});
 practiceResult.addEventListener('close',()=>{
-  shownResult=null;shownPairReport=null;
+  shownResult=null;shownClassCard=null;
   closeGameDialog();
   if(pairAfterClose){pairAfterClose=false;startPairBattle()}
+  if(nextGroupAfterCard){nextGroupAfterCard=false;openLessonIntro(true)}
 });
 observationInput.addEventListener('input',()=>{
   if(!shownResult)return;
   shownResult.observation=observationInput.value;
-  if(shownResult===practice)saveLessonCheckpoint();
+  if(shownClassCard){
+    shownClassCard.lesson.observation=shownResult.observation;
+    persistClassCard(shownClassCard);
+  }else if(shownResult===practice)saveLessonCheckpoint();
   else if(recentLesson)persistLesson({...recentLesson,observation:shownResult.observation});
 });
-document.getElementById('practiceDownload').addEventListener('click',()=>{
-  if(!shownResult?.complete)return;
-  const status=document.getElementById('practiceDownloadStatus');
+function classCardFilename(card){
+  const time=new Date(card.completedAt);
+  const stamp=new Date(time.getTime()-time.getTimezoneOffset()*60000).toISOString().slice(0,19).replace('T','_').replaceAll(':','');
+  return '조준-각도왕-수업-결과_'+stamp+'_'+card.id.slice(0,6)+'.png';
+}
+function downloadLessonFigure(rows,observation,classCard,status){
   try{
     const image=document.createElement('canvas'),link=document.createElement('a');
-    drawResultFigure(image,trajectoryRows(shownResult),shownResult.observation.trim(),shownPairReport);
-    link.download=shownPairReport?'조준-각도왕-수업-결과.png':'조준-각도왕-탄도-결과.png';
+    drawResultFigure(image,rows,observation.trim(),classCard?.report);
+    link.download=classCard?classCardFilename(classCard):'조준-각도왕-탄도-결과.png';
     link.href=image.toDataURL('image/png');
     document.body.append(link);link.click();link.remove();
     status.textContent='PNG 내려받기를 시작했어요.';
   }catch{
     status.textContent='PNG를 만들지 못했어요. 다시 눌러 주세요.';
   }
+}
+document.getElementById('practiceDownload').addEventListener('click',()=>{
+  if(!shownResult?.complete)return;
+  downloadLessonFigure(trajectoryRows(shownResult),shownResult.observation,shownClassCard,document.getElementById('practiceDownloadStatus'));
+});
+document.getElementById('pairDownload').addEventListener('click',()=>{
+  if(recentClassCard?.id!==matchId)return;
+  const draft=recentClassCard.lesson;
+  const previous=restoreLessonShot(draft.shots[0]),lastShot=restoreLessonShot(draft.shots[1]);
+  downloadLessonFigure(trajectoryRows({...lastShot,previous}),draft.observation,recentClassCard,document.getElementById('pairDownloadStatus'));
 });

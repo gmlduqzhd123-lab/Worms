@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="36">
+<meta name="wormfront-version" content="37">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -69,16 +69,19 @@
   <div id="powerBox"><div id="power"></div></div>
   <section id="wormIntro" hidden aria-label="각도봇 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">바로 전투</button></section>
   <section id="pairReadyPanel" hidden aria-labelledby="pairReadyTitle">
-    <div class="pairReadyCopy"><h2 id="pairReadyTitle"></h2><p>한 사람씩 한 발 쏴 봐요. 고른 각도로 쏘면 언덕 앞에 떨어질까요, 언덕을 넘길까요?</p></div>
+    <div class="pairReadyCopy"><h2 id="pairReadyTitle"></h2><p>한 사람씩 한 발 쏴 봐요.</p></div>
     <div class="pairReadyControls">
       <div role="group" aria-label="시작 조준 각도"><button type="button" class="toolBtn" data-pair-angle="30" aria-pressed="false">30°로 도전</button><button type="button" class="toolBtn" data-pair-angle="60" aria-pressed="false">60°로 도전</button></div>
       <button type="button" class="toolBtn" id="pairReadyStudy">탐구 결과 보기</button>
+    </div>
+    <div class="pairReadyControls">
+      <div id="pairPredictionChoices" role="group" aria-label="착탄 예상 (선택)"><span aria-hidden="true">착탄 예상 (선택)</span><button type="button" class="toolBtn" data-pair-prediction="before" aria-pressed="false">언덕 앞</button><button type="button" class="toolBtn" data-pair-prediction="beyond" aria-pressed="false">언덕 너머</button><button type="button" class="toolBtn" data-pair-prediction="unsure" aria-pressed="false">잘 모르겠어요</button></div>
       <button type="button" class="btn primary" id="pairReadyAction">준비</button>
     </div>
-    <p id="pairReadyStatus" role="status"></p>
-    <p id="pairReadySave" role="status"></p>
+    <div class="pairReadyNotes"><p id="pairReadyStatus" role="status"></p><p id="pairReadySave" role="status"></p></div>
   </section>
   <p id="pairSaveProgress" role="status" hidden></p>
+  <p id="pairShotReminder" role="status" hidden>아직 발사하지 않았어요. 이번 차례에 한 발 쏴 봐요.</p>
   <section id="practicePanel" aria-labelledby="practiceTitle" hidden>
     <h2 id="practiceTitle">한 발 연습</h2><p id="practiceStep" role="status"></p>
     <div id="lessonReadAngle" hidden><button type="button" class="toolBtn" id="lessonRevealAngle">각도 확인</button><span id="lessonAngleAnswer" role="status"></span></div>
@@ -129,7 +132,7 @@
       <div class="homeCrew" aria-hidden="true"><img src="./assets/images/bot-scout.png"><img src="./assets/images/bot-relay.png"><img src="./assets/images/bot-nova.png"></div><div class="brandLine">각도 학습 · 턴제 전략 게임</div>
       <h1>조준! 각도왕</h1>
       <p>게임 모드와 맵만 고르면 준비 완료! 팀 이름과 캐릭터는 추가 설정에서 바꿀 수 있어요.</p>
-      <div class="homeExtras"><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button><button class="btn ghost" id="homeCredits">제작 정보</button></div>
+      <div class="homeExtras"><button class="btn ghost" id="homeClassCard" hidden>최근 수업 결과 다시 열기</button><button class="btn ghost" id="homeGuide">처음이라면 플레이 가이드</button><button class="btn ghost" id="homeHistory">대전 기록</button><button class="btn ghost" id="homeCredits">제작 정보</button></div>
       <p id="storageStatus" class="storageNote" aria-live="polite">설정과 완료한 대전은 이 브라우저에만 저장됩니다.</p>
       <div class="grid coreSettings" aria-label="기본 게임 설정">
         <div><label>게임 모드<select id="mode"><option value="cpu" selected>플레이어 vs PC</option><option value="pvp">2인 로컬 대전</option></select></label></div>
@@ -160,10 +163,14 @@
     </div>
     <section id="resultPanel" aria-labelledby="resultTitle" hidden>
       <h2 id="resultTitle" tabindex="-1"></h2><p id="matchSummary" hidden></p><p id="pairResult" hidden></p>
+      <div class="dialogActions" id="pairResultActions" hidden><button type="button" class="btn ghost" id="pairLessonReview">수업 결과 카드</button><button type="button" class="btn primary" id="pairDownload">PNG 저장</button><button type="button" class="btn ghost" id="pairNextGroup">다음 모둠 시작</button></div>
+      <p id="pairDownloadStatus" role="status"></p>
       <div id="pairReflection" hidden><h3>마지막 조준 발사</h3><ul><li id="pairShot1"></li><li id="pairShot2"></li></ul>
       <canvas id="pairShotMap" width="520" height="110" role="img" aria-label="마지막 조준 발사의 실제 도착 위치 지도" hidden></canvas>
-      <p>어디에 떨어질 거라고 생각했나요? 실제로는 어디에 떨어졌나요?</p></div>
-      <div class="dialogActions"><button type="button" class="btn ghost" id="resultHome">시작 화면</button><button type="button" class="btn ghost" id="pairLessonReview" hidden>수업 결과 카드</button><button type="button" class="btn primary" id="rematch">같은 설정으로 다시 대전</button><button type="button" class="btn primary" id="pairNextGroup" hidden>다음 모둠 시작</button></div>
+      <p>어디에 떨어질 거라고 생각했나요? 실제로는 어디에 떨어졌나요?</p>
+      <div id="pairUnfired" hidden><p id="pairUnfiredText"></p><button type="button" class="btn ghost" id="pairPracticeTry">한 발 연습하기</button></div>
+      </div>
+      <div class="dialogActions"><button type="button" class="btn ghost" id="resultHome">시작 화면</button><button type="button" class="btn primary" id="rematch">같은 설정으로 다시 대전</button></div>
     </section>
   </div>
 </div>
@@ -176,10 +183,12 @@
   <p id="lessonPairPreset" hidden></p>
   <section id="lessonSaved" hidden>
     <p class="lessonSavedLabel">이 기기에 저장된 활동</p>
-    <div id="pairSaved" hidden><p id="pairSavedText"></p><button type="button" class="btn primary" id="pairResume">짝 대전 이어하기</button><p id="pairResumeStatus" role="status"></p></div>
+    <div id="pairSaved" hidden><p id="pairSavedText"></p><p id="pairResumeStatus" role="status"></p></div>
+    <div class="dialogActions lessonSavedActions"><button type="button" class="btn ghost" id="pairResume" hidden>짝 대전 이어하기</button><button type="button" class="btn primary" id="lessonRestart">새 모둠 시작</button></div>
     <p id="lessonSavedText"></p>
-    <div class="dialogActions"><button type="button" class="btn ghost" id="lessonRestart">새 모둠 시작</button><button type="button" class="btn primary" id="lessonResume">이어하기</button></div>
+    <button type="button" class="btn ghost" id="lessonResume">이어하기</button>
   </section>
+  <button type="button" class="btn ghost" id="lessonClassCard" hidden>최근 수업 결과 다시 열기</button>
   <div id="lessonPrediction">
   <p>바람이 없는 평지에서 발사력을 35%로 맞춰 30°와 60°로 한 번씩 쏩니다.</p>
   <fieldset><legend>어느 각도로 쏘면 더 높이 올라갈까요?</legend><div class="lessonChoices">
@@ -211,19 +220,22 @@
   <div class="dialogHead"><h2 id="practiceResultTitle">탄도 비교 결과</h2><button type="button" class="btn ghost" id="practiceResultClose">닫기</button></div>
   <div id="practiceResultScroll">
     <p id="practiceCondition" hidden></p>
-    <canvas id="trajectoryFigure" width="960" height="410" role="img" aria-describedby="trajectoryDetails"></canvas>
-    <p id="trajectoryDetails"></p><p id="lessonFinding" hidden></p>
+    <section id="lessonQuickSummary" aria-label="핵심 결과" hidden>
+      <p id="lessonFinding"></p><ul id="lessonQuickShots" hidden><li id="lessonQuickShot1"></li><li id="lessonQuickShot2"></li></ul>
+    </section>
     <div id="practiceObservationGroup">
       <label for="practiceObservation">내가 발견한 점 한 줄 <span>(선택)</span></label>
       <input id="practiceObservation" type="text" maxlength="100" autocomplete="off" placeholder="예: 60°로 쐈을 때 더 높이 올라갔어요.">
     </div>
+    <canvas id="trajectoryFigure" width="960" height="410" role="img" aria-describedby="trajectoryDetails"></canvas>
+    <p id="trajectoryDetails"></p>
     <section id="practicePairReport" aria-labelledby="practicePairReportTitle" hidden>
       <h3 id="practicePairReportTitle"></h3>
       <ul><li id="practicePairShot1"></li><li id="practicePairShot2"></li></ul>
     </section>
   </div>
   <div id="practiceResultFooter">
-    <div class="dialogActions"><button type="button" class="btn ghost" id="practiceDownload">PNG 저장</button><button type="button" class="btn primary" id="resultPair" hidden>짝 대전 시작</button></div>
+    <div class="dialogActions"><button type="button" class="btn ghost" id="practiceDownload">PNG 저장</button><button type="button" class="btn primary" id="cardNextGroup" hidden>다음 모둠 시작</button><button type="button" class="btn primary" id="resultPair" hidden>짝 대전 시작</button></div>
     <p id="practiceDownloadStatus" role="status"></p>
   </div>
 </dialog>

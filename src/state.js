@@ -18,7 +18,7 @@ let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
 let pauseIntent=false,orientationBlocked=false,wormIntro=null,initialBattleView=false;
 let practice=null,firstChargeStarted=false;
 let pairedLessonBattle=false,pairNeedsReady=false,pairLastShots=[null,null];
-let pairTurnLimit=4,pairPlannedAngle=null,pairTurnFired=false;
+let pairTurnLimit=4,pairPlannedAngle=null,pairPrediction=null,pairTurnFired=false;
 let activeTeam=0,activeIdx=[0,0],turnSec=45,turnLeft=45,turnStart=0,turnLocked=false,turnNo=0,sdAt=20,sudden=false;
 let selected='bazooka',aim=-45,facing=1,wind=0,retreatUntil=0,chargeAt=0,charging=false,lastJumpTap=0;
 let targetMode=null,targetPoint=null,shotgunRemain=0,rope=null,jetpack=false,jetFuel=0;

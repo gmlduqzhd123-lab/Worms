@@ -60,13 +60,13 @@ function startGame({training=false,previous=null,lockedPower=null,startingAngle=
   const fieldHeight=training?(previous?.fieldHeight??(lesson?820:Math.max(820,Math.round(VH*1.18)))):null;
   practice=training?{fieldHeight,previous,lesson,observation:'',showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
   pairedLessonBattle=pairPractice;
-  pairTurnLimit=pairTurns===2?2:4;pairPlannedAngle=null;pairNeedsReady=false;pairTurnFired=false;pairLastShots=[null,null];
+  pairTurnLimit=pairTurns===2?2:4;pairPlannedAngle=null;pairPrediction=null;pairNeedsReady=false;pairTurnFired=false;pairLastShots=[null,null];
   applyClassroomAudio(!!lesson?.shared||(pairPractice&&(!!classroomAudioBase||!!restoredPair?.checkpoint.classroom)));
   setHUDText(document.getElementById('practiceTitle'),lesson?'각도 탐구':'한 발 연습');
   document.getElementById('pairResult').hidden=true;
   document.getElementById('pairReflection').hidden=true;
-  document.getElementById('pairLessonReview').hidden=true;
-  document.getElementById('pairNextGroup').hidden=true;
+  document.getElementById('pairResultActions').hidden=true;
+  document.getElementById('pairDownloadStatus').textContent='';
   firstChargeStarted=false;
   document.getElementById('ui').classList.toggle('practicing',training);
   document.getElementById('ui').classList.toggle('pairedBattle',pairPractice);
@@ -131,7 +131,7 @@ function completeWormIntro(){
 
 function beginTurn(){
   if(gameOver)return;if(!practice&&(!living(0).length||!living(1).length)){finishGame();return}
-  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;pairPlannedAngle=null;pairTurnFired=false;
+  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;pairPlannedAngle=null;pairPrediction=null;pairTurnFired=false;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;
   if(!practice){if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate()}
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
@@ -153,7 +153,7 @@ function startPairedTurn(){
 function recordPairShot(weapon,angle,power){
   if(!pairedLessonBattle)return null;
   pairTurnFired=true;
-  return pairLastShots[activeTeam]={weapon,plannedAngle:pairPlannedAngle,angle:Math.round(-angle),power:Math.round(power*100),wind,landing:null};
+  return pairLastShots[activeTeam]={weapon,plannedAngle:pairPlannedAngle,prediction:pairPrediction,angle:Math.round(-angle),power:Math.round(power*100),wind,landing:null};
 }
 
 function returnToStart(){
@@ -196,7 +196,8 @@ function finishGame(){
   if(gameOver)return;
   cpuWalk=null;cpuStatus='';gameOver=true;turnLocked=true;clearInput();combatTasks=[];pendingEmissions=0;cancelCombat(aiTimer);
   const winner=matchWinner(),msg=winner===null?'무승부!':teams[winner].name+' 승리!';
-  recordMatchResult();if(pairedLessonBattle)clearPairCheckpoint(matchId);
+  if(pairedLessonBattle){saveClassCard();clearPairCheckpoint(matchId)}
+  recordMatchResult();
   stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
   const finishedMatch=matchId;
   setTimeout(()=>{
@@ -209,9 +210,14 @@ function finishGame(){
       pairResult.textContent='짝 대전 · 남은 체력으로 결과를 정했어요.';
       document.getElementById('pairReflection').hidden=false;
       renderPairReflection();
-      document.getElementById('pairLessonReview').hidden=!recentLesson?.shots[1];
-      document.getElementById('pairNextGroup').hidden=false;
+      const cardAvailable=recentClassCard?.id===matchId;
+      document.getElementById('pairResultActions').hidden=false;
+      document.getElementById('pairLessonReview').hidden=!cardAvailable;
+      document.getElementById('pairDownload').hidden=!cardAvailable;
+      if(cardAvailable&&!classCardStored)document.getElementById('pairDownloadStatus').textContent='브라우저에 저장되지 않았어요. PNG로 남길 수 있어요.';
     }
+    document.getElementById('rematch').classList.toggle('primary',!pairedLessonBattle);
+    document.getElementById('rematch').classList.toggle('ghost',pairedLessonBattle);
     document.getElementById('panel').hidden=true;
     panel.hidden=false;
     ui.overlay.style.display='flex';
