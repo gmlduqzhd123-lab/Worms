@@ -252,6 +252,28 @@ function duckMusic(){
   musicGain.gain.cancelScheduledValues(now);musicGain.gain.setTargetAtTime(musicVolume*.45,now,.025);
   musicGain.gain.setTargetAtTime(musicVolume,now+.45,.22);
 }
+let classroomAudioBase=null;
+function audioSettings(){return {music:musicEnabled,sfx:sfxEnabled,musicVolume,sfxVolume}}
+function applyClassroomAudio(active){
+  if(active===!!classroomAudioBase)return;
+  if(active){
+    classroomAudioBase=audioSettings();
+    musicEnabled=false;
+    sfxVolume=Math.min(sfxVolume,.25);
+  }else{
+    const {music,sfx,musicVolume:musicLevel,sfxVolume:sfxLevel}=classroomAudioBase;
+    classroomAudioBase=null;
+    musicEnabled=music;sfxEnabled=sfx;musicVolume=musicLevel;sfxVolume=sfxLevel;
+  }
+  if(!musicEnabled)stopMusic();
+  if(audio&&musicGain&&sfxGain){
+    musicGain.gain.cancelScheduledValues(audio.currentTime);
+    sfxGain.gain.cancelScheduledValues(audio.currentTime);
+    musicGain.gain.setTargetAtTime(musicVolume,audio.currentTime,.03);
+    sfxGain.gain.setTargetAtTime(sfxEnabled?sfxVolume:0,audio.currentTime,.03);
+  }
+  updateAudioButtons();
+}
 function setMusic(on){musicEnabled=on;if(on)ensureAudio();else stopMusic();updateAudioButtons();saveSettings()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopMusic();stopSFX()}else if(musicEnabled&&audio)startMusic()});
 function setSfx(on){sfxEnabled=on;if(!on)stopSFX();if(sfxGain&&audio)sfxGain.gain.setTargetAtTime(on?sfxVolume:0,audio.currentTime,.03);updateAudioButtons();saveSettings()}

@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="33">
+<meta name="wormfront-version" content="34">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -68,8 +68,13 @@
   <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="쌍날개팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="쌍날개팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
   <div id="powerBox"><div id="power"></div></div>
   <section id="wormIntro" hidden aria-label="각도봇 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">바로 전투</button></section>
+  <section id="pairReadyPanel" hidden aria-labelledby="pairReadyTitle">
+    <div><h2 id="pairReadyTitle"></h2><p>기기를 넘긴 뒤 준비를 눌러요. 발사 버튼을 길게 눌러 힘을 조절하고, 놓으면 쏩니다.</p></div>
+    <button type="button" class="btn primary" id="pairReadyAction">준비</button>
+  </section>
   <section id="practicePanel" aria-labelledby="practiceTitle" hidden>
     <h2 id="practiceTitle">한 발 연습</h2><p id="practiceStep" role="status"></p>
+    <div id="lessonReadAngle" hidden><button type="button" class="toolBtn" id="lessonRevealAngle">각도 확인</button><span id="lessonAngleAnswer" role="status"></span></div>
     <div id="practicePreviousRow" hidden><p id="practicePreviousInfo" hidden></p><button type="button" class="toolBtn" id="practicePrevious" aria-pressed="false">이전 탄도</button></div>
     <div id="practiceActions" hidden><button type="button" class="btn ghost" id="practiceHome">시작 화면</button><button type="button" class="btn ghost" id="practiceRetry">한 발 더</button><button type="button" class="btn ghost" id="practiceLarge">결과 크게 보기</button><button type="button" class="btn primary" id="practiceCompare">같은 힘으로 60° 쏘기</button><button type="button" class="btn primary" id="practicePair" hidden>짝 대전 시작</button></div>
   </section>
@@ -148,7 +153,8 @@
     </div>
     <section id="resultPanel" aria-labelledby="resultTitle" hidden>
       <h2 id="resultTitle"></h2><p id="matchSummary" hidden></p><p id="pairResult" hidden></p>
-      <div class="dialogActions"><button type="button" class="btn ghost" id="resultHome">시작 화면</button><button type="button" class="btn primary" id="rematch">같은 설정으로 다시 대전</button></div>
+      <div id="pairReflection" hidden><h3>마지막 조준 발사</h3><ul><li id="pairShot1"></li><li id="pairShot2"></li></ul><p>언덕을 넘기려고 각도와 힘 중 무엇을 바꿨나요?</p></div>
+      <div class="dialogActions"><button type="button" class="btn ghost" id="resultHome">시작 화면</button><button type="button" class="btn ghost" id="pairLessonReview" hidden>탐구 결과 다시 보기</button><button type="button" class="btn primary" id="rematch">같은 설정으로 다시 대전</button></div>
     </section>
   </div>
 </div>
@@ -158,6 +164,11 @@
 <dialog id="weaponDialog" class="gameDialog" aria-labelledby="weaponDialogTitle"><div class="dialogHead"><h2 id="weaponDialogTitle">전체 무기</h2><button type="button" class="btn ghost" id="weaponDialogClose">닫기</button></div><div id="weaponGroups"></div></dialog>
 <dialog id="lessonIntro" class="gameDialog" aria-labelledby="lessonIntroTitle">
   <div class="dialogHead"><h2 id="lessonIntroTitle">각도 탐구</h2><button type="button" class="btn ghost" id="lessonClose">닫기</button></div>
+  <section id="lessonSaved" hidden>
+    <p id="lessonSavedText"></p>
+    <div class="dialogActions"><button type="button" class="btn ghost" id="lessonRestart">새 활동 시작</button><button type="button" class="btn primary" id="lessonResume">이어하기</button></div>
+  </section>
+  <div id="lessonPrediction">
   <p>바람이 없는 평지에서 발사력을 35%로 맞춰 30°와 60°로 한 번씩 쏩니다.</p>
   <fieldset><legend>어느 각도로 쏘면 더 높이 올라갈까요?</legend><div class="lessonChoices">
     <label><input type="radio" name="lessonGuess" value="30°"> 30°</label>
@@ -165,15 +176,21 @@
     <label><input type="radio" name="lessonGuess" value="같은 높이"> 같은 높이</label>
     <label><input type="radio" name="lessonGuess" value="아직 모르겠어요"> 아직 모르겠어요</label>
   </div></fieldset>
-  <div class="dialogActions"><button type="button" class="btn primary" id="lessonBegin" disabled>30° 발사 준비</button></div>
+  <div class="dialogActions"><button type="button" class="btn primary" id="lessonBegin" disabled>첫 발 준비</button></div>
+  </div>
 </dialog>
 <dialog id="practiceResult" class="gameDialog" aria-labelledby="practiceResultTitle">
   <div class="dialogHead"><h2 id="practiceResultTitle">탄도 비교 결과</h2><button type="button" class="btn ghost" id="practiceResultClose">닫기</button></div>
-  <canvas id="trajectoryFigure" width="960" height="410" role="img" aria-describedby="trajectoryDetails"></canvas>
-  <p id="trajectoryDetails"></p><p id="lessonFinding" hidden></p>
-  <label for="practiceObservation">내가 발견한 점 한 줄 <span>(선택)</span></label>
-  <input id="practiceObservation" type="text" maxlength="100" autocomplete="off" placeholder="예: 60°로 쐈을 때 더 높이 올라갔어요.">
-  <div class="dialogActions"><button type="button" class="btn ghost" id="practiceDownload">결과 카드 저장 (PNG)</button><button type="button" class="btn primary" id="resultPair" hidden>짝 대전 시작</button></div>
+  <div id="practiceResultScroll">
+    <canvas id="trajectoryFigure" width="960" height="410" role="img" aria-describedby="trajectoryDetails"></canvas>
+    <p id="trajectoryDetails"></p><p id="lessonFinding" hidden></p>
+    <label for="practiceObservation">내가 발견한 점 한 줄 <span>(선택)</span></label>
+    <input id="practiceObservation" type="text" maxlength="100" autocomplete="off" placeholder="예: 60°로 쐈을 때 더 높이 올라갔어요.">
+  </div>
+  <div id="practiceResultFooter">
+    <div class="dialogActions"><button type="button" class="btn ghost" id="practiceDownload">PNG 저장</button><button type="button" class="btn primary" id="resultPair" hidden>짝 대전 시작</button></div>
+    <p id="practiceDownloadStatus" role="status"></p>
+  </div>
 </dialog>
 
 <script defer src="./src/state.js"></script>
@@ -199,6 +216,6 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
 }
 </script>
 <dialog id="creditsDialog" class="gameDialog" aria-labelledby="creditsTitle"><div class="dialogHead"><h2 id="creditsTitle">조준! 각도왕 제작 정보</h2><button class="btn ghost" id="creditsClose">닫기</button></div><p>기획·개발: 엽쌤</p><p>각도봇·도구 이미지: 이 프로젝트를 위해 AI로 제작하고 편집했습니다.</p><p>배경음악: Bouncy Tactical Groove · Suno 유료 요금제로 제작·다운로드한 사용자 제공 곡</p><p>효과음: 직접 합성한 기계음·알림·충돌음</p><p>각도는 수평선을 0°로 읽습니다. 30°·45°·60°·90°를 선택하거나 ±1°로 세밀하게 조준해 보세요. Shift+↑/↓도 1°씩 바꿉니다.</p></dialog>
-<dialog id="quitDialog" class="gameDialog" aria-labelledby="quitTitle"><h2 id="quitTitle">게임을 종료할까요?</h2><p>현재 대전을 끝내고 시작 화면으로 돌아갑니다. 진행 중인 대전은 저장되지 않으며 기존 설정과 완료한 대전 기록은 유지됩니다.</p><div class="dialogActions"><button type="button" class="btn ghost" id="quitCancel">계속 플레이</button><button type="button" class="btn primary" id="quitConfirm">게임 종료</button></div></dialog>
+<dialog id="quitDialog" class="gameDialog" aria-labelledby="quitTitle"><h2 id="quitTitle">게임을 종료할까요?</h2><p id="quitDetails">현재 대전을 끝내고 시작 화면으로 돌아갑니다. 진행 중인 대전은 저장되지 않으며 기존 설정과 완료한 대전 기록은 유지됩니다.</p><div class="dialogActions"><button type="button" class="btn ghost" id="quitCancel">계속 플레이</button><button type="button" class="btn primary" id="quitConfirm">게임 종료</button></div></dialog>
 </body>
 </html>

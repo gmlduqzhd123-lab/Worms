@@ -41,7 +41,7 @@ function playerTurnLabel(){
   return mode==='pvp'?(activeTeam+1)+'P 차례':isCPU()?'PC 차례':'내 차례';
 }
 function canPlayerAct(){
-  return started&&!paused&&!gameOver&&!wormIntro&&!orientationBlocked&&!turnEnding&&!isCPU()&&!!current()?.alive;
+  return started&&!paused&&!gameOver&&!wormIntro&&!pairNeedsReady&&!orientationBlocked&&!turnEnding&&!isCPU()&&!!current()?.alive;
 }
 function canMoveCurrent(){
   if(practice||!canPlayerAct()||walkers.length)return false;
@@ -55,8 +55,12 @@ function startGame({training=false,previous=null,lockedPower=null,startingAngle=
   const fieldHeight=training?(previous?.fieldHeight??(lesson?820:Math.max(820,Math.round(VH*1.18)))):null;
   practice=training?{fieldHeight,previous,lesson,observation:'',showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
   pairedLessonBattle=pairPractice;
+  pairNeedsReady=false;pairLastShots=[null,null];
+  applyClassroomAudio(!!lesson?.shared||(pairPractice&&!!classroomAudioBase));
   setHUDText(document.getElementById('practiceTitle'),lesson?'각도 탐구':'한 발 연습');
   document.getElementById('pairResult').hidden=true;
+  document.getElementById('pairReflection').hidden=true;
+  document.getElementById('pairLessonReview').hidden=true;
   firstChargeStarted=false;
   document.getElementById('ui').classList.toggle('practicing',training);
   document.getElementById('ui').classList.remove('comparing');
@@ -90,10 +94,7 @@ function startGame({training=false,previous=null,lockedPower=null,startingAngle=
     beginTurn();
     if(startingAngle!==null){aim=-startingAngle;updateHUD()}
     canvas.focus();last=performance.now()
-  }else if(pairPractice){
-    last=performance.now();beginTurn();
-    toast('짝 대전 · 두 턴씩 번갈아 플레이 · 턴당 35초',2000);
-  }else beginWormIntro();
+  }else if(pairPractice){last=performance.now();beginTurn()}else beginWormIntro();
   syncMobileOrientation();
 }
 
@@ -117,25 +118,38 @@ function completeWormIntro(){
 
 function beginTurn(){
   if(gameOver)return;if(!practice&&(!living(0).length||!living(1).length)){finishGame();return}
-  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;
+  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;
   if(!practice){if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate()}
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=practice?0:rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
-  const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${mode==='pvp'?playerTurnLabel():teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
+  const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${mode==='pvp'?playerTurnLabel():teams[activeTeam].name} · ${w.name}`,1200);if(!pairNeedsReady)playSFX('turn');updateHUD();
   initialBattleView=!practice&&turnNo===1;if(initialBattleView)fitBattleView();
+  if(pairNeedsReady)document.getElementById('pairReadyAction').focus();
   if(isCPU())scheduleAI()
+}
+function startPairedTurn(){
+  if(!pairNeedsReady||paused||orientationBlocked||gameOver)return;
+  pairNeedsReady=false;
+  clearInput();
+  turnStart=gameNow;physicsAccumulator=0;last=performance.now();
+  updateHUD();canvas.focus();
+  playSFX('turn');
+}
+function recordPairShot(weapon,angle,power){
+  if(pairedLessonBattle)pairLastShots[activeTeam]={weapon,angle:Math.round(-angle),power:Math.round(power*100)};
 }
 
 function returnToStart(){
   practice=null;
   pairedLessonBattle=false;
+  pairNeedsReady=false;
   document.getElementById('ui').classList.remove('practicing','comparing');
   document.getElementById('practicePanel').hidden=true;
   document.getElementById('resultPanel').hidden=true;
   document.getElementById('panel').hidden=false;
   previewFit=false;shotPreviewCache=null;
-  clearInput();stopSFX();stopMusic();combatTasks=[];pendingEmissions=0;aiBusy=false;aiTimer=null;cpuWalk=null;cpuStatus='';
+  clearInput();stopSFX();stopMusic();applyClassroomAudio(false);combatTasks=[];pendingEmissions=0;aiBusy=false;aiTimer=null;cpuWalk=null;cpuStatus='';
   started=false;gameOver=true;paused=false;pauseIntent=false;wormIntro=null;initialBattleView=false;turnLocked=true;turnEnding=false;attackCommitted=false;physicsAccumulator=0;
   projectiles=[];walkers=[];particles=[];explosions=[];damageLabels=[];injuredWorms=[];shotFocus=null;injuryZoom=null;rope=null;jetpack=false;deploymentRetreatUntil=0;retreatUntil=0;matchId='';matchRecorded=false;finishTarget();
   document.getElementById('wormIntro').hidden=true;document.getElementById('ui').classList.remove('introducing','aiming');document.getElementById('battleOptions').open=!isMobileDevice();
@@ -145,7 +159,7 @@ function returnToStart(){
   document.getElementById('start').focus();
 }
 function nextTurn(delay=900){
-  if(turnEnding||gameOver||wormIntro||practice)return;
+  if(turnEnding||gameOver||wormIntro||practice||pairNeedsReady)return;
   if(combatUnsettled()||presentationPending()){commitAttack(0);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
@@ -173,7 +187,15 @@ function finishGame(){
     document.getElementById('resultTitle').textContent=msg;
     const pairResult=document.getElementById('pairResult');
     pairResult.hidden=!pairedLessonBattle;
-    if(pairedLessonBattle)pairResult.textContent='짝 대전 · 남은 체력으로 결과를 정했어요.';
+    if(pairedLessonBattle){
+      pairResult.textContent='짝 대전 · 남은 체력으로 결과를 정했어요.';
+      document.getElementById('pairReflection').hidden=false;
+      for(let i=0;i<pairLastShots.length;i++){
+        const shot=pairLastShots[i];
+        document.getElementById('pairShot'+(i+1)).textContent=(i+1)+'P · '+(shot?weaponNames[shot.weapon]+' '+shot.angle+'° · 힘 '+shot.power+'%':'조준 발사 기록 없음');
+      }
+      document.getElementById('pairLessonReview').hidden=!recentLesson?.shots[1];
+    }
     document.getElementById('panel').hidden=true;
     document.getElementById('resultPanel').hidden=false;
     ui.overlay.style.display='flex';

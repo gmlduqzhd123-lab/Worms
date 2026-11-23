@@ -33,6 +33,7 @@ function trajectoryLabelPosition(x,y,width){
   return null;
 }
 function drawTrajectory(){
+  if(readingLessonAngle()&&!practice.angleRevealed&&!previewFit)return;
   if(practice?.showPrevious){
     drawPracticeTrack(practice.previous,true);
   }

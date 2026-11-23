@@ -16,7 +16,7 @@ function writeSaved(key,value){
 }
 function settingsSnapshot(){
   const options={};for(const id of OPTION_IDS){const el=document.getElementById(id);options[id]=el.tagName==='INPUT'?el.value.trim().slice(0,40):el.value}
-  return{version:1,options,audio:{music:musicEnabled,sfx:sfxEnabled,musicVolume,sfxVolume}}
+  return{version:1,options,audio:classroomAudioBase||audioSettings()}
 }
 function saveSettings(){if(writeSaved(STORAGE_KEYS.settings,settingsSnapshot())&&!blockedStorageKeys.has(STORAGE_KEYS.results))storageStatus('설정이 이 브라우저에 저장됐습니다.')}
 function loadSettings(){

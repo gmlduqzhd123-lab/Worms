@@ -4,6 +4,7 @@ function battlePhase(){
   if(gameOver)return {id:'over',text:'전투 종료',timer:'—'};
   if(!started)return {id:'ready',text:'전투 준비',timer:String(turnSec)};
   if(paused)return {id:'paused',text:'일시정지',timer:'Ⅱ'};
+  if(pairNeedsReady)return {id:'pairReady',text:(activeTeam+1)+'P 준비 대기',timer:String(turnSec)};
   if(practice)return {id:'practice',text:practice.complete?'탄도 비교':practice.prediction?'발사 진행 중':'시간 제한 없음',timer:'∞'};
   if(wormIntro)return {id:'intro',text:wormIntro.overview?'양 팀 전체 위치':'전장 둘러보기 · '+(wormIntro.index+1)+' / '+wormIntro.worms.length,timer:(2-wormIntro.elapsed).toFixed(1)};
   if(turnEnding)return {id:'handoff',text:'다음 팀으로 교대',timer:'↔'};
@@ -138,6 +139,13 @@ function updateHUD(){
     :status+(sudden?' · 수위 상승':''));
   setHUDAttribute(hud.top,'data-team',String(activeTeam));
   setHUDFlag(hud.session,'hidden',!started);
+  const readyPanel=document.getElementById('pairReadyPanel');
+  setHUDFlag(readyPanel,'hidden',!pairNeedsReady||paused||gameOver);
+  if(hud.root.classList.contains('waitingForPair')!==pairNeedsReady)hud.root.classList.toggle('waitingForPair',pairNeedsReady);
+  if(pairNeedsReady){
+    setHUDText(document.getElementById('pairReadyTitle'),(activeTeam+1)+'P 차례 · '+turnNo+'/'+LESSON_PAIR_TURNS+'턴');
+    setHUDText(document.getElementById('pairReadyAction'),(activeTeam+1)+'P 준비');
+  }
   const aimGuide=canShowAimGuide(),canChoose=canSelectWeapon();
   if(hud.root.classList.contains('aiming')!==aimGuide)hud.root.classList.toggle('aiming',aimGuide);
   if(hud.root.classList.contains('openingView')!==initialBattleView)hud.root.classList.toggle('openingView',initialBattleView);
@@ -147,7 +155,10 @@ function updateHUD(){
   setHUDText(hud.custom,angle+'°');
   if(hud.preset.value!==preset)hud.preset.value=preset;
   const percent=Math.round(shotPower()*100),width=percent+'%',usesPower=!['rope','homing'].includes(selected);
-  setHUDText(hud.angle,'각도 '+angle+'°'+(usesPower?' · 힘 '+(selected==='shotgun'&&shotgunRemain===1?100:percent)+'%':''));
+  const hideAngle=readingLessonAngle()&&!practice.angleRevealed;
+  if(hud.root.classList.contains('readingAngle')!==hideAngle)hud.root.classList.toggle('readingAngle',hideAngle);
+  setHUDText(hud.angle,hideAngle?'힘 '+percent+'% 고정':
+    '각도 '+angle+'°'+(usesPower?' · 힘 '+(selected==='shotgun'&&shotgunRemain===1?100:percent)+'%':''));
   setHUDText(hud.fireText,charging?width:'발사');
   if(charging&&ui.power.style.width!==width)ui.power.style.width=width;
   setHUDFlag(hud.coach,'hidden',!!practice||phase.id!=='aim'||turnNo!==1||firstChargeStarted||!aimGuide||!usesPower);
@@ -170,11 +181,18 @@ function updatePracticeHUD(angle){
     else text=angle+'° · 힘 '+power+'% · '+text;
     setHUDText(hud.practiceCompare,'같은 힘으로 '+nextPracticeAngle(angle)+'° 쏘기');
   }else if(practice.prediction)text='실제 포탄이 날아가는 모습을 보세요.';
-  else if(guided)text=(second?'2/2':'1/2')+' · '+angle+'° · 힘 35% 고정 · 발사 버튼을 눌러 보세요.';
+  else if(guided)text=second?'2/2 · 60° · 힘 35% 고정 · 발사 버튼을 눌러 보세요.':
+    '1/2 · 힘 35% 고정 · 0° 수평선부터 조준선까지 몇 도인지 짝과 말해 봐요.';
   else if(!practice.aimed)text='각도 선택에서 30°를 골라 보세요.';
   else if(practice.lockedPower!==null)text='힘 '+Math.round(practice.lockedPower*100)+'% 고정 · 발사해 두 탄도를 비교해 보세요.';
   else text=(isMobileDevice()?'발사 버튼':'Space 또는 발사 버튼')+'을 누르고 힘을 모아, 놓아 보세요.';
+  if(guided&&practice.complete&&!lessonStored)text+=' · 이 창에서만 이어할 수 있어요.';
   setHUDText(hud.practiceStep,text);
+  setHUDFlag(document.getElementById('lessonReadAngle'),'hidden',!readingLessonAngle());
+  if(readingLessonAngle()){
+    setHUDText(document.getElementById('lessonAngleAnswer'),practice.angleRevealed?'0°에서 조준선까지 30°예요.':'읽어 본 뒤 발사해요.');
+    setHUDFlag(document.getElementById('lessonRevealAngle'),'disabled',!!practice.angleRevealed);
+  }
   setHUDFlag(hud.previousRow,'hidden',!second||guided);
   setHUDAttribute(hud.previousToggle,'aria-pressed',String(practice.showPrevious));
   setHUDFlag(hud.previousInfo,'hidden',!practice.showPrevious);
@@ -222,6 +240,7 @@ function trackPracticeShot(projectile,ended){
 function finishPractice(){
   practice.complete=true;
   practice.stats=measureTrajectory(practice);
+  saveLessonCheckpoint();
   hud.root.classList.add('comparing');
   document.getElementById('practiceActions').hidden=false;
   updatePracticeHUD(Math.round(-aim));
@@ -251,7 +270,8 @@ function clampCamera(){
 function focusOn(x,y,instant=false){
   const cw=VW/cameraZoom,ch=VH/cameraZoom,minX=Math.min(0,(WW-cw)/2),minY=Math.min(0,(WH-ch)/2,projectiles.length?y-ch*.46:0);
   const aimSpace=VH<=360&&VW>VH&&matchMedia('(pointer:coarse)').matches&&canShowAimGuide();
-  camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*(aimSpace ? .58 : .46),minY,Math.max(minY,WH-ch));
+  const framing=VH<=400&&readingLessonAngle() ? .68 : aimSpace ? .58 : .46;
+  camera.targetX=clamp(x-cw*.5,minX,Math.max(minX,WW-cw));camera.targetY=clamp(y-ch*framing,minY,Math.max(minY,WH-ch));
   if(instant){camera.x=camera.targetX;camera.y=camera.targetY}
 }
 function fitBattleView(){

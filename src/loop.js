@@ -5,6 +5,7 @@ function update(dt,ts){
   worldTime=gameNow;if(!started||paused||gameOver){updateCamera(dt);return}
   if(practice?.complete){updateEffects(dt);return}
   ts=gameNow;runCombatTasks();
+  if(pairNeedsReady)return;
   if(sudden)waterY=Math.max(WH*.51,waterY-dt*1.55);
   if(!practice&&!turnLocked&&retreatUntil===0){turnLeft=turnSec-(ts-turnStart)/1000;if(turnLeft<=0){turnLeft=0;nextTurn(600)}}
   if(retreatUntil>0&&ts>=retreatUntil){retreatUntil=0;nextTurn(0)}
@@ -27,14 +28,14 @@ function update(dt,ts){
 }
 
 function advanceFrame(elapsed){
-  if(!started||paused||gameOver){physicsAccumulator=0;return 0}
+  if(!started||paused||gameOver||pairNeedsReady){physicsAccumulator=0;return 0}
   if(wormIntro){physicsAccumulator=0;advanceWormIntro(Math.max(0,Math.min(MAX_FRAME_DELTA,elapsed)));return 0}
   physicsAccumulator+=Math.max(0,Math.min(MAX_FRAME_DELTA,elapsed));
   let steps=0;
   while(physicsAccumulator+1e-9>=FIXED_DT){
     physicsAccumulator=Math.max(0,physicsAccumulator-FIXED_DT);gameNow+=FIXED_DT*1000;physicsSteps++;steps++;
     update(FIXED_DT,gameNow);
-    if(paused||gameOver){physicsAccumulator=0;break}
+    if(paused||gameOver||pairNeedsReady){physicsAccumulator=0;break}
   }
   return steps
 }

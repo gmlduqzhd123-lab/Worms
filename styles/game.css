@@ -309,10 +309,41 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
 #practiceObservation{font-size:16px}
 #practiceResult .dialogActions{flex-wrap:wrap}
 #pairResult{margin:8px 0;font-size:13px;color:#d6e8f2}
+#pairReadyPanel{
+  position:absolute;left:50%;bottom:calc(15px + var(--safe-bottom));transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+  width:min(530px,calc(100% - var(--safe-left) - var(--safe-right) - 16px));
+  padding:10px 12px;z-index:6;border:1px solid #90adbc;border-radius:12px;background:#0b2438f5;pointer-events:auto;
+}
+#pairReadyTitle{margin:0 0 4px;color:#ffe49b;font-size:16px}
+#pairReadyPanel p{margin:0;font-size:12px;line-height:1.4}
+#pairReadyAction{flex:none;min-height:42px;white-space:nowrap}
+#ui.waitingForPair :is(#weaponDock,#mobile,#utilityControls){visibility:hidden}
+#pairReflection h3{margin:12px 0 5px;color:#ffe49b;font-size:14px}
+#pairReflection ul{margin:0;padding:0;list-style:none;font-size:13px}
+#pairReflection p{margin:6px 0 0;font-size:13px}
+#lessonReadAngle{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;font-size:12px}
+#lessonRevealAngle{min-height:32px;padding:4px 9px;pointer-events:auto}
+#ui.readingAngle #angleControls :is(#aimMinus,#aimPreset,#aimPlus){display:none}
+#practiceResult[open]{display:flex;flex-direction:column;overflow:hidden}
+#practiceResult>.dialogHead{flex:none}
+#practiceResultScroll{overflow-y:auto;min-height:0;overscroll-behavior:contain;padding-bottom:4px}
+#practiceResultFooter{flex:none;padding-top:4px}
+#practiceResultFooter .dialogActions{margin-top:4px}
+#practiceDownloadStatus{margin:3px 0 0;font-size:12px;color:#ffe49b}
+#practiceDownloadStatus:empty{display:none}
 @media(max-height:400px){
+  #practicePanel:has(#lessonReadAngle:not([hidden])){padding:7px 10px}
+  #practicePanel:has(#lessonReadAngle:not([hidden])) #practiceTitle{display:none}
+  #practicePanel:has(#lessonReadAngle:not([hidden])) #practiceStep{font-size:11px}
   #ui.comparing #practicePanel{padding:6px 9px}
   #ui.comparing #practiceTitle{display:none}
   #ui.comparing #practiceStep{font-size:11px}
   #practiceActions .btn{min-height:30px;padding-inline:8px}
-  #practiceResult .dialogHead{position:sticky;top:0;background:#142f43;z-index:1;padding-block:3px}
+  #practiceResult{padding:10px 12px}
+  #practiceResult .dialogHead{padding-block:3px}
+  #practiceResultFooter .btn{min-height:34px;padding:6px 9px}
+}
+@media(max-height:340px){
+  #trajectoryFigure{max-height:max(90px,calc(var(--app-height) - 180px));object-fit:contain}
 }

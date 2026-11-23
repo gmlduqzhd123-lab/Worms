@@ -62,6 +62,7 @@ function createBallistic(type,w,pwr,ang,face,target=null){
     vx:Math.cos(rad)*face*speed,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
 }
 function spawnBallistic(type,w,pwr,ang,face,target=null){
+  recordPairShot(type,ang,pwr);
   projectiles.push(createBallistic(type,w,pwr,ang,face,target));commitAttack();
   playSFX(['grenade','banana','sacred','cluster'].includes(type)?'throw':type==='homing'?'homing':type==='mortar'?'mortar':'launch')
 }
@@ -118,6 +119,7 @@ function getShotPreview(){
   const value={...trace,type,power,angle:aim,face:facing};shotPreviewCache={key,value};return value;
 }
 function shootShotgun(w,pwr){
+  recordPairShot('shotgun',aim,pwr);
   const trace=traceShotgun(w,pwr,aim,facing),{x,y}=trace.end,hit=trace.hit;
   rememberImpact(x,y);carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
   if(shotgunRemain>0)toast('확산포 1발 남음',800);else{startRetreat(2.6)}

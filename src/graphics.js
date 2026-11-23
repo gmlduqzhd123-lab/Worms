@@ -77,6 +77,12 @@ function drawAimGuide(){
  const tickA=point(angle,radius-7),tickB=point(angle,radius+6);
  ctx.strokeStyle='#ffe49b';
  ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tickA.x,tickA.y);ctx.lineTo(tickB.x,tickB.y);ctx.stroke();
+ if(readingLessonAngle()){
+  const baseline=point(0,radius),beam=point(angle,radius-8);
+  ctx.strokeStyle='#f6fbff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(baseline.x,baseline.y);ctx.stroke();
+  ctx.strokeStyle='#ffe49b';ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(beam.x,beam.y);ctx.stroke();
+  if(!practice.angleRevealed){ctx.restore();return}
+ }
  // Put the readout outside the tick labels and keep it inside the viewport.
  const label=point(angle,radius===68&&angle<15?radius-12:radius+38);if(radius===68&&angle<15)label.y-=24;
  const labelX=clamp(x+label.x,24,VW-24)-x,labelY=clamp(y+label.y,13,VH-13)-y;

@@ -21,6 +21,7 @@ if(window.visualViewport)visualViewport.addEventListener('resize',()=>{resize();
 for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,()=>{resize();syncMobileOrientation()});
 document.getElementById('fullscreenBtn').addEventListener('click',()=>{if(document.fullscreenElement||document.webkitFullscreenElement){const exit=document.exitFullscreen||document.webkitExitFullscreen;try{const result=exit?.call(document);result?.catch(()=>{})}catch{}}else requestGameFullscreen()});
 document.getElementById('skipIntro').addEventListener('click',completeWormIntro);
+document.getElementById('pairReadyAction').addEventListener('click',startPairedTurn);
 
 /* ---------------- Input ---------------- */
 function nativeKeyboardTarget(e){return e.target.closest?.('input,select,textarea,[contenteditable="true"]')||([' ','Enter'].includes(e.key)&&e.target.closest?.('button,summary,a[href]'))}
@@ -89,7 +90,14 @@ document.getElementById('practicePrevious').addEventListener('click',togglePrevi
 document.getElementById('practiceHome').addEventListener('click',returnToStart);
 document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame({pairPractice:pairedLessonBattle})});
 document.getElementById('resultHome').addEventListener('click',returnToStart);
-document.getElementById('quitBtn').addEventListener('click',()=>{if(started)openGameDialog(document.getElementById('quitDialog'))});
+document.getElementById('quitBtn').addEventListener('click',()=>{
+  if(!started)return;
+  const message=practice?.lesson?'시작 화면으로 돌아갑니다. 완료한 발사 지점까지 다시 이어할 수 있습니다.':
+    pairedLessonBattle?'현재 짝 대전을 끝냅니다. 최근 탐구 결과는 각도 탐구에서 다시 열 수 있습니다.':
+    '현재 대전을 끝내고 시작 화면으로 돌아갑니다. 진행 중인 대전은 저장되지 않으며 기존 설정과 완료한 대전 기록은 유지됩니다.';
+  document.getElementById('quitDetails').textContent=message;
+  openGameDialog(document.getElementById('quitDialog'));
+});
 document.getElementById('quitCancel').addEventListener('click',()=>document.getElementById('quitDialog').close());
 document.getElementById('quitDialog').addEventListener('close',()=>closeGameDialog());
 document.getElementById('quitConfirm').addEventListener('click',()=>{returnToStart();document.getElementById('quitDialog').close()});
