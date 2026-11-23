@@ -14,12 +14,60 @@ function drawSky(){
 }
 function drawTerrain(){ctx.drawImage(terrain,camera.x,camera.y,VW/cameraZoom,VH/cameraZoom,0,0,VW/cameraZoom,VH/cameraZoom)}
 function drawWorm(w){drawExplorer(w)}
+function strokeShotPath(points,color,width,dash=[]){
+  ctx.strokeStyle=color;ctx.lineWidth=width/cameraZoom;ctx.setLineDash(dash.map(n=>n/cameraZoom));ctx.beginPath();
+  points.forEach((p,i)=>i?ctx.lineTo(screenX(p.x),screenY(p.y)):ctx.moveTo(screenX(p.x),screenY(p.y)));
+  ctx.stroke();ctx.setLineDash([]);
+}
+function trajectoryLabelPosition(x,y,width){
+  const blocked=teams.flatMap(t=>t.worms).filter(w=>w.alive).map(w=>{
+    const px=screenX(w.x)*cameraZoom,py=screenY(w.y)*cameraZoom;
+    const offset=(VH<=320&&(initialBattleView||wormIntro?.overview)?18:0)-Math.max(0,(cameraZoom-1)*34);
+    const half=Math.max(25,ctx.measureText(w.name).width/2+6);
+    return{left:px-half,right:px+half,top:py+offset-77,bottom:py+offset-38};
+  });
+  for(const [dx,dy] of [[0,-24],[0,25],[width/2+15,0],[-width/2-15,0],[0,-48],[0,49]]){
+    const cx=clamp(x+dx,12+width/2,VW-12-width/2),cy=clamp(y+dy,93,Math.max(93,VH-149));
+    if(!blocked.some(b=>cx-width/2<b.right&&cx+width/2>b.left&&cy-11<b.bottom&&cy+11>b.top))return{x:cx,y:cy};
+  }
+  return null;
+}
 function drawTrajectory(){
-  const trace=getShotPreview();if(!trace)return;ctx.save();ctx.strokeStyle='rgba(255,228,155,.95)';ctx.lineWidth=2.2/cameraZoom;ctx.setLineDash([5/cameraZoom,5/cameraZoom]);ctx.beginPath();trace.points.forEach((p,i)=>i?ctx.lineTo(screenX(p.x),screenY(p.y)):ctx.moveTo(screenX(p.x),screenY(p.y)));ctx.stroke();ctx.setLineDash([]);
-  const rawX=screenX(trace.end.x)*cameraZoom,rawY=screenY(trace.end.y)*cameraZoom,outside=rawX<18||rawX>VW-18||rawY<88||rawY>VH-136,x=clamp(rawX,18,VW-18),y=clamp(rawY,88,Math.max(89,VH-136));
-  ctx.scale(1/cameraZoom,1/cameraZoom);ctx.translate(x,y);ctx.lineWidth=2;ctx.strokeStyle=outside?'#9edbff':'#ffe49b';ctx.beginPath();ctx.arc(0,0,7,0,Math.PI*2);ctx.moveTo(-11,0);ctx.lineTo(11,0);ctx.moveTo(0,-11);ctx.lineTo(0,11);ctx.stroke();
-  ctx.font='700 10px system-ui';const label={water:'수면 도달',bounds:'맵 밖',range:'최대 거리',anchor:'연결 예상',worm:'피격 예상',fuse:'폭발 예상',terrain:'착탄 예상',limit:'예상 끝'}[trace.end.event]||'도착 예상',text=(outside?'화면 밖 · ':'')+label+(trace.type==='rope'?'':' · 힘 '+Math.round(trace.power*100)+'%'),width=Math.min(VW-24,ctx.measureText(text).width+22),lx=clamp(x,12+width/2,VW-12-width/2)-x,ly=clamp(y-24,96,Math.max(96,VH-166))-y;
-  ctx.fillStyle='#102a3bed';ctx.beginPath();ctx.roundRect(lx-width/2,ly-11,width,22,6);ctx.fill();ctx.fillStyle='#ffe49b';ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,lx,ly);ctx.restore();
+  if(practice?.complete){
+    ctx.save();
+    strokeShotPath(practice.prediction.points,'#ffe49b',7,[6,6]);
+    strokeShotPath(practice.path,'#56d9ff',2.5);
+    ctx.fillStyle='#56d9ff';ctx.beginPath();
+    ctx.arc(screenX(practice.impact.x),screenY(practice.impact.y),7/cameraZoom,0,2*Math.PI);
+    ctx.fill();ctx.restore();return;
+  }
+  const trace=getShotPreview();if(!trace)return;
+  ctx.save();strokeShotPath(trace.points,'rgba(255,228,155,.95)',2.2,[5,5]);
+  const rawX=screenX(trace.end.x)*cameraZoom,rawY=screenY(trace.end.y)*cameraZoom;
+  const x=clamp(rawX,18,VW-18),y=clamp(rawY,86,Math.max(87,VH-136));
+  const outside=x!==rawX||y!==rawY;
+  ctx.scale(1/cameraZoom,1/cameraZoom);ctx.lineWidth=2;
+  ctx.save();ctx.translate(x,y);
+  if(outside){
+    ctx.rotate(Math.atan2(rawY-y,rawX-x));
+    ctx.fillStyle='#9edbff';ctx.strokeStyle='#12334a';ctx.beginPath();
+    ctx.moveTo(9,0);ctx.lineTo(-7,-7);ctx.lineTo(-4,0);ctx.lineTo(-7,7);
+    ctx.closePath();ctx.fill();ctx.stroke();
+  }else{
+    ctx.strokeStyle='#ffe49b';ctx.beginPath();ctx.arc(0,0,7,0,Math.PI*2);
+    ctx.moveTo(-11,0);ctx.lineTo(11,0);ctx.moveTo(0,-11);ctx.lineTo(0,11);ctx.stroke();
+  }
+  ctx.restore();
+  ctx.font='700 10px system-ui';
+  const label={water:'수면 도달',bounds:'맵 밖',range:'최대 거리',anchor:'연결 예상',worm:'피격 예상',fuse:'폭발 예상',terrain:'착탄 예상',limit:'예상 끝'}[trace.end.event]||'도착 예상';
+  const text=(outside?'화면 밖 · ':'')+label,width=Math.min(VW-24,ctx.measureText(text).width+18);
+  const position=trajectoryLabelPosition(x,y,width);
+  if(position){
+    ctx.fillStyle='#102a3bed';ctx.beginPath();ctx.roundRect(position.x-width/2,position.y-11,width,22,6);ctx.fill();
+    ctx.fillStyle=outside?'#9edbff':'#ffe49b';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(text,position.x,position.y);
+  }
+  ctx.restore();
 }
 function drawGirderPreview(){
   if(targetMode!=='girder'||!targetPoint||paused||gameOver)return;

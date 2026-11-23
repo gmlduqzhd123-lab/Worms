@@ -6,9 +6,9 @@
 
 ## 현재 버전
 
-게임 버전은 **v30**, 서비스 워커 캐시는 `worms-v30`입니다. 시작 시 기본 모드는 **플레이어 vs PC**이며, 이전에 저장한 2인 대전 설정보다 우선합니다. 2인 로컬 대전은 게임 모드에서 선택할 수 있습니다. 기존 발판 중첩 방지·충돌 판정·저장 기록 복구와 무기 피해량·탄도 계수·설정 키는 유지합니다.
+게임 버전은 **v31**, 서비스 워커 캐시는 `worms-v31`입니다. 시작 시 기본 모드는 **플레이어 vs PC**입니다. 모바일에서는 기본 무기를 바로 선택하고 **전체 무기**에서 다른 장비와 남은 탄약을 확인할 수 있습니다.
 
-현재 단일 HTML은 `npm run build`로 생성하는 `dist/wormfront-stage30-offline.html`입니다. [v28 검수 보고서](verification/battle-improvements-2026-10-27/REPORT.md)는 이전 버전의 변경 범위와 당시 검증 결과이며, 최신 검증 결과는 Actions의 아티팩트에서 확인합니다. 이전 단계의 안내는 [변경 이력](CHANGELOG.md)에 보존했습니다.
+현재 단일 HTML은 `npm run build`로 생성하는 `dist/wormfront-stage31-offline.html`입니다. 이전 단계의 안내는 [변경 이력](CHANGELOG.md)에 보존했습니다.
 
 ## 주요 기능
 
@@ -23,6 +23,8 @@
 
 공개 주소를 열고 게임 모드와 맵을 고른 뒤 **전투 시작**을 누릅니다. 팀 이름·외형·난이도·봇 수·전투 규칙·음량은 시작 화면의 **추가 설정**에서 변경합니다.
 
+**한 발 연습**에서는 시간 제한 없이 각도를 맞추고 발사한 뒤, 예상 궤적과 실제 궤적을 비교할 수 있습니다. 대전에서는 전장 전체를 본 뒤 **바로 전투**를 누를 수 있고, 결과 화면에서 **같은 설정으로 다시 대전**할 수 있습니다.
+
 로컬에서는 Node.js로 미리보기를 실행할 수 있습니다.
 
 ```sh
@@ -31,7 +33,7 @@ node scripts/serve.cjs
 
 주소는 <http://127.0.0.1:4187>입니다. 폴더 구조를 유지해야 이미지와 음악을 함께 읽을 수 있습니다. `index.html`을 직접 여는 방식은 브라우저의 `file://` 정책에 따라 MP3 로딩이 제한될 수 있습니다.
 
-인터넷 없이 파일 하나로 실행하려면 빌드 후 `dist/wormfront-stage30-offline.html`을 열거나 위의 공개 오프라인 단일 HTML을 저장합니다. 공개 웹앱은 첫 방문에서 리소스 캐시를 마친 뒤 오프라인으로 다시 열 수 있습니다. 앱 설치 지원 여부와 전체 화면 동작은 브라우저에 따라 다릅니다.
+인터넷 없이 파일 하나로 실행하려면 빌드 후 `dist/wormfront-stage31-offline.html`을 열거나 위의 공개 오프라인 단일 HTML을 저장합니다. 공개 웹앱은 첫 방문에서 리소스 캐시를 마친 뒤 오프라인으로 다시 열 수 있습니다. 앱 설치 지원 여부와 전체 화면 동작은 브라우저에 따라 다릅니다.
 
 ## 조작
 
@@ -97,7 +99,7 @@ Linux에서는 브라우저 시스템 의존성까지 설치하도록 `npx playw
 | `npm run build` | 현재 HTML 버전으로 오프라인 HTML을 만든 뒤 배포 폴더와 해시 명세 생성 |
 | `npm test` | 구조 검사, 전투·발판·저장 복구·504개 탄도 조합·효과음 회귀, 생성된 배포본의 브라우저 기본 동작 검사 |
 
-`npm test` 전에 `npm run build`를 실행합니다. 출력은 `dist/wormfront-stage30-offline.html`, `release/site/`, `release/manifest.json`이며, 검증 결과는 `test-results/`에 저장합니다. 새 단일 HTML은 빌드 산출물로 생성하며 Git에 추가하지 않습니다. `release/site/offline/wormfront.html`은 현재 소스에서 생성된 단일 파일입니다. 기존 설치 브라우저로 검사하려면 `WORMFRONT_BROWSER_CHANNEL` 환경 변수를 `msedge` 또는 `chrome`으로 설정할 수 있으며, 기본값은 Playwright Chromium입니다.
+`npm test` 전에 `npm run build`를 실행합니다. 출력은 `dist/wormfront-stage31-offline.html`, `release/site/`, `release/manifest.json`이며, 검증 결과는 `test-results/`에 저장합니다. 새 단일 HTML은 빌드 산출물로 생성하며 Git에 추가하지 않습니다. `release/site/offline/wormfront.html`은 현재 소스에서 생성된 단일 파일입니다. 기존 설치 브라우저로 검사하려면 `WORMFRONT_BROWSER_CHANNEL` 환경 변수를 `msedge` 또는 `chrome`으로 설정할 수 있으며, 기본값은 Playwright Chromium입니다.
 
 자동 검증은 핵심 회귀와 배포본 검사를 실행합니다. 과거 보고서에 기록된 모든 플랫폼·실험 검사를 매번 실행하는 것은 아닙니다. 자세한 자동 검증·배포 절차는 [배포 안내](DEPLOYMENT.md)를 참고하세요.
 

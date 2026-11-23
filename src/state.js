@@ -16,6 +16,7 @@ let camera={x:0,y:0,targetX:0,targetY:0,manualUntil:0};
 let graphicsInitialized=false;
 let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
 let pauseIntent=false,orientationBlocked=false,wormIntro=null,initialBattleView=false;
+let practice=null,firstShotFired=false;
 let activeTeam=0,activeIdx=[0,0],turnSec=45,turnLeft=45,turnStart=0,turnLocked=false,turnNo=0,sdAt=20,sudden=false;
 let selected='bazooka',aim=-45,facing=1,wind=0,retreatUntil=0,chargeAt=0,charging=false,lastJumpTap=0;
 let targetMode=null,targetPoint=null,shotgunRemain=0,rope=null,jetpack=false,jetFuel=0;

@@ -7,15 +7,21 @@ function resize(){
   canvas.width=Math.round(VW*DPR);canvas.height=Math.round(VH*DPR);canvas.style.width=VW+'px';canvas.style.height=VH+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
   mini.width=500;mini.height=130;
   if(!graphicsInitialized)return;
-  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(wormIntro)focusIntroWorm();else if(previewFit&&canShowAimGuide())fitShotPreview(true);else if(initialBattleView)fitBattleView();else clampCamera();
+  if(!started) buildWorld(+document.getElementById('mapSize').value);else if(practice?.complete)fitPracticeView();else if(wormIntro)focusIntroWorm();else if(previewFit&&canShowAimGuide())fitShotPreview(true);else if(initialBattleView)fitBattleView();else clampCamera();
 }
 addEventListener('resize',resize);
 
-function buildWorld(mult){
+function buildWorld(mult,training=false){
   activeMapTheme=MAP_THEMES.some(t=>t.id===document.getElementById('mapTheme').value)?document.getElementById('mapTheme').value:'coast';loadArtFile(getMapTheme().file);
-  WW=Math.max(2600,Math.round(VW*mult));WH=Math.max(820,Math.round(VH*1.18));
+  WW=training?4200:Math.max(2600,Math.round(VW*mult));WH=Math.max(820,Math.round(VH*1.18));
   terrain.width=WW;terrain.height=WH;baseWater=WH*.875;waterY=baseWater;
-  generateTerrain();
+  if(training){
+    const floor=Math.round(WH*.7),theme=getMapTheme();
+    tctx.fillStyle=theme.bottom;tctx.fillRect(0,floor,WW,WH-floor);
+    tctx.fillStyle=theme.rim;tctx.fillRect(0,floor,WW,5);
+    refreshTerrainCollision();
+    mines=[];crates=[];girders=[];clouds=[];
+  }else generateTerrain();
   camera.x=0;camera.y=Math.max(0,WH-VH);
 }
 

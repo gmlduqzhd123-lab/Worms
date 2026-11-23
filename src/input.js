@@ -28,6 +28,7 @@ addEventListener('keydown',e=>{
   if(orientationBlocked)return;
   if(e.target.closest?.('#audioControls,#homeAudioControls,#angleControls'))return;
   if(nativeKeyboardTarget(e))return;
+  if(practice&&['a','d','w','s','enter'].includes(e.key.toLowerCase()))return;
   if(wormIntro&&e.key!=='Escape')return;
   if(document.querySelector('dialog[open]'))return;
   if(e.shiftKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(!e.repeat)nudgeAim(e.key==='ArrowUp'?1:-1);return}
@@ -81,6 +82,11 @@ document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paus
 document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!musicEnabled));
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
 document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();startGame()});
+document.getElementById('practiceStart').addEventListener('click',()=>{requestGameFullscreen();startGame({training:true})});
+document.getElementById('practiceRetry').addEventListener('click',()=>startGame({training:true,repeat:true}));
+document.getElementById('practiceHome').addEventListener('click',returnToStart);
+document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame()});
+document.getElementById('resultHome').addEventListener('click',returnToStart);
 document.getElementById('quitBtn').addEventListener('click',()=>{if(started)openGameDialog(document.getElementById('quitDialog'))});
 document.getElementById('quitCancel').addEventListener('click',()=>document.getElementById('quitDialog').close());
 document.getElementById('quitDialog').addEventListener('close',()=>closeGameDialog());
@@ -99,6 +105,16 @@ document.querySelectorAll('.ctrl').forEach(btn=>{
   function release(e,cancelled){if(!heldControls.has(e.pointerId))return;heldControls.delete(e.pointerId);syncHeldKeys();if(action==='fire'){if(cancelled){charging=false;ui.powerBox.classList.remove('show')}else fireEnd()}}
   btn.addEventListener('pointerup',e=>release(e,false));btn.addEventListener('pointercancel',e=>release(e,true));btn.addEventListener('lostpointercapture',e=>release(e,true));
 });
+const fireButton=document.querySelector('[data-act="fire"]');
+for(const type of ['keydown','keyup']){
+  fireButton.addEventListener(type,e=>{
+    if(e.key!==' '&&e.key!=='Enter')return;
+    e.preventDefault();e.stopPropagation();
+    if(type==='keyup')fireEnd();
+    else if(!e.repeat)fireStart();
+  });
+}
+fireButton.addEventListener('blur',clearInput);
 
 for(const [id,kind] of [['musicVolume','music'],['sfxVolume','sfx'],['homeMusicVolume','music'],['homeSfxVolume','sfx']])document.getElementById(id).addEventListener('input',e=>setAudioVolume(kind,e.target.value));
 document.getElementById('audioControls').addEventListener('focusin',clearInput);

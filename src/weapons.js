@@ -1,14 +1,17 @@
 'use strict';
 
-function selectWeapon(id){if(!started||paused||turnLocked||charging||shotgunRemain>0||gameOver||isCPU()||retreatUntil>gameNow||projectiles.length||walkers.length)return;selected=id;targetMode=null;targetPoint=null;ui.targetTip.style.display='none';updateHUD()}
+function canSelectWeapon(){return started&&!practice&&!paused&&!turnLocked&&!charging&&shotgunRemain===0&&!gameOver&&!isCPU()&&retreatUntil<=gameNow&&!projectiles.length&&!walkers.length}
+function selectWeapon(id){if(!canSelectWeapon())return;selected=id;targetMode=null;targetPoint=null;ui.targetTip.style.display='none';updateHUD()}
 function hasAmmo(id){return !limited.includes(id)||teams[activeTeam].ammo[id]>0}
 function spend(id){if(limited.includes(id))teams[activeTeam].ammo[id]--}
+function shotPower(){return charging?clamp((gameNow-chargeAt)/1600,.12,1):.12}
 
 function beginTargeting(type,text){
   if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;if(type==='homing'){const enemy=nearestEnemy(current());targetPoint=enemy?{x:enemy.x,y:enemy.y}:null}else if(type==='girder'){const w=current();targetPoint={x:w.x+facing*100,y:w.y-45}}ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
 }
 function fireStart(){
   const w=current();if(!w||!w.alive||gameOver||paused||turnLocked||retreatUntil>gameNow||projectiles.length||walkers.length||isCPU())return;
+  if(practice&&Math.round(-aim)!==30&&!practice.aimed){toast('먼저 30°로 맞춰 보세요');return}
   if(selected==='rope'){toggleRope();return}
   if(selected==='jetpack'){toggleJetpack();return}
   if(selected==='teleport'){beginTargeting('teleport','이동할 지형을 클릭하세요.');return}
@@ -25,10 +28,13 @@ function fireStart(){
   if(!charging){charging=true;chargeAt=gameNow;ui.powerBox.classList.add('show')}
 }
 function fireEnd(){
-  if(!charging||paused||gameOver||turnLocked||retreatUntil>gameNow)return;charging=false;ui.powerBox.classList.remove('show');const w=current();if(!w)return;
-  const pwr=clamp((gameNow-chargeAt)/1600,.12,1);
-  if(selected==='shotgun'){shotgunRemain=2;shootShotgun(w,pwr);return}
+  if(!charging||paused||gameOver||turnLocked||retreatUntil>gameNow)return;
+  const pwr=shotPower(),w=current();
+  if(practice&&w)capturePracticeShot(getShotPreview()||traceShot(w,selected,pwr,aim,facing),pwr);
+  charging=false;ui.powerBox.classList.remove('show');if(!w)return;
+  if(selected==='shotgun'){firstShotFired=true;shotgunRemain=2;shootShotgun(w,pwr);return}
   if(!hasAmmo(selected)){toast('탄약이 없습니다');return}
+  firstShotFired=true;
   if(['banana','sacred','cluster','mortar'].includes(selected))spend(selected);
   spawnBallistic(selected,w,pwr,aim,facing);updateHUD()
 }
@@ -103,7 +109,7 @@ function traceRope(w,ang,face){
 }
 function getShotPreview(){
   if(!canShowAimGuide())return null;const w=current(),type=selected;if(type==='homing'&&(!targetPoint||targetMode!=='homing'))return null;
-  const power=type==='homing'?.72:type==='shotgun'&&shotgunRemain===1?1:charging?clamp((gameNow-chargeAt)/1600,.12,1):.12;
+  const power=type==='homing'?.72:type==='shotgun'&&shotgunRemain===1?1:shotPower();
   const key=[matchId,type,w.x,w.y,aim,facing,power,wind,waterY,terrainReadbacks,WW,WH,targetPoint?.x,targetPoint?.y,teams.flatMap(t=>t.worms).map(o=>[o.x,o.y,o.alive].join(':')).join(';'),JSON.stringify(girders)].join('|');
   if(shotPreviewCache?.key===key)return shotPreviewCache.value;
   const trace=type==='shotgun'?traceShotgun(w,power,aim,facing):type==='rope'?traceRope(w,aim,facing):traceShot(w,type,power,aim,facing,type==='homing'?targetPoint:null);

@@ -183,3 +183,88 @@ html[data-mobile="true"][data-portrait="false"] #utilityControls .toolBtn{min-he
 button,input,select{font-family:inherit}
 input:not([type="range"]),select{-webkit-appearance:none;appearance:none;color-scheme:dark}
 select,#angleControls select{padding-right:24px;background-image:linear-gradient(45deg,transparent 50%,#ffe49b 50%),linear-gradient(135deg,#ffe49b 50%,transparent 50%);background-position:calc(100% - 13px) 50%,calc(100% - 8px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+
+#timer{white-space:nowrap}
+#center{grid-template-columns:minmax(0,1fr) auto}
+#aimReadout{
+  position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);
+  border:1px solid #6d95a5;border-radius:7px;padding:3px 8px;
+  background:#102a3bf5;color:#ffe49b;font-size:11px;font-weight:800;white-space:nowrap;pointer-events:none;
+}
+#fireCoach{
+  position:absolute;bottom:190px;right:max(12px,var(--safe-right));margin:0;
+  padding:5px 8px;border:1px solid #6d95a5;border-radius:7px;
+  background:#102a3bf5;color:#fff0ba;font-size:11px;
+}
+#weaponQuickInfo,#weaponPickerBtn{display:none}
+#weaponDialog .dialogHead{position:sticky;top:0;z-index:1;background:#142f43;padding-block:4px}
+#weaponGroups h3{margin:12px 0 6px;color:#ffe49b;font-size:14px}
+.weaponGroupGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px}
+.weaponOption{
+  display:flex;flex-direction:column;gap:4px;text-align:left;min-height:48px;
+  padding:6px 9px;border:1px solid #557789;border-radius:8px;
+  background:#0d2537;color:#f6fbff;cursor:pointer;font-size:12px;
+}
+.weaponOption[aria-pressed="true"]{border-color:#ffe49b;background:#294454}
+.weaponOption span{color:#c4d3e2;font-size:11px}
+.weaponOption:disabled,#weaponPickerBtn:disabled{opacity:.55;cursor:default}
+#practicePanel,#resultPanel{
+  border:1px solid #90adbc;border-radius:14px;background:#0b2438f5;
+  padding:12px 16px;max-width:calc(100% - var(--safe-left) - var(--safe-right) - 16px);
+}
+#practicePanel{
+  position:absolute;top:calc(80px + var(--safe-top));left:50%;transform:translateX(-50%);
+  width:max-content;max-width:min(560px,calc(100% - var(--safe-left) - var(--safe-right) - 16px));
+  text-align:center;z-index:4;
+}
+#practicePanel h2,#resultPanel h2{margin:0 0 5px;color:#ffe49b}
+#practicePanel h2{font-size:14px}
+#practiceStep,#matchSummary{margin:0;line-height:1.45}
+#practiceStep{font-size:12px}
+#practiceActions{display:flex;gap:8px;justify-content:center;margin-top:8px;pointer-events:auto}
+#practiceActions .btn{min-height:36px;padding:6px 11px;font-size:12px}
+#resultPanel{width:min(480px,90vw);padding:18px;text-align:center}
+#resultPanel .dialogActions{justify-content:center;flex-wrap:wrap}
+#panel .actions #practiceStart{min-height:46px;white-space:nowrap}
+#ui.practicing #top .team{visibility:hidden}
+#ui.practicing :is(#weaponDock,#utilityControls,.movementPad,#hint,#minimapWrap){display:none}
+#ui.practicing #mobile{display:flex;justify-content:flex-end;bottom:calc(12px + var(--safe-bottom))}
+#ui.practicing #mobile [data-act="fire"]{width:62px;background:#193e53;color:#ffe49b;font-size:13px}
+#ui.practicing #angleControls{top:auto;bottom:calc(12px + var(--safe-bottom));left:50%;transform:translateX(-50%)}
+#ui.practicing #powerBox{bottom:calc(67px + var(--safe-bottom))}
+#ui.comparing #practicePanel{top:auto;bottom:calc(10px + var(--safe-bottom))}
+#ui.comparing #mobile{display:none}
+#ui.comparing #powerBox{display:none}
+
+html[data-mobile="true"][data-portrait="false"] #center{grid-template-columns:minmax(0,1fr) auto}
+html[data-mobile="true"][data-portrait="false"] #wind{display:none}
+html[data-mobile="true"][data-portrait="false"] #center #subhud{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-mobile="true"][data-portrait="false"] #timer{grid-row:1 / 3;font-size:19px}
+html[data-mobile="true"][data-portrait="false"] #turnLabel{font-size:10px}
+html[data-mobile="true"][data-portrait="false"] #weaponDock{width:max-content;overflow:visible;align-items:center;gap:6px}
+html[data-mobile="true"][data-portrait="false"] #weaponDock .weapon:not(.quickWeapon):not(.active){display:none}
+html[data-mobile="true"][data-portrait="false"] #weaponQuickInfo{display:grid;gap:3px;padding-inline:4px;min-width:0;max-width:146px;font-size:10px;word-break:keep-all;overflow-wrap:anywhere}
+#weaponQuickInfo strong{color:#ffe49b}
+#weaponQuickInfo span{color:#c4d3e2}
+html[data-mobile="true"][data-portrait="false"] #weaponPickerBtn{display:block;flex:none;min-height:42px;padding-inline:8px;white-space:nowrap}
+html[data-mobile="true"][data-portrait="false"] #mobile [data-act="fire"]{width:53px;background:#193e53;color:#ffe49b;font-size:12px}
+html[data-mobile="true"][data-portrait="false"] #fireCoach{bottom:calc(125px + var(--safe-bottom));font-size:10px;max-width:47vw}
+html[data-mobile="true"][data-portrait="false"] #powerBox{bottom:calc(155px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #ui.practicing :is(#mobile,#angleControls){bottom:calc(12px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #ui.practicing #powerBox{bottom:calc(67px + var(--safe-bottom))}
+html[data-mobile="true"][data-portrait="false"] #ui.practicing :is(#weaponDock,#utilityControls),
+html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:none}
+
+@media(max-height:320px){
+  html[data-mobile="true"][data-portrait="false"] #center #subhud{font-size:10px}
+  html[data-mobile="true"][data-portrait="false"] :is(#sessionControls,#battleOptions){top:calc(47px + var(--safe-top))}
+  html[data-mobile="true"][data-portrait="false"] #timer{font-size:17px}
+  html[data-mobile="true"][data-portrait="false"] #mobile [data-act="fire"]{width:44px}
+  html[data-mobile="true"][data-portrait="false"] #fireCoach{bottom:calc(134px + var(--safe-bottom))}
+  html[data-mobile="true"][data-portrait="false"] #powerBox{bottom:calc(137px + var(--safe-bottom))}
+}
+@media(max-width:500px){
+  html[data-mobile="true"][data-portrait="false"] #weaponQuickInfo{display:none}
+  html[data-mobile="true"][data-portrait="false"] #mobile .pad{gap:2px}
+  html[data-mobile="true"][data-portrait="false"] #angleControls{bottom:calc(116px + var(--safe-bottom))}
+}
