@@ -2,7 +2,7 @@
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [저장소](https://github.com/gmlduqzhd123-lab/Worms) · [현재 사용법](README.md)
 
-게임 버전은 v32입니다. 자동 배포는 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다.
+게임 버전은 v33입니다. 자동 배포는 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다.
 
 ## 자동 검증과 배포
 
@@ -61,11 +61,11 @@ npm test
 
 ## 빌드 산출물
 
-현재 버전 번호는 `index.html`에서 읽습니다. v32에서 생성되는 파일은 다음과 같습니다.
+현재 버전 번호는 `index.html`에서 읽습니다. v33에서 생성되는 파일은 다음과 같습니다.
 
 | 경로 | 내용 |
 | --- | --- |
-| `dist/wormfront-stage32-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
+| `dist/wormfront-stage33-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
 | `release/site/` | 정적 사이트로 배포할 실행 파일 |
 | `release/site/offline/wormfront.html` | 위 단일 HTML의 배포용 사본 |
 | `release/manifest.json` | 배포 파일의 크기와 SHA-256 명세 |
@@ -96,7 +96,7 @@ $zipPath = Join-Path (Get-Location).Path 'release/wormfront-stage30-pages.zip'
 ## 실행과 확인 범위
 
 - 로컬 미리보기는 `npm start` 또는 `node scripts/serve.cjs`를 실행하고 <http://127.0.0.1:4187>을 엽니다.
-- 단일 파일은 `dist/wormfront-stage32-offline.html`을 엽니다. ZIP 내부에서는 `offline/wormfront.html`입니다.
+- 단일 파일은 `dist/wormfront-stage33-offline.html`을 엽니다. ZIP 내부에서는 `offline/wormfront.html`입니다.
 - 분리된 `index.html`을 직접 여는 경우 브라우저의 `file://` 정책 때문에 MP3가 제한될 수 있습니다. 완전한 오프라인 파일 실행에는 단일 HTML을 사용합니다.
 - 설정과 완료 기록은 브라우저 `localStorage`에 저장하며 기기 간 동기화하지 않습니다. HTTP 주소와 `file://` 파일의 저장 공간은 다를 수 있습니다.
 

@@ -87,7 +87,7 @@ document.getElementById('practiceRetry').addEventListener('click',()=>retryPract
 document.getElementById('practiceCompare').addEventListener('click',()=>retryPractice(true));
 document.getElementById('practicePrevious').addEventListener('click',togglePreviousPractice);
 document.getElementById('practiceHome').addEventListener('click',returnToStart);
-document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame()});
+document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame({pairPractice:pairedLessonBattle})});
 document.getElementById('resultHome').addEventListener('click',returnToStart);
 document.getElementById('quitBtn').addEventListener('click',()=>{if(started)openGameDialog(document.getElementById('quitDialog'))});
 document.getElementById('quitCancel').addEventListener('click',()=>document.getElementById('quitDialog').close());

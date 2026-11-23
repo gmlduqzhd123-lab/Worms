@@ -87,7 +87,7 @@ function syncBattleControls(aimGuide,canChoose){
       action==='ropein'||action==='ropeout'?move&&!!rope:move;
     setHUDFlag(control,'disabled',!enabled);
   }
-  for(const button of hud.aimButtons)setHUDFlag(button,'disabled',!aimGuide);
+  for(const button of hud.aimButtons)setHUDFlag(button,'disabled',!aimGuide||(!!practice?.lesson&&button!==hud.preview));
   setHUDFlag(hud.endTurn,'disabled',!canEndCurrentTurn());
   setHUDFlag(weaponPicker,'disabled',!canChoose&&!weaponDialog.open);
 }
@@ -127,13 +127,14 @@ function updateHUD(){
   setHUDText(ui.timer,timer);
   setHUDAttribute(ui.timer,'data-phase',phase.id);
   setHUDAttribute(ui.timer,'aria-label',phase.text+' · '+timer);
-  setHUDText(ui.wind,'바람 '+arrow+' '+windSpeed+' · '+turnNo+'턴');
+  const pairProgress=pairedLessonBattle?' · 짝 대전 '+turnNo+'/'+LESSON_PAIR_TURNS+'턴':'';
+  setHUDText(ui.wind,'바람 '+arrow+' '+windSpeed+(pairProgress||' · '+turnNo+'턴'));
 
   const aimPhase=phase.id==='aim'||phase.id==='charge';
   const status=aimPhase?(mobile?turn:turn+' · '+phase.text):phase.text;
   const mobileStatus={resolve:{'공격 진행 중':'발사 중','체력 감소 표시 중':'피해 표시','사망 연출 중':'전투 연출','충돌 화면 확인':'착탄 확인 중'}[phase.text],retreat:'후퇴',handoff:'턴 교대'}[phase.id]||status;
   setHUDText(ui.subhud,mobile
-    ?(practice?'한 발 연습 · 바람 없음':wormIntro?mobileStatus:mobileStatus+' · 바람 '+arrow+' '+windSpeed)
+    ?(practice?(practice.lesson?'각도 탐구':'한 발 연습')+' · 바람 없음':wormIntro?mobileStatus:mobileStatus+' · 바람 '+arrow+' '+windSpeed+(pairedLessonBattle?' · '+turnNo+'/'+LESSON_PAIR_TURNS+'턴':''))
     :status+(sudden?' · 수위 상승':''));
   setHUDAttribute(hud.top,'data-team',String(activeTeam));
   setHUDFlag(hud.session,'hidden',!started);
@@ -159,30 +160,43 @@ function nextPracticeAngle(angle){return angle===60?30:60}
 
 function updatePracticeHUD(angle){
   if(angle===30)practice.aimed=true;
+  const guided=!!practice.lesson,second=!!practice.previous;
   let text;
   if(practice.complete){
     const {angle,power,end}=practice.prediction;
     const matched=dist(end.x,end.y,practice.impact.x,practice.impact.y)<2;
-    text=angle+'° · 힘 '+power+'% · 노란 점선은 예상, 파란 실선은 실제. '+(matched?'도착점이 일치했어요.':'두 도착점을 비교해 보세요.');
+    text=angle+'°의 예상점과 실제 착탄점'+(matched?'이 일치했어요.':'을 비교해 보세요.');
+    if(guided)text=second?'30°·60° 탐구 완료 · 힘 35% 고정':'1/2 · 30° 완료 · 같은 힘으로 60°를 쏴 보세요.';
+    else text=angle+'° · 힘 '+power+'% · '+text;
     setHUDText(hud.practiceCompare,'같은 힘으로 '+nextPracticeAngle(angle)+'° 쏘기');
   }else if(practice.prediction)text='실제 포탄이 날아가는 모습을 보세요.';
+  else if(guided)text=(second?'2/2':'1/2')+' · '+angle+'° · 힘 35% 고정 · 발사 버튼을 눌러 보세요.';
   else if(!practice.aimed)text='각도 선택에서 30°를 골라 보세요.';
   else if(practice.lockedPower!==null)text='힘 '+Math.round(practice.lockedPower*100)+'% 고정 · 발사해 두 탄도를 비교해 보세요.';
   else text=(isMobileDevice()?'발사 버튼':'Space 또는 발사 버튼')+'을 누르고 힘을 모아, 놓아 보세요.';
   setHUDText(hud.practiceStep,text);
-  setHUDFlag(hud.previousRow,'hidden',!practice.previous);
+  setHUDFlag(hud.previousRow,'hidden',!second||guided);
   setHUDAttribute(hud.previousToggle,'aria-pressed',String(practice.showPrevious));
   setHUDFlag(hud.previousInfo,'hidden',!practice.showPrevious);
-  if(practice.showPrevious){
+  if(practice.showPrevious&&!guided){
     const previous=practice.previous.prediction;
     setHUDText(hud.previousInfo,'보라 점선 · 이전 '+previous.angle+'° · 힘 '+previous.power+'%');
+  }
+  if(practice.complete){
+    setHUDFlag(hud.practiceCompare,'hidden',guided&&second);
+    setHUDFlag(document.getElementById('practiceRetry'),'hidden',guided&&!second);
+    setHUDText(document.getElementById('practiceRetry'),guided?'다시 탐구':'한 발 더');
+    setHUDFlag(document.getElementById('practiceLarge'),'hidden',guided&&!second);
+    setHUDFlag(document.getElementById('practicePair'),'hidden',!guided||!second);
   }
 }
 function retryPractice(samePower){
   if(!practice?.complete)return;
-  const previous={fieldHeight:practice.fieldHeight,prediction:practice.prediction,path:practice.path,impact:practice.impact};
+  if(practice.lesson&&!samePower){openLessonIntro();return}
+  const previous={fieldHeight:practice.fieldHeight,prediction:practice.prediction,path:practice.path,impact:practice.impact,origin:practice.origin,stats:practice.stats};
   startGame({
     training:true,previous,
+    lesson:practice.lesson,
     lockedPower:samePower?previous.prediction.powerValue:null,
     startingAngle:samePower?nextPracticeAngle(previous.prediction.angle):null
   });
@@ -194,6 +208,7 @@ function togglePreviousPractice(){
   if(practice.complete)fitPracticeView();
 }
 function capturePracticeShot(trace,power){
+  const w=current();practice.origin={x:w.x,y:w.y};
   practice.prediction={...trace,angle:Math.round(-aim),power:Math.round(power*100),powerValue:power};
   practice.path=[trace.points[0]];
 }
@@ -206,11 +221,12 @@ function trackPracticeShot(projectile,ended){
 }
 function finishPractice(){
   practice.complete=true;
+  practice.stats=measureTrajectory(practice);
   hud.root.classList.add('comparing');
   document.getElementById('practiceActions').hidden=false;
   updatePracticeHUD(Math.round(-aim));
   fitPracticeView();
-  hud.practiceCompare.focus();
+  (hud.practiceCompare.hidden?document.getElementById('practiceLarge'):hud.practiceCompare).focus();
 }
 function fitPracticeView(){
   const points=practice.showPrevious?[...practice.path,...practice.previous.path]:practice.path;

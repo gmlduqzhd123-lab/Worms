@@ -34,20 +34,12 @@ function trajectoryLabelPosition(x,y,width){
 }
 function drawTrajectory(){
   if(practice?.showPrevious){
-    ctx.save();
-    strokeShotPath(practice.previous.path,'#d6a5ff',3,[3,6]);
-    const end=practice.previous.impact;
-    ctx.strokeStyle='#e3bfff';ctx.lineWidth=2/cameraZoom;ctx.beginPath();
-    ctx.arc(screenX(end.x),screenY(end.y),10/cameraZoom,0,2*Math.PI);
-    ctx.stroke();ctx.restore();
+    drawPracticeTrack(practice.previous,true);
   }
   if(practice?.complete){
     ctx.save();
-    strokeShotPath(practice.prediction.points,'#ffe49b',7,[6,6]);
-    strokeShotPath(practice.path,'#56d9ff',2.5);
-    ctx.fillStyle='#56d9ff';ctx.beginPath();
-    ctx.arc(screenX(practice.impact.x),screenY(practice.impact.y),7/cameraZoom,0,2*Math.PI);
-    ctx.fill();ctx.restore();return;
+    strokeShotPath(practice.prediction.points,'#ffe49b',6,[6,6]);ctx.restore();
+    drawPracticeTrack(practice,false);return;
   }
   const trace=getShotPreview();if(!trace)return;
   ctx.save();strokeShotPath(trace.points,'rgba(255,228,155,.95)',2.2,[5,5]);

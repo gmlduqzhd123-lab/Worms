@@ -15,8 +15,8 @@ function safeSpawn(team,idx,desired,left,right){
   }
   return null;
 }
-function placeWorms(){
-  const n=+document.getElementById('count').value,total=n*2,left=WW*.07,right=WW*.93,spacing=(right-left)/(total-1);let spots=null;
+function placeWorms(n=+document.getElementById('count').value){
+  const total=n*2,left=WW*.07,right=WW*.93,spacing=(right-left)/(total-1);let spots=null;
   for(let attempt=0;attempt<24&&!spots;attempt++){
     teams.forEach(t=>t.worms=[]);
     for(let i=0;i<total;i++){const desired=clamp(left+i*spacing+rand(-.18,.18)*spacing,left,right),w=safeSpawn(0,i,desired,left,right);if(!w)break;teams[0].worms.push(w)}
@@ -51,9 +51,12 @@ function canJumpCurrent(){return canMoveCurrent()&&!rope&&!jetpack}
 function canAimCurrent(){return canPlayerAct()&&!turnLocked&&!projectiles.length&&!walkers.length&&retreatUntil<=gameNow}
 function canEndCurrentTurn(){return !practice&&canAimCurrent()&&!charging}
 
-function startGame({training=false,previous=null,lockedPower=null,startingAngle=null}={}){
-  const fieldHeight=training?(previous?.fieldHeight??Math.max(820,Math.round(VH*1.18))):null;
-  practice=training?{fieldHeight,previous,showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
+function startGame({training=false,previous=null,lockedPower=null,startingAngle=null,lesson=null,pairPractice=false}={}){
+  const fieldHeight=training?(previous?.fieldHeight??(lesson?820:Math.max(820,Math.round(VH*1.18)))):null;
+  practice=training?{fieldHeight,previous,lesson,observation:'',showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
+  pairedLessonBattle=pairPractice;
+  setHUDText(document.getElementById('practiceTitle'),lesson?'각도 탐구':'한 발 연습');
+  document.getElementById('pairResult').hidden=true;
   firstChargeStarted=false;
   document.getElementById('ui').classList.toggle('practicing',training);
   document.getElementById('ui').classList.remove('comparing');
@@ -64,27 +67,32 @@ function startGame({training=false,previous=null,lockedPower=null,startingAngle=
   wormIntro=null;pauseIntent=false;initialBattleView=false;previewFit=false;shotPreviewCache=null;
   injuredWorms=[];injuryZoom=null;shotFocus=null;cameraShake=0;deploymentRetreatUntil=0;
   cpuWalk=null;cpuStatus='';
-  if(training){matchId='';matchRecorded=false}else{saveSettings();beginMatchRecord()}
+  if(training){matchId='';matchRecorded=false}else{if(!pairPractice)saveSettings();beginMatchRecord()}
   stopSFX();ensureAudio();
   cameraZoom=1;overview=false;physicsAccumulator=0;combatTasks=[];pendingEmissions=0;turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();aiBusy=false;
-  mode=document.getElementById('mode').value;difficulty=document.getElementById('difficulty').value;
-  teams[0].name=document.getElementById('inputA').value.trim()||'플레이어';teams[1].name=document.getElementById('inputB').value.trim()||(mode==='cpu'?'CPU':'블루 팀');
-  teams.forEach(t=>t.ammo={...defaultAmmo});turnSec=+document.getElementById('turnTime').value;sdAt=+document.getElementById('sdTurn').value;
-  crateRate=+document.getElementById('crateRate').value;initialMineCount=+document.getElementById('mineCount').value;
+  mode=pairPractice?'pvp':document.getElementById('mode').value;difficulty=document.getElementById('difficulty').value;
+  teams[0].name=pairPractice?'1P':document.getElementById('inputA').value.trim()||'플레이어';
+  teams[1].name=pairPractice?'2P':document.getElementById('inputB').value.trim()||(mode==='cpu'?'CPU':'블루 팀');
+  teams.forEach(t=>t.ammo={...defaultAmmo});turnSec=pairPractice?35:+document.getElementById('turnTime').value;sdAt=+document.getElementById('sdTurn').value;
+  crateRate=pairPractice?0:+document.getElementById('crateRate').value;initialMineCount=pairPractice?0:+document.getElementById('mineCount').value;
   ui.nameA.textContent=teams[0].name;ui.nameB.textContent=teams[1].name;
-  buildWorld(+document.getElementById('mapSize').value,fieldHeight);
+  buildWorld(pairPractice?2.5:+document.getElementById('mapSize').value,fieldHeight,
+    lesson||pairPractice?'coast':document.getElementById('mapTheme').value);
   if(training){
     const bot=createWorm(0,0,650);
     bot.name='연습봇';bot.y=Math.round(WH*.7)-bot.r+.2;
     teams[0].worms=[bot];teams[1].worms=[];
-  }else{placeWorms();seedMines(initialMineCount)}
+  }else{placeWorms(pairPractice?2:undefined);seedMines(initialMineCount)}
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
   activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
   selected='bazooka';ui.overlay.style.display='none';turnLeft=turnSec;turnStart=gameNow;ensureAudio();
   if(training){
     beginTurn();
-    if(startingAngle!==null)setAimElevation(startingAngle);
+    if(startingAngle!==null){aim=-startingAngle;updateHUD()}
     canvas.focus();last=performance.now()
+  }else if(pairPractice){
+    last=performance.now();beginTurn();
+    toast('짝 대전 · 두 턴씩 번갈아 플레이 · 턴당 35초',2000);
   }else beginWormIntro();
   syncMobileOrientation();
 }
@@ -121,6 +129,7 @@ function beginTurn(){
 
 function returnToStart(){
   practice=null;
+  pairedLessonBattle=false;
   document.getElementById('ui').classList.remove('practicing','comparing');
   document.getElementById('practicePanel').hidden=true;
   document.getElementById('resultPanel').hidden=true;
@@ -140,18 +149,31 @@ function nextTurn(delay=900){
   if(combatUnsettled()||presentationPending()){commitAttack(0);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
-  const handoff=()=>{if(combatUnsettled()||presentationPending()){scheduleCombat(handoff,100);return}activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()};
+  const handoff=()=>{
+    if(combatUnsettled()||presentationPending()){scheduleCombat(handoff,100);return}
+    if(pairedLessonBattle&&turnNo>=LESSON_PAIR_TURNS){finishGame();return}
+    activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()
+  };
   scheduleCombat(handoff,delay)
 }
 function startRetreat(sec=2.6){commitAttack(sec)}
+function matchWinner(){
+  const score=pairedLessonBattle?teamHP:team=>living(team).length;
+  const a=score(0),b=score(1);
+  return a===b?null:a>b?0:1;
+}
 function finishGame(){
   if(gameOver)return;
-  cpuWalk=null;cpuStatus='';gameOver=true;turnLocked=true;clearInput();combatTasks=[];pendingEmissions=0;cancelCombat(aiTimer);const a=living(0).length,b=living(1).length;
-  const msg=a===b?'무승부!':a>b?`${teams[0].name} 승리!`:`${teams[1].name} 승리!`;recordMatchResult();stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
+  cpuWalk=null;cpuStatus='';gameOver=true;turnLocked=true;clearInput();combatTasks=[];pendingEmissions=0;cancelCombat(aiTimer);
+  const winner=matchWinner(),msg=winner===null?'무승부!':teams[winner].name+' 승리!';
+  recordMatchResult();stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
   const finishedMatch=matchId;
   setTimeout(()=>{
     if(!gameOver||matchId!==finishedMatch)return;
     document.getElementById('resultTitle').textContent=msg;
+    const pairResult=document.getElementById('pairResult');
+    pairResult.hidden=!pairedLessonBattle;
+    if(pairedLessonBattle)pairResult.textContent='짝 대전 · 남은 체력으로 결과를 정했어요.';
     document.getElementById('panel').hidden=true;
     document.getElementById('resultPanel').hidden=false;
     ui.overlay.style.display='flex';

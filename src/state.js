@@ -17,6 +17,8 @@ let graphicsInitialized=false;
 let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
 let pauseIntent=false,orientationBlocked=false,wormIntro=null,initialBattleView=false;
 let practice=null,firstChargeStarted=false;
+let pairedLessonBattle=false;
+const LESSON_PAIR_TURNS=4;
 let activeTeam=0,activeIdx=[0,0],turnSec=45,turnLeft=45,turnStart=0,turnLocked=false,turnNo=0,sdAt=20,sudden=false;
 let selected='bazooka',aim=-45,facing=1,wind=0,retreatUntil=0,chargeAt=0,charging=false,lastJumpTap=0;
 let targetMode=null,targetPoint=null,shotgunRemain=0,rope=null,jetpack=false,jetFuel=0;
@@ -71,7 +73,7 @@ function lerp(a,b,t){return a+(b-a)*t}
 function dist(a,b,c,d){return Math.hypot(c-a,d-b)}
 function screenX(x){return x-camera.x}
 function screenY(y){return y-camera.y}
-function setAimElevation(degrees){if(!canShowAimGuide()||!Number.isFinite(degrees))return false;aim=-clamp(Math.round(degrees),-13,90);updateHUD();return true}
+function setAimElevation(degrees){if(practice?.lesson||!canShowAimGuide()||!Number.isFinite(degrees))return false;aim=-clamp(Math.round(degrees),-13,90);updateHUD();return true}
 function nudgeAim(degrees){return setAimElevation(Math.round(-aim)+degrees)}
 function viewportPoint(sx,sy){const r=canvas.getBoundingClientRect();return{x:sx-r.left,y:sy-r.top}}
 function worldFromScreen(sx,sy){const p=viewportPoint(sx,sy);return{x:p.x/cameraZoom+camera.x,y:p.y/cameraZoom+camera.y}}

@@ -8,7 +8,7 @@ function update(dt,ts){
   if(sudden)waterY=Math.max(WH*.51,waterY-dt*1.55);
   if(!practice&&!turnLocked&&retreatUntil===0){turnLeft=turnSec-(ts-turnStart)/1000;if(turnLeft<=0){turnLeft=0;nextTurn(600)}}
   if(retreatUntil>0&&ts>=retreatUntil){retreatUntil=0;nextTurn(0)}
-  if(canAimCurrent()&&!keys.Shift){aim=Math.round(aim);if(keys.ArrowUp)aim=clamp(aim-1,-90,13);if(keys.ArrowDown)aim=clamp(aim+1,-90,13)}
+  if(!practice?.lesson&&canAimCurrent()&&!keys.Shift){aim=Math.round(aim);if(keys.ArrowUp)aim=clamp(aim-1,-90,13);if(keys.ArrowDown)aim=clamp(aim+1,-90,13)}
   if(keys.z&&!isCPU())panCamera(-6,0)
   if(keys.x&&!isCPU())panCamera(6,0)
 

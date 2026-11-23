@@ -1,6 +1,6 @@
 {
   "name": "angle-king",
-  "version": "32.0.0",
+  "version": "33.0.0",
   "private": true,
   "description": "Development checks and static builds for 조준! 각도왕",
   "engines": {

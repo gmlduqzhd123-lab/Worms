@@ -288,3 +288,31 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
   html[data-mobile="true"][data-portrait="false"] #mobile .pad{gap:2px}
   html[data-mobile="true"][data-portrait="false"] #angleControls{bottom:calc(116px + var(--safe-bottom))}
 }
+
+#panel .actions{flex-wrap:wrap}
+#panel .lessonEntry{background:#b5e8ff;color:#102d41;min-height:46px}
+@media(max-width:600px){
+  #panel .actions #start{width:auto;flex:1 1 auto;min-width:104px;white-space:nowrap}
+}
+#lessonIntro fieldset{border:1px solid #69889b;border-radius:10px;padding:10px}
+#lessonIntro legend{padding-inline:6px;font-weight:800;color:#ffe49b}
+.lessonChoices{display:flex;flex-wrap:wrap;gap:7px}
+.lessonChoices label{display:flex;align-items:center;gap:5px;padding:8px;border:1px solid #638398;border-radius:7px;color:#f6fbff;font-size:13px;cursor:pointer}
+.lessonChoices label:has(:checked){border-color:#ffe49b;background:#244759}
+.lessonChoices input[type="radio"]{appearance:auto;width:auto;margin:0;accent-color:#ffe49b}
+#lessonBegin:disabled{opacity:.5}
+#practiceResult{width:min(880px,calc(var(--app-width,100vw) - 24px));touch-action:pan-y}
+#trajectoryFigure{display:block;width:100%;height:auto;border:1px solid #466a80;border-radius:10px}
+#trajectoryDetails,#lessonFinding{margin:8px 0;font-size:13px;line-height:1.5}
+#lessonFinding{color:#ffe49b}
+#practiceResult label{font-size:13px}
+#practiceObservation{font-size:16px}
+#practiceResult .dialogActions{flex-wrap:wrap}
+#pairResult{margin:8px 0;font-size:13px;color:#d6e8f2}
+@media(max-height:400px){
+  #ui.comparing #practicePanel{padding:6px 9px}
+  #ui.comparing #practiceTitle{display:none}
+  #ui.comparing #practiceStep{font-size:11px}
+  #practiceActions .btn{min-height:30px;padding-inline:8px}
+  #practiceResult .dialogHead{position:sticky;top:0;background:#142f43;z-index:1;padding-block:3px}
+}

@@ -39,8 +39,7 @@ function loadResults(){
 function beginMatchRecord(){matchId=globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);matchStartedAt=gameNow;matchRecorded=false;document.getElementById('matchSummary').hidden=true}
 function recordMatchResult(){
   if(matchRecorded)return;matchRecorded=true;
-  const a=living(0).length,b=living(1).length;
-  const result={id:matchId||'session-'+Date.now(),savedAt:new Date().toISOString(),mode,difficulty,winner:a===b?null:a>b?0:1,turns:turnNo,seconds:Math.max(0,Math.round((gameNow-matchStartedAt)/1000)),teams:teams.map(t=>({name:t.name.slice(0,40),hp:t.worms.reduce((n,w)=>n+(w.alive?w.hp:0),0),survivors:t.worms.filter(w=>w.alive).length}))};
+  const result={id:matchId||'session-'+Date.now(),savedAt:new Date().toISOString(),mode,difficulty,winner:matchWinner(),turns:turnNo,seconds:Math.max(0,Math.round((gameNow-matchStartedAt)/1000)),teams:teams.map(t=>({name:t.name.slice(0,40),hp:t.worms.reduce((n,w)=>n+(w.alive?w.hp:0),0),survivors:t.worms.filter(w=>w.alive).length}))};
   matchHistory=[result,...matchHistory.filter(r=>r.id!==result.id)].slice(0,30);writeSaved(STORAGE_KEYS.results,{version:1,matches:matchHistory});
   const summary=document.getElementById('matchSummary');summary.hidden=false;summary.textContent=result.turns+'턴 · '+formatDuration(result.seconds)+' · 남은 체력 '+result.teams.map(t=>t.name+' '+t.hp).join(' / ');renderHistory();
 }

@@ -13,7 +13,8 @@
         '.yq-card .yq-qr{display:block;width:min(100%,62vh,420px);height:auto;margin:12px auto;image-rendering:pixelated}' +
         '.yq-card .yq-url{margin:0 0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;word-break:break-all;color:#0f172a}' +
         '.yq-card .yq-hint{margin:0 0 14px;color:#64748b;font-size:14px}' +
-        '.yq-card .yq-close{font:inherit;font-weight:700;width:100%;padding:12px;border:0;border-radius:12px;background:#0f172a;color:#fff;cursor:pointer}';
+        '.yq-card .yq-close{font:inherit;font-weight:700;width:100%;padding:12px;border:0;border-radius:12px;background:#0f172a;color:#fff;cursor:pointer}' +
+        '.yq-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}.yq-actions button,.yq-copy{border:1px solid #64748b;border-radius:8px;background:#fff;color:#142b3b;padding:8px;font:inherit;font-weight:700;cursor:pointer}.yq-actions button[aria-pressed="true"]{background:#d9ecfb;border-color:#245673}.yq-copy{margin-bottom:8px}';
 
     function injectCss() {
         if (document.getElementById('yq-style') || !document.head) return;
@@ -35,19 +36,43 @@
         injectCss();
         var last = document.activeElement;
         var url = appUrl();
+        var lessonUrl = new URL(url);
+        lessonUrl.searchParams.set('lesson', 'angle');
         var back = document.createElement('div');
         back.className = 'yq-back';
         back.style.setProperty('display', 'flex', 'important'); // 앱 CSS가 다른 창을 숨겨도 QR 창은 보이게
         back.innerHTML = '<div class="yq-card" role="dialog" aria-modal="true" aria-labelledby="yq-title">' +
-            '<p class="yq-title" id="yq-title">📱 카메라로 찍어서 들어와요</p><p class="yq-name"></p>' +
+            '<p class="yq-title" id="yq-title">📱 카메라로 찍어서 들어와요</p><p class="yq-name"></p><div class="yq-actions"><button type="button" class="yq-home" aria-pressed="true">게임 시작 화면</button><button type="button" class="yq-lesson" aria-pressed="false">수업용 각도 탐구</button></div>' +
             '<img class="yq-qr" alt="" width="420" height="420">' +
-            '<p class="yq-url"></p><p class="yq-hint">휴대폰·태블릿 카메라를 QR 코드에 비추면 바로 열려요.</p>' +
+            '<p class="yq-url"></p><p class="yq-hint" role="status">휴대폰·태블릿 카메라를 QR 코드에 비추면 바로 열려요.</p><button type="button" class="yq-copy" hidden>수업 링크 복사</button>' +
             '<button type="button" class="yq-close">닫기</button></div>';
-        back.querySelector('.yq-name').textContent = appName();
-        back.querySelector('.yq-url').textContent = url.replace(/^https?:\/\//, '');
         var img = back.querySelector('.yq-qr');
-        img.src = root.getAttribute('data-qr-src') || new URL('qr.svg', location.href).href; // 이 앱 폴더의 파일(오프라인에서도 뜸)
-        img.alt = appName() + ' 주소 QR 코드';
+        var home = back.querySelector('.yq-home'), lesson = back.querySelector('.yq-lesson');
+        var hint = back.querySelector('.yq-hint'),copy = back.querySelector('.yq-copy');
+        function showQr(forLesson) {
+            var name = appName() + (forLesson ? ' · 각도 탐구' : '');
+            var link = forLesson ? lessonUrl.href : url;
+            var asset = forLesson ? 'qr-lesson.svg' : 'qr.svg';
+            back.querySelector('.yq-name').textContent = name;
+            back.querySelector('.yq-url').textContent = link.replace(/^https?:\/\//, '');
+            img.src = root.getAttribute(forLesson ? 'data-lesson-qr-src' : 'data-qr-src') || new URL(asset, location.href).href;
+            img.alt = name + ' 주소 QR 코드';
+            home.setAttribute('aria-pressed', String(!forLesson));
+            lesson.setAttribute('aria-pressed', String(forLesson));
+            hint.textContent = '휴대폰·태블릿 카메라를 QR 코드에 비추면 바로 열려요.';
+            copy.hidden = !forLesson;
+        }
+        home.addEventListener('click', function () { showQr(false); });
+        lesson.addEventListener('click', function () { showQr(true); });
+        copy.addEventListener('click', async function () {
+            try {
+                await navigator.clipboard.writeText(lessonUrl.href);
+                hint.textContent = '수업 링크를 복사했어요.';
+            } catch {
+                hint.textContent = '위 주소를 선택해서 복사해 주세요.';
+            }
+        });
+        showQr(false);
         function close() {
             document.removeEventListener('keydown', onKey);
             back.remove();

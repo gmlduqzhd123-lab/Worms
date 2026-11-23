@@ -13,5 +13,6 @@
   "src/input.js",
   "src/graphics.js",
   "src/persistence.js",
+  "src/lesson.js",
   "src/boot.js"
 ]
