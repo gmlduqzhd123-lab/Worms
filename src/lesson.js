@@ -62,8 +62,17 @@ function openLessonDraft(draft){
 
 function showLessonChoice(fresh=false){
   const saved=!fresh&&!!recentLesson;
-  document.getElementById('lessonSaved').hidden=!saved;
-  document.getElementById('lessonPrediction').hidden=saved;
+  const resumePair=!fresh&&!!recentPair;
+  document.getElementById('lessonSaved').hidden=!saved&&!resumePair;
+  document.getElementById('lessonPrediction').hidden=saved||resumePair;
+  document.getElementById('pairSaved').hidden=!resumePair;
+  document.getElementById('lessonSavedText').hidden=!saved;
+  document.getElementById('lessonResume').hidden=!saved;
+  if(resumePair){
+    document.getElementById('pairSavedText').textContent='짝 대전 '+recentPair.turn+'/'+recentPair.limit+'턴 · '+(recentPair.team+1)+'P 준비';
+    pairResume.textContent=(recentPair.team+1)+'P 준비부터 이어하기';
+    document.getElementById('pairResumeStatus').textContent='';
+  }
   if(saved){
     const howFar=['30° 발사 준비','30° 완료 · 60°부터 이어할 수 있어요.','30°·60° 비교 완료 · 관찰 내용을 다시 볼 수 있어요.'][recentLesson.shots.length];
     document.getElementById('lessonSavedText').textContent=howFar+(lessonStored?'':' 이 창에서만 이어할 수 있어요.');
@@ -84,6 +93,7 @@ function maybeOpenSharedLesson(){
 }
 function initLessonSharing(){
   recentLesson=readLessonCheckpoint();
+  recentPair=loadPairCheckpoint();
   sharedLessonLink=new URL(location.href).searchParams.get('lesson')==='angle';
   openSharedLesson=sharedLessonLink;
   maybeOpenSharedLesson();
@@ -98,7 +108,7 @@ function startPairBattle(){
     practiceResult.close();
     return;
   }
-  startGame({pairPractice:true});
+  openPairSetup();
 }
 
 function measureTrajectory(shot){
@@ -201,19 +211,24 @@ function drawResultFigure(surface,rows,note=null){
     if(line)pen.fillText(line,30,lineY);
   }
 }
-function showPracticeResult(result=practice){
+function showPracticeResult(result=practice,{quickReview=false}={}){
   if(!result?.complete)return;
   shownResult=result;
   document.getElementById('practiceDownloadStatus').textContent='';
   document.getElementById('practiceResultScroll').scrollTop=0;
   const rows=trajectoryRows(result),summary=document.getElementById('trajectoryDetails');
+  const condition=document.getElementById('practiceCondition');
+  condition.hidden=!quickReview;
+  if(quickReview)condition.textContent=resultCondition(rows);
   drawResultFigure(document.getElementById('trajectoryFigure'),rows);
   summary.textContent=rows.map(row=>row.angle+'° · 최고 높이 '+cells(row.height)+' · 가로 거리 '+cells(row.distance)+
     (row.matched?' · 이 각도의 예상점과 실제 착탄점이 일치했어요.':' · 이 각도의 예상점과 실제 착탄점을 비교해 보세요.')).join(' ');
   const finding=document.getElementById('lessonFinding'),paired=!!result.lesson&&rows.length===2;
-  finding.hidden=!paired;
+  finding.hidden=!paired||quickReview;
   if(paired)finding.textContent=explainLessonFinding(rows,result.lesson.guess)+' 짝 대전에서는 언덕을 넘기려면 어떤 각도가 좋을지 시험해 보세요.';
   document.getElementById('resultPair').hidden=!paired||result!==practice;
+  document.getElementById('practiceObservationGroup').hidden=quickReview;
+  document.getElementById('practiceResultFooter').hidden=quickReview;
   observationInput.value=result.observation;
   openGameDialog(practiceResult);
   document.getElementById('practiceResultScroll').scrollTop=0;
@@ -224,21 +239,22 @@ document.getElementById('lessonClose').addEventListener('click',()=>lessonIntro.
 lessonIntro.addEventListener('change',()=>{lessonBegin.disabled=!lessonIntro.querySelector('input:checked')});
 lessonIntro.addEventListener('close',()=>{
   closeGameDialog();
-  const draft=afterLessonIntro;
+  const resume=afterLessonIntro;
   afterLessonIntro=null;
-  if(draft)openLessonDraft(draft);
+  if(resume)resume();
 });
 function launchLessonDraft(draft){
   requestGameFullscreen();
   applyClassroomAudio(sharedLessonLink);
   ensureAudio();
-  afterLessonIntro=draft;
+  afterLessonIntro=()=>openLessonDraft(draft);
   lessonIntro.close();
 }
 lessonBegin.addEventListener('click',()=>{
   const choice=lessonIntro.querySelector('input:checked');
   if(!choice)return;
   blockedStorageKeys.delete(LESSON_KEY);
+  clearPairCheckpoint();
   launchLessonDraft({version:1,guess:choice.value,shots:[],observation:''});
 });
 document.getElementById('lessonRestart').addEventListener('click',()=>{
@@ -252,13 +268,15 @@ document.getElementById('lessonRevealAngle').addEventListener('click',()=>{
   updateHUD();
 });
 document.getElementById('practiceLarge').addEventListener('click',()=>showPracticeResult());
-document.getElementById('pairLessonReview').addEventListener('click',()=>{
+function showSavedLessonResult(quickReview=false){
   if(!recentLesson?.shots[1])return;
   showPracticeResult({
     ...restoreLessonShot(recentLesson.shots[1]),previous:restoreLessonShot(recentLesson.shots[0]),
     lesson:{guess:recentLesson.guess},observation:recentLesson.observation,complete:true
-  });
-});
+  },{quickReview});
+}
+document.getElementById('pairLessonReview').addEventListener('click',()=>showSavedLessonResult());
+document.getElementById('pairReadyStudy').addEventListener('click',()=>{if(pairNeedsReady)showSavedLessonResult(true)});
 document.getElementById('practicePair').addEventListener('click',startPairBattle);
 document.getElementById('resultPair').addEventListener('click',startPairBattle);
 document.getElementById('practiceResultClose').addEventListener('click',()=>practiceResult.close());

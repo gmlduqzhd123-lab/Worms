@@ -311,17 +311,29 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
 #pairResult{margin:8px 0;font-size:13px;color:#d6e8f2}
 #pairReadyPanel{
   position:absolute;left:50%;bottom:calc(15px + var(--safe-bottom));transform:translateX(-50%);
-  display:flex;align-items:center;gap:12px;justify-content:space-between;
-  width:min(530px,calc(100% - var(--safe-left) - var(--safe-right) - 16px));
+  display:grid;gap:7px;
+  width:min(580px,calc(100% - var(--safe-left) - var(--safe-right) - 16px));
   padding:10px 12px;z-index:6;border:1px solid #90adbc;border-radius:12px;background:#0b2438f5;pointer-events:auto;
 }
 #pairReadyTitle{margin:0 0 4px;color:#ffe49b;font-size:16px}
 #pairReadyPanel p{margin:0;font-size:12px;line-height:1.4}
-#pairReadyAction{flex:none;min-height:42px;white-space:nowrap}
+.pairReadyControls{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pairReadyControls [role="group"]{display:flex;gap:5px}
+.pairReadyControls .toolBtn{padding:6px 8px;font-size:12px;white-space:nowrap}
+.pairReadyControls [aria-pressed="true"]{background:#ffe49b;color:#172d40}
+#pairReadyAction{margin-left:auto;flex:none;min-height:40px;white-space:nowrap}
+#pairReadyStatus{color:#cde5ef}
 #ui.waitingForPair :is(#weaponDock,#mobile,#utilityControls){visibility:hidden}
+#resultPanel{max-height:calc(var(--app-height) - var(--safe-top) - var(--safe-bottom) - 20px);overflow-y:auto}
+#pairShotMap{display:block;width:100%;height:auto;margin-top:7px;border-radius:6px;border:1px solid #7392a3}
 #pairReflection h3{margin:12px 0 5px;color:#ffe49b;font-size:14px}
-#pairReflection ul{margin:0;padding:0;list-style:none;font-size:13px}
+#pairReflection ul{margin:0;padding:0;list-style:none;font-size:13px;line-height:1.5}
 #pairReflection p{margin:6px 0 0;font-size:13px}
+.lessonSavedLabel{font-weight:800;color:#ffe49b}
+#pairSaved{border:1px solid #6d8fa3;border-radius:8px;padding:5px 8px}
+#pairSaved p{margin:4px 0}
+#pairResumeStatus:empty{display:none}
+#practiceCondition{margin:2px 0 6px;color:#ffe49b;font-size:13px;font-weight:700}
 #lessonReadAngle{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;font-size:12px}
 #lessonRevealAngle{min-height:32px;padding:4px 9px;pointer-events:auto}
 #ui.readingAngle #angleControls :is(#aimMinus,#aimPreset,#aimPlus){display:none}
@@ -333,6 +345,14 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
 #practiceDownloadStatus{margin:3px 0 0;font-size:12px;color:#ffe49b}
 #practiceDownloadStatus:empty{display:none}
 @media(max-height:400px){
+  #resultPanel:has(#pairReflection:not([hidden])){width:min(520px,92vw);padding:9px 12px}
+  #resultPanel:has(#pairReflection:not([hidden])) h2{font-size:19px}
+  #resultPanel:has(#pairReflection:not([hidden])) #matchSummary{padding:5px 8px}
+  #pairShotMap{max-height:62px;object-fit:contain}
+  #pairReflection h3{margin-top:5px}
+  #pairReflection ul,#pairReflection p{font-size:11px}
+  #resultPanel:has(#pairReflection:not([hidden])) .dialogActions{margin-top:8px;gap:5px}
+  #resultPanel:has(#pairReflection:not([hidden])) .btn{padding:7px 8px;font-size:11px}
   #practicePanel:has(#lessonReadAngle:not([hidden])){padding:7px 10px}
   #practicePanel:has(#lessonReadAngle:not([hidden])) #practiceTitle{display:none}
   #practicePanel:has(#lessonReadAngle:not([hidden])) #practiceStep{font-size:11px}

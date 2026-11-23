@@ -128,14 +128,14 @@ function updateHUD(){
   setHUDText(ui.timer,timer);
   setHUDAttribute(ui.timer,'data-phase',phase.id);
   setHUDAttribute(ui.timer,'aria-label',phase.text+' · '+timer);
-  const pairProgress=pairedLessonBattle?' · 짝 대전 '+turnNo+'/'+LESSON_PAIR_TURNS+'턴':'';
+  const pairProgress=pairedLessonBattle?' · 짝 대전 '+turnNo+'/'+pairTurnLimit+'턴':'';
   setHUDText(ui.wind,'바람 '+arrow+' '+windSpeed+(pairProgress||' · '+turnNo+'턴'));
 
   const aimPhase=phase.id==='aim'||phase.id==='charge';
   const status=aimPhase?(mobile?turn:turn+' · '+phase.text):phase.text;
   const mobileStatus={resolve:{'공격 진행 중':'발사 중','체력 감소 표시 중':'피해 표시','사망 연출 중':'전투 연출','충돌 화면 확인':'착탄 확인 중'}[phase.text],retreat:'후퇴',handoff:'턴 교대'}[phase.id]||status;
   setHUDText(ui.subhud,mobile
-    ?(practice?(practice.lesson?'각도 탐구':'한 발 연습')+' · 바람 없음':wormIntro?mobileStatus:mobileStatus+' · 바람 '+arrow+' '+windSpeed+(pairedLessonBattle?' · '+turnNo+'/'+LESSON_PAIR_TURNS+'턴':''))
+    ?(practice?(practice.lesson?'각도 탐구':'한 발 연습')+' · 바람 없음':wormIntro?mobileStatus:mobileStatus+' · 바람 '+arrow+' '+windSpeed+(pairedLessonBattle?' · '+turnNo+'/'+pairTurnLimit+'턴':''))
     :status+(sudden?' · 수위 상승':''));
   setHUDAttribute(hud.top,'data-team',String(activeTeam));
   setHUDFlag(hud.session,'hidden',!started);
@@ -143,8 +143,13 @@ function updateHUD(){
   setHUDFlag(readyPanel,'hidden',!pairNeedsReady||paused||gameOver);
   if(hud.root.classList.contains('waitingForPair')!==pairNeedsReady)hud.root.classList.toggle('waitingForPair',pairNeedsReady);
   if(pairNeedsReady){
-    setHUDText(document.getElementById('pairReadyTitle'),(activeTeam+1)+'P 차례 · '+turnNo+'/'+LESSON_PAIR_TURNS+'턴');
+    setHUDText(document.getElementById('pairReadyTitle'),(activeTeam+1)+'P 차례 · '+turnNo+'/'+pairTurnLimit+'턴');
     setHUDText(document.getElementById('pairReadyAction'),(activeTeam+1)+'P 준비');
+    for(const button of readyAngles)setHUDAttribute(button,'aria-pressed',String(Number(button.dataset.pairAngle)===pairPlannedAngle));
+    setHUDFlag(document.getElementById('pairReadyStudy'),'hidden',!recentLesson?.shots[1]);
+    const startAngle=pairPlannedAngle===null?'기본 45°':pairPlannedAngle+'°';
+    setHUDText(document.getElementById('pairReadyStatus'),startAngle+'로 시작해요. 발사 버튼을 길게 눌러 힘을 조절해요.'+
+      (pairStored?'':' 이 차례는 이 브라우저에 저장되지 않았어요.'));
   }
   const aimGuide=canShowAimGuide(),canChoose=canSelectWeapon();
   if(hud.root.classList.contains('aiming')!==aimGuide)hud.root.classList.toggle('aiming',aimGuide);

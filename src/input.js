@@ -88,12 +88,12 @@ document.getElementById('practiceRetry').addEventListener('click',()=>retryPract
 document.getElementById('practiceCompare').addEventListener('click',()=>retryPractice(true));
 document.getElementById('practicePrevious').addEventListener('click',togglePreviousPractice);
 document.getElementById('practiceHome').addEventListener('click',returnToStart);
-document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame({pairPractice:pairedLessonBattle})});
+document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame({pairPractice:pairedLessonBattle,pairTurns:pairTurnLimit})});
 document.getElementById('resultHome').addEventListener('click',returnToStart);
 document.getElementById('quitBtn').addEventListener('click',()=>{
   if(!started)return;
   const message=practice?.lesson?'시작 화면으로 돌아갑니다. 완료한 발사 지점까지 다시 이어할 수 있습니다.':
-    pairedLessonBattle?'현재 짝 대전을 끝냅니다. 최근 탐구 결과는 각도 탐구에서 다시 열 수 있습니다.':
+    pairedLessonBattle?'시작 화면으로 돌아갑니다. 마지막으로 저장된 준비 화면은 각도 탐구에서 다시 열 수 있습니다.':
     '현재 대전을 끝내고 시작 화면으로 돌아갑니다. 진행 중인 대전은 저장되지 않으며 기존 설정과 완료한 대전 기록은 유지됩니다.';
   document.getElementById('quitDetails').textContent=message;
   openGameDialog(document.getElementById('quitDialog'));

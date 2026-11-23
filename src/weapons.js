@@ -62,8 +62,9 @@ function createBallistic(type,w,pwr,ang,face,target=null){
     vx:Math.cos(rad)*face*speed,vy:Math.sin(rad)*speed,r:rule.r,life:rule.life,bounce:rule.bounce||0,owner:w,target}
 }
 function spawnBallistic(type,w,pwr,ang,face,target=null){
-  recordPairShot(type,ang,pwr);
-  projectiles.push(createBallistic(type,w,pwr,ang,face,target));commitAttack();
+  const shot=createBallistic(type,w,pwr,ang,face,target),report=recordPairShot(type,ang,pwr);
+  if(report)shot.pairReport=report;
+  projectiles.push(shot);commitAttack();
   playSFX(['grenade','banana','sacred','cluster'].includes(type)?'throw':type==='homing'?'homing':type==='mortar'?'mortar':'launch')
 }
 // Shared by live projectiles and CPU prediction. Only the projectile is mutated.
@@ -119,8 +120,9 @@ function getShotPreview(){
   const value={...trace,type,power,angle:aim,face:facing};shotPreviewCache={key,value};return value;
 }
 function shootShotgun(w,pwr){
-  recordPairShot('shotgun',aim,pwr);
+  const report=recordPairShot('shotgun',aim,pwr);
   const trace=traceShotgun(w,pwr,aim,facing),{x,y}=trace.end,hit=trace.hit;
+  if(report)report.landing={...trace.end};
   rememberImpact(x,y);carve(x,y,15);burst(x,y,'#ffe3a0',9);if(hit)damage(hit,25,(hit.x-w.x>0?1:-1)*1.8,-1.4);shotgunRemain--;playSFX('shotgun');
   if(shotgunRemain>0)toast('확산포 1발 남음',800);else{startRetreat(2.6)}
 }
@@ -207,6 +209,7 @@ function projectileStep(p,dt){
     p.life-=dt;p.y+=p.vy*dt*60;carve(p.x,p.y,8);if(p.life<=1e-9||p.y>waterY){explode(p.x,p.y,58,52,'drill');return true}return false
   }
   const bounces=p.bounce,event=advanceBallistic(p,dt);if(p.bounce<bounces)playSFX('bounce');if(!event)return false;
+  if(p.pairReport)p.pairReport.landing={x:p.x,y:p.y,event};
   if(event==='water'){playSFX('splash');burst(p.x,waterY,'#9eeeff',12);return true}
   if(event==='bounds')return true;
   if(['banana','cluster'].includes(p.type)){splitBomb(p,weaponBalance[p.type].children);return true}

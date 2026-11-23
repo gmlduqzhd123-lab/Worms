@@ -51,12 +51,12 @@ function canJumpCurrent(){return canMoveCurrent()&&!rope&&!jetpack}
 function canAimCurrent(){return canPlayerAct()&&!turnLocked&&!projectiles.length&&!walkers.length&&retreatUntil<=gameNow}
 function canEndCurrentTurn(){return !practice&&canAimCurrent()&&!charging}
 
-function startGame({training=false,previous=null,lockedPower=null,startingAngle=null,lesson=null,pairPractice=false}={}){
+function startGame({training=false,previous=null,lockedPower=null,startingAngle=null,lesson=null,pairPractice=false,pairTurns=4,restoredPair=null}={}){
   const fieldHeight=training?(previous?.fieldHeight??(lesson?820:Math.max(820,Math.round(VH*1.18)))):null;
   practice=training?{fieldHeight,previous,lesson,observation:'',showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
   pairedLessonBattle=pairPractice;
-  pairNeedsReady=false;pairLastShots=[null,null];
-  applyClassroomAudio(!!lesson?.shared||(pairPractice&&!!classroomAudioBase));
+  pairTurnLimit=pairTurns===2?2:4;pairPlannedAngle=null;pairNeedsReady=false;pairLastShots=[null,null];
+  applyClassroomAudio(!!lesson?.shared||(pairPractice&&(!!classroomAudioBase||!!restoredPair?.checkpoint.classroom)));
   setHUDText(document.getElementById('practiceTitle'),lesson?'각도 탐구':'한 발 연습');
   document.getElementById('pairResult').hidden=true;
   document.getElementById('pairReflection').hidden=true;
@@ -80,21 +80,27 @@ function startGame({training=false,previous=null,lockedPower=null,startingAngle=
   teams.forEach(t=>t.ammo={...defaultAmmo});turnSec=pairPractice?35:+document.getElementById('turnTime').value;sdAt=+document.getElementById('sdTurn').value;
   crateRate=pairPractice?0:+document.getElementById('crateRate').value;initialMineCount=pairPractice?0:+document.getElementById('mineCount').value;
   ui.nameA.textContent=teams[0].name;ui.nameB.textContent=teams[1].name;
-  buildWorld(pairPractice?2.5:+document.getElementById('mapSize').value,fieldHeight,
-    lesson||pairPractice?'coast':document.getElementById('mapTheme').value);
-  if(training){
-    const bot=createWorm(0,0,650);
-    bot.name='연습봇';bot.y=Math.round(WH*.7)-bot.r+.2;
-    teams[0].worms=[bot];teams[1].worms=[];
-  }else{placeWorms(pairPractice?2:undefined);seedMines(initialMineCount)}
+  if(restoredPair)restorePairWorld(restoredPair.checkpoint,restoredPair.image);
+  else{
+    buildWorld(pairPractice?2.5:+document.getElementById('mapSize').value,fieldHeight,
+      lesson||pairPractice?'coast':document.getElementById('mapTheme').value);
+    if(training){
+      const bot=createWorm(0,0,650);
+      bot.name='연습봇';bot.y=Math.round(WH*.7)-bot.r+.2;
+      teams[0].worms=[bot];teams[1].worms=[];
+    }else{placeWorms(pairPractice?2:undefined);seedMines(initialMineCount)}
+  }
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
-  activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
+  activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;
+  if(!restoredPair)waterY=baseWater;
+  document.getElementById('pauseBtn').textContent='⏸ 일시정지';
   selected='bazooka';ui.overlay.style.display='none';turnLeft=turnSec;turnStart=gameNow;ensureAudio();
   if(training){
     beginTurn();
     if(startingAngle!==null){aim=-startingAngle;updateHUD()}
     canvas.focus();last=performance.now()
-  }else if(pairPractice){last=performance.now();beginTurn()}else beginWormIntro();
+  }else if(restoredPair)resumePairTurn(restoredPair.checkpoint);
+  else if(pairPractice){clearPairCheckpoint();last=performance.now();beginTurn()}else beginWormIntro();
   syncMobileOrientation();
 }
 
@@ -118,14 +124,14 @@ function completeWormIntro(){
 
 function beginTurn(){
   if(gameOver)return;if(!practice&&(!living(0).length||!living(1).length)){finishGame();return}
-  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;
+  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;pairPlannedAngle=null;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;
   if(!practice){if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate()}
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=practice?0:rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
   const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${mode==='pvp'?playerTurnLabel():teams[activeTeam].name} · ${w.name}`,1200);if(!pairNeedsReady)playSFX('turn');updateHUD();
   initialBattleView=!practice&&turnNo===1;if(initialBattleView)fitBattleView();
-  if(pairNeedsReady)document.getElementById('pairReadyAction').focus();
+  if(pairNeedsReady){savePairCheckpoint();document.getElementById('pairReadyAction').focus()}
   if(isCPU())scheduleAI()
 }
 function startPairedTurn(){
@@ -134,10 +140,12 @@ function startPairedTurn(){
   clearInput();
   turnStart=gameNow;physicsAccumulator=0;last=performance.now();
   updateHUD();canvas.focus();
+  ensureAudio();
   playSFX('turn');
 }
 function recordPairShot(weapon,angle,power){
-  if(pairedLessonBattle)pairLastShots[activeTeam]={weapon,angle:Math.round(-angle),power:Math.round(power*100)};
+  if(!pairedLessonBattle)return null;
+  return pairLastShots[activeTeam]={weapon,angle:Math.round(-angle),power:Math.round(power*100),wind,landing:null};
 }
 
 function returnToStart(){
@@ -165,7 +173,7 @@ function nextTurn(delay=900){
   cancelCombat(aiTimer);aiBusy=false;
   const handoff=()=>{
     if(combatUnsettled()||presentationPending()){scheduleCombat(handoff,100);return}
-    if(pairedLessonBattle&&turnNo>=LESSON_PAIR_TURNS){finishGame();return}
+    if(pairedLessonBattle&&turnNo>=pairTurnLimit){finishGame();return}
     activeIdx[activeTeam]=(activeIdx[activeTeam]+1)%teams[activeTeam].worms.length;activeTeam=1-activeTeam;beginTurn()
   };
   scheduleCombat(handoff,delay)
@@ -180,26 +188,27 @@ function finishGame(){
   if(gameOver)return;
   cpuWalk=null;cpuStatus='';gameOver=true;turnLocked=true;clearInput();combatTasks=[];pendingEmissions=0;cancelCombat(aiTimer);
   const winner=matchWinner(),msg=winner===null?'무승부!':teams[winner].name+' 승리!';
-  recordMatchResult();stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
+  recordMatchResult();if(pairedLessonBattle)clearPairCheckpoint(matchId);
+  stopSFX();playSFX('victory');bigBanner(msg,2300);ui.turnLabel.textContent=msg;
   const finishedMatch=matchId;
   setTimeout(()=>{
     if(!gameOver||matchId!==finishedMatch)return;
-    document.getElementById('resultTitle').textContent=msg;
+    const resultTitle=document.getElementById('resultTitle'),panel=document.getElementById('resultPanel');
+    resultTitle.textContent=msg;
     const pairResult=document.getElementById('pairResult');
     pairResult.hidden=!pairedLessonBattle;
     if(pairedLessonBattle){
       pairResult.textContent='짝 대전 · 남은 체력으로 결과를 정했어요.';
       document.getElementById('pairReflection').hidden=false;
-      for(let i=0;i<pairLastShots.length;i++){
-        const shot=pairLastShots[i];
-        document.getElementById('pairShot'+(i+1)).textContent=(i+1)+'P · '+(shot?weaponNames[shot.weapon]+' '+shot.angle+'° · 힘 '+shot.power+'%':'조준 발사 기록 없음');
-      }
+      renderPairReflection();
       document.getElementById('pairLessonReview').hidden=!recentLesson?.shots[1];
     }
     document.getElementById('panel').hidden=true;
-    document.getElementById('resultPanel').hidden=false;
+    panel.hidden=false;
     ui.overlay.style.display='flex';
-    document.getElementById('rematch').focus();
+    panel.scrollTop=0;
+    if(pairedLessonBattle)resultTitle.focus({preventScroll:true});
+    else document.getElementById('rematch').focus();
   },2100)
 }
 function startSuddenDeath(){sudden=true;playSFX('sudden');bigBanner('갑작스러운 죽음!',1700);toast('수위가 상승하기 시작합니다!',2200)}

@@ -49,7 +49,7 @@ function renderHistory(){
   if(!matchHistory.length){const p=document.createElement('p');p.textContent='아직 완료한 대전이 없습니다. 끝까지 플레이하면 결과가 여기에 남습니다.';list.append(p);return}
   for(const r of matchHistory){const item=document.createElement('article');item.className='historyItem';const title=document.createElement('strong');title.textContent=r.winner===null?'무승부':r.teams[r.winner].name+' 승리';const detail=document.createElement('p');detail.textContent=r.teams.map(t=>t.name+' '+t.hp+'HP').join(' vs ')+' · '+r.turns+'턴 · '+formatDuration(r.seconds);const date=document.createElement('small');date.textContent=new Date(r.savedAt).toLocaleString('ko-KR')+' · '+(r.mode==='cpu'?'CPU 대전':'로컬 대전');item.append(title,detail,date);list.append(item)}
 }
-function openGameDialog(dialog){modalReturnFocus=document.activeElement;modalPauseOwned=started&&!paused&&!gameOver;if(modalPauseOwned)setPaused(true);dialog.showModal()}
+function openGameDialog(dialog){modalReturnFocus=document.activeElement;modalPauseOwned=started&&!paused&&!gameOver&&!pairNeedsReady;if(modalPauseOwned)setPaused(true);dialog.showModal()}
 function closeGameDialog(){if(modalPauseOwned&&!gameOver)setPaused(false);modalPauseOwned=false;modalReturnFocus?.focus()}
 const GUIDE_STEPS=[
   {title:'작은 전장, 큰 한 수',body:'두 팀이 번갈아 움직입니다. 상대 팀을 모두 쓰러뜨리거나 물에 빠뜨리면 승리합니다. 코랄 탐사대와 민트 탐사대의 전장을 시작해 보세요.',hint:'기본 모드는 플레이어 vs PC입니다. 처음에는 CPU 난이도 쉬움과 작은 맵으로 조작을 익혀 보세요. 함께 플레이하려면 2인 로컬 대전을 선택하세요.',icon:'target'},
