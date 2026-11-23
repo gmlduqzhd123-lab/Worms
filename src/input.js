@@ -34,7 +34,7 @@ addEventListener('keydown',e=>{
   if(e.shiftKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(!e.repeat)nudgeAim(e.key==='ArrowUp'?1:-1);return}
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
-  if(e.key==='Enter'&&!paused&&!turnLocked&&!isCPU()&&retreatUntil===0)nextTurn(0);
+  if(e.key==='Enter'&&canEndCurrentTurn())nextTurn(0);
   if(e.key==='c'||e.key==='C')followWorm();if(e.key==='m'||e.key==='M')toggleOverview();if(e.key==='+'||e.key==='=')setCameraZoom(cameraZoom*1.2);if(e.key==='-')setCameraZoom(cameraZoom/1.2);
   if(['1','2','3','4','5','6','7','8','9'].includes(e.key))selectWeapon(['bazooka','grenade','shotgun','banana','sacred','cluster','homing','mortar','airstrike'][+e.key-1])
 });
@@ -75,7 +75,7 @@ document.getElementById('zoomIn').addEventListener('click',()=>setCameraZoom(cam
 document.getElementById('zoomOut').addEventListener('click',()=>setCameraZoom(cameraZoom/1.2));
 document.getElementById('overviewBtn').addEventListener('click',toggleOverview);
 document.getElementById('followBtn').addEventListener('click',followWorm);
-document.getElementById('endTurnBtn').addEventListener('click',()=>{if(started&&!paused&&!turnLocked&&!isCPU()&&retreatUntil===0)nextTurn(0)});
+document.getElementById('endTurnBtn').addEventListener('click',()=>{if(canEndCurrentTurn())nextTurn(0)});
 
 document.querySelectorAll('.weapon').forEach(b=>b.addEventListener('click',()=>{playSFX('click');selectWeapon(b.dataset.w)}));
 document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paused));
@@ -83,7 +83,9 @@ document.getElementById('musicBtn').addEventListener('click',()=>setMusic(!music
 document.getElementById('sfxBtn').addEventListener('click',()=>setSfx(!sfxEnabled));
 document.getElementById('start').addEventListener('click',()=>{requestGameFullscreen();startGame()});
 document.getElementById('practiceStart').addEventListener('click',()=>{requestGameFullscreen();startGame({training:true})});
-document.getElementById('practiceRetry').addEventListener('click',()=>startGame({training:true,repeat:true}));
+document.getElementById('practiceRetry').addEventListener('click',()=>retryPractice(false));
+document.getElementById('practiceCompare').addEventListener('click',()=>retryPractice(true));
+document.getElementById('practicePrevious').addEventListener('click',togglePreviousPractice);
 document.getElementById('practiceHome').addEventListener('click',returnToStart);
 document.getElementById('rematch').addEventListener('click',()=>{requestGameFullscreen();startGame()});
 document.getElementById('resultHome').addEventListener('click',returnToStart);
@@ -94,14 +96,23 @@ document.getElementById('quitConfirm').addEventListener('click',()=>{returnToSta
 document.getElementById('battleOptions').addEventListener('click',e=>{if(document.documentElement.dataset.mobile==='true'&&e.target.closest('#helpAccess button,#cameraControls button'))document.getElementById('battleOptions').open=false});
 document.getElementById('aimMinus').addEventListener('click',()=>nudgeAim(-1));
 document.getElementById('aimPlus').addEventListener('click',()=>nudgeAim(1));
-document.getElementById('aimPreset').addEventListener('change',e=>{if(e.target.value!=='custom')setAimElevation(Number(e.target.value))});
+const aimPreset=document.getElementById('aimPreset');
+let aimPresetUsedMouse=false;
+aimPreset.addEventListener('pointerdown',e=>{aimPresetUsedMouse=e.pointerType==='mouse'});
+aimPreset.addEventListener('keydown',()=>{aimPresetUsedMouse=false});
+aimPreset.addEventListener('blur',()=>{aimPresetUsedMouse=false});
+aimPreset.addEventListener('change',()=>{
+  const returnFocus=aimPresetUsedMouse;
+  aimPresetUsedMouse=false;
+  if(aimPreset.value!=='custom'&&setAimElevation(Number(aimPreset.value))&&returnFocus)canvas.focus({preventScroll:true});
+});
 document.getElementById('previewFitBtn').addEventListener('click',togglePreviewFit);
 const heldControls=new Map();
 function controlKey(action){return{left:'a',right:'d',aimup:'ArrowUp',aimdown:'ArrowDown',rise:'w',descend:'s',ropein:'w',ropeout:'s'}[action]}
 function syncHeldKeys(){for(const k of ['a','d','ArrowUp','ArrowDown','w','s'])keys[k]=[...heldControls.values()].some(a=>controlKey(a)===k)}
 document.querySelectorAll('.ctrl').forEach(btn=>{
   const action=btn.dataset.act;btn.addEventListener('contextmenu',e=>e.preventDefault());
-  btn.addEventListener('pointerdown',e=>{e.preventDefault();if(heldControls.has(e.pointerId)||!started||paused||gameOver||wormIntro)return;btn.setPointerCapture(e.pointerId);heldControls.set(e.pointerId,action);syncHeldKeys();if(action==='jump')jump();if(action==='fire')fireStart()});
+  btn.addEventListener('pointerdown',e=>{e.preventDefault();if(heldControls.has(e.pointerId)||btn.disabled||!canPlayerAct())return;btn.setPointerCapture(e.pointerId);heldControls.set(e.pointerId,action);syncHeldKeys();if(action==='jump')jump();if(action==='fire')fireStart()});
   function release(e,cancelled){if(!heldControls.has(e.pointerId))return;heldControls.delete(e.pointerId);syncHeldKeys();if(action==='fire'){if(cancelled){charging=false;ui.powerBox.classList.remove('show')}else fireEnd()}}
   btn.addEventListener('pointerup',e=>release(e,false));btn.addEventListener('pointercancel',e=>release(e,true));btn.addEventListener('lostpointercapture',e=>release(e,true));
 });

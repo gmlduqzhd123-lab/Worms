@@ -18,7 +18,7 @@ function moveBody(w,dx,dy,stepUp=false){
   w.onGround=hitDown||pointBlocked(w.x,w.y+w.r+.2);return hitDown
 }
 function wormStep(w,dt){
-  if(!w.alive)return;const cw=current(),deploying=deploymentRetreatActive(),can=started&&!paused&&!gameOver&&(!turnLocked||deploying)&&w===cw&&(projectiles.length===0||deploying)&&walkers.length===0&&!isCPU();
+  if(!w.alive)return;const cw=current(),can=w===cw&&canMoveCurrent();
   w.knockTime=Math.max(0,(w.knockTime||0)-dt);
   if(jetpack&&w===cw&&can){
     jetFuel-=dt;if(keys.a){w.vx-=.16;facing=-1}if(keys.d){w.vx+=.16;facing=1}
@@ -49,7 +49,8 @@ function updateMines(dt){
     else if(gameNow>=(m.armAt??0)&&teams.some(t=>t.worms.some(w=>w.alive&&dist(m.x,m.y,w.x,w.y)<38))){m.timer=.65;playSFX('mine')}}
 }
 function jump(){
-  const w=current(),deploying=deploymentRetreatActive();if(!w||!w.alive||paused||(turnLocked&&!deploying)||(projectiles.length&&!deploying)||walkers.length||gameOver||isCPU()||rope||jetpack)return;
+  if(!canJumpCurrent())return;
+  const w=current();
   if(w.onGround){w.vy=JUMP;w.onGround=false;w.jumpAt=gameNow;w.jumpState=1;playSFX('jump')}
   else if(w.jumpState===1&&gameNow-w.jumpAt<=330){w.vy=-6.25;w.vx=-facing*2.6;w.knockTime=.4;w.jumpState=2;toast('백플립!',600);playSFX('jump')}
 }

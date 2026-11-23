@@ -54,8 +54,7 @@ function drawHealthLabel(w,x,y){
 // Aim elevation is measured from the horizontal in the worm's facing direction.
 // Keep this HUD in screen pixels so camera zoom cannot shrink the degree labels.
 function canShowAimGuide(){
- const w=current();
- return !!(w?.alive&&started&&!paused&&!wormIntro&&!gameOver&&!overview&&!turnLocked&&!turnEnding&&retreatUntil<=gameNow&&!isCPU()&&!projectiles.length&&!walkers.length&&(!targetMode||targetMode==='homing')&&!rope&&!jetpack&&['bazooka','grenade','shotgun','banana','sacred','cluster','mortar','homing','rope'].includes(selected));
+ return canAimCurrent()&&!overview&&(!targetMode||targetMode==='homing')&&!rope&&!jetpack&&['bazooka','grenade','shotgun','banana','sacred','cluster','mortar','homing','rope'].includes(selected);
 }
 function aimGuideState(){
  if(!canShowAimGuide())return null;const w=current();

@@ -2,7 +2,7 @@
 <html lang="ko" data-qr-url="https://gmlduqzhd123-lab.github.io/Worms/" data-qr-name="조준! 각도왕">
 <head>
 <meta charset="UTF-8"/>
-<meta name="wormfront-version" content="31">
+<meta name="wormfront-version" content="32">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>조준! 각도왕</title>
 <link rel="stylesheet" href="./styles/game.css">
@@ -68,10 +68,10 @@
   <div id="utilityControls"><button class="toolBtn ctrl" data-act="rise" aria-label="쌍날개팩 상승">상승</button><button class="toolBtn ctrl" data-act="descend" aria-label="쌍날개팩 하강">하강</button><button class="toolBtn ctrl" data-act="ropein" aria-label="로프 줄이기">로프 −</button><button class="toolBtn ctrl" data-act="ropeout" aria-label="로프 늘리기">로프 ＋</button><button class="toolBtn" id="endTurnBtn">턴 넘김</button></div>
   <div id="powerBox"><div id="power"></div></div>
   <section id="wormIntro" hidden aria-label="각도봇 위치 소개"><div><strong>전장 둘러보기 <span id="introProgress"></span></strong><p id="introName"></p></div><button class="btn primary" id="skipIntro">바로 전투</button></section>
-  <p id="fireCoach" hidden></p>
   <section id="practicePanel" aria-labelledby="practiceTitle" hidden>
     <h2 id="practiceTitle">한 발 연습</h2><p id="practiceStep" role="status"></p>
-    <div id="practiceActions" hidden><button type="button" class="btn ghost" id="practiceHome">시작 화면</button><button type="button" class="btn primary" id="practiceRetry">한 발 더</button></div>
+    <div id="practicePreviousRow" hidden><p id="practicePreviousInfo" hidden></p><button type="button" class="toolBtn" id="practicePrevious" aria-pressed="false">이전 탄도</button></div>
+    <div id="practiceActions" hidden><button type="button" class="btn ghost" id="practiceHome">시작 화면</button><button type="button" class="btn ghost" id="practiceRetry">한 발 더</button><button type="button" class="btn primary" id="practiceCompare">같은 힘으로 60° 쏘기</button></div>
   </section>
 
   <div id="minimapWrap"><canvas id="minimap"></canvas></div>
@@ -84,7 +84,7 @@
 
   <div id="mobile">
     <div class="pad movementPad"><button class="ctrl" data-act="left" aria-label="왼쪽 이동">◀</button><button class="ctrl" data-act="jump" aria-label="점프">⤒</button><button class="ctrl" data-act="right" aria-label="오른쪽 이동">▶</button></div>
-    <div class="pad firePad"><button class="ctrl" data-act="aimup" aria-label="조준 높이기">↗</button><button class="ctrl" data-act="fire" aria-label="발사"><span id="fireButtonText">발사</span></button><button class="ctrl" data-act="aimdown" aria-label="조준 낮추기">↘</button></div>
+    <div class="pad firePad"><button class="ctrl" data-act="aimup" aria-label="조준 높이기">↗</button><button class="ctrl" data-act="fire" aria-label="발사" aria-describedby="fireCoach"><span id="fireButtonText">발사</span><span id="fireCoach" hidden>길게 눌러 놓기</span></button><button class="ctrl" data-act="aimdown" aria-label="조준 낮추기">↘</button></div>
   </div>
 
   <div id="weaponDock">

@@ -33,6 +33,14 @@ function trajectoryLabelPosition(x,y,width){
   return null;
 }
 function drawTrajectory(){
+  if(practice?.showPrevious){
+    ctx.save();
+    strokeShotPath(practice.previous.path,'#d6a5ff',3,[3,6]);
+    const end=practice.previous.impact;
+    ctx.strokeStyle='#e3bfff';ctx.lineWidth=2/cameraZoom;ctx.beginPath();
+    ctx.arc(screenX(end.x),screenY(end.y),10/cameraZoom,0,2*Math.PI);
+    ctx.stroke();ctx.restore();
+  }
   if(practice?.complete){
     ctx.save();
     strokeShotPath(practice.prediction.points,'#ffe49b',7,[6,6]);

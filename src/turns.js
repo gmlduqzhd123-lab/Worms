@@ -1,7 +1,10 @@
 'use strict';
 
+function wormName(team,idx){
+  return mode==='pvp'?`${team+1}P 봇 ${idx+1}`:`${team===0?'내캐릭':'NPC'}${idx+1}`;
+}
 function createWorm(team,idx,x){
-  return{team,idx,name:`${team===0?'내캐릭':'NPC'}${idx+1}`,x,y:groundY(x)-10,vx:0,vy:0,r:9,hp:100,alive:true,onGround:true,hurt:0}
+  return{team,idx,name:wormName(team,idx),x,y:groundY(x)-10,vx:0,vy:0,r:9,hp:100,alive:true,onGround:true,hurt:0}
 }
 const SPAWN_GAP=150;
 function safeSpawn(team,idx,desired,left,right){
@@ -23,7 +26,7 @@ function placeWorms(){
   const order=Array.from({length:total},(_,i)=>i<n?0:1);
   for(let attempt=0;attempt<24;attempt++){for(let i=total-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}if(n===1||order.slice(1).filter((t,i)=>t!==order[i]).length>=2)break;if(attempt===23)order.forEach((_,i)=>order[i]=i%2)}
   teams.forEach(t=>t.worms=[]);
-  spots.forEach((w,i)=>{const team=order[i],idx=teams[team].worms.length;Object.assign(w,{team,idx,name:`${team===0?'내캐릭':'NPC'}${idx+1}`});teams[team].worms.push(w)});
+  spots.forEach((w,i)=>{const team=order[i],idx=teams[team].worms.length;Object.assign(w,{team,idx,name:wormName(team,idx)});teams[team].worms.push(w)});
 }
 function living(t){return teams[t].worms.filter(w=>w.alive)}
 function teamHP(t){return living(t).reduce((s,w)=>s+w.hp,0)}
@@ -34,10 +37,24 @@ function current(){
   return null
 }
 function isCPU(){return mode==='cpu'&&activeTeam===1}
+function playerTurnLabel(){
+  return mode==='pvp'?(activeTeam+1)+'P 차례':isCPU()?'PC 차례':'내 차례';
+}
+function canPlayerAct(){
+  return started&&!paused&&!gameOver&&!wormIntro&&!orientationBlocked&&!turnEnding&&!isCPU()&&!!current()?.alive;
+}
+function canMoveCurrent(){
+  if(practice||!canPlayerAct()||walkers.length)return false;
+  return deploymentRetreatActive()||(!turnLocked&&!projectiles.length);
+}
+function canJumpCurrent(){return canMoveCurrent()&&!rope&&!jetpack}
+function canAimCurrent(){return canPlayerAct()&&!turnLocked&&!projectiles.length&&!walkers.length&&retreatUntil<=gameNow}
+function canEndCurrentTurn(){return !practice&&canAimCurrent()&&!charging}
 
-function startGame({training=false,repeat=false}={}){
-  practice=training?{aimed:repeat,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
-  firstShotFired=false;
+function startGame({training=false,previous=null,lockedPower=null,startingAngle=null}={}){
+  const fieldHeight=training?(previous?.fieldHeight??Math.max(820,Math.round(VH*1.18))):null;
+  practice=training?{fieldHeight,previous,showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
+  firstChargeStarted=false;
   document.getElementById('ui').classList.toggle('practicing',training);
   document.getElementById('ui').classList.remove('comparing');
   document.getElementById('practicePanel').hidden=!training;
@@ -55,7 +72,7 @@ function startGame({training=false,repeat=false}={}){
   teams.forEach(t=>t.ammo={...defaultAmmo});turnSec=+document.getElementById('turnTime').value;sdAt=+document.getElementById('sdTurn').value;
   crateRate=+document.getElementById('crateRate').value;initialMineCount=+document.getElementById('mineCount').value;
   ui.nameA.textContent=teams[0].name;ui.nameB.textContent=teams[1].name;
-  buildWorld(+document.getElementById('mapSize').value,training);
+  buildWorld(+document.getElementById('mapSize').value,fieldHeight);
   if(training){
     const bot=createWorm(0,0,650);
     bot.name='연습봇';bot.y=Math.round(WH*.7)-bot.r+.2;
@@ -64,7 +81,11 @@ function startGame({training=false,repeat=false}={}){
   projectiles=[];particles=[];explosions=[];damageLabels=[];walkers=[];rope=null;jetpack=false;targetMode=null;targetPoint=null;
   activeTeam=0;activeIdx=[0,0];turnNo=0;sudden=false;gameOver=false;paused=false;started=true;waterY=baseWater;document.getElementById('pauseBtn').textContent='⏸ 일시정지';
   selected='bazooka';ui.overlay.style.display='none';turnLeft=turnSec;turnStart=gameNow;ensureAudio();
-  if(training){beginTurn();canvas.focus();last=performance.now()}else beginWormIntro();
+  if(training){
+    beginTurn();
+    if(startingAngle!==null)setAimElevation(startingAngle);
+    canvas.focus();last=performance.now()
+  }else beginWormIntro();
   syncMobileOrientation();
 }
 
@@ -93,7 +114,7 @@ function beginTurn(){
   if(!practice){if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate()}
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=practice?0:rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
-  const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
+  const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${mode==='pvp'?playerTurnLabel():teams[activeTeam].name} · ${w.name}`,1200);playSFX('turn');updateHUD();
   initialBattleView=!practice&&turnNo===1;if(initialBattleView)fitBattleView();
   if(isCPU())scheduleAI()
 }

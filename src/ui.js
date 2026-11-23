@@ -11,7 +11,7 @@ function battlePhase(){
   if(attackCommitted||turnLocked){const flying=projectiles.length||walkers.length||pendingEmissions;return {id:'resolve',text:flying?'공격 진행 중':healthAnimating()?'체력 감소 표시 중':deathPending()?'사망 연출 중':'충돌 화면 확인',timer:'…'}};
   if(retreatUntil>gameNow)return {id:'retreat',text:'안전한 곳으로 후퇴',timer:((retreatUntil-gameNow)/1000).toFixed(1)};
   if(charging)return {id:'charge',text:'발사력 '+Math.round(clamp((gameNow-chargeAt)/1600,.12,1)*100)+'%',timer:String(Math.max(0,Math.ceil(turnLeft)))};
-  return {id:'aim',text:isCPU()?'CPU · '+(cpuStatus||'상황 판단 중'):'이동 · 무기 선택 · 조준',timer:String(Math.max(0,Math.ceil(turnLeft)))};
+  return {id:'aim',text:isCPU()?(cpuStatus||'상황 판단 중'):'이동 · 무기 선택 · 조준',timer:String(Math.max(0,Math.ceil(turnLeft)))};
 }
 const weaponGroups=[
   {name:'공격',items:{bazooka:'바람의 영향을 받는 포탄',grenade:'튕긴 뒤 폭발',shotgun:'직선으로 두 번 발사',banana:'폭발하면 파편이 흩어짐',sacred:'넓은 범위에 폭발',cluster:'작은 캡슐로 흩어짐',homing:'지정한 목표를 향해 이동',mortar:'높이 날아가 파편 방출',airstrike:'지정한 위치에 공중 지원',bat:'가까운 상대를 밀어냄',punch:'가까운 상대를 위로 띄움',sheep:'지면을 따라 달린 뒤 폭발',drill:'아래 지형을 파고듦'}},
@@ -37,7 +37,7 @@ function openWeaponPicker(){
       const button=document.createElement('button'),name=document.createElement('strong'),description=document.createElement('span');
       button.type='button';
       button.className='weaponOption';
-      button.disabled=!hasAmmo(id);
+      button.disabled=!canUseWeapon(id);
       button.setAttribute('aria-pressed',String(id===selected));
       name.textContent=weaponNames[id]+' · '+ammoLabel(id);
       description.textContent=use;
@@ -59,60 +59,142 @@ weaponDialog.addEventListener('close',()=>{
   pendingWeapon=null;
 });
 
-function updateHUD(){
-  const max=Math.max(1,teams[0].worms.length*100);ui.fillA.style.width=100*teamHP(0)/max+'%';ui.fillB.style.width=100*teamHP(1)/max+'%';
-  ui.metaA.textContent=`${teamHP(0)} HP · ${living(0).length}명`;ui.metaB.textContent=`${teamHP(1)} HP · ${living(1).length}명`;
-  const w=wormIntro?wormIntro.worms[wormIntro.index]:current();ui.turnLabel.textContent=gameOver?'전투 종료':wormIntro?`${teams[w.team].name} · ${w.name}`:`${teams[activeTeam].name} · ${w?w.name:''} · ${weaponNames[selected]}`;
-  const phase=battlePhase(),arrow=wind>=0?'→':'←',windSpeed=Math.abs(wind*100).toFixed(1);
-  const turn=mode==='cpu'?(isCPU()?'PC 차례':'내 차례'):(activeTeam===0?'A팀 차례':'B팀 차례');
-  const mobile=document.documentElement.dataset.mobile==='true';
-  ui.timer.textContent=/^\d+$/.test(phase.timer)?phase.timer+'초':phase.timer;ui.timer.dataset.phase=phase.id;
-  ui.timer.setAttribute('aria-label',phase.text+' · '+ui.timer.textContent);ui.subhud.textContent=phase.text+(sudden?' · 수위 상승':'');
-  ui.wind.textContent=`바람 ${arrow} ${windSpeed} · ${turnNo}턴`;
-  if(mobile){
-    const status={aim:turn,charge:turn,resolve:{'공격 진행 중':'발사 중','체력 감소 표시 중':'피해 표시','사망 연출 중':'전투 연출','충돌 화면 확인':'착탄 확인'}[phase.text],retreat:'후퇴',handoff:'턴 교대'}[phase.id]||phase.text;
-    ui.subhud.textContent=practice?'한 발 연습 · 바람 없음':wormIntro?status:`${status} · 바람 ${arrow} ${windSpeed}`;
-  }
-  document.getElementById('top').dataset.team=activeTeam;
-  document.getElementById('sessionControls').hidden=!started;
-  document.getElementById('ui').classList.toggle('aiming',canShowAimGuide());
-  document.getElementById('ui').classList.toggle('openingView',initialBattleView);
-  const previewButton=document.getElementById('previewFitBtn');previewButton.setAttribute('aria-pressed',String(previewFit));previewButton.textContent=previewFit?'봇 보기':'탄도 전체';
-  const angle=Math.round(-aim),preset=document.getElementById('aimPreset');document.getElementById('aimCurrent').textContent=angle+'°';preset.value=[0,30,45,60,90].includes(angle)?String(angle):'custom';
-  const percent=Math.round(shotPower()*100);
-  const usesPower=!['rope','homing'].includes(selected);
-  document.getElementById('aimReadout').textContent='각도 '+angle+'°'+(usesPower?' · 힘 '+(selected==='shotgun'&&shotgunRemain===1?100:percent)+'%':'');
-  document.getElementById('fireButtonText').textContent=charging?percent+'%':'발사';
-  const coach=document.getElementById('fireCoach');
-  coach.hidden=!!practice||phase.id!=='aim'||turnNo!==1||firstShotFired||!canShowAimGuide()||!usesPower;
-  coach.textContent=(mobile?'발사 버튼':'Space')+'을 누르고 힘을 모아, 놓으면 발사돼요.';
-  weaponPicker.disabled=!canSelectWeapon()&&!weaponDialog.open;
-  document.getElementById('weaponQuickName').textContent=weaponNames[selected]+' · '+ammoLabel(selected);
-  document.getElementById('weaponQuickUse').textContent=weaponUses[selected];
+const hud={
+  root:document.getElementById('ui'),top:document.getElementById('top'),
+  session:document.getElementById('sessionControls'),preview:document.getElementById('previewFitBtn'),
+  preset:document.getElementById('aimPreset'),custom:document.getElementById('aimCurrent'),
+  angle:document.getElementById('aimReadout'),fireText:document.getElementById('fireButtonText'),
+  coach:document.getElementById('fireCoach'),endTurn:document.getElementById('endTurnBtn'),
+  aimButtons:document.querySelectorAll('#aimMinus,#aimPlus,#aimPreset,#previewFitBtn'),
+  controls:document.querySelectorAll('.ctrl'),weaponName:document.getElementById('weaponQuickName'),
+  weaponUse:document.getElementById('weaponQuickUse'),practiceStep:document.getElementById('practiceStep'),
+  previousRow:document.getElementById('practicePreviousRow'),previousInfo:document.getElementById('practicePreviousInfo'),
+  previousToggle:document.getElementById('practicePrevious'),
+  practiceCompare:document.getElementById('practiceCompare')
+};
+let weaponHUDState='';
+function setHUDText(node,text){if(node.textContent!==text)node.textContent=text}
+function setHUDAttribute(node,key,value){if(node.getAttribute(key)!==value)node.setAttribute(key,value)}
+function setHUDFlag(node,key,on){if(node[key]!==on)node[key]=on}
 
-  weaponDockButtons.forEach(b=>{
-    const id=b.dataset.w;b.classList.toggle('active',id===selected);b.setAttribute('aria-pressed',String(id===selected));
+function syncBattleControls(aimGuide,canChoose){
+  const move=canMoveCurrent(),fire=canFireCurrent();
+  for(const control of hud.controls){
+    const action=control.dataset.act;
+    const enabled=action==='fire'?fire:action==='jump'?move&&!rope&&!jetpack:
+      action==='aimup'||action==='aimdown'?aimGuide:
+      action==='rise'||action==='descend'?move&&jetpack:
+      action==='ropein'||action==='ropeout'?move&&!!rope:move;
+    setHUDFlag(control,'disabled',!enabled);
+  }
+  for(const button of hud.aimButtons)setHUDFlag(button,'disabled',!aimGuide);
+  setHUDFlag(hud.endTurn,'disabled',!canEndCurrentTurn());
+  setHUDFlag(weaponPicker,'disabled',!canChoose&&!weaponDialog.open);
+}
+
+function updateWeaponHUD(canChoose){
+  const snapshot=[activeTeam,selected,canChoose,jetpack,...limited.map(id=>teams[activeTeam].ammo[id])].join('|');
+  if(snapshot===weaponHUDState)return;
+  weaponHUDState=snapshot;
+  setHUDText(hud.weaponName,weaponNames[selected]+' · '+ammoLabel(selected));
+  setHUDText(hud.weaponUse,weaponUses[selected]);
+  for(const button of weaponDockButtons){
+    const id=button.dataset.w,active=id===selected;
+    button.classList.toggle('active',active);
+    setHUDAttribute(button,'aria-pressed',String(active));
     const label=weaponNames[id]+' · '+ammoLabel(id)+' · '+weaponUses[id];
-    if(b.title!==label){b.title=label;b.setAttribute('aria-label',label)}
-    const am=b.querySelector('.ammo');if(limited.includes(id))am.textContent=teams[activeTeam].ammo[id]
-  })
+    setHUDAttribute(button,'title',label);
+    setHUDAttribute(button,'aria-label',label);
+    setHUDFlag(button,'disabled',!canChoose||!canUseWeapon(id));
+    if(limited.includes(id))setHUDText(button.querySelector('.ammo'),String(teams[activeTeam].ammo[id]));
+  }
+}
+
+function updateHUD(){
+  const max=Math.max(1,teams[0].worms.length*100);
+  for(const [i,fill,meta] of [[0,ui.fillA,ui.metaA],[1,ui.fillB,ui.metaB]]){
+    const bots=living(i),hp=bots.reduce((sum,bot)=>sum+bot.hp,0),percent=Math.round(100000*hp/max)/1000;
+    if(parseFloat(fill.style.width)!==percent)fill.style.width=percent+'%';
+    setHUDText(meta,hp+' HP · '+bots.length+'명');
+  }
+  const w=wormIntro?wormIntro.worms[wormIntro.index]:current();
+  setHUDText(ui.turnLabel,gameOver?'전투 종료':wormIntro&&w
+    ?teams[w.team].name+' · '+w.name
+    :teams[activeTeam].name+' · '+(w?w.name+' · ':'')+weaponNames[selected]);
+  const phase=battlePhase(),arrow=wind>=0?'→':'←',windSpeed=Math.abs(wind*100).toFixed(1);
+  const turn=playerTurnLabel(),mobile=document.documentElement.dataset.mobile==='true';
+  const timer=/^\d+$/.test(phase.timer)?phase.timer+'초':phase.timer;
+  setHUDText(ui.timer,timer);
+  setHUDAttribute(ui.timer,'data-phase',phase.id);
+  setHUDAttribute(ui.timer,'aria-label',phase.text+' · '+timer);
+  setHUDText(ui.wind,'바람 '+arrow+' '+windSpeed+' · '+turnNo+'턴');
+
+  const aimPhase=phase.id==='aim'||phase.id==='charge';
+  const status=aimPhase?(mobile?turn:turn+' · '+phase.text):phase.text;
+  const mobileStatus={resolve:{'공격 진행 중':'발사 중','체력 감소 표시 중':'피해 표시','사망 연출 중':'전투 연출','충돌 화면 확인':'착탄 확인 중'}[phase.text],retreat:'후퇴',handoff:'턴 교대'}[phase.id]||status;
+  setHUDText(ui.subhud,mobile
+    ?(practice?'한 발 연습 · 바람 없음':wormIntro?mobileStatus:mobileStatus+' · 바람 '+arrow+' '+windSpeed)
+    :status+(sudden?' · 수위 상승':''));
+  setHUDAttribute(hud.top,'data-team',String(activeTeam));
+  setHUDFlag(hud.session,'hidden',!started);
+  const aimGuide=canShowAimGuide(),canChoose=canSelectWeapon();
+  if(hud.root.classList.contains('aiming')!==aimGuide)hud.root.classList.toggle('aiming',aimGuide);
+  if(hud.root.classList.contains('openingView')!==initialBattleView)hud.root.classList.toggle('openingView',initialBattleView);
+  setHUDAttribute(hud.preview,'aria-pressed',String(previewFit));
+  setHUDText(hud.preview,previewFit?'봇 보기':'탄도 전체');
+  const angle=Math.round(-aim),preset=[0,30,45,60,90].includes(angle)?String(angle):'custom';
+  setHUDText(hud.custom,angle+'°');
+  if(hud.preset.value!==preset)hud.preset.value=preset;
+  const percent=Math.round(shotPower()*100),width=percent+'%',usesPower=!['rope','homing'].includes(selected);
+  setHUDText(hud.angle,'각도 '+angle+'°'+(usesPower?' · 힘 '+(selected==='shotgun'&&shotgunRemain===1?100:percent)+'%':''));
+  setHUDText(hud.fireText,charging?width:'발사');
+  if(charging&&ui.power.style.width!==width)ui.power.style.width=width;
+  setHUDFlag(hud.coach,'hidden',!!practice||phase.id!=='aim'||turnNo!==1||firstChargeStarted||!aimGuide||!usesPower);
+  syncBattleControls(aimGuide,canChoose);
+  updateWeaponHUD(canChoose);
   if(practice)updatePracticeHUD(angle);
 }
+
+function nextPracticeAngle(angle){return angle===60?30:60}
+
 function updatePracticeHUD(angle){
   if(angle===30)practice.aimed=true;
-  const message=document.getElementById('practiceStep');
   let text;
   if(practice.complete){
     const {angle,power,end}=practice.prediction;
     const matched=dist(end.x,end.y,practice.impact.x,practice.impact.y)<2;
-    text=`${angle}° · 힘 ${power}% · 노란 점선은 예상, 파란 실선은 실제. ${matched?'도착점이 일치했어요.':'두 도착점을 비교해 보세요.'}`;
+    text=angle+'° · 힘 '+power+'% · 노란 점선은 예상, 파란 실선은 실제. '+(matched?'도착점이 일치했어요.':'두 도착점을 비교해 보세요.');
+    setHUDText(hud.practiceCompare,'같은 힘으로 '+nextPracticeAngle(angle)+'° 쏘기');
   }else if(practice.prediction)text='실제 포탄이 날아가는 모습을 보세요.';
   else if(!practice.aimed)text='각도 선택에서 30°를 골라 보세요.';
+  else if(practice.lockedPower!==null)text='힘 '+Math.round(practice.lockedPower*100)+'% 고정 · 발사해 두 탄도를 비교해 보세요.';
   else text=(isMobileDevice()?'발사 버튼':'Space 또는 발사 버튼')+'을 누르고 힘을 모아, 놓아 보세요.';
-  if(message.textContent!==text)message.textContent=text;
+  setHUDText(hud.practiceStep,text);
+  setHUDFlag(hud.previousRow,'hidden',!practice.previous);
+  setHUDAttribute(hud.previousToggle,'aria-pressed',String(practice.showPrevious));
+  setHUDFlag(hud.previousInfo,'hidden',!practice.showPrevious);
+  if(practice.showPrevious){
+    const previous=practice.previous.prediction;
+    setHUDText(hud.previousInfo,'보라 점선 · 이전 '+previous.angle+'° · 힘 '+previous.power+'%');
+  }
+}
+function retryPractice(samePower){
+  if(!practice?.complete)return;
+  const previous={fieldHeight:practice.fieldHeight,prediction:practice.prediction,path:practice.path,impact:practice.impact};
+  startGame({
+    training:true,previous,
+    lockedPower:samePower?previous.prediction.powerValue:null,
+    startingAngle:samePower?nextPracticeAngle(previous.prediction.angle):null
+  });
+}
+function togglePreviousPractice(){
+  if(!practice?.previous)return;
+  practice.showPrevious=!practice.showPrevious;
+  updatePracticeHUD(Math.round(-aim));
+  if(practice.complete)fitPracticeView();
 }
 function capturePracticeShot(trace,power){
-  practice.prediction={...trace,angle:Math.round(-aim),power:Math.round(power*100)};
+  practice.prediction={...trace,angle:Math.round(-aim),power:Math.round(power*100),powerValue:power};
   practice.path=[trace.points[0]];
 }
 function trackPracticeShot(projectile,ended){
@@ -124,16 +206,20 @@ function trackPracticeShot(projectile,ended){
 }
 function finishPractice(){
   practice.complete=true;
-  document.getElementById('ui').classList.add('comparing');
+  hud.root.classList.add('comparing');
   document.getElementById('practiceActions').hidden=false;
+  updatePracticeHUD(Math.round(-aim));
   fitPracticeView();
-  document.getElementById('practiceRetry').focus();
+  hud.practiceCompare.focus();
 }
 function fitPracticeView(){
-  const points=practice.path,minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x));
+  const points=practice.showPrevious?[...practice.path,...practice.previous.path]:practice.path;
+  const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x));
   const minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y));
-  const top=78,bottom=VH-112;
-  cameraZoom=Math.min(1,Math.max(32,VW-72)/Math.max(40,maxX-minX),Math.max(32,bottom-top)/Math.max(40,maxY-minY));
+  const panel=document.getElementById('practicePanel').getBoundingClientRect();
+  const field=canvas.getBoundingClientRect();
+  const top=78,bottom=Math.max(top+32,panel.top-field.top-13);
+  cameraZoom=Math.min(1,Math.max(32,VW-90)/Math.max(40,maxX-minX),Math.max(32,bottom-top)/Math.max(40,maxY-minY));
   camera.x=camera.targetX=(minX+maxX)/2-VW/2/cameraZoom;
   camera.y=camera.targetY=(minY+maxY)/2-(top+bottom)/2/cameraZoom;
   camera.manualUntil=Infinity;
@@ -164,6 +250,7 @@ function fitBattleView(){
 }
 function fitShotPreview(instant=false,dt=FIXED_DT){
   const trace=getShotPreview();if(!trace)return;const w=current(),points=[...trace.points,{x:w.x,y:w.y}],left=40,right=VW-40,top=VH<500?94:150,bottom=VH-(VH<500?142:180);
+  if(practice?.showPrevious)points.push(...practice.previous.path);
   const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y));
   const zoom=Math.max(.02,Math.min(1,(right-left)/Math.max(1,maxX-minX+110),(bottom-top)/Math.max(1,maxY-minY+160)));
   const blend=instant?1:1-Math.pow(.001,dt);cameraZoom=zoom<cameraZoom?zoom:lerp(cameraZoom,zoom,blend);

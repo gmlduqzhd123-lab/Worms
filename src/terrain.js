@@ -11,11 +11,11 @@ function resize(){
 }
 addEventListener('resize',resize);
 
-function buildWorld(mult,training=false){
+function buildWorld(mult,trainingHeight=null){
   activeMapTheme=MAP_THEMES.some(t=>t.id===document.getElementById('mapTheme').value)?document.getElementById('mapTheme').value:'coast';loadArtFile(getMapTheme().file);
-  WW=training?4200:Math.max(2600,Math.round(VW*mult));WH=Math.max(820,Math.round(VH*1.18));
+  WW=trainingHeight?4200:Math.max(2600,Math.round(VW*mult));WH=trainingHeight??Math.max(820,Math.round(VH*1.18));
   terrain.width=WW;terrain.height=WH;baseWater=WH*.875;waterY=baseWater;
-  if(training){
+  if(trainingHeight){
     const floor=Math.round(WH*.7),theme=getMapTheme();
     tctx.fillStyle=theme.bottom;tctx.fillRect(0,floor,WW,WH-floor);
     tctx.fillStyle=theme.rim;tctx.fillRect(0,floor,WW,5);

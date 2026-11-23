@@ -1,16 +1,19 @@
 'use strict';
 
-function canSelectWeapon(){return started&&!practice&&!paused&&!turnLocked&&!charging&&shotgunRemain===0&&!gameOver&&!isCPU()&&retreatUntil<=gameNow&&!projectiles.length&&!walkers.length}
-function selectWeapon(id){if(!canSelectWeapon())return;selected=id;targetMode=null;targetPoint=null;ui.targetTip.style.display='none';updateHUD()}
+function canSelectWeapon(){return !practice&&canAimCurrent()&&!charging&&shotgunRemain===0}
+function selectWeapon(id){if(!canSelectWeapon()||!canUseWeapon(id))return;selected=id;targetMode=null;targetPoint=null;ui.targetTip.style.display='none';updateHUD()}
 function hasAmmo(id){return !limited.includes(id)||teams[activeTeam].ammo[id]>0}
+function canUseWeapon(id){return hasAmmo(id)||(id==='jetpack'&&jetpack)}
 function spend(id){if(limited.includes(id))teams[activeTeam].ammo[id]--}
-function shotPower(){return charging?clamp((gameNow-chargeAt)/1600,.12,1):.12}
+function shotPower(){return practice?.lockedPower??(charging?clamp((gameNow-chargeAt)/1600,.12,1):.12)}
+function canFireCurrent(){return canAimCurrent()&&canUseWeapon(selected)}
 
 function beginTargeting(type,text){
   if(!hasAmmo(type)){toast('탄약이 없습니다');return}targetMode=type;if(type==='homing'){const enemy=nearestEnemy(current());targetPoint=enemy?{x:enemy.x,y:enemy.y}:null}else if(type==='girder'){const w=current();targetPoint={x:w.x+facing*100,y:w.y-45}}ui.targetTip.style.display='block';ui.targetTip.textContent=text||'목표 지점을 클릭하세요.'
 }
 function fireStart(){
-  const w=current();if(!w||!w.alive||gameOver||paused||turnLocked||retreatUntil>gameNow||projectiles.length||walkers.length||isCPU())return;
+  if(!canFireCurrent())return;
+  const w=current();
   if(practice&&Math.round(-aim)!==30&&!practice.aimed){toast('먼저 30°로 맞춰 보세요');return}
   if(selected==='rope'){toggleRope();return}
   if(selected==='jetpack'){toggleJetpack();return}
@@ -25,16 +28,15 @@ function fireStart(){
   if(selected==='sheep'){releaseSheep();return}
   if(selected==='drill'){dropDrill();return}
   if(selected==='shotgun'&&shotgunRemain===1){shootShotgun(w,1);return}
-  if(!charging){charging=true;chargeAt=gameNow;ui.powerBox.classList.add('show')}
+  if(!charging){charging=true;firstChargeStarted=true;chargeAt=gameNow;ui.powerBox.classList.add('show');updateHUD()}
 }
 function fireEnd(){
   if(!charging||paused||gameOver||turnLocked||retreatUntil>gameNow)return;
   const pwr=shotPower(),w=current();
   if(practice&&w)capturePracticeShot(getShotPreview()||traceShot(w,selected,pwr,aim,facing),pwr);
   charging=false;ui.powerBox.classList.remove('show');if(!w)return;
-  if(selected==='shotgun'){firstShotFired=true;shotgunRemain=2;shootShotgun(w,pwr);return}
+  if(selected==='shotgun'){shotgunRemain=2;shootShotgun(w,pwr);return}
   if(!hasAmmo(selected)){toast('탄약이 없습니다');return}
-  firstShotFired=true;
   if(['banana','sacred','cluster','mortar'].includes(selected))spend(selected);
   spawnBallistic(selected,w,pwr,aim,facing);updateHUD()
 }

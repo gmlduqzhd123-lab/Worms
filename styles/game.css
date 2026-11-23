@@ -191,10 +191,22 @@ select,#angleControls select{padding-right:24px;background-image:linear-gradient
   border:1px solid #6d95a5;border-radius:7px;padding:3px 8px;
   background:#102a3bf5;color:#ffe49b;font-size:11px;font-weight:800;white-space:nowrap;pointer-events:none;
 }
-#fireCoach{
-  position:absolute;bottom:190px;right:max(12px,var(--safe-right));margin:0;
-  padding:5px 8px;border:1px solid #6d95a5;border-radius:7px;
-  background:#102a3bf5;color:#fff0ba;font-size:11px;
+#mobile [data-act="fire"]{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:2px;border-radius:10px;line-height:1.05;
+}
+#fireCoach{font-size:9px;color:#fff0ba;line-height:1.1;word-break:keep-all}
+#ui :is(.ctrl,.weapon,#endTurnBtn):disabled{opacity:.55;cursor:default}
+#ui :is([data-act="fire"],#practicePrevious):focus-visible{outline:2px solid #ffe49b;outline-offset:2px}
+html[data-mobile="false"] #ui:not(.practicing) #mobile{
+  display:flex;top:113px;left:320px;right:auto;bottom:auto;
+}
+html[data-mobile="false"] #ui:not(.practicing) #mobile :is(.movementPad,[data-act="aimup"],[data-act="aimdown"]){display:none}
+html[data-mobile="false"] #ui:not(.practicing) #mobile [data-act="fire"]{
+  min-width:88px;height:44px;font-size:14px;background:#193e53;color:#ffe49b;
+}
+@media(max-width:690px){
+  html[data-mobile="false"] #ui:not(.practicing) #mobile{top:161px;left:12px}
 }
 #weaponQuickInfo,#weaponPickerBtn{display:none}
 #weaponDialog .dialogHead{position:sticky;top:0;z-index:1;background:#142f43;padding-block:4px}
@@ -221,8 +233,14 @@ select,#angleControls select{padding-right:24px;background-image:linear-gradient
 #practicePanel h2{font-size:14px}
 #practiceStep,#matchSummary{margin:0;line-height:1.45}
 #practiceStep{font-size:12px}
-#practiceActions{display:flex;gap:8px;justify-content:center;margin-top:8px;pointer-events:auto}
+#practiceActions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;pointer-events:auto}
 #practiceActions .btn{min-height:36px;padding:6px 11px;font-size:12px}
+#practicePreviousRow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 8px;margin-top:4px}
+#practicePreviousInfo{margin:0;color:#dfc2ff;font-size:11px}
+#practicePrevious{min-height:30px;padding:4px 8px;pointer-events:auto;font-size:11px}
+#practicePrevious[aria-pressed="true"]{border-color:#c595ff;color:#e9d2ff}
+#ui.comparing #practicePanel{width:min(520px,calc(100% - var(--safe-left) - var(--safe-right) - 16px))}
+#ui.practicing:not(.comparing) #practicePanel:has(#practicePreviousRow:not([hidden])){top:calc(84px + var(--safe-top))}
 #resultPanel{width:min(480px,90vw);padding:18px;text-align:center}
 #resultPanel .dialogActions{justify-content:center;flex-wrap:wrap}
 #panel .actions #practiceStart{min-height:46px;white-space:nowrap}
@@ -248,7 +266,6 @@ html[data-mobile="true"][data-portrait="false"] #weaponQuickInfo{display:grid;ga
 #weaponQuickInfo span{color:#c4d3e2}
 html[data-mobile="true"][data-portrait="false"] #weaponPickerBtn{display:block;flex:none;min-height:42px;padding-inline:8px;white-space:nowrap}
 html[data-mobile="true"][data-portrait="false"] #mobile [data-act="fire"]{width:53px;background:#193e53;color:#ffe49b;font-size:12px}
-html[data-mobile="true"][data-portrait="false"] #fireCoach{bottom:calc(125px + var(--safe-bottom));font-size:10px;max-width:47vw}
 html[data-mobile="true"][data-portrait="false"] #powerBox{bottom:calc(155px + var(--safe-bottom))}
 html[data-mobile="true"][data-portrait="false"] #ui.practicing :is(#mobile,#angleControls){bottom:calc(12px + var(--safe-bottom))}
 html[data-mobile="true"][data-portrait="false"] #ui.practicing #powerBox{bottom:calc(67px + var(--safe-bottom))}
@@ -256,11 +273,14 @@ html[data-mobile="true"][data-portrait="false"] #ui.practicing :is(#weaponDock,#
 html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:none}
 
 @media(max-height:320px){
+  #ui.comparing #practicePanel{padding:7px 12px}
+  #ui.comparing #practiceActions{margin-top:4px}
+  #ui.comparing #practiceActions .btn{min-height:33px}
   html[data-mobile="true"][data-portrait="false"] #center #subhud{font-size:10px}
   html[data-mobile="true"][data-portrait="false"] :is(#sessionControls,#battleOptions){top:calc(47px + var(--safe-top))}
   html[data-mobile="true"][data-portrait="false"] #timer{font-size:17px}
   html[data-mobile="true"][data-portrait="false"] #mobile [data-act="fire"]{width:44px}
-  html[data-mobile="true"][data-portrait="false"] #fireCoach{bottom:calc(134px + var(--safe-bottom))}
+  html[data-mobile="true"][data-portrait="false"] #fireCoach{font-size:8px}
   html[data-mobile="true"][data-portrait="false"] #powerBox{bottom:calc(137px + var(--safe-bottom))}
 }
 @media(max-width:500px){
