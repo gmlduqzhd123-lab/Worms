@@ -14,7 +14,8 @@
         '.yq-card .yq-url{margin:0 0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;word-break:break-all;color:#0f172a}' +
         '.yq-card .yq-hint{margin:0 0 14px;color:#64748b;font-size:14px}' +
         '.yq-card .yq-close{font:inherit;font-weight:700;width:100%;padding:12px;border:0;border-radius:12px;background:#0f172a;color:#fff;cursor:pointer}' +
-        '.yq-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}.yq-actions button,.yq-copy{border:1px solid #64748b;border-radius:8px;background:#fff;color:#142b3b;padding:8px;font:inherit;font-weight:700;cursor:pointer}.yq-actions button[aria-pressed="true"]{background:#d9ecfb;border-color:#245673}.yq-copy{margin-bottom:8px}';
+        '.yq-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}.yq-actions button,.yq-copy{border:1px solid #64748b;border-radius:8px;background:#fff;color:#142b3b;padding:8px;font:inherit;font-weight:700;cursor:pointer}.yq-actions button[aria-pressed="true"]{background:#d9ecfb;border-color:#245673}.yq-copy{margin-bottom:8px}' +
+        '@media (orientation:landscape) and (max-height:500px){.yq-card{display:grid;grid-template-columns:38% 1fr;align-items:center;gap:4px 12px;width:min(100%,620px);padding:10px 12px}.yq-card .yq-title,.yq-card .yq-name{grid-column:1/-1}.yq-card .yq-title{font-size:16px}.yq-card .yq-name{font-size:13px}.yq-card .yq-qr{grid-column:1;grid-row:3/8;width:min(100%,60vh);margin:0 auto}.yq-card :is(.yq-actions,.yq-url,.yq-hint,.yq-copy,.yq-close){grid-column:2;margin:0}.yq-card :is(.yq-actions button,.yq-copy,.yq-close){font-size:12px;padding:5px 7px}.yq-card :is(.yq-url,.yq-hint){font-size:12px}}';
 
     function injectCss() {
         if (document.getElementById('yq-style') || !document.head) return;
@@ -38,41 +39,45 @@
         var url = appUrl();
         var lessonUrl = new URL(url);
         lessonUrl.searchParams.set('lesson', 'angle');
+        var currentShare = url;
         var back = document.createElement('div');
         back.className = 'yq-back';
         back.style.setProperty('display', 'flex', 'important'); // 앱 CSS가 다른 창을 숨겨도 QR 창은 보이게
         back.innerHTML = '<div class="yq-card" role="dialog" aria-modal="true" aria-labelledby="yq-title">' +
-            '<p class="yq-title" id="yq-title">📱 카메라로 찍어서 들어와요</p><p class="yq-name"></p><div class="yq-actions"><button type="button" class="yq-home" aria-pressed="true">게임 시작 화면</button><button type="button" class="yq-lesson" aria-pressed="false">수업용 각도 탐구</button></div>' +
+            '<p class="yq-title" id="yq-title">📱 카메라로 찍어서 들어와요</p><p class="yq-name"></p><div class="yq-actions" role="group" aria-label="공유할 활동"><button type="button" class="yq-home" data-share="home">게임 시작 화면</button><button type="button" class="yq-lesson" data-share="lesson">수업용 · 턴 선택</button><button type="button" data-share="2">수업용 · 2턴</button><button type="button" data-share="4">수업용 · 4턴</button></div>' +
             '<img class="yq-qr" alt="" width="420" height="420">' +
             '<p class="yq-url"></p><p class="yq-hint" role="status">휴대폰·태블릿 카메라를 QR 코드에 비추면 바로 열려요.</p><button type="button" class="yq-copy" hidden>수업 링크 복사</button>' +
             '<button type="button" class="yq-close">닫기</button></div>';
         var img = back.querySelector('.yq-qr');
-        var home = back.querySelector('.yq-home'), lesson = back.querySelector('.yq-lesson');
+        var choices = back.querySelectorAll('[data-share]');
         var hint = back.querySelector('.yq-hint'),copy = back.querySelector('.yq-copy');
-        function showQr(forLesson) {
-            var name = appName() + (forLesson ? ' · 각도 탐구' : '');
-            var link = forLesson ? lessonUrl.href : url;
-            var asset = forLesson ? 'qr-lesson.svg' : 'qr.svg';
+        function showQr(choice) {
+            var forLesson = choice !== 'home';
+            var turns = choice === '2' || choice === '4' ? choice : '';
+            var name = appName() + (forLesson ? ' · 각도 탐구' : '') + (turns ? ' · ' + turns + '턴 짝 대전' : '');
+            var link = new URL(forLesson ? lessonUrl : url);
+            if (turns) link.searchParams.set('turns', turns);
+            currentShare = link.href;
+            var asset = 'qr' + (forLesson ? '-lesson' : '') + (turns ? '-' + turns : '') + '.svg';
+            var attribute = forLesson ? 'data-lesson' + (turns ? '-' + turns : '') + '-qr-src' : 'data-qr-src';
             back.querySelector('.yq-name').textContent = name;
-            back.querySelector('.yq-url').textContent = link.replace(/^https?:\/\//, '');
-            img.src = root.getAttribute(forLesson ? 'data-lesson-qr-src' : 'data-qr-src') || new URL(asset, location.href).href;
+            back.querySelector('.yq-url').textContent = currentShare.replace(/^https?:\/\//, '');
+            img.src = root.getAttribute(attribute) || new URL(asset, location.href).href;
             img.alt = name + ' 주소 QR 코드';
-            home.setAttribute('aria-pressed', String(!forLesson));
-            lesson.setAttribute('aria-pressed', String(forLesson));
+            choices.forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.share === choice)); });
             hint.textContent = '휴대폰·태블릿 카메라를 QR 코드에 비추면 바로 열려요.';
             copy.hidden = !forLesson;
         }
-        home.addEventListener('click', function () { showQr(false); });
-        lesson.addEventListener('click', function () { showQr(true); });
+        choices.forEach(function (button) { button.addEventListener('click', function () { showQr(button.dataset.share); }); });
         copy.addEventListener('click', async function () {
             try {
-                await navigator.clipboard.writeText(lessonUrl.href);
+                await navigator.clipboard.writeText(currentShare);
                 hint.textContent = '수업 링크를 복사했어요.';
             } catch {
                 hint.textContent = '위 주소를 선택해서 복사해 주세요.';
             }
         });
-        showQr(false);
+        showQr('home');
         function close() {
             document.removeEventListener('keydown', onKey);
             back.remove();

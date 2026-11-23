@@ -50,19 +50,26 @@ function canMoveCurrent(){
 function canJumpCurrent(){return canMoveCurrent()&&!rope&&!jetpack}
 function canAimCurrent(){return canPlayerAct()&&!turnLocked&&!projectiles.length&&!walkers.length&&retreatUntil<=gameNow}
 function canEndCurrentTurn(){return !practice&&canAimCurrent()&&!charging}
+function requestPlayerEndTurn(){
+  if(!canEndCurrentTurn())return;
+  if(pairedLessonBattle&&!pairTurnFired)openPairSkipWarning();
+  else nextTurn(0);
+}
 
 function startGame({training=false,previous=null,lockedPower=null,startingAngle=null,lesson=null,pairPractice=false,pairTurns=4,restoredPair=null}={}){
   const fieldHeight=training?(previous?.fieldHeight??(lesson?820:Math.max(820,Math.round(VH*1.18)))):null;
   practice=training?{fieldHeight,previous,lesson,observation:'',showPrevious:!!previous,lockedPower,aimed:!!previous,prediction:null,path:[],impact:null,completeAt:0,complete:false}:null;
   pairedLessonBattle=pairPractice;
-  pairTurnLimit=pairTurns===2?2:4;pairPlannedAngle=null;pairNeedsReady=false;pairLastShots=[null,null];
+  pairTurnLimit=pairTurns===2?2:4;pairPlannedAngle=null;pairNeedsReady=false;pairTurnFired=false;pairLastShots=[null,null];
   applyClassroomAudio(!!lesson?.shared||(pairPractice&&(!!classroomAudioBase||!!restoredPair?.checkpoint.classroom)));
   setHUDText(document.getElementById('practiceTitle'),lesson?'각도 탐구':'한 발 연습');
   document.getElementById('pairResult').hidden=true;
   document.getElementById('pairReflection').hidden=true;
   document.getElementById('pairLessonReview').hidden=true;
+  document.getElementById('pairNextGroup').hidden=true;
   firstChargeStarted=false;
   document.getElementById('ui').classList.toggle('practicing',training);
+  document.getElementById('ui').classList.toggle('pairedBattle',pairPractice);
   document.getElementById('ui').classList.remove('comparing');
   document.getElementById('practicePanel').hidden=!training;
   document.getElementById('practiceActions').hidden=true;
@@ -124,14 +131,14 @@ function completeWormIntro(){
 
 function beginTurn(){
   if(gameOver)return;if(!practice&&(!living(0).length||!living(1).length)){finishGame();return}
-  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;pairPlannedAngle=null;
+  deploymentRetreatUntil=0;previewFit=false;shotPreviewCache=null;pairNeedsReady=pairedLessonBattle;pairPlannedAngle=null;pairTurnFired=false;
   if(injuryZoom!==null)cameraZoom=injuryZoom;injuryZoom=null;injuredWorms=[];shotFocus=null;cpuWalk=null;cpuStatus='';turnNo++;
   if(!practice){if(!sudden&&turnNo>=sdAt)startSuddenDeath();if(Math.random()<crateRate)spawnCrate()}
   turnWorm=null;turnEnding=false;attackCommitted=false;clearInput();turnLocked=false;charging=false;retreatUntil=0;targetMode=null;targetPoint=null;rope=null;jetpack=false;jetFuel=0;shotgunRemain=0;
   ui.targetTip.style.display='none';turnLeft=turnSec;turnStart=gameNow;wind=practice?0:rand(-.062,.062);aim=-45;facing=activeTeam===0?1:-1;
   const w=current(),enemy=nearestEnemy(w);if(enemy)facing=enemy.x>=w.x?1:-1;turnWorm=w;w.jumpAt=-Infinity;w.jumpState=0;if(overview){overview=false;cameraZoom=1;document.getElementById('overviewBtn').textContent='전체 맵'}camera.manualUntil=0;focusOn(w.x,w.y,true);toast(`${mode==='pvp'?playerTurnLabel():teams[activeTeam].name} · ${w.name}`,1200);if(!pairNeedsReady)playSFX('turn');updateHUD();
   initialBattleView=!practice&&turnNo===1;if(initialBattleView)fitBattleView();
-  if(pairNeedsReady){savePairCheckpoint();document.getElementById('pairReadyAction').focus()}
+  if(pairNeedsReady){savePairCheckpoint();updateHUD();document.getElementById('pairReadyAction').focus()}
   if(isCPU())scheduleAI()
 }
 function startPairedTurn(){
@@ -145,14 +152,15 @@ function startPairedTurn(){
 }
 function recordPairShot(weapon,angle,power){
   if(!pairedLessonBattle)return null;
-  return pairLastShots[activeTeam]={weapon,angle:Math.round(-angle),power:Math.round(power*100),wind,landing:null};
+  pairTurnFired=true;
+  return pairLastShots[activeTeam]={weapon,plannedAngle:pairPlannedAngle,angle:Math.round(-angle),power:Math.round(power*100),wind,landing:null};
 }
 
 function returnToStart(){
   practice=null;
   pairedLessonBattle=false;
   pairNeedsReady=false;
-  document.getElementById('ui').classList.remove('practicing','comparing');
+  document.getElementById('ui').classList.remove('practicing','comparing','pairedBattle');
   document.getElementById('practicePanel').hidden=true;
   document.getElementById('resultPanel').hidden=true;
   document.getElementById('panel').hidden=false;
@@ -168,7 +176,7 @@ function returnToStart(){
 }
 function nextTurn(delay=900){
   if(turnEnding||gameOver||wormIntro||practice||pairNeedsReady)return;
-  if(combatUnsettled()||presentationPending()){commitAttack(0);return}
+  if(combatUnsettled()||presentationPending()){commitAttack(0,false);return}
   cpuWalk=null;cpuStatus='';turnEnding=true;turnLocked=true;clearInput();rope=null;jetpack=false;finishTarget();
   cancelCombat(aiTimer);aiBusy=false;
   const handoff=()=>{
@@ -202,6 +210,7 @@ function finishGame(){
       document.getElementById('pairReflection').hidden=false;
       renderPairReflection();
       document.getElementById('pairLessonReview').hidden=!recentLesson?.shots[1];
+      document.getElementById('pairNextGroup').hidden=false;
     }
     document.getElementById('panel').hidden=true;
     panel.hidden=false;

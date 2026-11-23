@@ -6,7 +6,10 @@ for(const helper of ['ys-install.js','ys-qr.js'])html=html.replace('<script src=
 html=html.replace('<link rel="manifest" href="./manifest.webmanifest">','');
 html=html.replace(/href="\.\/icons\/([^"]+)"/g,(_,file)=>'href="data:image/png;base64,'+fs.readFileSync(path.join(root,'icons',file.split('?')[0])).toString('base64')+'"');
 const qrData=name=>'data:image/svg+xml;base64,'+fs.readFileSync(path.join(root,name)).toString('base64');
-html=html.replace('<html lang="ko"','<html data-qr-src="'+qrData('qr.svg')+'" data-lesson-qr-src="'+qrData('qr-lesson.svg')+'" lang="ko"');
+const qrAssets={'data-qr-src':'qr.svg','data-lesson-qr-src':'qr-lesson.svg',
+  'data-lesson-2-qr-src':'qr-lesson-2.svg','data-lesson-4-qr-src':'qr-lesson-4.svg'};
+html=html.replace('<html lang="ko"','<html '+Object.entries(qrAssets)
+  .map(([attribute,file])=>attribute+'="'+qrData(file)+'"').join(' ')+' lang="ko"');
 html=html.replace(/<script>\s*\/\/[^\n]*\nif \('serviceWorker'[\s\S]*?<\/script>/,'');
 const scripts=[...html.matchAll(/<script defer src="\.\/([^\"]+)"><\/script>/g)];
 const assetFiles=fs.existsSync(path.join(root,'assets','images'))?fs.readdirSync(path.join(root,'assets','images')).filter(f=>f.endsWith('.png')):[];const assetData=Object.fromEntries(assetFiles.map(f=>[f,'data:image/png;base64,'+fs.readFileSync(path.join(root,'assets','images',f)).toString('base64')]));

@@ -323,6 +323,19 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
 .pairReadyControls [aria-pressed="true"]{background:#ffe49b;color:#172d40}
 #pairReadyAction{margin-left:auto;flex:none;min-height:40px;white-space:nowrap}
 #pairReadyStatus{color:#cde5ef}
+#pairReadySave,#lessonPairPreset{color:#ffe49b}
+#pairSaveProgress{
+  position:absolute;top:calc(76px + var(--safe-top));left:50%;transform:translateX(-50%);z-index:4;
+  margin:0;padding:4px 8px;border:1px solid #7392a3;border-radius:7px;background:#0b2438f5;
+  max-width:calc(100% - 26px);color:#ffe49b;font-size:12px;text-align:center;
+}
+#pairSkipDialog .dialogActions{flex-wrap:wrap}
+#practicePairReport{margin-top:14px;border-top:1px solid #466a80;padding-top:8px}
+#practicePairReport h3{margin:0 0 4px;color:#ffe49b;font-size:15px}
+#practicePairReport ul{margin:0;padding-left:22px;font-size:13px;line-height:1.5}
+@media(min-width:901px) and (pointer:fine){
+  #ui.pairedBattle.aiming #utilityControls{display:flex;left:12px;right:auto;bottom:176px}
+}
 #ui.waitingForPair :is(#weaponDock,#mobile,#utilityControls){visibility:hidden}
 #resultPanel{max-height:calc(var(--app-height) - var(--safe-top) - var(--safe-bottom) - 20px);overflow-y:auto}
 #pairShotMap{display:block;width:100%;height:auto;margin-top:7px;border-radius:6px;border:1px solid #7392a3}
@@ -345,6 +358,7 @@ html[data-mobile="true"][data-portrait="false"] #ui.comparing #mobile{display:no
 #practiceDownloadStatus{margin:3px 0 0;font-size:12px;color:#ffe49b}
 #practiceDownloadStatus:empty{display:none}
 @media(max-height:400px){
+  #pairSaveProgress{top:calc(51px + var(--safe-top));font-size:11px}
   #resultPanel:has(#pairReflection:not([hidden])){width:min(520px,92vw);padding:9px 12px}
   #resultPanel:has(#pairReflection:not([hidden])) h2{font-size:19px}
   #resultPanel:has(#pairReflection:not([hidden])) #matchSummary{padding:5px 8px}

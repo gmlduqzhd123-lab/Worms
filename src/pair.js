@@ -3,6 +3,7 @@
 const PAIR_KEY='wormfront.paired-battle.v1';
 const pairResume=document.getElementById('pairResume');
 const pairSetup=document.getElementById('pairSetup');
+const pairSkipDialog=document.getElementById('pairSkipDialog');
 const readyAngles=[...document.querySelectorAll('[data-pair-angle]')];
 const PAIR_LANDING_LABELS={terrain:'지형 착탄',worm:'봇 명중',water:'수면 도달',bounds:'전장 밖',fuse:'신관 폭발',range:'최대 거리'};
 let recentPair=null,pairStored=true,queuedPairLimit=null;
@@ -16,7 +17,8 @@ function validSavedPair(s){
   const team=t=>t&&list(t.worms,2,worm)&&t.worms.length===2&&
     Object.keys(defaultAmmo).every(id=>Number.isInteger(t.ammo?.[id])&&finite(t.ammo[id],0,99));
   const shot=o=>o===null||(o&&Object.hasOwn(weaponNames,o.weapon)&&finite(o.angle,-13,90)&&finite(o.power,0,100)&&
-    finite(o.wind,-.1,.1)&&(o.landing===null||(position(o.landing)&&Object.hasOwn(PAIR_LANDING_LABELS,o.landing.event))));
+    [null,30,60].includes(o.plannedAngle??null)&&finite(o.wind,-.1,.1)&&
+    (o.landing===null||(position(o.landing)&&Object.hasOwn(PAIR_LANDING_LABELS,o.landing.event))));
   return s?.version===1&&typeof s.id==='string'&&s.id.length>0&&s.id.length<=80&&
     [2,4].includes(s.limit)&&Number.isInteger(s.turn)&&finite(s.turn,1,s.limit)&&s.team===(s.turn-1)%2&&
     list(s.activeIdx,2,i=>[0,1].includes(i))&&s.activeIdx.length===2&&
@@ -87,7 +89,7 @@ function resumePairTurn(s){
   matchId=s.id;matchStartedAt=s.startedAt;gameNow=s.clock;worldTime=gameNow;
   turnNo=s.turn;activeTeam=s.team;activeIdx=[...s.activeIdx];turnWorm=current();turnLocked=false;
   retreatUntil=0;settledSince=null;shotgunRemain=0;turnStart=gameNow;turnLeft=turnSec;
-  pairNeedsReady=true;pairPlannedAngle=s.plannedAngle;pairLastShots=s.shots.map(o=>o&&{...o});
+  pairNeedsReady=true;pairTurnFired=false;pairPlannedAngle=s.plannedAngle;pairLastShots=s.shots.map(o=>o&&{...o});
   selected=s.selected;wind=s.wind;aim=-(pairPlannedAngle??45);facing=s.facing;
   if(turnNo===1){initialBattleView=true;fitBattleView()}else focusOn(turnWorm.x,turnWorm.y,true);
   last=performance.now();updateHUD();
@@ -117,6 +119,26 @@ function openPairSetup(){
   queuedPairLimit=null;
   openGameDialog(pairSetup);
 }
+function openPairSkipWarning(){
+  pairSkipDialog.returnValue='';
+  openGameDialog(pairSkipDialog);
+}
+pairSkipDialog.addEventListener('close',()=>{
+  closeGameDialog();
+  if(pairSkipDialog.returnValue==='skip'&&canEndCurrentTurn())nextTurn(0);
+});
+function formatPairShot(shot,i){
+  const player=(i+1)+'P · ';
+  if(!shot)return player+'조준 발사 기록 없음';
+  const plan=shot.plannedAngle==null?'준비 각도 선택 없음':shot.plannedAngle+'° 준비';
+  const breeze=Math.abs(shot.wind*100).toFixed(1);
+  const windLabel=breeze==='0.0'?'없음':(shot.wind<0?'← ':'→ ')+breeze;
+  const landing=shot.landing;
+  const destination=!landing?'도착 기록 없음':PAIR_LANDING_LABELS[landing.event]+
+    (landing.event==='bounds'?'':' · 왼쪽에서 '+Math.round(clamp(landing.x,0,WW)/10)+'칸');
+  return player+plan+' → '+shot.angle+'° 발사 → '+destination+
+    ' · '+weaponNames[shot.weapon]+' · 힘 '+shot.power+'% · 바람 '+windLabel;
+}
 function renderPairReflection(){
   const map=document.getElementById('pairShotMap'),pen=map.getContext('2d');
   map.hidden=!pairLastShots.some(shot=>shot?.landing&&shot.landing.event!=='bounds');
@@ -126,25 +148,16 @@ function renderPairReflection(){
     pen.drawImage(terrain,0,0,map.width,map.height);
   }
   pairLastShots.forEach((shot,i)=>{
-    let text='조준 발사 기록 없음';
-    if(shot){
-      const breeze=Math.abs(shot.wind*100).toFixed(1);
-      text=weaponNames[shot.weapon]+' '+shot.angle+'° · 힘 '+shot.power+'% · 바람 '+(breeze==='0.0'?'없음':(shot.wind<0?'← ':'→ ')+breeze);
-      const landing=shot.landing;
-      if(landing){
-        text+=' · '+PAIR_LANDING_LABELS[landing.event];
-        if(landing.event!=='bounds'){
-          text+=' · 왼쪽에서 '+Math.round(clamp(landing.x,0,WW)/10)+'칸';
-          const x=clamp(landing.x/WW*map.width,14,map.width-14),y=clamp(landing.y/WH*map.height,14,map.height-14);
-          const labelY=clamp(y+(i?14:-10),13,map.height-4);
-          pen.fillStyle=teams[i].color;pen.strokeStyle='#102337';pen.lineWidth=2;
-          pen.beginPath();pen.arc(x,y,5,0,Math.PI*2);pen.fill();pen.stroke();
-          pen.font='900 13px system-ui';pen.textAlign='center';pen.lineWidth=3;
-          pen.strokeText((i+1)+'P',x,labelY);pen.fillText((i+1)+'P',x,labelY);
-        }
-      }
+    const landing=shot?.landing;
+    if(landing&&landing.event!=='bounds'){
+      const x=clamp(landing.x/WW*map.width,14,map.width-14),y=clamp(landing.y/WH*map.height,14,map.height-14);
+      const labelY=clamp(y+(i?14:-10),13,map.height-4);
+      pen.fillStyle=teams[i].color;pen.strokeStyle='#102337';pen.lineWidth=2;
+      pen.beginPath();pen.arc(x,y,5,0,Math.PI*2);pen.fill();pen.stroke();
+      pen.font='900 13px system-ui';pen.textAlign='center';pen.lineWidth=3;
+      pen.strokeText((i+1)+'P',x,labelY);pen.fillText((i+1)+'P',x,labelY);
     }
-    document.getElementById('pairShot'+(i+1)).textContent=(i+1)+'P · '+text;
+    document.getElementById('pairShot'+(i+1)).textContent=formatPairShot(shot,i);
   });
 }
 

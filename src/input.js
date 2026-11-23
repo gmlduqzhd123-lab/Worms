@@ -35,7 +35,7 @@ addEventListener('keydown',e=>{
   if(e.shiftKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();if(!e.repeat)nudgeAim(e.key==='ArrowUp'?1:-1);return}
   const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();
   if(!started)return;if(e.repeat)return;if(!paused&&(e.key==='w'||e.key==='W'))jump();if(e.key===' ')fireStart();if(e.key==='Escape'&&!e.repeat)setPaused(!paused);
-  if(e.key==='Enter'&&canEndCurrentTurn())nextTurn(0);
+  if(e.key==='Enter'&&canEndCurrentTurn()){e.preventDefault();requestPlayerEndTurn()}
   if(e.key==='c'||e.key==='C')followWorm();if(e.key==='m'||e.key==='M')toggleOverview();if(e.key==='+'||e.key==='=')setCameraZoom(cameraZoom*1.2);if(e.key==='-')setCameraZoom(cameraZoom/1.2);
   if(['1','2','3','4','5','6','7','8','9'].includes(e.key))selectWeapon(['bazooka','grenade','shotgun','banana','sacred','cluster','homing','mortar','airstrike'][+e.key-1])
 });
@@ -76,7 +76,7 @@ document.getElementById('zoomIn').addEventListener('click',()=>setCameraZoom(cam
 document.getElementById('zoomOut').addEventListener('click',()=>setCameraZoom(cameraZoom/1.2));
 document.getElementById('overviewBtn').addEventListener('click',toggleOverview);
 document.getElementById('followBtn').addEventListener('click',followWorm);
-document.getElementById('endTurnBtn').addEventListener('click',()=>{if(canEndCurrentTurn())nextTurn(0)});
+document.getElementById('endTurnBtn').addEventListener('click',requestPlayerEndTurn);
 
 document.querySelectorAll('.weapon').forEach(b=>b.addEventListener('click',()=>{playSFX('click');selectWeapon(b.dataset.w)}));
 document.getElementById('pauseBtn').addEventListener('click',()=>setPaused(!paused));

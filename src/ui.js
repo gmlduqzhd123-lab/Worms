@@ -148,9 +148,18 @@ function updateHUD(){
     for(const button of readyAngles)setHUDAttribute(button,'aria-pressed',String(Number(button.dataset.pairAngle)===pairPlannedAngle));
     setHUDFlag(document.getElementById('pairReadyStudy'),'hidden',!recentLesson?.shots[1]);
     const startAngle=pairPlannedAngle===null?'기본 45°':pairPlannedAngle+'°';
-    setHUDText(document.getElementById('pairReadyStatus'),startAngle+'로 시작해요. 발사 버튼을 길게 눌러 힘을 조절해요.'+
-      (pairStored?'':' 이 차례는 이 브라우저에 저장되지 않았어요.'));
+    setHUDText(document.getElementById('pairReadyStatus'),startAngle+'로 시작해요. 발사 버튼을 길게 눌러 힘을 조절해요.');
+    const saved=pairStored&&recentPair?.id===matchId&&recentPair.turn===turnNo;
+    setHUDText(document.getElementById('pairReadySave'),saved
+      ?'이 차례 저장됨 · 새로 열면 이 준비 화면부터 이어져요.'
+      :'이 차례는 이 브라우저에 저장되지 않았어요.');
   }
+  const saveProgress=document.getElementById('pairSaveProgress');
+  const savingNext=pairedLessonBattle&&!pairNeedsReady&&!gameOver&&!paused&&['resolve','retreat','handoff'].includes(phase.id);
+  setHUDFlag(saveProgress,'hidden',!savingNext);
+  if(savingNext)setHUDText(saveProgress,turnNo<pairTurnLimit
+    ?'다음 준비 화면에서 저장돼요.'
+    :'이번 차례가 끝나면 결과 화면이 열려요.');
   const aimGuide=canShowAimGuide(),canChoose=canSelectWeapon();
   if(hud.root.classList.contains('aiming')!==aimGuide)hud.root.classList.toggle('aiming',aimGuide);
   if(hud.root.classList.contains('openingView')!==initialBattleView)hud.root.classList.toggle('openingView',initialBattleView);

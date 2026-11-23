@@ -2,7 +2,7 @@
 
 [게임 실행](https://gmlduqzhd123-lab.github.io/Worms/) · [저장소](https://github.com/gmlduqzhd123-lab/Worms) · [현재 사용법](README.md)
 
-게임 버전은 v35입니다. 자동 배포는 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다.
+게임 버전은 v36입니다. 자동 배포는 현재 소스에서 새로 빌드하고 검사한 파일을 사용합니다.
 
 ## 자동 검증과 배포
 
@@ -61,11 +61,11 @@ npm test
 
 ## 빌드 산출물
 
-현재 버전 번호는 `index.html`에서 읽습니다. v35에서 생성되는 파일은 다음과 같습니다.
+현재 버전 번호는 `index.html`에서 읽습니다. v36에서 생성되는 파일은 다음과 같습니다.
 
 | 경로 | 내용 |
 | --- | --- |
-| `dist/wormfront-stage35-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
+| `dist/wormfront-stage36-offline.html` | 이미지·음악·스크립트를 포함한 단일 HTML |
 | `release/site/` | 정적 사이트로 배포할 실행 파일 |
 | `release/site/offline/wormfront.html` | 위 단일 HTML의 배포용 사본 |
 | `release/manifest.json` | 배포 파일의 크기와 SHA-256 명세 |

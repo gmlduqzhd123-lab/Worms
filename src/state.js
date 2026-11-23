@@ -18,7 +18,7 @@ let started=false,paused=false,gameOver=false,mode='cpu',difficulty='normal';
 let pauseIntent=false,orientationBlocked=false,wormIntro=null,initialBattleView=false;
 let practice=null,firstChargeStarted=false;
 let pairedLessonBattle=false,pairNeedsReady=false,pairLastShots=[null,null];
-let pairTurnLimit=4,pairPlannedAngle=null;
+let pairTurnLimit=4,pairPlannedAngle=null,pairTurnFired=false;
 let activeTeam=0,activeIdx=[0,0],turnSec=45,turnLeft=45,turnStart=0,turnLocked=false,turnNo=0,sdAt=20,sudden=false;
 let selected='bazooka',aim=-45,facing=1,wind=0,retreatUntil=0,chargeAt=0,charging=false,lastJumpTap=0;
 let targetMode=null,targetPoint=null,shotgunRemain=0,rope=null,jetpack=false,jetFuel=0;
@@ -41,7 +41,7 @@ function cancelCombat(id){combatTasks=combatTasks.filter(t=>t.id!==id)}
 function runCombatTasks(){const due=combatTasks.filter(t=>t.at<=gameNow);combatTasks=combatTasks.filter(t=>t.at>gameNow);for(const t of due){if(!gameOver)t.fn()}}
 function deploymentRetreatActive(){return attackCommitted&&gameNow<deploymentRetreatUntil}
 function combatUnsettled(){return deploymentRetreatActive()||projectiles.length>0||walkers.length>0||pendingEmissions>0||mines.some(m=>m.armed&&m.timer>0)||teams.some(t=>t.worms.some(w=>w.alive&&!w.onGround&&Math.abs(w.vy)>.75))}
-function commitAttack(sec=2.5){if(previewFit){previewFit=false;cameraZoom=1;camera.manualUntil=0}deploymentRetreatUntil=0;attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
+function commitAttack(sec=2.5,fired=true){if(fired&&pairedLessonBattle)pairTurnFired=true;if(previewFit){previewFit=false;cameraZoom=1;camera.manualUntil=0}deploymentRetreatUntil=0;attackCommitted=true;settledSince=null;turnLocked=true;retreatDuration=sec;charging=false;ui.powerBox.classList.remove('show');rope=null;jetpack=false;finishTarget()}
 function beginDeploymentRetreat(sec){commitAttack(0);deploymentRetreatUntil=gameNow+sec*1000}
 function resolveCombat(){if(turnEnding||gameOver)return;if(attackCommitted){if(combatUnsettled()||presentationPending()){settledSince=null;return}if(settledSince===null)settledSince=gameNow;if(gameNow-settledSince>=250){turnLocked=false;attackCommitted=false;retreatUntil=gameNow+retreatDuration*1000}}else if(!current()?.alive&&!turnLocked){nextTurn(0)}}
 function clearInput(){heldControls.clear();cameraPointers.clear();dragCamera=null;for(const k of Object.keys(keys))keys[k]=false;charging=false;ui.powerBox.classList.remove('show')}
